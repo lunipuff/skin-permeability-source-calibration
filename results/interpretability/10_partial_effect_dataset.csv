@@ -1,0 +1,501 @@
+"predictor","predictor_label","predictor_unit","x","predicted_logkpl"
+"MWa","Molecular weight","Da",18,-1.39416199338427
+"MWa","Molecular weight","Da",22.0454545454545,-1.41044978928267
+"MWa","Molecular weight","Da",26.0909090909091,-1.42673758518107
+"MWa","Molecular weight","Da",30.1363636363636,-1.44302538107947
+"MWa","Molecular weight","Da",34.1818181818182,-1.45931317697787
+"MWa","Molecular weight","Da",38.2272727272727,-1.47560097287627
+"MWa","Molecular weight","Da",42.2727272727273,-1.49188876877466
+"MWa","Molecular weight","Da",46.3181818181818,-1.50817656467306
+"MWa","Molecular weight","Da",50.3636363636364,-1.52446436057146
+"MWa","Molecular weight","Da",54.4090909090909,-1.54075215646986
+"MWa","Molecular weight","Da",58.4545454545455,-1.55703995236826
+"MWa","Molecular weight","Da",62.5,-1.57332774826665
+"MWa","Molecular weight","Da",66.5454545454545,-1.58961554416506
+"MWa","Molecular weight","Da",70.5909090909091,-1.60590334006345
+"MWa","Molecular weight","Da",74.6363636363636,-1.62219113596185
+"MWa","Molecular weight","Da",78.6818181818182,-1.63847893186025
+"MWa","Molecular weight","Da",82.7272727272727,-1.65476672775865
+"MWa","Molecular weight","Da",86.7727272727273,-1.67105452365704
+"MWa","Molecular weight","Da",90.8181818181818,-1.68734231955544
+"MWa","Molecular weight","Da",94.8636363636364,-1.70363011545384
+"MWa","Molecular weight","Da",98.9090909090909,-1.71991791135223
+"MWa","Molecular weight","Da",102.954545454545,-1.73620570725064
+"MWa","Molecular weight","Da",107,-1.75249350314903
+"MWa","Molecular weight","Da",111.045454545455,-1.76878129904743
+"MWa","Molecular weight","Da",115.090909090909,-1.78506909494583
+"MWa","Molecular weight","Da",119.136363636364,-1.80135689084423
+"MWa","Molecular weight","Da",123.181818181818,-1.81764468674263
+"MWa","Molecular weight","Da",127.227272727273,-1.83393248264102
+"MWa","Molecular weight","Da",131.272727272727,-1.85022027853942
+"MWa","Molecular weight","Da",135.318181818182,-1.86650807443782
+"MWa","Molecular weight","Da",139.363636363636,-1.88279587033622
+"MWa","Molecular weight","Da",143.409090909091,-1.89908366623462
+"MWa","Molecular weight","Da",147.454545454545,-1.91537146213302
+"MWa","Molecular weight","Da",151.5,-1.93165925803141
+"MWa","Molecular weight","Da",155.545454545455,-1.94794705392982
+"MWa","Molecular weight","Da",159.590909090909,-1.96423484982821
+"MWa","Molecular weight","Da",163.636363636364,-1.9805226457266
+"MWa","Molecular weight","Da",167.681818181818,-1.99681044162501
+"MWa","Molecular weight","Da",171.727272727273,-2.0130982375234
+"MWa","Molecular weight","Da",175.772727272727,-2.0293860334218
+"MWa","Molecular weight","Da",179.818181818182,-2.0456738293202
+"MWa","Molecular weight","Da",183.863636363636,-2.0619616252186
+"MWa","Molecular weight","Da",187.909090909091,-2.07824942111699
+"MWa","Molecular weight","Da",191.954545454545,-2.0945372170154
+"MWa","Molecular weight","Da",196,-2.11082501291379
+"MWa","Molecular weight","Da",200.045454545455,-2.12711280881219
+"MWa","Molecular weight","Da",204.090909090909,-2.14340060471059
+"MWa","Molecular weight","Da",208.136363636364,-2.15968840060899
+"MWa","Molecular weight","Da",212.181818181818,-2.17597619650738
+"MWa","Molecular weight","Da",216.227272727273,-2.19226399240578
+"MWa","Molecular weight","Da",220.272727272727,-2.20855178830418
+"MWa","Molecular weight","Da",224.318181818182,-2.22483958420258
+"MWa","Molecular weight","Da",228.363636363636,-2.24112738010098
+"MWa","Molecular weight","Da",232.409090909091,-2.25741517599938
+"MWa","Molecular weight","Da",236.454545454545,-2.27370297189778
+"MWa","Molecular weight","Da",240.5,-2.28999076779617
+"MWa","Molecular weight","Da",244.545454545455,-2.30627856369457
+"MWa","Molecular weight","Da",248.590909090909,-2.32256635959297
+"MWa","Molecular weight","Da",252.636363636364,-2.33885415549136
+"MWa","Molecular weight","Da",256.681818181818,-2.35514195138977
+"MWa","Molecular weight","Da",260.727272727273,-2.37142974728816
+"MWa","Molecular weight","Da",264.772727272727,-2.38771754318656
+"MWa","Molecular weight","Da",268.818181818182,-2.40400533908496
+"MWa","Molecular weight","Da",272.863636363636,-2.42029313498336
+"MWa","Molecular weight","Da",276.909090909091,-2.43658093088175
+"MWa","Molecular weight","Da",280.954545454545,-2.45286872678015
+"MWa","Molecular weight","Da",285,-2.46915652267855
+"MWa","Molecular weight","Da",289.045454545455,-2.48544431857695
+"MWa","Molecular weight","Da",293.090909090909,-2.50173211447535
+"MWa","Molecular weight","Da",297.136363636364,-2.51801991037375
+"MWa","Molecular weight","Da",301.181818181818,-2.53430770627214
+"MWa","Molecular weight","Da",305.227272727273,-2.55059550217054
+"MWa","Molecular weight","Da",309.272727272727,-2.56688329806894
+"MWa","Molecular weight","Da",313.318181818182,-2.58317109396734
+"MWa","Molecular weight","Da",317.363636363636,-2.59945888986574
+"MWa","Molecular weight","Da",321.409090909091,-2.61574668576414
+"MWa","Molecular weight","Da",325.454545454545,-2.63203448166253
+"MWa","Molecular weight","Da",329.5,-2.64832227756093
+"MWa","Molecular weight","Da",333.545454545455,-2.66461007345933
+"MWa","Molecular weight","Da",337.590909090909,-2.68089786935773
+"MWa","Molecular weight","Da",341.636363636364,-2.69718566525612
+"MWa","Molecular weight","Da",345.681818181818,-2.71347346115453
+"MWa","Molecular weight","Da",349.727272727273,-2.72976125705292
+"MWa","Molecular weight","Da",353.772727272727,-2.74604905295131
+"MWa","Molecular weight","Da",357.818181818182,-2.76233684884972
+"MWa","Molecular weight","Da",361.863636363636,-2.77862464474811
+"MWa","Molecular weight","Da",365.909090909091,-2.79491244064651
+"MWa","Molecular weight","Da",369.954545454545,-2.81120023654491
+"MWa","Molecular weight","Da",374,-2.82748803244331
+"MWa","Molecular weight","Da",378.045454545455,-2.84377582834171
+"MWa","Molecular weight","Da",382.090909090909,-2.86006362424011
+"MWa","Molecular weight","Da",386.136363636364,-2.8763514201385
+"MWa","Molecular weight","Da",390.181818181818,-2.8926392160369
+"MWa","Molecular weight","Da",394.227272727273,-2.9089270119353
+"MWa","Molecular weight","Da",398.272727272727,-2.9252148078337
+"MWa","Molecular weight","Da",402.318181818182,-2.9415026037321
+"MWa","Molecular weight","Da",406.363636363636,-2.95779039963049
+"MWa","Molecular weight","Da",410.409090909091,-2.9740781955289
+"MWa","Molecular weight","Da",414.454545454545,-2.99036599142729
+"MWa","Molecular weight","Da",418.5,-3.00665378732569
+"Mptc","Melting point","K",162.9,-1.8970784867124
+"Mptc","Melting point","K",166.870707070707,-1.88164127316652
+"Mptc","Melting point","K",170.841414141414,-1.86710013299197
+"Mptc","Melting point","K",174.812121212121,-1.85342627909416
+"Mptc","Melting point","K",178.782828282828,-1.84059286431048
+"Mptc","Melting point","K",182.753535353535,-1.82857481092625
+"Mptc","Melting point","K",186.724242424242,-1.81734865851672
+"Mptc","Melting point","K",190.69494949495,-1.80689242780089
+"Mptc","Melting point","K",194.665656565657,-1.79718549852683
+"Mptc","Melting point","K",198.636363636364,-1.7882084996881
+"Mptc","Melting point","K",202.607070707071,-1.77994321060659
+"Mptc","Melting point","K",206.577777777778,-1.77237247161618
+"Mptc","Melting point","K",210.548484848485,-1.76548010325016
+"Mptc","Melting point","K",214.519191919192,-1.75925083297905
+"Mptc","Melting point","K",218.489898989899,-1.75367022866777
+"Mptc","Melting point","K",222.460606060606,-1.74872463802595
+"Mptc","Melting point","K",226.431313131313,-1.74440113341504
+"Mptc","Melting point","K",230.40202020202,-1.74068746145346
+"Mptc","Melting point","K",234.372727272727,-1.73757199692781
+"Mptc","Melting point","K",238.343434343434,-1.735043700576
+"Mptc","Melting point","K",242.314141414141,-1.73309208035833
+"Mptc","Melting point","K",246.284848484849,-1.7317071558765
+"Mptc","Melting point","K",250.255555555556,-1.73087942563829
+"Mptc","Melting point","K",254.226262626263,-1.7305998368991
+"Mptc","Melting point","K",258.19696969697,-1.73085975784069
+"Mptc","Melting point","K",262.167676767677,-1.73165095187323
+"Mptc","Melting point","K",266.138383838384,-1.73296555386892
+"Mptc","Melting point","K",270.109090909091,-1.73479604815562
+"Mptc","Melting point","K",274.079797979798,-1.7371352481164
+"Mptc","Melting point","K",278.050505050505,-1.7399762772564
+"Mptc","Melting point","K",282.021212121212,-1.74331255161206
+"Mptc","Melting point","K",285.991919191919,-1.7471377633901
+"Mptc","Melting point","K",289.962626262626,-1.75144586573479
+"Mptc","Melting point","K",293.933333333333,-1.75623105853095
+"Mptc","Melting point","K",297.90404040404,-1.76148777515965
+"Mptc","Melting point","K",301.874747474747,-1.76721067013082
+"Mptc","Melting point","K",305.845454545455,-1.77339460752395
+"Mptc","Melting point","K",309.816161616162,-1.78003465017431
+"Mptc","Melting point","K",313.786868686869,-1.78712604954797
+"Mptc","Melting point","K",317.757575757576,-1.7946642362532
+"Mptc","Melting point","K",321.728282828283,-1.80264481114133
+"Mptc","Melting point","K",325.69898989899,-1.81106353695325
+"Mptc","Melting point","K",329.669696969697,-1.81991633047221
+"Mptc","Melting point","K",333.640404040404,-1.82919925514631
+"Mptc","Melting point","K",337.611111111111,-1.83890851414747
+"Mptc","Melting point","K",341.581818181818,-1.84904044383618
+"Mptc","Melting point","K",345.552525252525,-1.85959150760399
+"Mptc","Melting point","K",349.523232323232,-1.87055829006771
+"Mptc","Melting point","K",353.493939393939,-1.88193749159161
+"Mptc","Melting point","K",357.464646464646,-1.8937259231155
+"Mptc","Melting point","K",361.435353535354,-1.90592050126858
+"Mptc","Melting point","K",365.406060606061,-1.91851824375014
+"Mptc","Melting point","K",369.376767676768,-1.93151626496002
+"Mptc","Melting point","K",373.347474747475,-1.94491177186249
+"Mptc","Melting point","K",377.318181818182,-1.95870206006919
+"Mptc","Melting point","K",381.288888888889,-1.97288451012684
+"Mptc","Melting point","K",385.259595959596,-1.98745658399749
+"Mptc","Melting point","K",389.230303030303,-2.00241582171903
+"Mptc","Melting point","K",393.20101010101,-2.01775983823536
+"Mptc","Melting point","K",397.171717171717,-2.03348632038567
+"Mptc","Melting point","K",401.142424242424,-2.04959302404355
+"Mptc","Melting point","K",405.113131313131,-2.06607777139705
+"Mptc","Melting point","K",409.083838383838,-2.08293844836128
+"Mptc","Melting point","K",413.054545454545,-2.10017300211602
+"Mptc","Melting point","K",417.025252525253,-2.11777943876119
+"Mptc","Melting point","K",420.99595959596,-2.13575582108334
+"Mptc","Melting point","K",424.966666666667,-2.15410026642703
+"Mptc","Melting point","K",428.937373737374,-2.17281094466511
+"Mptc","Melting point","K",432.908080808081,-2.19188607626263
+"Mptc","Melting point","K",436.878787878788,-2.2113239304291
+"Mptc","Melting point","K",440.849494949495,-2.23112282335424
+"Mptc","Melting point","K",444.820202020202,-2.25128111652304
+"Mptc","Melting point","K",448.790909090909,-2.27179721510547
+"Mptc","Melting point","K",452.761616161616,-2.2926695664173
+"Mptc","Melting point","K",456.732323232323,-2.31389665844792
+"Mptc","Melting point","K",460.70303030303,-2.33547701845215
+"Mptc","Melting point","K",464.673737373737,-2.3574092116022
+"Mptc","Melting point","K",468.644444444445,-2.37969183969717
+"Mptc","Melting point","K",472.615151515152,-2.40232353992685
+"Mptc","Melting point","K",476.585858585859,-2.42530298368744
+"Mptc","Melting point","K",480.556565656566,-2.44862887544615
+"Mptc","Melting point","K",484.527272727273,-2.47229995165269
+"Mptc","Melting point","K",488.49797979798,-2.49631497969517
+"Mptc","Melting point","K",492.468686868687,-2.52067275689814
+"Mptc","Melting point","K",496.439393939394,-2.54537210956101
+"Mptc","Melting point","K",500.410101010101,-2.5704118920347
+"Mptc","Melting point","K",504.380808080808,-2.59579098583477
+"Mptc","Melting point","K",508.351515151515,-2.62150829878936
+"Mptc","Melting point","K",512.322222222222,-2.64756276422026
+"Mptc","Melting point","K",516.292929292929,-2.6739533401556
+"Mptc","Melting point","K",520.263636363636,-2.7006790085727
+"Mptc","Melting point","K",524.234343434343,-2.72773877466966
+"Mptc","Melting point","K",528.20505050505,-2.75513166616454
+"Mptc","Melting point","K",532.175757575758,-2.78285673262067
+"Mptc","Melting point","K",536.146464646465,-2.81091304479708
+"Mptc","Melting point","K",540.117171717172,-2.83929969402296
+"Mptc","Melting point","K",544.087878787879,-2.8680157915949
+"Mptc","Melting point","K",548.058585858586,-2.89706046819611
+"Mptc","Melting point","K",552.029292929293,-2.92643287333671
+"Mptc","Melting point","K",556,-2.95613217481383
+"LogSaqd","Aqueous solubility","log mol/mL",-7.88605664769316,-1.21711502300903
+"LogSaqd","Aqueous solubility","log mol/mL",-7.81904407522145,-1.22621831477635
+"LogSaqd","Aqueous solubility","log mol/mL",-7.75203150274974,-1.23567500082015
+"LogSaqd","Aqueous solubility","log mol/mL",-7.68501893027803,-1.24548508114044
+"LogSaqd","Aqueous solubility","log mol/mL",-7.61800635780632,-1.2556485557372
+"LogSaqd","Aqueous solubility","log mol/mL",-7.55099378533461,-1.26616542461046
+"LogSaqd","Aqueous solubility","log mol/mL",-7.4839812128629,-1.27703568776018
+"LogSaqd","Aqueous solubility","log mol/mL",-7.41696864039119,-1.2882593451864
+"LogSaqd","Aqueous solubility","log mol/mL",-7.34995606791948,-1.29983639688909
+"LogSaqd","Aqueous solubility","log mol/mL",-7.28294349544776,-1.31176684286827
+"LogSaqd","Aqueous solubility","log mol/mL",-7.21593092297605,-1.32405068312393
+"LogSaqd","Aqueous solubility","log mol/mL",-7.14891835050434,-1.33668791765607
+"LogSaqd","Aqueous solubility","log mol/mL",-7.08190577803263,-1.34967854646469
+"LogSaqd","Aqueous solubility","log mol/mL",-7.01489320556092,-1.3630225695498
+"LogSaqd","Aqueous solubility","log mol/mL",-6.94788063308921,-1.37671998691138
+"LogSaqd","Aqueous solubility","log mol/mL",-6.8808680606175,-1.39077079854945
+"LogSaqd","Aqueous solubility","log mol/mL",-6.81385548814579,-1.405175004464
+"LogSaqd","Aqueous solubility","log mol/mL",-6.74684291567408,-1.41993260465503
+"LogSaqd","Aqueous solubility","log mol/mL",-6.67983034320237,-1.43504359912254
+"LogSaqd","Aqueous solubility","log mol/mL",-6.61281777073066,-1.45050798786654
+"LogSaqd","Aqueous solubility","log mol/mL",-6.54580519825895,-1.46632577088702
+"LogSaqd","Aqueous solubility","log mol/mL",-6.47879262578724,-1.48249694818397
+"LogSaqd","Aqueous solubility","log mol/mL",-6.41178005331552,-1.49902151975741
+"LogSaqd","Aqueous solubility","log mol/mL",-6.34476748084381,-1.51589948560734
+"LogSaqd","Aqueous solubility","log mol/mL",-6.2777549083721,-1.53313084573374
+"LogSaqd","Aqueous solubility","log mol/mL",-6.21074233590039,-1.55071560013663
+"LogSaqd","Aqueous solubility","log mol/mL",-6.14372976342868,-1.568653748816
+"LogSaqd","Aqueous solubility","log mol/mL",-6.07671719095697,-1.58694529177184
+"LogSaqd","Aqueous solubility","log mol/mL",-6.00970461848526,-1.60559022900418
+"LogSaqd","Aqueous solubility","log mol/mL",-5.94269204601355,-1.62458856051298
+"LogSaqd","Aqueous solubility","log mol/mL",-5.87567947354184,-1.64394028629828
+"LogSaqd","Aqueous solubility","log mol/mL",-5.80866690107013,-1.66364540636006
+"LogSaqd","Aqueous solubility","log mol/mL",-5.74165432859842,-1.68370392069832
+"LogSaqd","Aqueous solubility","log mol/mL",-5.67464175612671,-1.70411582931306
+"LogSaqd","Aqueous solubility","log mol/mL",-5.607629183655,-1.72488113220428
+"LogSaqd","Aqueous solubility","log mol/mL",-5.54061661118329,-1.74599982937199
+"LogSaqd","Aqueous solubility","log mol/mL",-5.47360403871158,-1.76747192081618
+"LogSaqd","Aqueous solubility","log mol/mL",-5.40659146623986,-1.78929740653684
+"LogSaqd","Aqueous solubility","log mol/mL",-5.33957889376815,-1.81147628653399
+"LogSaqd","Aqueous solubility","log mol/mL",-5.27256632129644,-1.83400856080762
+"LogSaqd","Aqueous solubility","log mol/mL",-5.20555374882473,-1.85689422935774
+"LogSaqd","Aqueous solubility","log mol/mL",-5.13854117635302,-1.88013329218433
+"LogSaqd","Aqueous solubility","log mol/mL",-5.07152860388131,-1.9037257492874
+"LogSaqd","Aqueous solubility","log mol/mL",-5.0045160314096,-1.92767160066697
+"LogSaqd","Aqueous solubility","log mol/mL",-4.93750345893789,-1.95197084632301
+"LogSaqd","Aqueous solubility","log mol/mL",-4.87049088646618,-1.97662348625553
+"LogSaqd","Aqueous solubility","log mol/mL",-4.80347831399447,-2.00162952046453
+"LogSaqd","Aqueous solubility","log mol/mL",-4.73646574152276,-2.02698894895001
+"LogSaqd","Aqueous solubility","log mol/mL",-4.66945316905105,-2.05270177171199
+"LogSaqd","Aqueous solubility","log mol/mL",-4.60244059657934,-2.07876798875044
+"LogSaqd","Aqueous solubility","log mol/mL",-4.53542802410763,-2.10518760006536
+"LogSaqd","Aqueous solubility","log mol/mL",-4.46841545163591,-2.13196060565678
+"LogSaqd","Aqueous solubility","log mol/mL",-4.4014028791642,-2.15908700552468
+"LogSaqd","Aqueous solubility","log mol/mL",-4.33439030669249,-2.18656679966905
+"LogSaqd","Aqueous solubility","log mol/mL",-4.26737773422078,-2.21439998808992
+"LogSaqd","Aqueous solubility","log mol/mL",-4.20036516174907,-2.24258657078725
+"LogSaqd","Aqueous solubility","log mol/mL",-4.13335258927736,-2.27112654776107
+"LogSaqd","Aqueous solubility","log mol/mL",-4.06634001680565,-2.30001991901138
+"LogSaqd","Aqueous solubility","log mol/mL",-3.99932744433394,-2.32926668453815
+"LogSaqd","Aqueous solubility","log mol/mL",-3.93231487186223,-2.35886684434143
+"LogSaqd","Aqueous solubility","log mol/mL",-3.86530229939052,-2.38882039842117
+"LogSaqd","Aqueous solubility","log mol/mL",-3.79828972691881,-2.41912734677741
+"LogSaqd","Aqueous solubility","log mol/mL",-3.7312771544471,-2.44978768941012
+"LogSaqd","Aqueous solubility","log mol/mL",-3.66426458197539,-2.48080142631932
+"LogSaqd","Aqueous solubility","log mol/mL",-3.59725200950368,-2.51216855750499
+"LogSaqd","Aqueous solubility","log mol/mL",-3.53023943703196,-2.54388908296715
+"LogSaqd","Aqueous solubility","log mol/mL",-3.46322686456025,-2.57596300270579
+"LogSaqd","Aqueous solubility","log mol/mL",-3.39621429208854,-2.60839031672092
+"LogSaqd","Aqueous solubility","log mol/mL",-3.32920171961683,-2.64117102501252
+"LogSaqd","Aqueous solubility","log mol/mL",-3.26218914714512,-2.67430512758061
+"LogSaqd","Aqueous solubility","log mol/mL",-3.19517657467341,-2.70779262442518
+"LogSaqd","Aqueous solubility","log mol/mL",-3.1281640022017,-2.74163351554623
+"LogSaqd","Aqueous solubility","log mol/mL",-3.06115142972999,-2.77582780094376
+"LogSaqd","Aqueous solubility","log mol/mL",-2.99413885725828,-2.81037548061776
+"LogSaqd","Aqueous solubility","log mol/mL",-2.92712628478657,-2.84527655456827
+"LogSaqd","Aqueous solubility","log mol/mL",-2.86011371231486,-2.88053102279525
+"LogSaqd","Aqueous solubility","log mol/mL",-2.79310113984315,-2.9161388852987
+"LogSaqd","Aqueous solubility","log mol/mL",-2.72608856737144,-2.95210014207864
+"LogSaqd","Aqueous solubility","log mol/mL",-2.65907599489973,-2.98841479313506
+"LogSaqd","Aqueous solubility","log mol/mL",-2.59206342242801,-3.02508283846797
+"LogSaqd","Aqueous solubility","log mol/mL",-2.5250508499563,-3.06210427807736
+"LogSaqd","Aqueous solubility","log mol/mL",-2.45803827748459,-3.09947911196323
+"LogSaqd","Aqueous solubility","log mol/mL",-2.39102570501288,-3.13720734012558
+"LogSaqd","Aqueous solubility","log mol/mL",-2.32401313254117,-3.1752889625644
+"LogSaqd","Aqueous solubility","log mol/mL",-2.25700056006946,-3.21372397927972
+"LogSaqd","Aqueous solubility","log mol/mL",-2.18998798759775,-3.25251239027152
+"LogSaqd","Aqueous solubility","log mol/mL",-2.12297541512604,-3.29165419553979
+"LogSaqd","Aqueous solubility","log mol/mL",-2.05596284265433,-3.33114939508455
+"LogSaqd","Aqueous solubility","log mol/mL",-1.98895027018262,-3.3709979889058
+"LogSaqd","Aqueous solubility","log mol/mL",-1.92193769771091,-3.41119997700351
+"LogSaqd","Aqueous solubility","log mol/mL",-1.8549251252392,-3.45175535937772
+"LogSaqd","Aqueous solubility","log mol/mL",-1.78791255276749,-3.4926641360284
+"LogSaqd","Aqueous solubility","log mol/mL",-1.72089998029578,-3.53392630695558
+"LogSaqd","Aqueous solubility","log mol/mL",-1.65388740782407,-3.57554187215923
+"LogSaqd","Aqueous solubility","log mol/mL",-1.58687483535235,-3.61751083163936
+"LogSaqd","Aqueous solubility","log mol/mL",-1.51986226288064,-3.65983318539597
+"LogSaqd","Aqueous solubility","log mol/mL",-1.45284969040893,-3.70250893342907
+"LogSaqd","Aqueous solubility","log mol/mL",-1.38583711793722,-3.74553807573864
+"LogSaqd","Aqueous solubility","log mol/mL",-1.31882454546551,-3.78892061232471
+"LogSaqd","Aqueous solubility","log mol/mL",-1.2518119729938,-3.83265654318724
+"LogSoce","Organic-solvent solubility","log mol/mL",-6.97419943971753,-3.15185794547395
+"LogSoce","Organic-solvent solubility","log mol/mL",-6.91693764157582,-3.13522863515345
+"LogSoce","Organic-solvent solubility","log mol/mL",-6.85967584343411,-3.11859932483294
+"LogSoce","Organic-solvent solubility","log mol/mL",-6.8024140452924,-3.10197001451244
+"LogSoce","Organic-solvent solubility","log mol/mL",-6.7451522471507,-3.08534070419194
+"LogSoce","Organic-solvent solubility","log mol/mL",-6.68789044900899,-3.06871139387143
+"LogSoce","Organic-solvent solubility","log mol/mL",-6.63062865086728,-3.05208208355094
+"LogSoce","Organic-solvent solubility","log mol/mL",-6.57336685272557,-3.03545277323043
+"LogSoce","Organic-solvent solubility","log mol/mL",-6.51610505458386,-3.01882346290993
+"LogSoce","Organic-solvent solubility","log mol/mL",-6.45884325644215,-3.00219415258942
+"LogSoce","Organic-solvent solubility","log mol/mL",-6.40158145830045,-2.98556484226892
+"LogSoce","Organic-solvent solubility","log mol/mL",-6.34431966015874,-2.96893553194842
+"LogSoce","Organic-solvent solubility","log mol/mL",-6.28705786201703,-2.95230622162791
+"LogSoce","Organic-solvent solubility","log mol/mL",-6.22979606387532,-2.93567691130741
+"LogSoce","Organic-solvent solubility","log mol/mL",-6.17253426573361,-2.91904760098691
+"LogSoce","Organic-solvent solubility","log mol/mL",-6.1152724675919,-2.90241829066641
+"LogSoce","Organic-solvent solubility","log mol/mL",-6.05801066945019,-2.88578898034591
+"LogSoce","Organic-solvent solubility","log mol/mL",-6.00074887130849,-2.8691596700254
+"LogSoce","Organic-solvent solubility","log mol/mL",-5.94348707316678,-2.8525303597049
+"LogSoce","Organic-solvent solubility","log mol/mL",-5.88622527502507,-2.8359010493844
+"LogSoce","Organic-solvent solubility","log mol/mL",-5.82896347688336,-2.81927173906389
+"LogSoce","Organic-solvent solubility","log mol/mL",-5.77170167874165,-2.80264242874339
+"LogSoce","Organic-solvent solubility","log mol/mL",-5.71443988059994,-2.78601311842289
+"LogSoce","Organic-solvent solubility","log mol/mL",-5.65717808245823,-2.76938380810238
+"LogSoce","Organic-solvent solubility","log mol/mL",-5.59991628431653,-2.75275449778188
+"LogSoce","Organic-solvent solubility","log mol/mL",-5.54265448617482,-2.73612518746138
+"LogSoce","Organic-solvent solubility","log mol/mL",-5.48539268803311,-2.71949587714088
+"LogSoce","Organic-solvent solubility","log mol/mL",-5.4281308898914,-2.70286656682038
+"LogSoce","Organic-solvent solubility","log mol/mL",-5.37086909174969,-2.68623725649987
+"LogSoce","Organic-solvent solubility","log mol/mL",-5.31360729360798,-2.66960794617937
+"LogSoce","Organic-solvent solubility","log mol/mL",-5.25634549546628,-2.65297863585887
+"LogSoce","Organic-solvent solubility","log mol/mL",-5.19908369732457,-2.63634932553836
+"LogSoce","Organic-solvent solubility","log mol/mL",-5.14182189918286,-2.61972001521786
+"LogSoce","Organic-solvent solubility","log mol/mL",-5.08456010104115,-2.60309070489735
+"LogSoce","Organic-solvent solubility","log mol/mL",-5.02729830289944,-2.58646139457686
+"LogSoce","Organic-solvent solubility","log mol/mL",-4.97003650475773,-2.56983208425635
+"LogSoce","Organic-solvent solubility","log mol/mL",-4.91277470661603,-2.55320277393585
+"LogSoce","Organic-solvent solubility","log mol/mL",-4.85551290847432,-2.53657346361535
+"LogSoce","Organic-solvent solubility","log mol/mL",-4.79825111033261,-2.51994415329484
+"LogSoce","Organic-solvent solubility","log mol/mL",-4.7409893121909,-2.50331484297434
+"LogSoce","Organic-solvent solubility","log mol/mL",-4.68372751404919,-2.48668553265384
+"LogSoce","Organic-solvent solubility","log mol/mL",-4.62646571590748,-2.47005622233333
+"LogSoce","Organic-solvent solubility","log mol/mL",-4.56920391776577,-2.45342691201283
+"LogSoce","Organic-solvent solubility","log mol/mL",-4.51194211962407,-2.43679760169233
+"LogSoce","Organic-solvent solubility","log mol/mL",-4.45468032148236,-2.42016829137183
+"LogSoce","Organic-solvent solubility","log mol/mL",-4.39741852334065,-2.40353898105133
+"LogSoce","Organic-solvent solubility","log mol/mL",-4.34015672519894,-2.38690967073082
+"LogSoce","Organic-solvent solubility","log mol/mL",-4.28289492705723,-2.37028036041032
+"LogSoce","Organic-solvent solubility","log mol/mL",-4.22563312891552,-2.35365105008982
+"LogSoce","Organic-solvent solubility","log mol/mL",-4.16837133077381,-2.33702173976931
+"LogSoce","Organic-solvent solubility","log mol/mL",-4.11110953263211,-2.32039242944881
+"LogSoce","Organic-solvent solubility","log mol/mL",-4.0538477344904,-2.30376311912831
+"LogSoce","Organic-solvent solubility","log mol/mL",-3.99658593634869,-2.2871338088078
+"LogSoce","Organic-solvent solubility","log mol/mL",-3.93932413820698,-2.27050449848731
+"LogSoce","Organic-solvent solubility","log mol/mL",-3.88206234006527,-2.2538751881668
+"LogSoce","Organic-solvent solubility","log mol/mL",-3.82480054192356,-2.2372458778463
+"LogSoce","Organic-solvent solubility","log mol/mL",-3.76753874378186,-2.2206165675258
+"LogSoce","Organic-solvent solubility","log mol/mL",-3.71027694564015,-2.20398725720529
+"LogSoce","Organic-solvent solubility","log mol/mL",-3.65301514749844,-2.18735794688479
+"LogSoce","Organic-solvent solubility","log mol/mL",-3.59575334935673,-2.17072863656428
+"LogSoce","Organic-solvent solubility","log mol/mL",-3.53849155121502,-2.15409932624378
+"LogSoce","Organic-solvent solubility","log mol/mL",-3.48122975307331,-2.13747001592328
+"LogSoce","Organic-solvent solubility","log mol/mL",-3.4239679549316,-2.12084070560278
+"LogSoce","Organic-solvent solubility","log mol/mL",-3.3667061567899,-2.10421139528228
+"LogSoce","Organic-solvent solubility","log mol/mL",-3.30944435864819,-2.08758208496177
+"LogSoce","Organic-solvent solubility","log mol/mL",-3.25218256050648,-2.07095277464127
+"LogSoce","Organic-solvent solubility","log mol/mL",-3.19492076236477,-2.05432346432077
+"LogSoce","Organic-solvent solubility","log mol/mL",-3.13765896422306,-2.03769415400026
+"LogSoce","Organic-solvent solubility","log mol/mL",-3.08039716608135,-2.02106484367976
+"LogSoce","Organic-solvent solubility","log mol/mL",-3.02313536793964,-2.00443553335926
+"LogSoce","Organic-solvent solubility","log mol/mL",-2.96587356979794,-1.98780622303875
+"LogSoce","Organic-solvent solubility","log mol/mL",-2.90861177165623,-1.97117691271826
+"LogSoce","Organic-solvent solubility","log mol/mL",-2.85134997351452,-1.95454760239775
+"LogSoce","Organic-solvent solubility","log mol/mL",-2.79408817537281,-1.93791829207725
+"LogSoce","Organic-solvent solubility","log mol/mL",-2.7368263772311,-1.92128898175675
+"LogSoce","Organic-solvent solubility","log mol/mL",-2.67956457908939,-1.90465967143624
+"LogSoce","Organic-solvent solubility","log mol/mL",-2.62230278094769,-1.88803036111574
+"LogSoce","Organic-solvent solubility","log mol/mL",-2.56504098280598,-1.87140105079524
+"LogSoce","Organic-solvent solubility","log mol/mL",-2.50777918466427,-1.85477174047473
+"LogSoce","Organic-solvent solubility","log mol/mL",-2.45051738652256,-1.83814243015423
+"LogSoce","Organic-solvent solubility","log mol/mL",-2.39325558838085,-1.82151311983373
+"LogSoce","Organic-solvent solubility","log mol/mL",-2.33599379023914,-1.80488380951323
+"LogSoce","Organic-solvent solubility","log mol/mL",-2.27873199209743,-1.78825449919272
+"LogSoce","Organic-solvent solubility","log mol/mL",-2.22147019395573,-1.77162518887222
+"LogSoce","Organic-solvent solubility","log mol/mL",-2.16420839581402,-1.75499587855172
+"LogSoce","Organic-solvent solubility","log mol/mL",-2.10694659767231,-1.73836656823121
+"LogSoce","Organic-solvent solubility","log mol/mL",-2.0496847995306,-1.72173725791071
+"LogSoce","Organic-solvent solubility","log mol/mL",-1.99242300138889,-1.70510794759021
+"LogSoce","Organic-solvent solubility","log mol/mL",-1.93516120324718,-1.6884786372697
+"LogSoce","Organic-solvent solubility","log mol/mL",-1.87789940510547,-1.6718493269492
+"LogSoce","Organic-solvent solubility","log mol/mL",-1.82063760696377,-1.6552200166287
+"LogSoce","Organic-solvent solubility","log mol/mL",-1.76337580882206,-1.6385907063082
+"LogSoce","Organic-solvent solubility","log mol/mL",-1.70611401068035,-1.6219613959877
+"LogSoce","Organic-solvent solubility","log mol/mL",-1.64885221253864,-1.60533208566719
+"LogSoce","Organic-solvent solubility","log mol/mL",-1.59159041439693,-1.58870277534669
+"LogSoce","Organic-solvent solubility","log mol/mL",-1.53432861625522,-1.57207346502619
+"LogSoce","Organic-solvent solubility","log mol/mL",-1.47706681811352,-1.55544415470568
+"LogSoce","Organic-solvent solubility","log mol/mL",-1.41980501997181,-1.53881484438518
+"LogSoce","Organic-solvent solubility","log mol/mL",-1.3625432218301,-1.52218553406468
+"LogSoce","Organic-solvent solubility","log mol/mL",-1.30528142368839,-1.50555622374418
+"Texpi","Experimental temperature","K",298,-2.13166223182952
+"Texpi","Experimental temperature","K",298.121212121212,-2.12905476234052
+"Texpi","Experimental temperature","K",298.242424242424,-2.12644835279849
+"Texpi","Experimental temperature","K",298.363636363636,-2.12384300234204
+"Texpi","Experimental temperature","K",298.484848484848,-2.12123871011084
+"Texpi","Experimental temperature","K",298.606060606061,-2.11863547524556
+"Texpi","Experimental temperature","K",298.727272727273,-2.11603329688797
+"Texpi","Experimental temperature","K",298.848484848485,-2.11343217418086
+"Texpi","Experimental temperature","K",298.969696969697,-2.11083210626806
+"Texpi","Experimental temperature","K",299.090909090909,-2.10823309229445
+"Texpi","Experimental temperature","K",299.212121212121,-2.10563513140595
+"Texpi","Experimental temperature","K",299.333333333333,-2.10303822274952
+"Texpi","Experimental temperature","K",299.454545454545,-2.10044236547314
+"Texpi","Experimental temperature","K",299.575757575758,-2.09784755872582
+"Texpi","Experimental temperature","K",299.69696969697,-2.09525380165765
+"Texpi","Experimental temperature","K",299.818181818182,-2.09266109341969
+"Texpi","Experimental temperature","K",299.939393939394,-2.09006943316408
+"Texpi","Experimental temperature","K",300.060606060606,-2.08747882004395
+"Texpi","Experimental temperature","K",300.181818181818,-2.08488925321348
+"Texpi","Experimental temperature","K",300.30303030303,-2.08230073182786
+"Texpi","Experimental temperature","K",300.424242424242,-2.07971325504331
+"Texpi","Experimental temperature","K",300.545454545455,-2.07712682201708
+"Texpi","Experimental temperature","K",300.666666666667,-2.07454143190741
+"Texpi","Experimental temperature","K",300.787878787879,-2.07195708387359
+"Texpi","Experimental temperature","K",300.909090909091,-2.06937377707592
+"Texpi","Experimental temperature","K",301.030303030303,-2.06679151067569
+"Texpi","Experimental temperature","K",301.151515151515,-2.06421028383524
+"Texpi","Experimental temperature","K",301.272727272727,-2.06163009571789
+"Texpi","Experimental temperature","K",301.393939393939,-2.05905094548798
+"Texpi","Experimental temperature","K",301.515151515152,-2.05647283231087
+"Texpi","Experimental temperature","K",301.636363636364,-2.0538957553529
+"Texpi","Experimental temperature","K",301.757575757576,-2.05131971378145
+"Texpi","Experimental temperature","K",301.878787878788,-2.04874470676488
+"Texpi","Experimental temperature","K",302,-2.04617073347254
+"Texpi","Experimental temperature","K",302.121212121212,-2.04359779307482
+"Texpi","Experimental temperature","K",302.242424242424,-2.04102588474306
+"Texpi","Experimental temperature","K",302.363636363636,-2.03845500764964
+"Texpi","Experimental temperature","K",302.484848484848,-2.03588516096791
+"Texpi","Experimental temperature","K",302.606060606061,-2.03331634387221
+"Texpi","Experimental temperature","K",302.727272727273,-2.03074855553789
+"Texpi","Experimental temperature","K",302.848484848485,-2.02818179514128
+"Texpi","Experimental temperature","K",302.969696969697,-2.02561606185971
+"Texpi","Experimental temperature","K",303.090909090909,-2.02305135487148
+"Texpi","Experimental temperature","K",303.212121212121,-2.02048767335588
+"Texpi","Experimental temperature","K",303.333333333333,-2.01792501649319
+"Texpi","Experimental temperature","K",303.454545454545,-2.01536338346467
+"Texpi","Experimental temperature","K",303.575757575758,-2.01280277345256
+"Texpi","Experimental temperature","K",303.69696969697,-2.01024318564009
+"Texpi","Experimental temperature","K",303.818181818182,-2.00768461921145
+"Texpi","Experimental temperature","K",303.939393939394,-2.00512707335182
+"Texpi","Experimental temperature","K",304.060606060606,-2.00257054724734
+"Texpi","Experimental temperature","K",304.181818181818,-2.00001504008513
+"Texpi","Experimental temperature","K",304.30303030303,-1.99746055105329
+"Texpi","Experimental temperature","K",304.424242424242,-1.9949070793409
+"Texpi","Experimental temperature","K",304.545454545455,-1.99235462413796
+"Texpi","Experimental temperature","K",304.666666666667,-1.98980318463549
+"Texpi","Experimental temperature","K",304.787878787879,-1.98725276002546
+"Texpi","Experimental temperature","K",304.909090909091,-1.98470334950078
+"Texpi","Experimental temperature","K",305.030303030303,-1.98215495225535
+"Texpi","Experimental temperature","K",305.151515151515,-1.97960756748402
+"Texpi","Experimental temperature","K",305.272727272727,-1.97706119438261
+"Texpi","Experimental temperature","K",305.393939393939,-1.97451583214787
+"Texpi","Experimental temperature","K",305.515151515152,-1.97197147997754
+"Texpi","Experimental temperature","K",305.636363636364,-1.96942813707029
+"Texpi","Experimental temperature","K",305.757575757576,-1.96688580262576
+"Texpi","Experimental temperature","K",305.878787878788,-1.96434447584454
+"Texpi","Experimental temperature","K",306,-1.96180415592815
+"Texpi","Experimental temperature","K",306.121212121212,-1.95926484207908
+"Texpi","Experimental temperature","K",306.242424242424,-1.95672653350076
+"Texpi","Experimental temperature","K",306.363636363636,-1.95418922939757
+"Texpi","Experimental temperature","K",306.484848484848,-1.95165292897482
+"Texpi","Experimental temperature","K",306.606060606061,-1.94911763143879
+"Texpi","Experimental temperature","K",306.727272727273,-1.94658333599666
+"Texpi","Experimental temperature","K",306.848484848485,-1.9440500418566
+"Texpi","Experimental temperature","K",306.969696969697,-1.94151774822768
+"Texpi","Experimental temperature","K",307.090909090909,-1.93898645431991
+"Texpi","Experimental temperature","K",307.212121212121,-1.93645615934425
+"Texpi","Experimental temperature","K",307.333333333333,-1.93392686251261
+"Texpi","Experimental temperature","K",307.454545454545,-1.93139856303777
+"Texpi","Experimental temperature","K",307.575757575758,-1.92887126013351
+"Texpi","Experimental temperature","K",307.69696969697,-1.9263449530145
+"Texpi","Experimental temperature","K",307.818181818182,-1.92381964089635
+"Texpi","Experimental temperature","K",307.939393939394,-1.9212953229956
+"Texpi","Experimental temperature","K",308.060606060606,-1.9187719985297
+"Texpi","Experimental temperature","K",308.181818181818,-1.91624966671704
+"Texpi","Experimental temperature","K",308.30303030303,-1.91372832677693
+"Texpi","Experimental temperature","K",308.424242424242,-1.91120797792958
+"Texpi","Experimental temperature","K",308.545454545455,-1.90868861939614
+"Texpi","Experimental temperature","K",308.666666666667,-1.90617025039869
+"Texpi","Experimental temperature","K",308.787878787879,-1.90365287016019
+"Texpi","Experimental temperature","K",308.909090909091,-1.90113647790454
+"Texpi","Experimental temperature","K",309.030303030303,-1.89862107285655
+"Texpi","Experimental temperature","K",309.151515151515,-1.89610665424193
+"Texpi","Experimental temperature","K",309.272727272727,-1.89359322128733
+"Texpi","Experimental temperature","K",309.393939393939,-1.89108077322027
+"Texpi","Experimental temperature","K",309.515151515152,-1.8885693092692
+"Texpi","Experimental temperature","K",309.636363636364,-1.88605882866349
+"Texpi","Experimental temperature","K",309.757575757576,-1.88354933063337
+"Texpi","Experimental temperature","K",309.878787878788,-1.88104081441002
+"Texpi","Experimental temperature","K",310,-1.8785332792255

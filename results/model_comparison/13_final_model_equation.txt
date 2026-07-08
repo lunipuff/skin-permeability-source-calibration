@@ -1,0 +1,14 @@
+Selected interpretable QSPR model
+
+Formula: logkpl ~ MWa + log(Mptc) + LogSaqd + LogSoce + log(Texpi) + I(Mptc^2) + I(LogSaqd^2) + MWa:LogSaqd
+
+Fitted coefficients:
+(Intercept) = -45.9177
+MWa = 0.00037581
+log(Mptc) = 1.106
+LogSaqd = -0.902715
+LogSoce = 0.290408
+log(Texpi) = 6.41177
+I(Mptc^2) = -8.55207e-06
+I(LogSaqd^2) = -0.0393475
+MWa:LogSaqd = 0.000906906

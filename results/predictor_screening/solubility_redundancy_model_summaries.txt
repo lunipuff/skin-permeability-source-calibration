@@ -1,0 +1,80 @@
+Correlation matrix
+         logKowb   Mptc LogSaqd LogSoce GSE_logS
+logKowb    1.000 -0.096  -0.763   0.470   -0.899
+Mptc      -0.096  1.000  -0.326  -0.591   -0.350
+LogSaqd   -0.763 -0.326   1.000   0.212    0.862
+LogSoce    0.470 -0.591   0.212   1.000   -0.182
+GSE_logS  -0.899 -0.350   0.862  -0.182    1.000
+
+
+Model: LogSaqd ~ logKowb + Mptc
+
+Call:
+lm(formula = LogSaqd ~ logKowb + Mptc, data = df)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.8348 -0.5560 -0.1372  0.6485  4.7004 
+
+Coefficients:
+              Estimate Std. Error t value Pr(>|t|)    
+(Intercept) -0.8634269  0.2154816  -4.007 7.67e-05 ***
+logKowb     -0.7240615  0.0257706 -28.096  < 2e-16 ***
+Mptc        -0.0077871  0.0005507 -14.140  < 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.9834 on 318 degrees of freedom
+Multiple R-squared:  0.7434,	Adjusted R-squared:  0.7418 
+F-statistic: 460.6 on 2 and 318 DF,  p-value: < 2.2e-16
+
+
+
+Model: LogSoce ~ logKowb + Mptc
+
+Call:
+lm(formula = LogSoce ~ logKowb + Mptc, data = df)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.8347 -0.5561 -0.1370  0.6486  4.7003 
+
+Coefficients:
+              Estimate Std. Error t value Pr(>|t|)    
+(Intercept) -0.8636731  0.2154807  -4.008 7.63e-05 ***
+logKowb      0.2759513  0.0257705  10.708  < 2e-16 ***
+Mptc        -0.0077866  0.0005507 -14.140  < 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.9834 on 318 degrees of freedom
+Multiple R-squared:  0.5218,	Adjusted R-squared:  0.5188 
+F-statistic: 173.5 on 2 and 318 DF,  p-value: < 2.2e-16
+
+
+
+Model: LogSaqd ~ GSE_logS
+
+Call:
+lm(formula = LogSaqd ~ GSE_logS, data = df)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.8779 -0.5728 -0.0703  0.6294  4.6516 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) -3.57032    0.06758  -52.83   <2e-16 ***
+GSE_logS     0.73248    0.02414   30.34   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.9832 on 319 degrees of freedom
+Multiple R-squared:  0.7427,	Adjusted R-squared:  0.7419 
+F-statistic: 920.8 on 1 and 319 DF,  p-value: < 2.2e-16
+
+
+
+VIF values
+     logKowb         Mptc      LogSaqd      LogSoce 
+2.015916e+07 1.655528e+00 1.643668e+07 8.820498e+06 

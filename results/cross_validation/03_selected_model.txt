@@ -1,0 +1,1 @@
+logkpl ~ MWa + log(Mptc) + LogSaqd + LogSoce + log(Texpi) + I(Mptc^2) + I(LogSaqd^2) + MWa:LogSaqd

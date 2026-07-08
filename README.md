@@ -65,6 +65,8 @@ Current repository purpose:
 
 The `data/` folder is intentionally omitted from the public repository at this stage.
 
+results/04_loco_cv_coefficient_long.csv is omitted because of file size.
+
 The raw permeability dataset is derived from a published data source. Users who wish to reproduce the full analysis should obtain the source dataset independently and place it in the expected project location.
 
 Expected raw input file:

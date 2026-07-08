@@ -1,0 +1,301 @@
+"x_predictor","modifier_predictor","x_predictor_label","modifier_predictor_label","x","modifier_level","modifier_value","predicted_logkpl"
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",18,"10th percentile",-7.31875876262441,-0.389898043290714
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",22.0454545454545,"10th percentile",-7.31875876262441,-0.415229133897547
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",26.0909090909091,"10th percentile",-7.31875876262441,-0.440560224504388
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",30.1363636363636,"10th percentile",-7.31875876262441,-0.465891315111229
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",34.1818181818182,"10th percentile",-7.31875876262441,-0.491222405718069
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",38.2272727272727,"10th percentile",-7.31875876262441,-0.516553496324903
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",42.2727272727273,"10th percentile",-7.31875876262441,-0.541884586931744
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",46.3181818181818,"10th percentile",-7.31875876262441,-0.567215677538577
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",50.3636363636364,"10th percentile",-7.31875876262441,-0.592546768145418
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",54.4090909090909,"10th percentile",-7.31875876262441,-0.617877858752259
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",58.4545454545455,"10th percentile",-7.31875876262441,-0.643208949359092
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",62.5,"10th percentile",-7.31875876262441,-0.668540039965933
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",66.5454545454545,"10th percentile",-7.31875876262441,-0.693871130572767
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",70.5909090909091,"10th percentile",-7.31875876262441,-0.719202221179614
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",74.6363636363636,"10th percentile",-7.31875876262441,-0.744533311786448
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",78.6818181818182,"10th percentile",-7.31875876262441,-0.769864402393289
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",82.7272727272727,"10th percentile",-7.31875876262441,-0.795195493000122
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",86.7727272727273,"10th percentile",-7.31875876262441,-0.820526583606956
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",90.8181818181818,"10th percentile",-7.31875876262441,-0.845857674213804
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",94.8636363636364,"10th percentile",-7.31875876262441,-0.871188764820637
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",98.9090909090909,"10th percentile",-7.31875876262441,-0.896519855427478
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",102.954545454545,"10th percentile",-7.31875876262441,-0.921850946034311
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",107,"10th percentile",-7.31875876262441,-0.947182036641152
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",111.045454545455,"10th percentile",-7.31875876262441,-0.972513127247993
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",115.090909090909,"10th percentile",-7.31875876262441,-0.997844217854833
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",119.136363636364,"10th percentile",-7.31875876262441,-1.02317530846167
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",123.181818181818,"10th percentile",-7.31875876262441,-1.0485063990685
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",127.227272727273,"10th percentile",-7.31875876262441,-1.07383748967534
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",131.272727272727,"10th percentile",-7.31875876262441,-1.09916858028218
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",135.318181818182,"10th percentile",-7.31875876262441,-1.12449967088902
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",139.363636363636,"10th percentile",-7.31875876262441,-1.14983076149586
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",143.409090909091,"10th percentile",-7.31875876262441,-1.1751618521027
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",147.454545454545,"10th percentile",-7.31875876262441,-1.20049294270953
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",151.5,"10th percentile",-7.31875876262441,-1.22582403331638
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",155.545454545455,"10th percentile",-7.31875876262441,-1.25115512392321
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",159.590909090909,"10th percentile",-7.31875876262441,-1.27648621453005
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",163.636363636364,"10th percentile",-7.31875876262441,-1.30181730513689
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",167.681818181818,"10th percentile",-7.31875876262441,-1.32714839574372
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",171.727272727273,"10th percentile",-7.31875876262441,-1.35247948635057
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",175.772727272727,"10th percentile",-7.31875876262441,-1.3778105769574
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",179.818181818182,"10th percentile",-7.31875876262441,-1.40314166756424
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",183.863636363636,"10th percentile",-7.31875876262441,-1.42847275817108
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",187.909090909091,"10th percentile",-7.31875876262441,-1.45380384877792
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",191.954545454545,"10th percentile",-7.31875876262441,-1.47913493938476
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",196,"10th percentile",-7.31875876262441,-1.5044660299916
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",200.045454545455,"10th percentile",-7.31875876262441,-1.52979712059843
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",204.090909090909,"10th percentile",-7.31875876262441,-1.55512821120526
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",208.136363636364,"10th percentile",-7.31875876262441,-1.58045930181211
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",212.181818181818,"10th percentile",-7.31875876262441,-1.60579039241895
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",216.227272727273,"10th percentile",-7.31875876262441,-1.63112148302579
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",220.272727272727,"10th percentile",-7.31875876262441,-1.65645257363262
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",224.318181818182,"10th percentile",-7.31875876262441,-1.68178366423946
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",228.363636363636,"10th percentile",-7.31875876262441,-1.70711475484629
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",232.409090909091,"10th percentile",-7.31875876262441,-1.73244584545314
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",236.454545454545,"10th percentile",-7.31875876262441,-1.75777693605998
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",240.5,"10th percentile",-7.31875876262441,-1.78310802666681
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",244.545454545455,"10th percentile",-7.31875876262441,-1.80843911727365
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",248.590909090909,"10th percentile",-7.31875876262441,-1.83377020788048
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",252.636363636364,"10th percentile",-7.31875876262441,-1.85910129848733
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",256.681818181818,"10th percentile",-7.31875876262441,-1.88443238909417
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",260.727272727273,"10th percentile",-7.31875876262441,-1.90976347970101
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",264.772727272727,"10th percentile",-7.31875876262441,-1.93509457030784
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",268.818181818182,"10th percentile",-7.31875876262441,-1.96042566091468
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",272.863636363636,"10th percentile",-7.31875876262441,-1.98575675152152
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",276.909090909091,"10th percentile",-7.31875876262441,-2.01108784212835
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",280.954545454545,"10th percentile",-7.31875876262441,-2.0364189327352
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",285,"10th percentile",-7.31875876262441,-2.06175002334203
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",289.045454545455,"10th percentile",-7.31875876262441,-2.08708111394887
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",293.090909090909,"10th percentile",-7.31875876262441,-2.11241220455571
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",297.136363636364,"10th percentile",-7.31875876262441,-2.13774329516255
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",301.181818181818,"10th percentile",-7.31875876262441,-2.16307438576938
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",305.227272727273,"10th percentile",-7.31875876262441,-2.18840547637623
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",309.272727272727,"10th percentile",-7.31875876262441,-2.21373656698306
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",313.318181818182,"10th percentile",-7.31875876262441,-2.2390676575899
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",317.363636363636,"10th percentile",-7.31875876262441,-2.26439874819674
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",321.409090909091,"10th percentile",-7.31875876262441,-2.28972983880357
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",325.454545454545,"10th percentile",-7.31875876262441,-2.31506092941041
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",329.5,"10th percentile",-7.31875876262441,-2.34039202001725
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",333.545454545455,"10th percentile",-7.31875876262441,-2.3657231106241
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",337.590909090909,"10th percentile",-7.31875876262441,-2.39105420123093
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",341.636363636364,"10th percentile",-7.31875876262441,-2.41638529183777
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",345.681818181818,"10th percentile",-7.31875876262441,-2.4417163824446
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",349.727272727273,"10th percentile",-7.31875876262441,-2.46704747305144
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",353.772727272727,"10th percentile",-7.31875876262441,-2.49237856365828
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",357.818181818182,"10th percentile",-7.31875876262441,-2.51770965426512
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",361.863636363636,"10th percentile",-7.31875876262441,-2.54304074487196
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",365.909090909091,"10th percentile",-7.31875876262441,-2.56837183547879
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",369.954545454545,"10th percentile",-7.31875876262441,-2.59370292608563
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",374,"10th percentile",-7.31875876262441,-2.61903401669247
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",378.045454545455,"10th percentile",-7.31875876262441,-2.64436510729931
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",382.090909090909,"10th percentile",-7.31875876262441,-2.66969619790615
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",386.136363636364,"10th percentile",-7.31875876262441,-2.69502728851299
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",390.181818181818,"10th percentile",-7.31875876262441,-2.72035837911982
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",394.227272727273,"10th percentile",-7.31875876262441,-2.74568946972666
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",398.272727272727,"10th percentile",-7.31875876262441,-2.7710205603335
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",402.318181818182,"10th percentile",-7.31875876262441,-2.79635165094034
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",406.363636363636,"10th percentile",-7.31875876262441,-2.82168274154718
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",410.409090909091,"10th percentile",-7.31875876262441,-2.84701383215401
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",414.454545454545,"10th percentile",-7.31875876262441,-2.87234492276086
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",418.5,"10th percentile",-7.31875876262441,-2.89767601336769
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",18,"median",-4.85387196432176,-1.39416199338427
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",22.0454545454545,"median",-4.85387196432176,-1.41044978928267
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",26.0909090909091,"median",-4.85387196432176,-1.42673758518107
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",30.1363636363636,"median",-4.85387196432176,-1.44302538107947
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",34.1818181818182,"median",-4.85387196432176,-1.45931317697787
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",38.2272727272727,"median",-4.85387196432176,-1.47560097287627
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",42.2727272727273,"median",-4.85387196432176,-1.49188876877466
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",46.3181818181818,"median",-4.85387196432176,-1.50817656467306
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",50.3636363636364,"median",-4.85387196432176,-1.52446436057146
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",54.4090909090909,"median",-4.85387196432176,-1.54075215646986
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",58.4545454545455,"median",-4.85387196432176,-1.55703995236826
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",62.5,"median",-4.85387196432176,-1.57332774826665
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",66.5454545454545,"median",-4.85387196432176,-1.58961554416506
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",70.5909090909091,"median",-4.85387196432176,-1.60590334006345
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",74.6363636363636,"median",-4.85387196432176,-1.62219113596185
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",78.6818181818182,"median",-4.85387196432176,-1.63847893186025
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",82.7272727272727,"median",-4.85387196432176,-1.65476672775865
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",86.7727272727273,"median",-4.85387196432176,-1.67105452365704
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",90.8181818181818,"median",-4.85387196432176,-1.68734231955544
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",94.8636363636364,"median",-4.85387196432176,-1.70363011545384
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",98.9090909090909,"median",-4.85387196432176,-1.71991791135223
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",102.954545454545,"median",-4.85387196432176,-1.73620570725064
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",107,"median",-4.85387196432176,-1.75249350314903
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",111.045454545455,"median",-4.85387196432176,-1.76878129904743
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",115.090909090909,"median",-4.85387196432176,-1.78506909494583
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",119.136363636364,"median",-4.85387196432176,-1.80135689084423
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",123.181818181818,"median",-4.85387196432176,-1.81764468674263
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",127.227272727273,"median",-4.85387196432176,-1.83393248264102
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",131.272727272727,"median",-4.85387196432176,-1.85022027853942
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",135.318181818182,"median",-4.85387196432176,-1.86650807443782
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",139.363636363636,"median",-4.85387196432176,-1.88279587033622
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",143.409090909091,"median",-4.85387196432176,-1.89908366623462
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",147.454545454545,"median",-4.85387196432176,-1.91537146213302
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",151.5,"median",-4.85387196432176,-1.93165925803141
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",155.545454545455,"median",-4.85387196432176,-1.94794705392982
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",159.590909090909,"median",-4.85387196432176,-1.96423484982821
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",163.636363636364,"median",-4.85387196432176,-1.9805226457266
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",167.681818181818,"median",-4.85387196432176,-1.99681044162501
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",171.727272727273,"median",-4.85387196432176,-2.0130982375234
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",175.772727272727,"median",-4.85387196432176,-2.0293860334218
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",179.818181818182,"median",-4.85387196432176,-2.0456738293202
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",183.863636363636,"median",-4.85387196432176,-2.0619616252186
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",187.909090909091,"median",-4.85387196432176,-2.07824942111699
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",191.954545454545,"median",-4.85387196432176,-2.0945372170154
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",196,"median",-4.85387196432176,-2.11082501291379
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",200.045454545455,"median",-4.85387196432176,-2.12711280881219
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",204.090909090909,"median",-4.85387196432176,-2.14340060471059
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",208.136363636364,"median",-4.85387196432176,-2.15968840060899
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",212.181818181818,"median",-4.85387196432176,-2.17597619650738
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",216.227272727273,"median",-4.85387196432176,-2.19226399240578
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",220.272727272727,"median",-4.85387196432176,-2.20855178830418
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",224.318181818182,"median",-4.85387196432176,-2.22483958420258
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",228.363636363636,"median",-4.85387196432176,-2.24112738010098
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",232.409090909091,"median",-4.85387196432176,-2.25741517599938
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",236.454545454545,"median",-4.85387196432176,-2.27370297189778
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",240.5,"median",-4.85387196432176,-2.28999076779617
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",244.545454545455,"median",-4.85387196432176,-2.30627856369457
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",248.590909090909,"median",-4.85387196432176,-2.32256635959297
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",252.636363636364,"median",-4.85387196432176,-2.33885415549136
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",256.681818181818,"median",-4.85387196432176,-2.35514195138977
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",260.727272727273,"median",-4.85387196432176,-2.37142974728816
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",264.772727272727,"median",-4.85387196432176,-2.38771754318656
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",268.818181818182,"median",-4.85387196432176,-2.40400533908496
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",272.863636363636,"median",-4.85387196432176,-2.42029313498336
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",276.909090909091,"median",-4.85387196432176,-2.43658093088175
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",280.954545454545,"median",-4.85387196432176,-2.45286872678015
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",285,"median",-4.85387196432176,-2.46915652267855
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",289.045454545455,"median",-4.85387196432176,-2.48544431857695
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",293.090909090909,"median",-4.85387196432176,-2.50173211447535
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",297.136363636364,"median",-4.85387196432176,-2.51801991037375
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",301.181818181818,"median",-4.85387196432176,-2.53430770627214
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",305.227272727273,"median",-4.85387196432176,-2.55059550217054
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",309.272727272727,"median",-4.85387196432176,-2.56688329806894
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",313.318181818182,"median",-4.85387196432176,-2.58317109396734
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",317.363636363636,"median",-4.85387196432176,-2.59945888986574
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",321.409090909091,"median",-4.85387196432176,-2.61574668576414
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",325.454545454545,"median",-4.85387196432176,-2.63203448166253
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",329.5,"median",-4.85387196432176,-2.64832227756093
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",333.545454545455,"median",-4.85387196432176,-2.66461007345933
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",337.590909090909,"median",-4.85387196432176,-2.68089786935773
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",341.636363636364,"median",-4.85387196432176,-2.69718566525612
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",345.681818181818,"median",-4.85387196432176,-2.71347346115453
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",349.727272727273,"median",-4.85387196432176,-2.72976125705292
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",353.772727272727,"median",-4.85387196432176,-2.74604905295131
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",357.818181818182,"median",-4.85387196432176,-2.76233684884972
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",361.863636363636,"median",-4.85387196432176,-2.77862464474811
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",365.909090909091,"median",-4.85387196432176,-2.79491244064651
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",369.954545454545,"median",-4.85387196432176,-2.81120023654491
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",374,"median",-4.85387196432176,-2.82748803244331
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",378.045454545455,"median",-4.85387196432176,-2.84377582834171
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",382.090909090909,"median",-4.85387196432176,-2.86006362424011
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",386.136363636364,"median",-4.85387196432176,-2.8763514201385
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",390.181818181818,"median",-4.85387196432176,-2.8926392160369
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",394.227272727273,"median",-4.85387196432176,-2.9089270119353
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",398.272727272727,"median",-4.85387196432176,-2.9252148078337
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",402.318181818182,"median",-4.85387196432176,-2.9415026037321
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",406.363636363636,"median",-4.85387196432176,-2.95779039963049
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",410.409090909091,"median",-4.85387196432176,-2.9740781955289
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",414.454545454545,"median",-4.85387196432176,-2.99036599142729
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",418.5,"median",-4.85387196432176,-3.00665378732569
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",18,"90th percentile",-1.99139982823808,-3.16043947941652
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",22.0454545454545,"90th percentile",-1.99139982823808,-3.16622530048218
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",26.0909090909091,"90th percentile",-1.99139982823808,-3.17201112154785
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",30.1363636363636,"90th percentile",-1.99139982823808,-3.17779694261352
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",34.1818181818182,"90th percentile",-1.99139982823808,-3.18358276367918
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",38.2272727272727,"90th percentile",-1.99139982823808,-3.18936858474486
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",42.2727272727273,"90th percentile",-1.99139982823808,-3.19515440581052
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",46.3181818181818,"90th percentile",-1.99139982823808,-3.20094022687619
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",50.3636363636364,"90th percentile",-1.99139982823808,-3.20672604794186
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",54.4090909090909,"90th percentile",-1.99139982823808,-3.21251186900753
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",58.4545454545455,"90th percentile",-1.99139982823808,-3.2182976900732
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",62.5,"90th percentile",-1.99139982823808,-3.22408351113886
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",66.5454545454545,"90th percentile",-1.99139982823808,-3.22986933220454
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",70.5909090909091,"90th percentile",-1.99139982823808,-3.2356551532702
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",74.6363636363636,"90th percentile",-1.99139982823808,-3.24144097433587
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",78.6818181818182,"90th percentile",-1.99139982823808,-3.24722679540154
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",82.7272727272727,"90th percentile",-1.99139982823808,-3.25301261646721
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",86.7727272727273,"90th percentile",-1.99139982823808,-3.25879843753287
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",90.8181818181818,"90th percentile",-1.99139982823808,-3.26458425859855
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",94.8636363636364,"90th percentile",-1.99139982823808,-3.27037007966421
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",98.9090909090909,"90th percentile",-1.99139982823808,-3.27615590072988
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",102.954545454545,"90th percentile",-1.99139982823808,-3.28194172179555
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",107,"90th percentile",-1.99139982823808,-3.28772754286121
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",111.045454545455,"90th percentile",-1.99139982823808,-3.29351336392688
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",115.090909090909,"90th percentile",-1.99139982823808,-3.29929918499255
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",119.136363636364,"90th percentile",-1.99139982823808,-3.30508500605822
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",123.181818181818,"90th percentile",-1.99139982823808,-3.31087082712389
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",127.227272727273,"90th percentile",-1.99139982823808,-3.31665664818956
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",131.272727272727,"90th percentile",-1.99139982823808,-3.32244246925522
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",135.318181818182,"90th percentile",-1.99139982823808,-3.32822829032089
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",139.363636363636,"90th percentile",-1.99139982823808,-3.33401411138656
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",143.409090909091,"90th percentile",-1.99139982823808,-3.33979993245222
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",147.454545454545,"90th percentile",-1.99139982823808,-3.3455857535179
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",151.5,"90th percentile",-1.99139982823808,-3.35137157458357
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",155.545454545455,"90th percentile",-1.99139982823808,-3.35715739564924
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",159.590909090909,"90th percentile",-1.99139982823808,-3.3629432167149
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",163.636363636364,"90th percentile",-1.99139982823808,-3.36872903778058
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",167.681818181818,"90th percentile",-1.99139982823808,-3.37451485884624
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",171.727272727273,"90th percentile",-1.99139982823808,-3.38030067991191
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",175.772727272727,"90th percentile",-1.99139982823808,-3.38608650097758
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",179.818181818182,"90th percentile",-1.99139982823808,-3.39187232204324
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",183.863636363636,"90th percentile",-1.99139982823808,-3.39765814310891
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",187.909090909091,"90th percentile",-1.99139982823808,-3.40344396417458
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",191.954545454545,"90th percentile",-1.99139982823808,-3.40922978524025
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",196,"90th percentile",-1.99139982823808,-3.41501560630591
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",200.045454545455,"90th percentile",-1.99139982823808,-3.42080142737159
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",204.090909090909,"90th percentile",-1.99139982823808,-3.42658724843725
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",208.136363636364,"90th percentile",-1.99139982823808,-3.43237306950292
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",212.181818181818,"90th percentile",-1.99139982823808,-3.43815889056859
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",216.227272727273,"90th percentile",-1.99139982823808,-3.44394471163425
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",220.272727272727,"90th percentile",-1.99139982823808,-3.44973053269992
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",224.318181818182,"90th percentile",-1.99139982823808,-3.45551635376559
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",228.363636363636,"90th percentile",-1.99139982823808,-3.46130217483126
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",232.409090909091,"90th percentile",-1.99139982823808,-3.46708799589693
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",236.454545454545,"90th percentile",-1.99139982823808,-3.4728738169626
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",240.5,"90th percentile",-1.99139982823808,-3.47865963802826
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",244.545454545455,"90th percentile",-1.99139982823808,-3.48444545909394
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",248.590909090909,"90th percentile",-1.99139982823808,-3.49023128015961
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",252.636363636364,"90th percentile",-1.99139982823808,-3.49601710122527
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",256.681818181818,"90th percentile",-1.99139982823808,-3.50180292229094
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",260.727272727273,"90th percentile",-1.99139982823808,-3.50758874335661
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",264.772727272727,"90th percentile",-1.99139982823808,-3.51337456442228
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",268.818181818182,"90th percentile",-1.99139982823808,-3.51916038548794
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",272.863636363636,"90th percentile",-1.99139982823808,-3.52494620655362
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",276.909090909091,"90th percentile",-1.99139982823808,-3.53073202761928
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",280.954545454545,"90th percentile",-1.99139982823808,-3.53651784868495
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",285,"90th percentile",-1.99139982823808,-3.54230366975062
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",289.045454545455,"90th percentile",-1.99139982823808,-3.54808949081628
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",293.090909090909,"90th percentile",-1.99139982823808,-3.55387531188195
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",297.136363636364,"90th percentile",-1.99139982823808,-3.55966113294762
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",301.181818181818,"90th percentile",-1.99139982823808,-3.56544695401329
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",305.227272727273,"90th percentile",-1.99139982823808,-3.57123277507895
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",309.272727272727,"90th percentile",-1.99139982823808,-3.57701859614463
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",313.318181818182,"90th percentile",-1.99139982823808,-3.58280441721029
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",317.363636363636,"90th percentile",-1.99139982823808,-3.58859023827596
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",321.409090909091,"90th percentile",-1.99139982823808,-3.59437605934163
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",325.454545454545,"90th percentile",-1.99139982823808,-3.60016188040729
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",329.5,"90th percentile",-1.99139982823808,-3.60594770147296
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",333.545454545455,"90th percentile",-1.99139982823808,-3.61173352253863
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",337.590909090909,"90th percentile",-1.99139982823808,-3.61751934360431
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",341.636363636364,"90th percentile",-1.99139982823808,-3.62330516466997
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",345.681818181818,"90th percentile",-1.99139982823808,-3.62909098573564
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",349.727272727273,"90th percentile",-1.99139982823808,-3.63487680680131
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",353.772727272727,"90th percentile",-1.99139982823808,-3.64066262786698
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",357.818181818182,"90th percentile",-1.99139982823808,-3.64644844893265
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",361.863636363636,"90th percentile",-1.99139982823808,-3.65223426999832
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",365.909090909091,"90th percentile",-1.99139982823808,-3.65802009106398
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",369.954545454545,"90th percentile",-1.99139982823808,-3.66380591212965
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",374,"90th percentile",-1.99139982823808,-3.66959173319532
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",378.045454545455,"90th percentile",-1.99139982823808,-3.67537755426098
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",382.090909090909,"90th percentile",-1.99139982823808,-3.68116337532665
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",386.136363636364,"90th percentile",-1.99139982823808,-3.68694919639232
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",390.181818181818,"90th percentile",-1.99139982823808,-3.69273501745799
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",394.227272727273,"90th percentile",-1.99139982823808,-3.69852083852366
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",398.272727272727,"90th percentile",-1.99139982823808,-3.70430665958933
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",402.318181818182,"90th percentile",-1.99139982823808,-3.71009248065499
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",406.363636363636,"90th percentile",-1.99139982823808,-3.71587830172066
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",410.409090909091,"90th percentile",-1.99139982823808,-3.72166412278633
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",414.454545454545,"90th percentile",-1.99139982823808,-3.72744994385199
+"MWa","LogSaqd","Molecular weight","Aqueous solubility",418.5,"90th percentile",-1.99139982823808,-3.73323576491767

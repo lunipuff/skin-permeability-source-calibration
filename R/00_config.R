@@ -111,6 +111,17 @@ path_fig_rdkit_benchmark_rmse_png <- "figures/figureS_rdkit_benchmark_RMSE.png"
 path_fig_rdkit_observed_predicted_pdf <- "figures/figureS_rdkit_observed_vs_predicted.pdf"
 path_fig_rdkit_observed_predicted_png <- "figures/figureS_rdkit_observed_vs_predicted.png"
 
+# Compiled benchmark table paths
+path_table_benchmark_all <- "tables/tableS_all_benchmark_models.csv"
+path_table_benchmark_main <- "tables/table_main_benchmark_models.csv"
+
+# Ablation analysis paths
+path_ablation_summary <- "results/ablation/09_ablation_summary.csv"
+path_ablation_predictions <- "results/ablation/09_ablation_predictions.csv"
+path_table_ablation_summary <- "tables/tableS_ablation_summary.csv"
+path_fig_ablation_rmse_pdf <- "figures/figureS_ablation_RMSE.pdf"
+path_fig_ablation_rmse_png <- "figures/figureS_ablation_RMSE.png"
+
 
 ############################################################
 # Predictor screening settings

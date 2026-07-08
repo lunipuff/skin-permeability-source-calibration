@@ -1,0 +1,14 @@
+"output_type","path","exists"
+"Selected model equation","results/model_comparison/13_final_model_equation.txt",TRUE
+"Final model coefficients","tables/table_final_model_coefficients.csv",TRUE
+"Manuscript key values","tables/table_manuscript_key_results.csv",TRUE
+"Final model performance summary","tables/table_final_model_performance_summary.csv",TRUE
+"Main benchmark table","tables/table_main_benchmark_models.csv",TRUE
+"All benchmark table","tables/tableS_all_benchmark_models.csv",TRUE
+"Ablation summary","tables/tableS_ablation_summary.csv",TRUE
+"Validation scheme sensitivity","tables/table_validation_scheme_sensitivity.csv",TRUE
+"Applicability-domain error summary","tables/table_applicability_domain_error_summary.csv",TRUE
+"Applicability-domain descriptor summary","tables/tableS_descriptor_domain_summary.csv",TRUE
+"Partial-effect dataset","results/interpretability/10_partial_effect_dataset.csv",TRUE
+"Interaction-effect dataset","results/interpretability/10_interaction_effect_dataset.csv",TRUE
+"RDKit benchmark summary","tables/tableS_rdkit_benchmark_summary.csv",TRUE

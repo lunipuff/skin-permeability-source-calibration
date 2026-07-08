@@ -122,6 +122,45 @@ path_table_ablation_summary <- "tables/tableS_ablation_summary.csv"
 path_fig_ablation_rmse_pdf <- "figures/figureS_ablation_RMSE.pdf"
 path_fig_ablation_rmse_png <- "figures/figureS_ablation_RMSE.png"
 
+# Partial-effect analysis paths
+path_partial_effect_dataset <- "results/interpretability/10_partial_effect_dataset.csv"
+path_interaction_effect_dataset <- "results/interpretability/10_interaction_effect_dataset.csv"
+path_fig_partial_effects_pdf <- "figures/figure_partial_effects_selected_model.pdf"
+path_fig_partial_effects_png <- "figures/figure_partial_effects_selected_model.png"
+path_fig_interaction_MWa_LogSaqd_pdf <- "figures/figure_interaction_MWa_LogSaqd.pdf"
+path_fig_interaction_MWa_LogSaqd_png <- "figures/figure_interaction_MWa_LogSaqd.png"
+
+# Row-wise validation sensitivity paths
+path_rowwise_cv_predictions <- "results/cross_validation/11_rowwise_cv_predictions.csv"
+path_rowwise_cv_summary <- "results/cross_validation/11_rowwise_cv_summary.csv"
+path_validation_scheme_summary <- "tables/table_validation_scheme_sensitivity.csv"
+path_fig_validation_scheme_rmse_pdf <- "figures/figure_validation_scheme_RMSE.pdf"
+path_fig_validation_scheme_rmse_png <- "figures/figure_validation_scheme_RMSE.png"
+path_fig_rowwise_observed_predicted_pdf <- "figures/figureS_rowwise_cv_observed_vs_predicted.pdf"
+path_fig_rowwise_observed_predicted_png <- "figures/figureS_rowwise_cv_observed_vs_predicted.png"
+
+# Applicability-domain summary paths
+path_ad_prediction_dataset <- "results/applicability_domain/12_applicability_domain_prediction_dataset.csv"
+path_ad_descriptor_summary <- "results/applicability_domain/12_descriptor_domain_summary.csv"
+path_ad_error_by_domain <- "results/applicability_domain/12_error_by_domain_class.csv"
+path_ad_high_error_summary <- "results/applicability_domain/12_high_error_domain_summary.csv"
+path_table_ad_descriptor_summary <- "tables/tableS_descriptor_domain_summary.csv"
+path_table_ad_error_by_domain <- "tables/table_applicability_domain_error_summary.csv"
+path_table_ad_high_error_summary <- "tables/tableS_high_error_domain_summary.csv"
+path_fig_ad_error_by_domain_pdf <- "figures/figure_applicability_domain_error_by_domain.pdf"
+path_fig_ad_error_by_domain_png <- "figures/figure_applicability_domain_error_by_domain.png"
+path_fig_ad_abs_error_by_predictor_pdf <- "figures/figureS_applicability_domain_abs_error_by_predictor.pdf"
+path_fig_ad_abs_error_by_predictor_png <- "figures/figureS_applicability_domain_abs_error_by_predictor.png"
+
+# Final model export paths
+path_final_model_coefficients <- "tables/table_final_model_coefficients.csv"
+path_final_model_equation <- "results/model_comparison/13_final_model_equation.txt"
+path_final_model_summary <- "results/model_comparison/13_final_model_summary.csv"
+path_final_model_manuscript_values <- "tables/table_manuscript_key_results.csv"
+path_table_final_model_performance <- "tables/table_final_model_performance_summary.csv"
+path_table_final_model_selected_outputs <- "tables/table_final_model_selected_outputs.csv"
+path_fig_final_model_coefficients_pdf <- "figures/figureS_final_model_coefficients.pdf"
+path_fig_final_model_coefficients_png <- "figures/figureS_final_model_coefficients.png"
 
 ############################################################
 # Predictor screening settings

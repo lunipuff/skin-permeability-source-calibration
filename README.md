@@ -1,54 +1,48 @@
-# Interpretable QSPR modeling of human skin permeability
+# Skin Permeability QSPR Framework
 
-This repository contains the analysis workflow for developing and evaluating an interpretable QSPR model for human skin permeability.
+This repository contains analysis code and generated outputs for a reproducible model-development workflow for human skin permeability QSPR modeling.
 
-The study uses a curated human skin permeability dataset to develop a compact physicochemical model, evaluate candidate predictors, compare benchmark models, assess applicability domain, characterize uncertainty, and generate manuscript-ready tables and figures.
+The project develops and evaluates an interpretable QSPR model for human skin permeability using leakage-aware validation, benchmark comparison, applicability-domain analysis, uncertainty analysis, RDKit descriptor benchmarking, ablation analysis, and partial-effect interpretation.
 
-## Project aim
+The full manuscript draft is not included in this public repository while the paper is still in preparation. It is maintained separately and will be released after submission, preprint, or publication.
 
-The aim of this project is to develop and evaluate an interpretable quadratic QSPR model for human skin permeability.
+## Project status
 
-The model-development workflow includes:
+Manuscript in preparation.
 
-1. data curation and cleaning;
-2. initial screening of a broader predictor set;
-3. selection of a compact physicochemical predictor set;
-4. candidate model construction;
-5. leave-one-compound-out cross-validation;
-6. row-wise validation sensitivity analysis;
-7. benchmark comparison;
-8. applicability-domain analysis;
-9. uncertainty analysis;
-10. partial effect interpretation;
-11. descriptor-group ablation;
-12. optional RDKit descriptor benchmarking.
+Current repository purpose:
 
-The selected model is intended to be interpreted as the best-performing interpretable model within the tested candidate model space, not as a universal skin permeability predictor.
+- document the analysis workflow;
+- make scripts and generated outputs inspectable;
+- support manuscript writing and internal review;
+- prepare for later public release with manuscript and data-availability documentation.
 
 ## Repository structure
 
 ```text
-202604_skin_permeability_qspr_model/
-│
-├── data/
-│   ├── raw/
-│   ├── interim/
-│   └── processed/
-│
+.
 ├── R/
 │   ├── 00_config.R
 │   ├── 01_clean_data.R
 │   ├── 02_initial_predictor_screening.R
-│   ├── 03_loco_cv.R
-│   ├── 04_model_comparison.R
-│   ├── 05_applicability_domain.R
-│   ├── 06_rowwise_cv_sensitivity.R
-│   ├── 07_random_forest_benchmark.R
-│   ├── 08_uncertainty_model.R
-│   ├── 09_partial_effects.R
-│   ├── 10_ablation_analysis.R
-│   ├── 11_make_tables.R
-│   └── 12_make_figures.R
+│   ├── 02b_solubility_redundancy_check.R
+│   ├── 03_loco_cv_candidate_model_search.R
+│   ├── 04_loco_cv_coefficient_stability.R
+│   ├── 05_loco_cv_error_diagnostics.R
+│   ├── 06_heteroscedastic_uncertainty_model.R
+│   ├── 07_descriptor_relationships_and_domain_overview.R
+│   ├── 08_benchmark_models.R
+│   ├── 08a_clean_compound_structure_lookup.R
+│   ├── 08b_rdkit_descriptor_benchmark.R
+│   ├── 08c_compile_benchmark_tables.R
+│   ├── 09_ablation_analysis.R
+│   ├── 10_partial_effects.R
+│   ├── 11_rowwise_cv_sensitivity.R
+│   ├── 12_applicability_domain_summary.R
+│   └── 13_export_final_model_outputs.R
+│
+├── python/
+│   └── calculate_rdkit_descriptors.py
 │
 ├── results/
 │   ├── predictor_screening/
@@ -57,327 +51,267 @@ The selected model is intended to be interpreted as the best-performing interpre
 │   ├── model_comparison/
 │   ├── applicability_domain/
 │   ├── uncertainty/
-│   └── ablation/
+│   ├── ablation/
+│   └── interpretability/
 │
-├── figures/
 ├── tables/
+├── figures/
 ├── manuscript/
-├── README.md
-└── 202604_skin_permeability_qspr_model.Rproj
+├── data/
+└── README.md
 ```
 
-## Folder descriptions
+## Data availability note
 
-### `data/raw/`
+The `data/` folder is intentionally omitted from the public repository at this stage.
 
-Contains the original dataset exactly as downloaded or received.
+The raw permeability dataset is derived from a published data source. Users who wish to reproduce the full analysis should obtain the source dataset independently and place it in the expected project location.
 
-Files in this folder should not be manually edited.
-
-Expected contents:
+Expected raw input file:
 
 ```text
-data/raw/original_skin_permeability_dataset.csv
-data/raw/README_raw_data.md
+data/raw/Table 1.xlsx
 ```
 
-### `data/interim/`
+Curated SMILES input for RDKit descriptor calculation is also omitted at this stage because structure curation is part of the ongoing manuscript preparation.
 
-Contains intermediate files created during cleaning and checking.
-
-Examples:
+Expected curated structure file after local curation:
 
 ```text
-data/interim/removed_rows_log.csv
-data/interim/missing_value_summary.csv
-data/interim/unit_check_summary.csv
-data/interim/compound_id_lookup.csv
+data/interim/compound_structure_lookup.csv
 ```
 
-### `data/processed/`
+The manuscript will include a complete data-availability statement before submission.
 
-Contains final analysis-ready datasets used by the modeling scripts.
+## Analysis overview
 
-Examples:
+The workflow is designed to evaluate both a selected interpretable QSPR model and the broader model-development framework.
+
+Main analysis components:
+
+1. data cleaning and duplicate handling;
+2. descriptor redundancy assessment;
+3. initial predictor screening;
+4. leave-one-compound-out candidate model search;
+5. coefficient-stability analysis;
+6. prediction-error diagnostics;
+7. heteroscedastic uncertainty analysis;
+8. descriptor relationship and domain overview;
+9. benchmark comparison against classical, random forest, and RDKit-based models;
+10. ablation analysis;
+11. partial-effect interpretation;
+12. row-wise validation sensitivity analysis;
+13. applicability-domain summary;
+14. final export of manuscript-ready tables and values.
+
+## Selected model
+
+The selected model is read programmatically from:
 
 ```text
-data/processed/skin_permeability_modeling_dataset.csv
-data/processed/skin_permeability_unique_compounds.csv
-data/processed/rdkit_descriptors.csv
-data/processed/modeling_dataset_with_rdkit.csv
+results/cross_validation/03_selected_model.txt
 ```
 
-### `R/`
-
-Contains numbered R scripts for the full analysis workflow.
-
-The main settings file is:
-
-```text
-R/00_config.R
-```
-
-This file contains shared paths, column names, predictor sets, model formulas, random seed, and performance functions.
-
-### `results/`
-
-Contains machine-readable analysis outputs.
-
-These files are generated by the R scripts and are used to create tables, figures, and manuscript results.
-
-### `figures/`
-
-Contains manuscript-ready figures.
-
-### `tables/`
-
-Contains manuscript-ready tables.
-
-### `manuscript/`
-
-Contains the manuscript R Markdown file and rendered outputs.
-
-Expected contents:
-
-```text
-manuscript/manuscript.Rmd
-manuscript/manuscript.html
-manuscript/manuscript.docx
-manuscript/supplementary.Rmd
-```
-
-## Data source
-
-The skin permeability dataset was obtained from:
-
-```text
-[INSERT DATASET SOURCE]
-[INSERT DOI OR URL]
-[INSERT DATE ACCESSED]
-```
-
-The raw dataset should be stored in:
-
-```text
-data/raw/
-```
-
-A short description of the original data source should be added to:
-
-```text
-data/raw/README_raw_data.md
-```
-
-## Main outcome
-
-The response variable is:
-
-```text
-logkpl
-```
-
-This represents the logarithm of the skin permeability coefficient.
-
-## Candidate predictors
-
-The original curated dataset contains a broader set of candidate predictors, including:
-
-```text
-MWa
-logKowb
-Mptc
-LogSaqd
-LogSoce
-Hdf
-Hag
-MVh
-Texpi
-Skin.thicknessj
-```
-
-The final core predictor set selected from initial simple-model screening is:
-
-```text
-MWa
-logKowb
-Mptc
-LogSaqd
-Texpi
-```
-
-## Main model
-
-The main selected model is an interpretable quadratic QSPR model:
-
-```r
-logkpl ~ MWa + logKowb + I(logKowb^2) +
-  Mptc + I(Mptc^2) +
-  LogSaqd + I(LogSaqd^2) +
-  Texpi + I(Texpi^2)
-```
-
-This model was selected based on leave-one-compound-out cross-validation performance, parsimony, and interpretability.
+At the current stage, downstream scripts are designed to avoid hard-coding the selected model structure. Scripts extract model predictors and terms from the selected model formula where possible.
 
 ## Validation strategy
 
 The primary validation strategy is leave-one-compound-out cross-validation.
 
-In each fold, all observations from one compound are held out together. This prevents the same compound from appearing in both training and test data.
+This is used because the dataset contains repeated observations for some compounds. Row-wise validation may place observations from the same compound in both training and test sets, which can lead to compound-level information leakage.
 
-A row-wise cross-validation analysis is included only as a sensitivity analysis.
+A row-wise validation sensitivity analysis is included in:
+
+```text
+R/11_rowwise_cv_sensitivity.R
+```
 
 ## Benchmark models
 
-The following models are compared:
+Benchmark models include:
 
-| Model | Purpose |
-|---|---|
-| Dummy baseline | Minimum reference model |
-| Potts-Guy-style model | Classical low-complexity permeability baseline |
-| Linear physicochemical model | Tests selected predictors without quadratic terms |
-| Quadratic physicochemical model | Main interpretable selected model |
-| Extended sensitivity model | Tests additional predictors or interactions |
-| Random forest benchmark | Tests flexible nonlinear learning using the same predictors |
-| RDKit descriptor benchmark | Optional cheminformatics benchmark using molecular descriptors |
+- null mean model;
+- Potts-Guy-style model;
+- linear model using selected predictors;
+- selected interpretable QSPR model;
+- random forest using selected predictors;
+- RDKit descriptor models;
+- RDKit random forest models with and without experimental variables.
 
-## Reproducing the analysis
-
-Open the RStudio project file:
+Compiled benchmark tables are generated by:
 
 ```text
-202604_skin_permeability_qspr_model.Rproj
+R/08c_compile_benchmark_tables.R
 ```
 
-Then run the scripts in order:
+Main benchmark table:
+
+```text
+tables/table_main_benchmark_models.csv
+```
+
+Full supplementary benchmark table:
+
+```text
+tables/tableS_all_benchmark_models.csv
+```
+
+## RDKit descriptor workflow
+
+RDKit descriptors are calculated outside R using Python.
+
+The Python script is:
+
+```text
+python/calculate_rdkit_descriptors.py
+```
+
+It reads:
+
+```text
+data/interim/compound_structure_lookup.csv
+```
+
+and writes:
+
+```text
+data/processed/rdkit_descriptors_as_reported.csv
+data/processed/rdkit_descriptors_parent.csv
+data/interim/rdkit_descriptor_calculation_log.csv
+```
+
+The RDKit benchmark is then run in R using:
+
+```text
+R/08b_rdkit_descriptor_benchmark.R
+```
+
+Recommended Python environment:
+
+```bash
+conda create -n rdkit_env -c conda-forge python=3.11 rdkit pandas
+conda activate rdkit_env
+python python/calculate_rdkit_descriptors.py
+```
+
+## Suggested run order
+
+The full local analysis should be run from the project root.
 
 ```r
 source("R/01_clean_data.R")
 source("R/02_initial_predictor_screening.R")
-source("R/03_loco_cv.R")
-source("R/04_model_comparison.R")
-source("R/05_applicability_domain.R")
-source("R/06_rowwise_cv_sensitivity.R")
-source("R/07_random_forest_benchmark.R")
-source("R/08_uncertainty_model.R")
-source("R/09_partial_effects.R")
-source("R/10_ablation_analysis.R")
-source("R/11_make_tables.R")
-source("R/12_make_figures.R")
+source("R/02b_solubility_redundancy_check.R")
+source("R/03_loco_cv_candidate_model_search.R")
+source("R/04_loco_cv_coefficient_stability.R")
+source("R/05_loco_cv_error_diagnostics.R")
+source("R/06_heteroscedastic_uncertainty_model.R")
+source("R/07_descriptor_relationships_and_domain_overview.R")
+source("R/08_benchmark_models.R")
+source("R/08a_clean_compound_structure_lookup.R")
 ```
 
-Render the manuscript with:
+Then run the Python RDKit descriptor step:
+
+```bash
+conda activate rdkit_env
+python python/calculate_rdkit_descriptors.py
+```
+
+Then continue in R:
 
 ```r
-rmarkdown::render("manuscript/manuscript.Rmd")
+source("R/08b_rdkit_descriptor_benchmark.R")
+source("R/08c_compile_benchmark_tables.R")
+source("R/09_ablation_analysis.R")
+source("R/10_partial_effects.R")
+source("R/11_rowwise_cv_sensitivity.R")
+source("R/12_applicability_domain_summary.R")
+source("R/13_export_final_model_outputs.R")
 ```
 
-## Software requirements
+## Key final outputs
 
-This analysis was developed using R.
+Final manuscript-ready outputs are compiled by:
 
-Recommended packages:
-
-```r
-install.packages(c(
-  "rmarkdown",
-  "knitr",
-  "randomForest"
-))
+```text
+R/13_export_final_model_outputs.R
 ```
 
-Additional packages may be required depending on the final scripts.
+Important output files include:
 
-Record the final R session information using:
+```text
+tables/table_manuscript_key_results.csv
+tables/table_final_model_coefficients.csv
+tables/table_final_model_performance_summary.csv
+tables/table_main_benchmark_models.csv
+tables/tableS_all_benchmark_models.csv
+tables/tableS_ablation_summary.csv
+tables/table_validation_scheme_sensitivity.csv
+tables/table_applicability_domain_error_summary.csv
+tables/tableS_descriptor_domain_summary.csv
+results/model_comparison/13_final_model_equation.txt
+results/model_comparison/13_final_model_summary.csv
+```
+
+Important figures include:
+
+```text
+figures/figure_loco_cv_observed_vs_predicted.png
+figures/figure_benchmark_model_RMSE.png
+figures/figureS_rdkit_benchmark_RMSE.png
+figures/figureS_ablation_RMSE.png
+figures/figure_partial_effects_selected_model.png
+figures/figure_interaction_MWa_LogSaqd.png
+figures/figure_validation_scheme_RMSE.png
+figures/figure_applicability_domain_error_by_domain.png
+```
+
+## Current manuscript framing
+
+The manuscript is being developed around two linked contributions:
+
+1. an interpretable QSPR model for human skin permeability;
+2. a reusable, leakage-aware model-development framework for curated permeability datasets.
+
+The selected model is not presented as a universal best permeability predictor. It is presented as the best-performing interpretable model within the tested model space, evaluated against classical, random forest, and RDKit-based benchmarks.
+
+## Reproducibility
+
+The repository is intended to support reproducibility of the computational workflow.
+
+Current limitations:
+
+- raw data are not committed;
+- curated SMILES are not committed at this stage;
+- the manuscript draft is not public yet;
+- exact reproduction requires local placement of the input data files described above.
+
+Recommended environment documentation before submission:
 
 ```r
 sessionInfo()
 ```
 
-## Optional RDKit descriptor benchmark
+or an `renv.lock` file.
 
-RDKit is used only for optional cheminformatics benchmarking.
+## GitHub inspection notes
 
-If SMILES strings are available, RDKit can be used to calculate molecular descriptors such as:
-
-```text
-calculated logP
-topological polar surface area
-hydrogen-bond donors
-hydrogen-bond acceptors
-rotatable bonds
-aromatic ring count
-heavy atom count
-fraction sp3
-Morgan fingerprints
-```
-
-These descriptors can then be used to train benchmark models and compare them with the compact interpretable physicochemical model.
-
-RDKit descriptor files should be saved as:
+For reviewing the repository, start with:
 
 ```text
-data/processed/rdkit_descriptors.csv
+R/00_config.R
+R/03_loco_cv_candidate_model_search.R
+R/08c_compile_benchmark_tables.R
+R/09_ablation_analysis.R
+R/10_partial_effects.R
+R/11_rowwise_cv_sensitivity.R
+R/12_applicability_domain_summary.R
+R/13_export_final_model_outputs.R
+tables/table_manuscript_key_results.csv
+tables/table_main_benchmark_models.csv
+tables/table_applicability_domain_error_summary.csv
+figures/
 ```
 
-## Expected main outputs
-
-### Tables
-
-```text
-tables/table1_dataset_summary.csv
-tables/table2_predictor_screening.csv
-tables/table3_qsar_principles.csv
-tables/table4_model_performance.csv
-tables/table5_validation_scheme.csv
-tables/table6_statistical_comparison.csv
-tables/table7_applicability_domain.csv
-tables/table8_uncertainty.csv
-tables/table9_coefficients.csv
-tables/table10_ablation.csv
-```
-
-### Figures
-
-```text
-figures/figure1_workflow.pdf
-figures/figure2_dataset_space.pdf
-figures/figure3_predictor_screening.pdf
-figures/figure4_model_performance.pdf
-figures/figure5_validation_scheme_comparison.pdf
-figures/figure6_applicability_domain.pdf
-figures/figure7_uncertainty.pdf
-figures/figure8_partial_effects.pdf
-figures/figure9_ablation.pdf
-```
-
-## Manuscript status
-
-Current target journal:
-
-```text
-Journal of Cheminformatics
-```
-
-Possible backup journals:
-
-```text
-Pharmaceutics
-International Journal of Pharmaceutics
-Computational Toxicology
-Molecular Pharmaceutics
-```
-
-## Citation
-
-If using this repository, cite:
-
-```text
-[INSERT MANUSCRIPT CITATION WHEN AVAILABLE]
-```
-
-## Contact
-
-Chayada Piantham  
-CUDENT Bioprint 3D Laboratory  
-Faculty of Dentistry, Chulalongkorn University  
-Bangkok, Thailand
+The private manuscript `.Rmd` should be checked separately against these generated outputs.

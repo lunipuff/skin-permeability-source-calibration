@@ -6,8 +6,6 @@
 .Rhistory
 .RData
 .Rproj.user/
-
-# R package/cache files
 *.Rproj
 renv/library/
 renv/staging/
@@ -17,70 +15,16 @@ __pycache__/
 *.pyc
 .ipynb_checkpoints/
 
-# virtual environments
+# Virtual environments
 rdkit_env/
 .venv/
 env/
 
-# temporary files
+# Temporary files
 *.tmp
 *.log
 
-# large/raw data if needed
-data/raw/large/# macOS
-.DS_Store
-
-# R
-.Rhistory
-.RData
-.Rproj.user/
-
-# R package/cache files
-*.Rproj
-renv/library/
-renv/staging/
-
-# Python
-__pycache__/
-*.pyc
-.ipynb_checkpoints/
-
-# virtual environments
-rdkit_env/
-.venv/
-env/
-
-# temporary files
-*.tmp
-*.log
-
-# large/raw data if needed
-data/raw/large/# macOS
-.DS_Store
-
-# R
-.Rhistory
-.RData
-.Rproj.user/
-
-# R package/cache files
-*.Rproj
-renv/library/
-renv/staging/
-
-# Python
-__pycache__/
-*.pyc
-.ipynb_checkpoints/
-
-# virtual environments
-rdkit_env/
-.venv/
-env/
-
-# temporary files
-*.tmp
-*.log
-
-# large/raw data if needed
-data/raw/large/
+# Omitted data
+manuscript/
+data/
+results/cross_validation/04_loco_cv_coefficient_long.csv

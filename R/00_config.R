@@ -14,6 +14,11 @@ library("knitr")
 
 path_cleaned_dataset <- "data/processed/skin_permeability_modeling_dataset.csv"
 
+# Paths for workflow
+path_workflow_svg <- "figures/figure_workflow.svg"
+path_workflow_pdf <- "figures/figure_workflow.pdf"
+path_workflow_png <- "figures/figure_workflow.png"
+
 # Paths for cleaning
 path_raw_excel <- "data/raw/Table 1.xlsx"
 path_interim_raw_csv <- "data/interim/raw_dataset.csv"

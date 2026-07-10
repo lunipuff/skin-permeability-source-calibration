@@ -72,7 +72,7 @@
 <g id="node6" class="node">
 <title>benchmarks</title>
 <path fill="#f4f6f8" stroke="#2f3a45" d="M203.4826,-169.0013C203.4826,-169.0013 11.839,-169.0013 11.839,-169.0013 5.839,-169.0013 -.161,-163.0013 -.161,-157.0013 -.161,-157.0013 -.161,-116.1988 -.161,-116.1988 -.161,-110.1988 5.839,-104.1988 11.839,-104.1988 11.839,-104.1988 203.4826,-104.1988 203.4826,-104.1988 209.4826,-104.1988 215.4826,-110.1988 215.4826,-116.1988 215.4826,-116.1988 215.4826,-157.0013 215.4826,-157.0013 215.4826,-163.0013 209.4826,-169.0013 203.4826,-169.0013"/>
-<text text-anchor="middle" x="107.6608" y="-141.4" font-family="Helvetica,sans-Serif" font-size="16.00" fill="#000000">Benchmark comparison</text>
+<text text-anchor="middle" x="107.6608" y="-141.4" font-family="Helvetica,sans-Serif" font-size="16.00" fill="#000000">Benchmark comparison:</text>
 <text text-anchor="middle" x="107.6608" y="-122.2" font-family="Helvetica,sans-Serif" font-size="16.00" fill="#000000">classical, linear, RF, RDKit</text>
 </g>
 <!-- selected&#45;&gt;benchmarks -->
@@ -110,9 +110,9 @@
 <!-- outputs -->
 <g id="node9" class="node">
 <title>outputs</title>
-<path fill="#eaf7ea" stroke="#2f3a45" d="M395.9234,-64.6013C395.9234,-64.6013 267.3982,-64.6013 267.3982,-64.6013 261.3982,-64.6013 255.3982,-58.6013 255.3982,-52.6013 255.3982,-52.6013 255.3982,-11.7987 255.3982,-11.7987 255.3982,-5.7987 261.3982,.2013 267.3982,.2013 267.3982,.2013 395.9234,.2013 395.9234,.2013 401.9234,.2013 407.9234,-5.7987 407.9234,-11.7987 407.9234,-11.7987 407.9234,-52.6013 407.9234,-52.6013 407.9234,-58.6013 401.9234,-64.6013 395.9234,-64.6013"/>
-<text text-anchor="middle" x="331.6608" y="-37" font-family="Helvetica,sans-Serif" font-size="16.00" fill="#000000">Manuscript&#45;ready</text>
-<text text-anchor="middle" x="331.6608" y="-17.8" font-family="Helvetica,sans-Serif" font-size="16.00" fill="#000000">tables and figures</text>
+<path fill="#eaf7ea" stroke="#2f3a45" d="M447.5355,-64.6013C447.5355,-64.6013 215.7861,-64.6013 215.7861,-64.6013 209.7861,-64.6013 203.7861,-58.6013 203.7861,-52.6013 203.7861,-52.6013 203.7861,-11.7987 203.7861,-11.7987 203.7861,-5.7987 209.7861,.2013 215.7861,.2013 215.7861,.2013 447.5355,.2013 447.5355,.2013 453.5355,.2013 459.5355,-5.7987 459.5355,-11.7987 459.5355,-11.7987 459.5355,-52.6013 459.5355,-52.6013 459.5355,-58.6013 453.5355,-64.6013 447.5355,-64.6013"/>
+<text text-anchor="middle" x="331.6608" y="-37" font-family="Helvetica,sans-Serif" font-size="16.00" fill="#000000">QSPR skin permeability model</text>
+<text text-anchor="middle" x="331.6608" y="-17.8" font-family="Helvetica,sans-Serif" font-size="16.00" fill="#000000">with defined applicability domain</text>
 </g>
 <!-- benchmarks&#45;&gt;outputs -->
 <g id="edge8" class="edge">

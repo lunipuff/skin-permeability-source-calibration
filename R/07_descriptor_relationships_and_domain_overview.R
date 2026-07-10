@@ -39,7 +39,7 @@ predictor_labels <- c(
 	logKowb = "Octanol-water partition coefficient",
 	Mptc = "Melting point",
 	LogSaqd = "Aqueous solubility",
-	LogSoce = "Organic-solvent solubility",
+	LogSoce = "Octanol solubility",
 	Texpi = "Experimental temperature",
 	Skin.thicknessj = "Skin thickness",
 	Hdf = "Hydrogen-bond donor count",

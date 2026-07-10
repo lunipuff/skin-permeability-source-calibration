@@ -21,6 +21,10 @@ path_removed_rows <- "data/interim/removed_rows_log.csv"
 path_cleaning_summary <- "data/interim/cleaning_summary.csv"
 path_descriptor_inconsistency_log <- "data/interim/descriptor_inconsistency_within_merge_groups.csv"
 
+# Cleaning flow table
+path_cleaning_flow_table <- "tables/table_cleaning_flow.csv"
+path_cleaning_flow_results <- "results/model_comparison/01b_cleaning_flow_table.csv"
+
 # Solubility redundancy check paths
 path_solubility_redundancy_table <- "results/predictor_screening/solubility_redundancy_check.csv"
 path_table_solubility_redundancy <- "tables/tableS_solubility_redundancy_check.csv"

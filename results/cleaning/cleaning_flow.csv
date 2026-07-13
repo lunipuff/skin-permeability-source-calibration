@@ -1,0 +1,8 @@
+"step","observations","unique_compounds","change_from_previous_step"
+"Raw imported dataset",479,142,NA
+"After formatting and column selection",479,142,0
+"After required-field filtering",469,140,-10
+"After CAS identifier filtering",469,140,0
+"After abnormal descriptor filtering",468,140,-1
+"After collapsing repeated profiles",321,140,-147
+"Final modeling dataset",321,140,NA

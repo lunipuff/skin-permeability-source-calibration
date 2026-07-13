@@ -25,6 +25,8 @@ path_interim_raw_csv <- "data/interim/raw_dataset.csv"
 path_removed_rows <- "data/interim/removed_rows_log.csv"
 path_cleaning_summary <- "data/interim/cleaning_summary.csv"
 path_descriptor_inconsistency_log <- "data/interim/descriptor_inconsistency_within_merge_groups.csv"
+path_required_missingness_summary <- "results/cleaning/required_missingness_summary.csv"
+path_cleaning_flow <- "results/cleaning/cleaning_flow.csv"
 
 # Cleaning flow table
 path_cleaning_flow_table <- "tables/table_cleaning_flow.csv"

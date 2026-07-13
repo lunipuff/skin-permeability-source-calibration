@@ -10,12 +10,61 @@ source("R/00_config.R")
 ############################################################
 
 log_removed <- function(data, reason) {
-	if (nrow(data) == 0) {
-		return(data.frame())
+	if (is.null(data) || nrow(data) == 0) {
+		return(NULL)
 	}
 
 	data$removal_reason <- reason
 	data
+}
+
+bind_removed <- function(removed_rows, new_rows) {
+	dplyr::bind_rows(
+		removed_rows,
+		new_rows
+	)
+}
+
+missing_string <- function(x) {
+	x_chr <- trimws(as.character(x))
+
+	is.na(x) |
+		x_chr == "" |
+		x_chr == "N/A" |
+		x_chr == "NA" |
+		x_chr == "na"
+}
+
+missing_numeric <- function(x) {
+	is.na(x)
+}
+
+count_unique_nonmissing <- function(x) {
+	x <- x[
+		!is.na(x) &
+			trimws(as.character(x)) != "" &
+			trimws(as.character(x)) != "N/A"
+	]
+
+	length(unique(x))
+}
+
+make_count_row <- function(step, data, previous_n = NA_integer_) {
+	n_current <- nrow(data)
+
+	change <- ifelse(
+		is.na(previous_n),
+		NA_integer_,
+		n_current - previous_n
+	)
+
+	data.frame(
+		step = step,
+		observations = n_current,
+		unique_compounds = count_unique_nonmissing(data$CAS.No),
+		change_from_previous_step = change,
+		stringsAsFactors = FALSE
+	)
 }
 
 ############################################################
@@ -30,32 +79,45 @@ write.csv(
 	row.names = FALSE
 )
 
-raw <- read.csv(path_interim_raw_csv)
+raw <- read.csv(
+	path_interim_raw_csv,
+	stringsAsFactors = FALSE
+)
 
 ############################################################
 # Initial formatting
 ############################################################
 
 df <- raw
-n_initial <- nrow(df)
 
-# Standardize compound names
+if (!("Compound" %in% names(df))) {
+	stop("Required column missing from raw dataset: Compound", call. = FALSE)
+}
+
+if (!("CAS.No" %in% names(df))) {
+	stop("Required column missing from raw dataset: CAS.No", call. = FALSE)
+}
+
 df$Compound <- tolower(df$Compound)
 df$Compound <- trimws(df$Compound)
 
-# Standardize CAS number format
 df$CAS.No <- gsub("–", "-", df$CAS.No)
 df$CAS.No <- gsub("--", "-", df$CAS.No)
 df$CAS.No <- trimws(df$CAS.No)
 
-# Arrange by compound name
 df <- df[order(df$Compound), ]
 
 ############################################################
-# Initialize removed-row log
+# Initialize logs
 ############################################################
 
-removed_rows <- data.frame()
+removed_rows <- NULL
+
+cleaning_flow <- make_count_row(
+	step = "Raw imported dataset",
+	data = df,
+	previous_n = NA_integer_
+)
 
 ############################################################
 # Convert numeric columns
@@ -74,6 +136,20 @@ numeric_cols <- c(
 	"Skin.thicknessj",
 	"logkpl"
 )
+
+missing_numeric_cols <- numeric_cols[
+	!(numeric_cols %in% names(df))
+]
+
+if (length(missing_numeric_cols) > 0) {
+	stop(
+		paste(
+			"Required numeric columns missing from raw dataset:",
+			paste(missing_numeric_cols, collapse = ", ")
+		),
+		call. = FALSE
+	)
+}
 
 for (col in numeric_cols) {
 	df[[col]] <- as.numeric(df[[col]])
@@ -100,49 +176,196 @@ selected_cols <- c(
 	"Reference"
 )
 
+missing_selected_cols <- selected_cols[
+	!(selected_cols %in% names(df))
+]
+
+if (length(missing_selected_cols) > 0) {
+	stop(
+		paste(
+			"Required selected columns missing from raw dataset:",
+			paste(missing_selected_cols, collapse = ", ")
+		),
+		call. = FALSE
+	)
+}
+
 df <- df[, selected_cols]
 
-############################################################
-# Remove rows without molecular volume
-############################################################
-
-missing_mvh <- is.na(df$MVh)
-
-removed_rows <- rbind(
-	removed_rows,
-	log_removed(df[missing_mvh, ], "Missing molecular volume MVh")
+cleaning_flow <- dplyr::bind_rows(
+	cleaning_flow,
+	make_count_row(
+		step = "After formatting and column selection",
+		data = df,
+		previous_n = cleaning_flow$observations[nrow(cleaning_flow)]
+	)
 )
 
-df <- df[!missing_mvh, ]
-n_after_missing_mvh <- nrow(df)
-
 ############################################################
-# Remove rows without CAS number
+# Define required fields
 ############################################################
 
-missing_cas <- is.na(df$CAS.No) | df$CAS.No == "" | df$CAS.No == "N/A"
-
-removed_rows <- rbind(
-	removed_rows,
-	log_removed(df[missing_cas, ], "Missing CAS number")
+required_identifier_cols <- c(
+	"Compound",
+	"CAS.No",
+	"Reference"
 )
 
-df <- df[!missing_cas, ]
-n_after_missing_cas <- nrow(df)
-
-############################################################
-# Remove known abnormal caffeine entry
-############################################################
-
-abnormal_caffeine <- df$CAS.No == "58-08-2" & df$logKowb == -0.63
-
-removed_rows <- rbind(
-	removed_rows,
-	log_removed(df[abnormal_caffeine, ], "Removed abnormal caffeine logKowb entry")
+required_predictor_cols <- c(
+	"MWa",
+	"logKowb",
+	"Mptc",
+	"LogSaqd",
+	"LogSoce",
+	"Hdf",
+	"Hag",
+	"MVh",
+	"Texpi",
+	"Skin.thicknessj"
 )
 
-df <- df[!abnormal_caffeine, ]
-n_after_abnormal_caffeine <- nrow(df)
+required_endpoint_cols <- c(
+	"logkpl"
+)
+
+required_cols <- c(
+	required_identifier_cols,
+	required_predictor_cols,
+	required_endpoint_cols
+)
+
+############################################################
+# Inspect missingness in required fields
+############################################################
+
+missing_matrix <- data.frame(
+	row_index = seq_len(nrow(df)),
+	stringsAsFactors = FALSE
+)
+
+for (col in required_cols) {
+	if (col %in% numeric_cols) {
+		missing_matrix[[col]] <- missing_numeric(df[[col]])
+	} else {
+		missing_matrix[[col]] <- missing_string(df[[col]])
+	}
+}
+
+missing_summary <- data.frame(
+	variable = required_cols,
+	n_missing = vapply(
+		required_cols,
+		function(col) {
+			sum(missing_matrix[[col]], na.rm = TRUE)
+		},
+		numeric(1)
+	),
+	stringsAsFactors = FALSE
+)
+
+write.csv(
+	missing_summary,
+	path_required_missingness_summary,
+	row.names = FALSE
+)
+
+############################################################
+# Remove rows with missing required fields
+############################################################
+
+missing_required <- apply(
+	missing_matrix[, required_cols, drop = FALSE],
+	1,
+	any
+)
+
+if (any(missing_required)) {
+	missing_reason <- apply(
+		missing_matrix[missing_required, required_cols, drop = FALSE],
+		1,
+		function(x) {
+			missing_cols <- required_cols[as.logical(x)]
+
+			paste(
+				missing_cols,
+				collapse = "; "
+			)
+		}
+	)
+
+	missing_required_rows <- df[missing_required, , drop = FALSE]
+	missing_required_rows$missing_required_fields <- missing_reason
+
+	removed_rows <- bind_removed(
+		removed_rows,
+		log_removed(
+			missing_required_rows,
+			"Missing required modeling field"
+		)
+	)
+}
+
+df <- df[!missing_required, , drop = FALSE]
+
+cleaning_flow <- dplyr::bind_rows(
+	cleaning_flow,
+	make_count_row(
+		step = "After required-field filtering",
+		data = df,
+		previous_n = cleaning_flow$observations[nrow(cleaning_flow)]
+	)
+)
+
+############################################################
+# Explicit CAS identifier-quality check
+############################################################
+
+invalid_cas <- missing_string(df$CAS.No)
+
+removed_rows <- bind_removed(
+	removed_rows,
+	log_removed(
+		df[invalid_cas, , drop = FALSE],
+		"Missing or unusable CAS number"
+	)
+)
+
+df <- df[!invalid_cas, , drop = FALSE]
+
+cleaning_flow <- dplyr::bind_rows(
+	cleaning_flow,
+	make_count_row(
+		step = "After CAS identifier filtering",
+		data = df,
+		previous_n = cleaning_flow$observations[nrow(cleaning_flow)]
+	)
+)
+
+############################################################
+# Remove known abnormal entry after manual inspection
+############################################################
+
+abnormal_entry <- df$CAS.No == "58-08-2" &
+	df$logKowb == -0.63
+
+removed_rows <- bind_removed(
+	removed_rows,
+	log_removed(
+		df[abnormal_entry, , drop = FALSE],
+		"Removed manually confirmed abnormal logKowb entry"
+	)
+)
+
+df <- df[!abnormal_entry, , drop = FALSE]
+
+cleaning_flow <- dplyr::bind_rows(
+	cleaning_flow,
+	make_count_row(
+		step = "After abnormal descriptor filtering",
+		data = df,
+		previous_n = cleaning_flow$observations[nrow(cleaning_flow)]
+	)
+)
 
 ############################################################
 # Collapse repeated entries from same compound, reference,
@@ -178,10 +401,10 @@ merge_keys <- c(
 ############################################################
 
 descriptor_inconsistency_log <- df %>%
-	group_by(across(all_of(condition_keys))) %>%
-	summarise(
-		n_rows = n(),
-		n_descriptor_profiles = n_distinct(
+	dplyr::group_by(dplyr::across(dplyr::all_of(condition_keys))) %>%
+	dplyr::summarise(
+		n_rows = dplyr::n(),
+		n_descriptor_profiles = dplyr::n_distinct(
 			paste(
 				MWa,
 				logKowb,
@@ -195,9 +418,9 @@ descriptor_inconsistency_log <- df %>%
 			),
 			na.rm = TRUE
 		),
-		across(
-			all_of(descriptor_cols),
-			~ n_distinct(.x, na.rm = TRUE),
+		dplyr::across(
+			dplyr::all_of(descriptor_cols),
+			~ dplyr::n_distinct(.x, na.rm = TRUE),
 			.names = "n_unique_{.col}"
 		),
 		.groups = "drop"
@@ -218,11 +441,15 @@ write.csv(
 ############################################################
 
 output <- df %>%
-	group_by(across(all_of(merge_keys))) %>%
-	summarise(
+	dplyr::group_by(dplyr::across(dplyr::all_of(merge_keys))) %>%
+	dplyr::summarise(
 		logkpl = mean(logkpl, na.rm = TRUE),
-		n_merged = n(),
-		logkpl_sd = ifelse(n() > 1, sd(logkpl, na.rm = TRUE), NA_real_),
+		n_merged = dplyr::n(),
+		logkpl_sd = ifelse(
+			dplyr::n() > 1,
+			stats::sd(logkpl, na.rm = TRUE),
+			NA_real_
+		),
 		.groups = "drop"
 	)
 
@@ -256,8 +483,31 @@ output <- output[, c(
 	"logkpl_sd"
 )]
 
+cleaning_flow <- dplyr::bind_rows(
+	cleaning_flow,
+	data.frame(
+		step = "After collapsing repeated profiles",
+		observations = nrow(output),
+		unique_compounds = length(unique(output$compound_id)),
+		change_from_previous_step = nrow(output) -
+			cleaning_flow$observations[nrow(cleaning_flow)],
+		stringsAsFactors = FALSE
+	)
+)
+
+cleaning_flow <- dplyr::bind_rows(
+	cleaning_flow,
+	data.frame(
+		step = "Final modeling dataset",
+		observations = nrow(output),
+		unique_compounds = length(unique(output$compound_id)),
+		change_from_previous_step = NA_integer_,
+		stringsAsFactors = FALSE
+	)
+)
+
 ############################################################
-# Save cleaned dataset and removal log
+# Save cleaned dataset and logs
 ############################################################
 
 write.csv(
@@ -266,9 +516,19 @@ write.csv(
 	row.names = FALSE
 )
 
+if (is.null(removed_rows)) {
+	removed_rows <- data.frame()
+}
+
 write.csv(
 	removed_rows,
 	path_removed_rows,
+	row.names = FALSE
+)
+
+write.csv(
+	cleaning_flow,
+	path_cleaning_flow,
 	row.names = FALSE
 )
 
@@ -277,14 +537,24 @@ write.csv(
 ############################################################
 
 n_collapsed <- sum(output$n_merged > 1, na.rm = TRUE)
-n_records_collapsed <- sum(output$n_merged[output$n_merged > 1], na.rm = TRUE)
+n_records_collapsed <- sum(
+	output$n_merged[output$n_merged > 1],
+	na.rm = TRUE
+)
+
+get_cleaning_n <- function(step_name) {
+	cleaning_flow$observations[
+		cleaning_flow$step == step_name
+	]
+}
 
 cleaning_summary <- data.frame(
 	item = c(
 		"initial_observations",
-		"rows_after_missing_mvh_removal",
-		"rows_after_missing_cas_removal",
-		"rows_after_abnormal_caffeine_removal",
+		"rows_after_formatting_and_column_selection",
+		"rows_after_required_field_filtering",
+		"rows_after_cas_filtering",
+		"rows_after_abnormal_entry_removal",
 		"final_observations",
 		"unique_compounds",
 		"removed_rows",
@@ -293,10 +563,11 @@ cleaning_summary <- data.frame(
 		"compound_condition_groups_with_multiple_descriptor_profiles"
 	),
 	value = c(
-		n_initial,
-		n_after_missing_mvh,
-		n_after_missing_cas,
-		n_after_abnormal_caffeine,
+		get_cleaning_n("Raw imported dataset"),
+		get_cleaning_n("After formatting and column selection"),
+		get_cleaning_n("After required-field filtering"),
+		get_cleaning_n("After CAS identifier filtering"),
+		get_cleaning_n("After abnormal descriptor filtering"),
 		nrow(output),
 		length(unique(output$compound_id)),
 		nrow(removed_rows),
@@ -317,7 +588,26 @@ write.csv(
 ############################################################
 
 cat("Cleaning complete.\n")
-cat("Initial rows:", n_initial, "\n")
+cat(
+	"Initial rows:",
+	cleaning_summary$value[cleaning_summary$item == "initial_observations"],
+	"\n"
+)
+cat(
+	"Rows after required-field filtering:",
+	cleaning_summary$value[cleaning_summary$item == "rows_after_required_field_filtering"],
+	"\n"
+)
+cat(
+	"Rows after CAS filtering:",
+	cleaning_summary$value[cleaning_summary$item == "rows_after_cas_filtering"],
+	"\n"
+)
+cat(
+	"Rows after abnormal descriptor filtering:",
+	cleaning_summary$value[cleaning_summary$item == "rows_after_abnormal_entry_removal"],
+	"\n"
+)
 cat("Final rows:", nrow(output), "\n")
 cat("Unique compounds:", length(unique(output$compound_id)), "\n")
 cat("Removed rows:", nrow(removed_rows), "\n")

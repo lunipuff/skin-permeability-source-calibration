@@ -4,7 +4,7 @@ source("R/00_config.R")
 # Table 1: Data cleaning and dataset attrition
 ############################################################
 
-	path_table_data_cleaning <- "manuscript/tables/table1_data_cleaning_attrition.csv"
+	path_table_data_cleaning <- "manuscript/tables/table2_data_cleaning_attrition.csv"
 
 	############################################################
 	# Read cleaning output

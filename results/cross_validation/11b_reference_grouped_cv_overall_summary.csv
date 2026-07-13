@@ -1,0 +1,2 @@
+"validation_scheme","n_observations","n_compounds","n_references","RMSE","MAE","R2_pred","R","mean_error","median_abs_error","n_abs_error_gt_1","proportion_abs_error_gt_1"
+"leave_one_reference_out",321,140,67,0.709140373447607,0.527631303653661,0.616262135308065,0.786201305114967,0.0104885703439576,0.403639559960907,50,0.155763239875389

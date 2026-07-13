@@ -148,6 +148,17 @@ path_fig_validation_scheme_rmse_png <- "figures/figure_validation_scheme_RMSE.pn
 path_fig_rowwise_observed_predicted_pdf <- "figures/figureS_rowwise_cv_observed_vs_predicted.pdf"
 path_fig_rowwise_observed_predicted_png <- "figures/figureS_rowwise_cv_observed_vs_predicted.png"
 
+# Ref group validation sensitivity analysis
+path_reference_cv_predictions <- "results/cross_validation/11b_reference_grouped_cv_predictions.csv"
+path_reference_cv_overall_summary <- "results/cross_validation/11b_reference_grouped_cv_overall_summary.csv"
+path_reference_cv_by_reference <- "results/cross_validation/11b_reference_grouped_cv_by_reference.csv"
+path_fig_reference_cv_rmse_pdf <- "figures/figure_reference_grouped_cv_rmse.pdf"
+path_fig_reference_cv_rmse_png <- "figures/figure_reference_grouped_cv_rmse.png"
+path_fig_reference_cv_observed_predicted_pdf <- "figures/figure_reference_grouped_cv_observed_predicted.pdf"
+path_fig_reference_cv_observed_predicted_png <- "figures/figure_reference_grouped_cv_observed_predicted.png"
+
+path_validation_design_sensitivity_table <- "tables/table_validation_design_sensitivity.csv"
+
 # Applicability-domain summary paths
 path_ad_prediction_dataset <- "results/applicability_domain/12_applicability_domain_prediction_dataset.csv"
 path_ad_descriptor_summary <- "results/applicability_domain/12_descriptor_domain_summary.csv"

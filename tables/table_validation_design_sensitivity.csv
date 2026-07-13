@@ -1,0 +1,4 @@
+"validation_design","held_out_unit","role","n_observations","n_compounds","n_validation_units","n_repeats","RMSE","MAE","R2_pred","median_abs_error","proportion_abs_error_gt_1","proportion_compound_seen_in_training"
+"LOCO-CV","Compound","Primary compound-level validation",321,140,140,NA,0.68,0.506,0.647,0.387,0.143,0
+"Row-wise CV","Observation","Validation-design sensitivity",321,140,250,50,0.671,0.496,0.657,0.371,0.139,0.735
+"Leave-one-reference-out CV","Literature reference","Reference-level sensitivity",321,140,67,NA,0.709,0.528,0.616,0.404,0.156,0.623

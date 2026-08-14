@@ -1,0 +1,7 @@
+"analysis","value"
+"Number of candidate descriptors screened",10
+"Complete observations used for redundancy screening",321
+"Number of descriptor pairs with |Pearson r| >= 0.70",5
+"Number of descriptor pairs with |Pearson r| >= 0.85",1
+"Maximum absolute pairwise correlation",0.902
+"Maximum VIF",20262320.394

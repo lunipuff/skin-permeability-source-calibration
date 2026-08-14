@@ -1,0 +1,8 @@
+"set_id","predictor_set","n_predictors","reason","source","severity"
+"soft_1","logKowb;LogSaqd",2,"Generated from descriptor screening: empirical pairwise Pearson correlation with |r| >= 0.7 and < 0.85.","soft_pairwise_correlation","soft"
+"soft_2","LogSaqd;MVh",2,"Generated from descriptor screening: empirical pairwise Pearson correlation with |r| >= 0.7 and < 0.85.","soft_pairwise_correlation","soft"
+"soft_3","Hag;Hdf",2,"Generated from descriptor screening: empirical pairwise Pearson correlation with |r| >= 0.7 and < 0.85.","soft_pairwise_correlation","soft"
+"soft_4","Hag;LogSoce",2,"Generated from descriptor screening: empirical pairwise Pearson correlation with |r| >= 0.7 and < 0.85.","soft_pairwise_correlation","soft"
+"soft_5","MWa",1,"Generated from descriptor screening: descriptor VIF >= 5 and < 100. Used for reporting only, not automatic model exclusion.","moderate_vif","soft"
+"soft_6","MVh",1,"Generated from descriptor screening: descriptor VIF >= 5 and < 100. Used for reporting only, not automatic model exclusion.","moderate_vif","soft"
+"soft_7","Hag",1,"Generated from descriptor screening: descriptor VIF >= 5 and < 100. Used for reporting only, not automatic model exclusion.","moderate_vif","soft"

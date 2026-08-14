@@ -1,12 +1,13 @@
 library("dplyr")
 library("readxl")
 library("knitr")
+library("ggplot2")
+library("bookdown")
 
 ############################################################
 # 00_config.R
 # Project-wide settings for skin permeability QSPR analysis
 ############################################################
-
 
 ############################################################
 # File paths
@@ -33,11 +34,32 @@ path_cleaning_flow_table <- "tables/table_cleaning_flow.csv"
 path_cleaning_flow_results <- "results/model_comparison/01b_cleaning_flow_table.csv"
 
 # Solubility redundancy check paths
-path_solubility_redundancy_table <- "results/predictor_screening/solubility_redundancy_check.csv"
-path_table_solubility_redundancy <- "tables/tableS_solubility_redundancy_check.csv"
-path_fig_gse_logs_vs_logsaqd_pdf <- "figures/figureS_gse_logS_vs_LogSaqd.pdf"
-path_fig_gse_logs_vs_logsaqd_png <- "figures/figureS_gse_logS_vs_LogSaqd.png"
-path_fig_solubility_correlation <- "figures/figureS_solubility_descriptor_correlation.pdf"
+path_all_descriptor_correlation_matrix <- "results/descriptor_redundancy/all_descriptor_correlation_matrix.csv"
+path_all_descriptor_high_correlations <- "results/descriptor_redundancy/all_descriptor_high_correlations.csv"
+path_all_descriptor_vif <- "results/descriptor_redundancy/all_descriptor_vif.csv"
+path_all_descriptor_summary <- "results/descriptor_redundancy/all_descriptor_redundancy_summary.csv"
+
+path_fig_all_descriptor_correlation_png <- "figures/figure2_descriptor_correlation.png"
+path_fig_all_descriptor_correlation_pdf <- "figures/figure2_descriptor_correlation.pdf"
+path_manuscript_fig_descriptor_correlation_png <- "manuscript/figures/figure2_descriptor_correlation.png"
+path_manuscript_fig_descriptor_correlation_pdf <- "manuscript/figures/figure2_descriptor_correlation.pdf"
+
+path_solubility_dataset <- "results/descriptor_redundancy/solubility_gse_dataset.csv"
+path_solubility_correlation_matrix <- "results/descriptor_redundancy/solubility_gse_correlation_matrix.csv"
+path_solubility_regression_summary <- "results/descriptor_redundancy/solubility_gse_regression_summary.csv"
+path_solubility_vif <- "results/descriptor_redundancy/solubility_gse_vif.csv"
+path_table_solubility_redundancy <- "tables/tableS1_solubility_redundancy_summary.csv"
+path_manuscript_table_solubility_redundancy <- "manuscript/tables/tableS1_solubility_redundancy_summary.csv"
+
+path_fig_gse_logS_vs_LogSaqd_png <- "figures/figureS_gse_logS_vs_LogSaqd.png"
+path_fig_gse_logS_vs_LogSaqd_pdf <- "figures/figureS_gse_logS_vs_LogSaqd.pdf"
+path_fig_solubility_correlation_png <- "figures/figureS_solubility_descriptor_correlation.png"
+path_fig_solubility_correlation_pdf <- "figures/figureS_solubility_descriptor_correlation.pdf"
+
+path_descriptor_red_flag_sets <- "results/descriptor_redundancy/descriptor_red_flag_sets.csv"
+path_descriptor_soft_warning_sets <- "results/descriptor_redundancy/descriptor_soft_warning_sets.csv"
+
+path_loco_cv_red_flag_exclusion_log <- "results/cross_validation/03_red_flag_model_exclusion_log.csv"
 
 # Paths for predictor screening
 path_predictor_screening_full <- "results/predictor_screening/initial_predictor_screening_full.csv"
@@ -202,16 +224,6 @@ all_predictors <- c(
 )
 
 fixed_predictors <- c("MWa")
-
-# Solubility, lipophilicity, and melting point are related through
-# established solubility models, including the General Solubility Equation.
-# To reduce redundancy during simple-model screening, models containing
-# logKowb, Mptc, and a solubility descriptor simultaneously are excluded.
-
-redundant_predictor_sets <- list(
-  c("logKowb", "Mptc", "LogSaqd"),
-  c("logKowb", "Mptc", "LogSoce")
-)
 
 ############################################################
 # Functions

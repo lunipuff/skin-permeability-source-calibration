@@ -1,13 +1,12 @@
 ############################################################
 # 02b_solubility_redundancy_check.R
-# General descriptor redundancy screening and targeted
-# solubility/GSE redundancy check
+# Descriptor redundancy screening and red-flag set generation
 ############################################################
 
 source("R/00_config.R")
 
 ############################################################
-# Required packages
+# Packages
 ############################################################
 
 required_packages <- c(
@@ -35,7 +34,7 @@ if (length(missing_packages) > 0) {
 }
 
 ############################################################
-# Output paths
+# Output folders
 ############################################################
 
 dir.create("results/descriptor_redundancy", showWarnings = FALSE, recursive = TRUE)
@@ -44,40 +43,44 @@ dir.create("tables", showWarnings = FALSE, recursive = TRUE)
 dir.create("manuscript/figures", showWarnings = FALSE, recursive = TRUE)
 dir.create("manuscript/tables", showWarnings = FALSE, recursive = TRUE)
 
-if (!exists("path_descriptor_red_flag_sets")) {
-	path_descriptor_red_flag_sets <- "results/descriptor_redundancy/descriptor_red_flag_sets.csv"
-}
-
-if (!exists("path_descriptor_soft_warning_sets")) {
-	path_descriptor_soft_warning_sets <- "results/descriptor_redundancy/descriptor_soft_warning_sets.csv"
-}
+############################################################
+# Output paths
+############################################################
 
 path_all_descriptor_correlation_matrix <- "results/descriptor_redundancy/all_descriptor_correlation_matrix.csv"
 path_all_descriptor_high_correlations <- "results/descriptor_redundancy/all_descriptor_high_correlations.csv"
 path_all_descriptor_vif <- "results/descriptor_redundancy/all_descriptor_vif.csv"
-path_all_descriptor_summary <- "results/descriptor_redundancy/all_descriptor_redundancy_summary.csv"
-path_final_base_predictor_vif <- "results/descriptor_redundancy/final_base_predictor_vif.csv"
+path_all_descriptor_redundancy_summary <- "results/descriptor_redundancy/all_descriptor_redundancy_summary.csv"
 
-path_fig_all_descriptor_correlation_png <- "figures/figure2_descriptor_correlation.png"
-path_fig_all_descriptor_correlation_pdf <- "figures/figure2_descriptor_correlation.pdf"
+path_descriptor_red_flag_sets <- "results/descriptor_redundancy/descriptor_red_flag_sets.csv"
+path_descriptor_soft_warning_sets <- "results/descriptor_redundancy/descriptor_soft_warning_sets.csv"
+
+path_solubility_gse_dataset <- "results/descriptor_redundancy/solubility_gse_dataset.csv"
+path_solubility_gse_correlation_matrix <- "results/descriptor_redundancy/solubility_gse_correlation_matrix.csv"
+path_solubility_gse_regression_summary <- "results/descriptor_redundancy/solubility_gse_regression_summary.csv"
+path_solubility_gse_vif <- "results/descriptor_redundancy/solubility_gse_vif.csv"
+
+path_table_descriptor_redundancy_summary <- "tables/tableS1_descriptor_redundancy_summary.csv"
+path_manuscript_table_descriptor_redundancy_summary <- "manuscript/tables/tableS1_descriptor_redundancy_summary.csv"
+
+path_fig_descriptor_correlation_png <- "figures/figure2_descriptor_correlation.png"
+path_fig_descriptor_correlation_pdf <- "figures/figure2_descriptor_correlation.pdf"
 path_manuscript_fig_descriptor_correlation_png <- "manuscript/figures/figure2_descriptor_correlation.png"
 path_manuscript_fig_descriptor_correlation_pdf <- "manuscript/figures/figure2_descriptor_correlation.pdf"
 
-path_solubility_dataset <- "results/descriptor_redundancy/solubility_gse_dataset.csv"
-path_solubility_correlation_matrix <- "results/descriptor_redundancy/solubility_gse_correlation_matrix.csv"
-path_solubility_regression_summary <- "results/descriptor_redundancy/solubility_gse_regression_summary.csv"
-path_solubility_vif <- "results/descriptor_redundancy/solubility_gse_vif.csv"
+path_fig_descriptor_vif_png <- "figures/figureS1_descriptor_vif.png"
+path_fig_descriptor_vif_pdf <- "figures/figureS1_descriptor_vif.pdf"
+path_manuscript_fig_descriptor_vif_png <- "manuscript/figures/figureS1_descriptor_vif.png"
+path_manuscript_fig_descriptor_vif_pdf <- "manuscript/figures/figureS1_descriptor_vif.pdf"
 
-path_table_descriptor_redundancy <- "tables/tableS1_descriptor_redundancy_summary.csv"
-path_manuscript_table_descriptor_redundancy <- "manuscript/tables/tableS1_descriptor_redundancy_summary.csv"
+path_fig_solubility_correlation_png <- "figures/figureS2_solubility_descriptor_correlation.png"
+path_fig_solubility_correlation_pdf <- "figures/figureS2_solubility_descriptor_correlation.pdf"
 
-path_fig_gse_logS_vs_LogSaqd_png <- "figures/figureS_gse_logS_vs_LogSaqd.png"
-path_fig_gse_logS_vs_LogSaqd_pdf <- "figures/figureS_gse_logS_vs_LogSaqd.pdf"
-path_fig_solubility_correlation_png <- "figures/figureS_solubility_descriptor_correlation.png"
-path_fig_solubility_correlation_pdf <- "figures/figureS_solubility_descriptor_correlation.pdf"
+path_fig_gse_logS_vs_LogSaqd_png <- "figures/figureS3_gse_logS_vs_LogSaqd.png"
+path_fig_gse_logS_vs_LogSaqd_pdf <- "figures/figureS3_gse_logS_vs_LogSaqd.pdf"
 
 ############################################################
-# Red-flag thresholds
+# Redundancy-screening thresholds
 ############################################################
 
 hard_pairwise_correlation_threshold <- 0.85
@@ -85,7 +88,6 @@ soft_pairwise_correlation_threshold <- 0.70
 
 extreme_vif_threshold <- 100
 moderate_vif_threshold <- 5
-extreme_vif_group_correlation_threshold <- 0.50
 
 ############################################################
 # Helper functions
@@ -126,7 +128,7 @@ calculate_vif <- function(data, predictor_cols) {
 
 	if (nrow(complete_data) < length(predictor_cols) + 2) {
 		stop(
-			"Too few complete rows to calculate VIF.",
+			"Too few complete observations to calculate VIF.",
 			call. = FALSE
 		)
 	}
@@ -188,7 +190,7 @@ make_correlation_long <- function(correlation_matrix) {
 	out
 }
 
-make_high_correlation_table <- function(correlation_matrix, threshold = 0.70) {
+make_high_correlation_table <- function(correlation_matrix, threshold) {
 	correlation_long <- make_correlation_long(correlation_matrix)
 
 	correlation_long <- correlation_long[
@@ -218,6 +220,22 @@ make_high_correlation_table <- function(correlation_matrix, threshold = 0.70) {
 
 plot_correlation_heatmap <- function(correlation_matrix, title, output_png, output_pdf) {
 	correlation_long <- make_correlation_long(correlation_matrix)
+
+	correlation_long$row_index <- match(
+		as.character(correlation_long$descriptor_1),
+		rownames(correlation_matrix)
+	)
+
+	correlation_long$col_index <- match(
+		as.character(correlation_long$descriptor_2),
+		colnames(correlation_matrix)
+	)
+
+	correlation_long <- correlation_long[
+		correlation_long$row_index > correlation_long$col_index,
+		,
+		drop = FALSE
+	]
 
 	correlation_long$descriptor_1 <- factor(
 		correlation_long$descriptor_1,
@@ -288,17 +306,79 @@ plot_correlation_heatmap <- function(correlation_matrix, title, output_png, outp
 	p
 }
 
-summarize_lm <- function(model_name, fit) {
-	fit_summary <- summary(fit)
+plot_vif_barplot <- function(vif_table, title, output_png, output_pdf) {
+	vif_plot_data <- vif_table
 
-	data.frame(
-		model = model_name,
-		n = stats::nobs(fit),
-		r_squared = fit_summary$r.squared,
-		adjusted_r_squared = fit_summary$adj.r.squared,
-		residual_standard_error = fit_summary$sigma,
-		stringsAsFactors = FALSE
+	vif_plot_data <- vif_plot_data[
+		order(vif_plot_data$VIF),
+		,
+		drop = FALSE
+	]
+
+	vif_plot_data$descriptor <- factor(
+		vif_plot_data$descriptor,
+		levels = vif_plot_data$descriptor
 	)
+
+	vif_plot_data$label <- ifelse(
+		vif_plot_data$VIF >= 1000,
+		formatC(vif_plot_data$VIF, format = "e", digits = 2),
+		sprintf("%.2f", vif_plot_data$VIF)
+	)
+
+	p <- ggplot2::ggplot(
+		vif_plot_data,
+		ggplot2::aes(
+			x = VIF,
+			y = descriptor
+		)
+	) +
+		ggplot2::geom_col(width = 0.7) +
+		ggplot2::geom_text(
+			ggplot2::aes(label = label),
+			hjust = -0.1,
+			size = 3
+		) +
+		ggplot2::geom_vline(
+			xintercept = moderate_vif_threshold,
+			linetype = "dashed",
+			linewidth = 0.4
+		) +
+		ggplot2::geom_vline(
+			xintercept = extreme_vif_threshold,
+			linetype = "dotted",
+			linewidth = 0.4
+		) +
+		ggplot2::scale_x_log10(
+			expand = ggplot2::expansion(mult = c(0.02, 0.25))
+		) +
+		ggplot2::labs(
+			title = title,
+			x = "Variance inflation factor, log10 scale",
+			y = NULL
+		) +
+		ggplot2::theme_minimal(base_size = 11) +
+		ggplot2::theme(
+			panel.grid.minor = ggplot2::element_blank(),
+			plot.title = ggplot2::element_text(face = "bold")
+		)
+
+	ggplot2::ggsave(
+		filename = output_png,
+		plot = p,
+		width = 7,
+		height = 5,
+		dpi = 300
+	)
+
+	ggplot2::ggsave(
+		filename = output_pdf,
+		plot = p,
+		width = 7,
+		height = 5
+	)
+
+	p
 }
 
 make_predictor_set_table <- function(predictor_sets, reason, source, severity) {
@@ -346,47 +426,17 @@ deduplicate_predictor_set_table <- function(x) {
 	x
 }
 
-get_connected_components <- function(nodes, edge_table) {
-	if (length(nodes) == 0) {
-		return(list())
-	}
+summarize_lm <- function(model_name, fit) {
+	fit_summary <- summary(fit)
 
-	remaining <- sort(unique(nodes))
-	components <- list()
-
-	while (length(remaining) > 0) {
-		current <- remaining[1]
-		queue <- current
-		component <- character(0)
-
-		while (length(queue) > 0) {
-			node <- queue[1]
-			queue <- queue[-1]
-
-			if (node %in% component) {
-				next
-			}
-
-			component <- c(component, node)
-
-			neighbors <- unique(c(
-				edge_table$descriptor_2[edge_table$descriptor_1 == node],
-				edge_table$descriptor_1[edge_table$descriptor_2 == node]
-			))
-
-			neighbors <- neighbors[
-				neighbors %in% nodes &
-					!(neighbors %in% component)
-			]
-
-			queue <- unique(c(queue, neighbors))
-		}
-
-		components[[length(components) + 1]] <- sort(unique(component))
-		remaining <- setdiff(remaining, component)
-	}
-
-	components
+	data.frame(
+		model = model_name,
+		n = stats::nobs(fit),
+		r_squared = fit_summary$r.squared,
+		adjusted_r_squared = fit_summary$adj.r.squared,
+		residual_standard_error = fit_summary$sigma,
+		stringsAsFactors = FALSE
+	)
 }
 
 ############################################################
@@ -398,22 +448,22 @@ df <- read.csv(
 	stringsAsFactors = FALSE
 )
 
-############################################################
-# A. General redundancy screening across all candidate descriptors
-############################################################
-
-candidate_descriptors <- c(
-	"MWa",
-	"logKowb",
-	"Mptc",
-	"LogSaqd",
-	"LogSoce",
-	"Hdf",
-	"Hag",
-	"MVh",
-	"Texpi",
-	"Skin.thicknessj"
-)
+if (exists("all_predictors")) {
+	candidate_descriptors <- all_predictors
+} else {
+	candidate_descriptors <- c(
+		"MWa",
+		"logKowb",
+		"Mptc",
+		"LogSaqd",
+		"LogSoce",
+		"Hdf",
+		"Hag",
+		"MVh",
+		"Texpi",
+		"Skin.thicknessj"
+	)
+}
 
 check_required_columns(
 	df,
@@ -434,10 +484,14 @@ descriptor_data <- df[
 
 if (nrow(descriptor_data) == 0) {
 	stop(
-		"No complete rows available for descriptor redundancy screening.",
+		"No complete observations available for descriptor redundancy screening.",
 		call. = FALSE
 	)
 }
+
+############################################################
+# A. General descriptor correlation screening
+############################################################
 
 all_descriptor_correlation <- stats::cor(
 	descriptor_data,
@@ -461,9 +515,32 @@ write.csv(
 	row.names = FALSE
 )
 
+plot_correlation_heatmap(
+	correlation_matrix = all_descriptor_correlation,
+	title = "Candidate descriptor correlation structure",
+	output_png = path_fig_descriptor_correlation_png,
+	output_pdf = path_fig_descriptor_correlation_pdf
+)
+
+file.copy(
+	path_fig_descriptor_correlation_png,
+	path_manuscript_fig_descriptor_correlation_png,
+	overwrite = TRUE
+)
+
+file.copy(
+	path_fig_descriptor_correlation_pdf,
+	path_manuscript_fig_descriptor_correlation_pdf,
+	overwrite = TRUE
+)
+
+############################################################
+# B. General descriptor VIF screening
+############################################################
+
 all_descriptor_vif <- calculate_vif(
-	df,
-	candidate_descriptors
+	data = df,
+	predictor_cols = candidate_descriptors
 )
 
 all_descriptor_vif <- all_descriptor_vif[
@@ -478,56 +555,27 @@ write.csv(
 	row.names = FALSE
 )
 
-all_descriptor_summary <- data.frame(
-	analysis = c(
-		"Number of candidate descriptors screened",
-		"Complete observations used for redundancy screening",
-		"Number of descriptor pairs with |Pearson r| >= 0.70",
-		"Number of descriptor pairs with |Pearson r| >= 0.85",
-		"Maximum absolute pairwise correlation",
-		"Maximum VIF"
-	),
-	value = c(
-		length(candidate_descriptors),
-		nrow(descriptor_data),
-		sum(all_descriptor_high_correlations$absolute_correlation >= 0.70),
-		sum(all_descriptor_high_correlations$absolute_correlation >= 0.85),
-		round(
-			max(abs(all_descriptor_correlation[upper.tri(all_descriptor_correlation)])),
-			3
-		),
-		round(max(all_descriptor_vif$VIF, na.rm = TRUE), 3)
-	),
-	stringsAsFactors = FALSE
-)
-
-write.csv(
-	all_descriptor_summary,
-	path_all_descriptor_summary,
-	row.names = FALSE
-)
-
-plot_correlation_heatmap(
-	all_descriptor_correlation,
-	title = "Candidate descriptor correlation structure",
-	output_png = path_fig_all_descriptor_correlation_png,
-	output_pdf = path_fig_all_descriptor_correlation_pdf
+plot_vif_barplot(
+	vif_table = all_descriptor_vif,
+	title = "Variance inflation factors for candidate descriptors",
+	output_png = path_fig_descriptor_vif_png,
+	output_pdf = path_fig_descriptor_vif_pdf
 )
 
 file.copy(
-	path_fig_all_descriptor_correlation_png,
-	path_manuscript_fig_descriptor_correlation_png,
+	path_fig_descriptor_vif_png,
+	path_manuscript_fig_descriptor_vif_png,
 	overwrite = TRUE
 )
 
 file.copy(
-	path_fig_all_descriptor_correlation_pdf,
-	path_manuscript_fig_descriptor_correlation_pdf,
+	path_fig_descriptor_vif_pdf,
+	path_manuscript_fig_descriptor_vif_pdf,
 	overwrite = TRUE
 )
 
 ############################################################
-# B. Generate red-flag predictor sets from screening results
+# C. Generate hard red-flag predictor sets
 ############################################################
 
 hard_pairwise_sets <- all_descriptor_high_correlations[
@@ -554,9 +602,9 @@ if (nrow(hard_pairwise_sets) > 0) {
 hard_pairwise_table <- make_predictor_set_table(
 	predictor_sets = hard_pairwise_predictor_sets,
 	reason = paste0(
-		"Generated from descriptor screening: empirical pairwise Pearson correlation with |r| >= ",
+		"Pairwise Pearson correlation with |r| >= ",
 		hard_pairwise_correlation_threshold,
-		"."
+		". Candidate formulas containing this descriptor combination should be skipped."
 	),
 	source = "hard_pairwise_correlation",
 	severity = "hard"
@@ -566,44 +614,28 @@ extreme_vif_descriptors <- all_descriptor_vif$descriptor[
 	all_descriptor_vif$VIF >= extreme_vif_threshold
 ]
 
-extreme_vif_edges <- all_descriptor_high_correlations[
-	all_descriptor_high_correlations$descriptor_1 %in% extreme_vif_descriptors &
-		all_descriptor_high_correlations$descriptor_2 %in% extreme_vif_descriptors &
-		all_descriptor_high_correlations$absolute_correlation >=
-			extreme_vif_group_correlation_threshold,
-	,
-	drop = FALSE
-]
+extreme_vif_predictor_sets <- list()
 
-extreme_vif_components <- get_connected_components(
-	nodes = extreme_vif_descriptors,
-	edge_table = extreme_vif_edges
-)
+if (length(extreme_vif_descriptors) >= 2) {
+	extreme_vif_predictor_sets <- list(
+		extreme_vif_descriptors
+	)
+}
 
-extreme_vif_components <- extreme_vif_components[
-	vapply(
-		extreme_vif_components,
-		length,
-		integer(1)
-	) >= 2
-]
-
-extreme_vif_group_table <- make_predictor_set_table(
-	predictor_sets = extreme_vif_components,
+extreme_vif_table <- make_predictor_set_table(
+	predictor_sets = extreme_vif_predictor_sets,
 	reason = paste0(
-		"Generated from descriptor screening: descriptors with VIF >= ",
+		"Descriptors with VIF >= ",
 		extreme_vif_threshold,
-		" connected by pairwise |r| >= ",
-		extreme_vif_group_correlation_threshold,
-		"."
+		". Candidate formulas containing all descriptors in this multivariable redundancy set should be skipped."
 	),
-	source = "extreme_vif_connected_group",
+	source = "extreme_vif_group",
 	severity = "hard"
 )
 
 descriptor_red_flag_sets <- rbind(
 	hard_pairwise_table,
-	extreme_vif_group_table
+	extreme_vif_table
 )
 
 descriptor_red_flag_sets <- deduplicate_predictor_set_table(
@@ -615,6 +647,10 @@ write.csv(
 	path_descriptor_red_flag_sets,
 	row.names = FALSE
 )
+
+############################################################
+# D. Generate soft-warning predictor sets
+############################################################
 
 soft_pairwise_sets <- all_descriptor_high_correlations[
 	all_descriptor_high_correlations$absolute_correlation >=
@@ -642,11 +678,11 @@ if (nrow(soft_pairwise_sets) > 0) {
 soft_pairwise_table <- make_predictor_set_table(
 	predictor_sets = soft_pairwise_predictor_sets,
 	reason = paste0(
-		"Generated from descriptor screening: empirical pairwise Pearson correlation with |r| >= ",
+		"Pairwise Pearson correlation with |r| >= ",
 		soft_pairwise_correlation_threshold,
 		" and < ",
 		hard_pairwise_correlation_threshold,
-		"."
+		". Used for reporting and interpretation, not automatic exclusion."
 	),
 	source = "soft_pairwise_correlation",
 	severity = "soft"
@@ -657,16 +693,18 @@ moderate_vif_descriptors <- all_descriptor_vif$descriptor[
 		all_descriptor_vif$VIF < extreme_vif_threshold
 ]
 
-moderate_vif_sets <- as.list(moderate_vif_descriptors)
+moderate_vif_predictor_sets <- as.list(
+	moderate_vif_descriptors
+)
 
 soft_vif_table <- make_predictor_set_table(
-	predictor_sets = moderate_vif_sets,
+	predictor_sets = moderate_vif_predictor_sets,
 	reason = paste0(
-		"Generated from descriptor screening: descriptor VIF >= ",
+		"Descriptor VIF >= ",
 		moderate_vif_threshold,
 		" and < ",
 		extreme_vif_threshold,
-		". Used for reporting only, not automatic model exclusion."
+		". Used for reporting and interpretation, not automatic exclusion."
 	),
 	source = "moderate_vif",
 	severity = "soft"
@@ -688,42 +726,7 @@ write.csv(
 )
 
 ############################################################
-# C. Final selected model base-predictor VIF
-############################################################
-
-final_base_predictors <- c(
-	"MWa",
-	"Mptc",
-	"LogSaqd",
-	"LogSoce",
-	"Texpi"
-)
-
-check_required_columns(
-	df,
-	final_base_predictors,
-	data_name = "cleaned dataset"
-)
-
-final_base_predictor_vif <- calculate_vif(
-	df,
-	final_base_predictors
-)
-
-final_base_predictor_vif <- final_base_predictor_vif[
-	order(-final_base_predictor_vif$VIF),
-	,
-	drop = FALSE
-]
-
-write.csv(
-	final_base_predictor_vif,
-	path_final_base_predictor_vif,
-	row.names = FALSE
-)
-
-############################################################
-# D. Targeted solubility/GSE redundancy check
+# E. Targeted solubility/GSE redundancy check
 ############################################################
 
 solubility_cols <- c(
@@ -747,7 +750,7 @@ solubility_data <- df[
 
 if (nrow(solubility_data) == 0) {
 	stop(
-		"No complete rows available for solubility/GSE redundancy check.",
+		"No complete observations available for solubility/GSE redundancy check.",
 		call. = FALSE
 	)
 }
@@ -760,7 +763,7 @@ solubility_data$GSE_logS <- 0.5 -
 
 write.csv(
 	solubility_data,
-	path_solubility_dataset,
+	path_solubility_gse_dataset,
 	row.names = FALSE
 )
 
@@ -773,19 +776,19 @@ solubility_correlation_cols <- c(
 	"GSE_logS"
 )
 
-solubility_correlation <- stats::cor(
+solubility_gse_correlation <- stats::cor(
 	solubility_data[, solubility_correlation_cols, drop = FALSE],
 	use = "complete.obs",
 	method = "pearson"
 )
 
 write.csv(
-	solubility_correlation,
-	path_solubility_correlation_matrix
+	solubility_gse_correlation,
+	path_solubility_gse_correlation_matrix
 )
 
 plot_correlation_heatmap(
-	solubility_correlation,
+	correlation_matrix = solubility_gse_correlation,
 	title = "Solubility-related descriptor correlation structure",
 	output_png = path_fig_solubility_correlation_png,
 	output_pdf = path_fig_solubility_correlation_pdf
@@ -811,7 +814,7 @@ fit_logsoce_from_gse <- stats::lm(
 	data = solubility_data
 )
 
-solubility_regression_summary <- rbind(
+solubility_gse_regression_summary <- rbind(
 	summarize_lm(
 		"LogSaqd ~ logKowb + Mptc",
 		fit_logsaqd_from_logkow_mpt
@@ -831,102 +834,27 @@ solubility_regression_summary <- rbind(
 )
 
 write.csv(
-	solubility_regression_summary,
-	path_solubility_regression_summary,
+	solubility_gse_regression_summary,
+	path_solubility_gse_regression_summary,
 	row.names = FALSE
 )
 
-solubility_vif <- calculate_vif(
-	solubility_data,
-	c(
-		"logKowb",
-		"Mptc",
-		"LogSaqd",
-		"LogSoce"
-	)
+solubility_gse_vif <- calculate_vif(
+	data = solubility_data,
+	predictor_cols = solubility_cols
 )
 
-solubility_vif <- solubility_vif[
-	order(-solubility_vif$VIF),
+solubility_gse_vif <- solubility_gse_vif[
+	order(-solubility_gse_vif$VIF),
 	,
 	drop = FALSE
 ]
 
 write.csv(
-	solubility_vif,
-	path_solubility_vif,
+	solubility_gse_vif,
+	path_solubility_gse_vif,
 	row.names = FALSE
 )
-
-############################################################
-# E. Manuscript-ready descriptor redundancy table
-############################################################
-
-table_descriptor_redundancy <- data.frame(
-	Analysis = c(
-		"Maximum absolute pairwise correlation in full descriptor pool",
-		"Number of hard red-flag predictor sets generated",
-		"Largest VIF in full descriptor pool",
-		"Largest VIF among retained final-model base predictors",
-		"Pearson correlation: LogSaqd vs GSE_logS",
-		"Pearson correlation: LogSoce vs GSE_logS",
-		"Regression: LogSaqd explained by logKowb and Mptc",
-		"Regression: LogSoce explained by logKowb and Mptc"
-	),
-	Result = c(
-		round(
-			max(abs(all_descriptor_correlation[upper.tri(all_descriptor_correlation)])),
-			3
-		),
-		nrow(descriptor_red_flag_sets),
-		round(max(all_descriptor_vif$VIF, na.rm = TRUE), 3),
-		round(max(final_base_predictor_vif$VIF, na.rm = TRUE), 3),
-		round(solubility_correlation["LogSaqd", "GSE_logS"], 3),
-		round(solubility_correlation["LogSoce", "GSE_logS"], 3),
-		round(
-			solubility_regression_summary$r_squared[
-				solubility_regression_summary$model ==
-					"LogSaqd ~ logKowb + Mptc"
-			],
-			3
-		),
-		round(
-			solubility_regression_summary$r_squared[
-				solubility_regression_summary$model ==
-					"LogSoce ~ logKowb + Mptc"
-			],
-			3
-		)
-	),
-	Interpretation = c(
-		"Strongest pairwise redundancy observed among candidate descriptors.",
-		"Number of empirically generated hard exclusion sets used to filter candidate formulas.",
-		"Severe multicollinearity diagnostic for the full candidate descriptor pool.",
-		"Multicollinearity diagnostic for the retained base predictors in the final selected model.",
-		"Agreement between reported aqueous solubility and GSE-derived solubility estimate.",
-		"Agreement between reported octanol solubility and GSE-derived aqueous solubility estimate.",
-		"Fraction of variation in reported aqueous solubility explained by lipophilicity and melting point.",
-		"Fraction of variation in reported octanol solubility explained by lipophilicity and melting point."
-	),
-	check.names = FALSE,
-	stringsAsFactors = FALSE
-)
-
-write.csv(
-	table_descriptor_redundancy,
-	path_table_descriptor_redundancy,
-	row.names = FALSE
-)
-
-write.csv(
-	table_descriptor_redundancy,
-	path_manuscript_table_descriptor_redundancy,
-	row.names = FALSE
-)
-
-############################################################
-# F. GSE plot
-############################################################
 
 gse_plot <- ggplot2::ggplot(
 	solubility_data,
@@ -970,50 +898,150 @@ ggplot2::ggsave(
 )
 
 ############################################################
+# F. Manuscript-ready descriptor redundancy summary
+############################################################
+
+max_abs_pairwise_correlation <- max(
+	abs(all_descriptor_correlation[upper.tri(all_descriptor_correlation)]),
+	na.rm = TRUE
+)
+
+max_full_descriptor_vif <- max(
+	all_descriptor_vif$VIF,
+	na.rm = TRUE
+)
+
+n_hard_red_flag_sets <- nrow(descriptor_red_flag_sets)
+n_soft_warning_sets <- nrow(descriptor_soft_warning_sets)
+
+table_descriptor_redundancy_summary <- data.frame(
+	Analysis = c(
+		"Candidate descriptors screened",
+		"Complete observations used for redundancy screening",
+		"Maximum absolute pairwise correlation",
+		"Descriptor pairs with |Pearson r| >= 0.85",
+		"Descriptor pairs with 0.70 <= |Pearson r| < 0.85",
+		"Maximum VIF in full candidate descriptor pool",
+		"Hard red-flag predictor sets generated",
+		"Soft-warning predictor sets generated",
+		"Correlation: LogSaqd vs GSE_logS",
+		"Correlation: LogSoce vs GSE_logS",
+		"Regression R2: LogSaqd ~ logKowb + Mptc",
+		"Regression R2: LogSoce ~ logKowb + Mptc"
+	),
+	Result = c(
+		length(candidate_descriptors),
+		nrow(descriptor_data),
+		round(max_abs_pairwise_correlation, 3),
+		sum(all_descriptor_high_correlations$absolute_correlation >= hard_pairwise_correlation_threshold),
+		sum(
+			all_descriptor_high_correlations$absolute_correlation >= soft_pairwise_correlation_threshold &
+				all_descriptor_high_correlations$absolute_correlation <
+					hard_pairwise_correlation_threshold
+		),
+		round(max_full_descriptor_vif, 3),
+		n_hard_red_flag_sets,
+		n_soft_warning_sets,
+		round(solubility_gse_correlation["LogSaqd", "GSE_logS"], 3),
+		round(solubility_gse_correlation["LogSoce", "GSE_logS"], 3),
+		round(
+			solubility_gse_regression_summary$r_squared[
+				solubility_gse_regression_summary$model ==
+					"LogSaqd ~ logKowb + Mptc"
+			],
+			3
+		),
+		round(
+			solubility_gse_regression_summary$r_squared[
+				solubility_gse_regression_summary$model ==
+					"LogSoce ~ logKowb + Mptc"
+			],
+			3
+		)
+	),
+	Interpretation = c(
+		"Number of candidate molecular and experimental-condition descriptors evaluated.",
+		"Rows with complete values for all candidate descriptors.",
+		"Strongest pairwise linear descriptor relationship observed in the candidate pool.",
+		"Pairs treated as hard red-flag combinations for model-search exclusion.",
+		"Pairs retained for model search but flagged for interpretation.",
+		"Strongest multivariable redundancy diagnostic in the candidate descriptor pool.",
+		"Combinations exported for automatic exclusion from candidate formulas.",
+		"Combinations exported for reporting and cautious interpretation only.",
+		"Agreement between reported aqueous solubility and GSE-derived solubility estimate.",
+		"Agreement between reported octanol solubility and GSE-derived aqueous solubility estimate.",
+		"Fraction of variation in aqueous solubility explained by lipophilicity and melting point.",
+		"Fraction of variation in octanol solubility explained by lipophilicity and melting point."
+	),
+	check.names = FALSE,
+	stringsAsFactors = FALSE
+)
+
+write.csv(
+	table_descriptor_redundancy_summary,
+	path_table_descriptor_redundancy_summary,
+	row.names = FALSE
+)
+
+write.csv(
+	table_descriptor_redundancy_summary,
+	path_manuscript_table_descriptor_redundancy_summary,
+	row.names = FALSE
+)
+
+write.csv(
+	table_descriptor_redundancy_summary,
+	path_solubility_redundancy_table,
+	row.names = FALSE
+)
+
+write.csv(
+	table_descriptor_redundancy_summary,
+	path_table_solubility_redundancy,
+	row.names = FALSE
+)
+
+############################################################
 # Console summary
 ############################################################
 
 cat("\nDescriptor redundancy screening complete.\n\n")
 
-cat("General descriptor redundancy outputs:\n")
+cat("Main descriptor screening outputs:\n")
 cat("  Correlation matrix: ", path_all_descriptor_correlation_matrix, "\n", sep = "")
-cat("  High-correlation pairs: ", path_all_descriptor_high_correlations, "\n", sep = "")
-cat("  Full descriptor VIF: ", path_all_descriptor_vif, "\n", sep = "")
-cat("  Final base-predictor VIF: ", path_final_base_predictor_vif, "\n", sep = "")
-cat("  Summary: ", path_all_descriptor_summary, "\n", sep = "")
-cat("  Red-flag sets: ", path_descriptor_red_flag_sets, "\n", sep = "")
-cat("  Soft-warning sets: ", path_descriptor_soft_warning_sets, "\n", sep = "")
-cat("  Figure PNG: ", path_fig_all_descriptor_correlation_png, "\n", sep = "")
-cat("  Figure PDF: ", path_fig_all_descriptor_correlation_pdf, "\n", sep = "")
-cat("  Manuscript figure PNG: ", path_manuscript_fig_descriptor_correlation_png, "\n", sep = "")
-cat("  Manuscript figure PDF: ", path_manuscript_fig_descriptor_correlation_pdf, "\n\n", sep = "")
+cat("  High-correlation table: ", path_all_descriptor_high_correlations, "\n", sep = "")
+cat("  VIF table: ", path_all_descriptor_vif, "\n", sep = "")
+cat("  Red-flag predictor sets: ", path_descriptor_red_flag_sets, "\n", sep = "")
+cat("  Soft-warning predictor sets: ", path_descriptor_soft_warning_sets, "\n", sep = "")
+cat("  Descriptor redundancy summary: ", path_all_descriptor_redundancy_summary, "\n", sep = "")
+cat("  Manuscript summary table: ", path_manuscript_table_descriptor_redundancy_summary, "\n\n", sep = "")
 
-cat("Solubility/GSE redundancy outputs:\n")
-cat("  Solubility dataset: ", path_solubility_dataset, "\n", sep = "")
-cat("  Correlation matrix: ", path_solubility_correlation_matrix, "\n", sep = "")
-cat("  Regression summary: ", path_solubility_regression_summary, "\n", sep = "")
-cat("  Solubility VIF: ", path_solubility_vif, "\n", sep = "")
-cat("  Descriptor redundancy table: ", path_table_descriptor_redundancy, "\n", sep = "")
-cat("  Manuscript descriptor redundancy table: ", path_manuscript_table_descriptor_redundancy, "\n", sep = "")
+cat("Main figure outputs:\n")
+cat("  Figure 2 PNG: ", path_fig_descriptor_correlation_png, "\n", sep = "")
+cat("  Figure 2 PDF: ", path_fig_descriptor_correlation_pdf, "\n", sep = "")
+cat("  Manuscript Figure 2 PNG: ", path_manuscript_fig_descriptor_correlation_png, "\n", sep = "")
+cat("  Manuscript Figure 2 PDF: ", path_manuscript_fig_descriptor_correlation_pdf, "\n", sep = "")
+cat("  VIF figure PNG: ", path_fig_descriptor_vif_png, "\n", sep = "")
+cat("  VIF figure PDF: ", path_fig_descriptor_vif_pdf, "\n\n", sep = "")
+
+cat("Solubility/GSE outputs:\n")
+cat("  Solubility/GSE dataset: ", path_solubility_gse_dataset, "\n", sep = "")
+cat("  Solubility/GSE correlation matrix: ", path_solubility_gse_correlation_matrix, "\n", sep = "")
+cat("  Solubility/GSE regression summary: ", path_solubility_gse_regression_summary, "\n", sep = "")
+cat("  Solubility/GSE VIF: ", path_solubility_gse_vif, "\n", sep = "")
+cat("  Solubility correlation figure PNG: ", path_fig_solubility_correlation_png, "\n", sep = "")
+cat("  Solubility correlation figure PDF: ", path_fig_solubility_correlation_pdf, "\n", sep = "")
 cat("  GSE plot PNG: ", path_fig_gse_logS_vs_LogSaqd_png, "\n", sep = "")
-cat("  GSE plot PDF: ", path_fig_gse_logS_vs_LogSaqd_pdf, "\n", sep = "")
-cat("  Solubility correlation PNG: ", path_fig_solubility_correlation_png, "\n", sep = "")
-cat("  Solubility correlation PDF: ", path_fig_solubility_correlation_pdf, "\n\n", sep = "")
+cat("  GSE plot PDF: ", path_fig_gse_logS_vs_LogSaqd_pdf, "\n\n", sep = "")
 
-cat("General redundancy summary:\n")
-print(all_descriptor_summary)
-
-cat("\nGenerated hard red-flag sets:\n")
+cat("Hard red-flag predictor sets:\n")
 print(descriptor_red_flag_sets)
 
-cat("\nGenerated soft-warning sets:\n")
+cat("\nSoft-warning predictor sets:\n")
 print(descriptor_soft_warning_sets)
 
 cat("\nFull descriptor VIF:\n")
 print(all_descriptor_vif)
 
-cat("\nFinal selected model base-predictor VIF:\n")
-print(final_base_predictor_vif)
-
-cat("\nDescriptor redundancy manuscript table:\n")
-print(table_descriptor_redundancy)
+cat("\nDescriptor redundancy summary:\n")
+print(table_descriptor_redundancy_summary)

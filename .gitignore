@@ -25,6 +25,4 @@ env/
 *.log
 
 # Omitted data
-manuscript/
-data/
 results/cross_validation/04_loco_cv_coefficient_long.csv

@@ -66,7 +66,7 @@ required_cols <- unique(c(
 	"CAS.No",
 	"Compound",
 	outcome_col,
-	core_predictors,
+	all_predictors,
 	unlist(
 		lapply(
 			benchmark_formulas,

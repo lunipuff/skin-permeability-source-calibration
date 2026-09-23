@@ -130,9 +130,9 @@ for (n_extra in 0:length(variable_predictors)) {
 			candidate_extra_predictors
 		)
 
-		if (has_redundant_combination(predictors, redundant_predictor_sets)) {
-			next
-		}
+#		if (has_redundant_combination(predictors, redundant_predictor_sets)) {
+#			next
+#		}
 
 		model_result <- fit_screening_model(
 			predictors = predictors,

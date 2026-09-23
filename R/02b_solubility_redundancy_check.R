@@ -10,7 +10,8 @@ source("R/00_config.R")
 ############################################################
 
 required_packages <- c(
-	"ggplot2"
+	"ggplot2",
+	"PNWColors"
 )
 
 missing_packages <- required_packages[
@@ -231,6 +232,7 @@ plot_correlation_heatmap <- function(correlation_matrix, title, output_png, outp
 		colnames(correlation_matrix)
 	)
 
+	# Keep lower triangle only, excluding the diagonal.
 	correlation_long <- correlation_long[
 		correlation_long$row_index > correlation_long$col_index,
 		,
@@ -244,14 +246,14 @@ plot_correlation_heatmap <- function(correlation_matrix, title, output_png, outp
 
 	correlation_long$descriptor_2 <- factor(
 		correlation_long$descriptor_2,
-		levels = rev(colnames(correlation_matrix))
+		levels = colnames(correlation_matrix)
 	)
 
 	p <- ggplot2::ggplot(
 		correlation_long,
 		ggplot2::aes(
-			x = descriptor_1,
-			y = descriptor_2,
+			x = descriptor_2,
+			y = descriptor_1,
 			fill = correlation
 		)
 	) +
@@ -263,11 +265,14 @@ plot_correlation_heatmap <- function(correlation_matrix, title, output_png, outp
 			ggplot2::aes(label = sprintf("%.2f", correlation)),
 			size = 3
 		) +
-		ggplot2::scale_fill_gradient2(
-			low = "#2166AC",
-			mid = "white",
-			high = "#B2182B",
-			midpoint = 0,
+		ggplot2::scale_y_discrete(
+			limits = rev
+		) +
+		ggplot2::scale_fill_gradientn(
+			colours = PNWColors::pnw_palette(
+				"Shuksan2",
+				n = 100
+			),
 			limits = c(-1, 1),
 			name = "Pearson r"
 		) +

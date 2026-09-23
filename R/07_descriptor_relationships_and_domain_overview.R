@@ -113,6 +113,34 @@ write.csv(
 
 make_descriptor_logkp_relationship_plot <- function() {
 
+	palette_values <- tryCatch(
+		PNWColors::pnw_palette(
+			"Sailboat",
+			n = 12
+		),
+		error = function(e) {
+			PNWColors::pnw_palette(
+				"sailboat",
+				n = 12
+			)
+		}
+	)
+
+	background_col_furthest <- grDevices::adjustcolor(
+		palette_values[9],
+		alpha.f = 0.2
+	)
+
+	background_col_further <- grDevices::adjustcolor(
+		palette_values[8],
+		alpha.f = 0.4
+	)
+
+	background_col_central <- grDevices::adjustcolor(
+		palette_values[6],
+		alpha.f = 0.4
+	)
+
 	op <- par(
 		mfrow = c(2, 3),
 		mar = c(4.5, 4.5, 3, 1),
@@ -135,51 +163,119 @@ make_descriptor_logkp_relationship_plot <- function() {
 			")"
 		)
 
-		plot(
-			x,
-			y,
-			pch = 16,
-			xlab = x_label,
-			ylab = "Observed logKp",
-			main = paste("logKp vs", predictor_labels[p])
-		)
-
-		if (sum(complete.cases(x, y)) > 5) {
-			lines(
-				lowess(x, y),
-				lwd = 2
-			)
-		}
-
-		rug(
-			x,
-			side = 1
-		)
-
 		q <- quantile(
 			x,
 			probs = c(0.025, 0.10, 0.90, 0.975),
 			na.rm = TRUE
 		)
 
+		plot(
+			x,
+			y,
+			type = "n",
+			xlab = x_label,
+			ylab = "Observed logKp",
+			main = paste("logKp vs", predictor_labels[p])
+		)
+
+		usr <- par("usr")
+
+		rect(
+			xleft = usr[1],
+			xright = q[1],
+			ybottom = usr[3],
+			ytop = usr[4],
+			col = background_col_furthest,
+			border = NA
+		)
+
+		rect(
+			xleft = q[1],
+			xright = q[2],
+			ybottom = usr[3],
+			ytop = usr[4],
+			col = background_col_further,
+			border = NA
+		)
+
+		rect(
+			xleft = q[2],
+			xright = q[3],
+			ybottom = usr[3],
+			ytop = usr[4],
+			col = background_col_central,
+			border = NA
+		)
+
+		rect(
+			xleft = q[3],
+			xright = q[4],
+			ybottom = usr[3],
+			ytop = usr[4],
+			col = background_col_further,
+			border = NA
+		)
+
+		rect(
+			xleft = q[4],
+			xright = usr[2],
+			ybottom = usr[3],
+			ytop = usr[4],
+			col = background_col_furthest,
+			border = NA
+		)
+
+		box()
+
+		points(
+			x,
+			y,
+			pch = 21,
+			bg = "white",
+			col = "black",
+			lwd = 0.4,
+			cex = 0.8
+		)
+
+		if (sum(complete.cases(x, y)) > 5) {
+			lines(
+				lowess(x, y),
+				lwd = 2,
+				col = "black"
+			)
+		}
+
+		rug(
+			x,
+			side = 1,
+			col = grDevices::adjustcolor(
+				"black",
+				alpha.f = 0.35
+			)
+		)
+
 		abline(
 			v = q[1],
-			lty = 3
+			lty = 3,
+			col = "black"
 		)
 
 		abline(
 			v = q[2],
-			lty = 2
+			lty = 2,
+			col = "black"
 		)
 
 		abline(
 			v = q[3],
-			lty = 2
+			lty = 2,
+			col = "black"
 		)
 
 		abline(
 			v = q[4],
-			lty = 3
+			lty = 3,
+			col = "black"
 		)
 
 		legend(
@@ -191,6 +287,7 @@ make_descriptor_logkp_relationship_plot <- function() {
 			),
 			lty = c(1, 2, 3),
 			lwd = c(2, 1, 1),
+			col = "black",
 			bty = "n",
 			cex = 0.8
 		)

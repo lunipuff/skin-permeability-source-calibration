@@ -1,0 +1,3 @@
+"Model","RMSE","MAE","Predictive R2","Pearson r","Base predictors","Total terms"
+"Best-RMSE candidate","0.674","0.497","0.653","0.809",7,10
+"Final selected model","0.680","0.506","0.647","0.805",6,8

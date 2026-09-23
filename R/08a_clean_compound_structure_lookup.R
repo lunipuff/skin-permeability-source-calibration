@@ -3,6 +3,7 @@
 # Starting file: ../data/raw/rdkit_descriptors.csv
 # Output file: ../data/interim/compound_structure_lookup.csv
 ############################################################
+setwd("R/")
 
 smiles <- read.csv(
 	"../data/raw/rdkit_descriptors.csv",

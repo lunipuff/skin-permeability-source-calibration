@@ -1,0 +1,8 @@
+"Model","n","RMSE","MAE","Predictive R2","|Error| > 1 log unit (%)"
+"Null mean",321,"1.157","0.979","-0.021","47.0"
+"Potts--Guy-style",321,"0.800","0.638","0.512","15.9"
+"Linear selected-predictor model",321,"0.778","0.624","0.538","15.0"
+"Selected interpretable QSPR model",321,"0.680","0.506","0.647","14.3"
+"Random forest, selected predictors",321,"0.657","0.489","0.670","12.5"
+"RDKit random forest, molecular only",320,"0.698","0.522","0.629","17.2"
+"RDKit random forest, molecular + experimental",320,"0.658","0.496","0.670","14.7"

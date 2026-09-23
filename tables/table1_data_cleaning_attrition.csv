@@ -1,0 +1,6 @@
+"Step","Observations","Unique compounds"
+"Raw imported dataset",479,142
+"After required-field filtering",469,140
+"After abnormal descriptor filtering",468,140
+"After collapsing repeated profiles",321,140
+"Final modeling dataset",321,140

@@ -4,120 +4,253 @@ source("R/00_config.R")
 # Table 1: Data cleaning and dataset attrition
 ############################################################
 
-	path_table_data_cleaning <- "manuscript/tables/table2_data_cleaning_attrition.csv"
+dir.create(
+	"tables",
+	showWarnings = FALSE,
+	recursive = TRUE
+)
 
-	############################################################
-	# Read cleaning output
-	############################################################
+dir.create(
+	"manuscript/tables",
+	showWarnings = FALSE,
+	recursive = TRUE
+)
 
-	cleaning_flow <- read.csv(
-		path_cleaning_flow,
-		stringsAsFactors = FALSE
+path_table1_data_cleaning <- "tables/table1_data_cleaning_attrition.csv"
+path_manuscript_table1_data_cleaning <- "manuscript/tables/table1_data_cleaning_attrition.csv"
+
+cleaning_flow <- read.csv(
+	path_cleaning_flow,
+	stringsAsFactors = FALSE
+)
+
+required_cleaning_cols <- c(
+	"step",
+	"observations",
+	"unique_compounds"
+)
+
+missing_cleaning_cols <- required_cleaning_cols[
+	!(required_cleaning_cols %in% names(cleaning_flow))
+]
+
+if (length(missing_cleaning_cols) > 0) {
+	stop(
+		paste(
+			"Missing required columns in cleaning_flow:",
+			paste(missing_cleaning_cols, collapse = ", ")
+		),
+		call. = FALSE
 	)
+}
 
-	############################################################
-	# Basic checks
-	############################################################
-
-	required_cleaning_cols <- c(
-		"step",
-		"observations",
-		"unique_compounds"
-	)
-
-	missing_cleaning_cols <- required_cleaning_cols[
-		!(required_cleaning_cols %in% names(cleaning_flow))
+get_step_row <- function(step_name) {
+	out <- cleaning_flow[
+		cleaning_flow$step == step_name,
+		,
+		drop = FALSE
 	]
 
-	if (length(missing_cleaning_cols) > 0) {
+	if (nrow(out) != 1) {
 		stop(
-			paste(
-				"Missing required columns in cleaning_flow:",
-				paste(missing_cleaning_cols, collapse = ", ")
+			paste0(
+				"Expected exactly one row for cleaning step '",
+				step_name,
+				"', found ",
+				nrow(out),
+				"."
 			),
 			call. = FALSE
 		)
 	}
 
-	############################################################
-	# Helper function
-	############################################################
+	out
+}
 
-	get_step_row <- function(step_name) {
-		out <- cleaning_flow[
-			cleaning_flow$step == step_name,
-			,
-			drop = FALSE
-		]
+raw_row <- get_step_row("Raw imported dataset")
+required_field_row <- get_step_row("After required-field filtering")
+abnormal_row <- get_step_row("After abnormal descriptor filtering")
+collapsed_row <- get_step_row("After collapsing repeated profiles")
+final_row <- get_step_row("Final modeling dataset")
 
-		if (nrow(out) != 1) {
-			stop(
-				paste0(
-					"Expected exactly one row for cleaning step '",
-					step_name,
-					"', found ",
-					nrow(out),
-					"."
-				),
-				call. = FALSE
-			)
-		}
+table1_data_cleaning <- data.frame(
+	Step = c(
+		"Raw imported dataset",
+		"After required-field filtering",
+		"After abnormal descriptor filtering",
+		"After collapsing repeated profiles",
+		"Final modeling dataset"
+	),
+	Observations = c(
+		raw_row$observations,
+		required_field_row$observations,
+		abnormal_row$observations,
+		collapsed_row$observations,
+		final_row$observations
+	),
+	"Unique compounds" = c(
+		raw_row$unique_compounds,
+		required_field_row$unique_compounds,
+		abnormal_row$unique_compounds,
+		collapsed_row$unique_compounds,
+		final_row$unique_compounds
+	),
+	check.names = FALSE,
+	stringsAsFactors = FALSE
+)
 
-		out
-	}
+write.csv(
+	table1_data_cleaning,
+	path_table1_data_cleaning,
+	row.names = FALSE
+)
 
-	############################################################
-	# Pull cleaning-step rows
-	############################################################
+write.csv(
+	table1_data_cleaning,
+	path_manuscript_table1_data_cleaning,
+	row.names = FALSE
+)
 
-	raw_row <- get_step_row("Raw imported dataset")
-	required_field_row <- get_step_row("After required-field filtering")
-	abnormal_row <- get_step_row("After abnormal descriptor filtering")
-	collapsed_row <- get_step_row("After collapsing repeated profiles")
-	final_row <- get_step_row("Final modeling dataset")
+cat("\nTable 1 written to:\n")
+cat("  ", path_table1_data_cleaning, "\n", sep = "")
+cat("  ", path_manuscript_table1_data_cleaning, "\n\n", sep = "")
 
-	############################################################
-	# Build manuscript-ready table
-	############################################################
-
-	table_data_cleaning <- data.frame(
-		Step = c(
-			"Raw imported dataset",
-			"After required-field filtering",
-			"After abnormal descriptor filtering",
-			"After collapsing repeated profiles",
-			"Final modeling dataset"
-		),
-		Observations = c(
-			raw_row$observations,
-			required_field_row$observations,
-			abnormal_row$observations,
-			collapsed_row$observations,
-			final_row$observations
-		),
-		"Unique compounds" = c(
-			raw_row$unique_compounds,
-			required_field_row$unique_compounds,
-			abnormal_row$unique_compounds,
-			collapsed_row$unique_compounds,
-			final_row$unique_compounds
-		),
-		check.names = FALSE,
-		stringsAsFactors = FALSE
-	)
-
-	############################################################
-	# Save
-	############################################################
-
-	write.csv(
-		table_data_cleaning,
-		path_table_data_cleaning,
-		row.names = FALSE
-	)
-
-	print(table_data_cleaning)
+print(table1_data_cleaning)
 	
+############################################################
+# Table 2: Concise LOCO-CV model-selection summary
+############################################################
+
+path_loco_cv_candidate_search <- "results/cross_validation/03_loco_cv_candidate_model_search.csv"
+path_selected_model <- "results/cross_validation/03_selected_model.txt"
+
+path_table2_model_selection <- "tables/table2_loco_cv_model_selection_summary.csv"
+path_manuscript_table2_model_selection <- "manuscript/tables/table2_loco_cv_model_selection_summary.csv"
+
+candidate_search <- read.csv(
+	path_loco_cv_candidate_search,
+	stringsAsFactors = FALSE
+)
+
+selected_model_formula <- readLines(
+	path_selected_model,
+	warn = FALSE
+)
+
+selected_model_formula <- trimws(
+	gsub(
+		"\\s+",
+		" ",
+		paste(selected_model_formula, collapse = " ")
+	)
+)
+
+required_cols <- c(
+	"formula",
+	"RMSE",
+	"MAE",
+	"R2_pred",
+	"R",
+	"n_base_predictors",
+	"n_terms"
+)
+
+missing_cols <- required_cols[
+	!(required_cols %in% names(candidate_search))
+]
+
+if (length(missing_cols) > 0) {
+	stop(
+		"Missing required columns in candidate-model search table: ",
+		paste(missing_cols, collapse = ", "),
+		call. = FALSE
+	)
+}
+
+best_rmse_row <- candidate_search[
+	order(
+		candidate_search$RMSE,
+		candidate_search$n_terms
+	),
+	,
+	drop = FALSE
+][1, , drop = FALSE]
+
+selected_model_row <- candidate_search[
+	candidate_search$formula == selected_model_formula,
+	,
+	drop = FALSE
+]
+
+if (nrow(selected_model_row) != 1) {
+	stop(
+		"Expected exactly one selected model row in candidate-model search table.",
+		call. = FALSE
+	)
+}
+
+table2_model_selection <- rbind(
+	best_rmse_row,
+	selected_model_row
+)
+
+table2_model_selection$Model <- c(
+	"Best-RMSE candidate",
+	"Final selected model"
+)
+
+table2_model_selection <- table2_model_selection[
+	,
+	c(
+		"Model",
+		"RMSE",
+		"MAE",
+		"R2_pred",
+		"R",
+		"n_base_predictors",
+		"n_terms"
+	),
+	drop = FALSE
+]
+
+names(table2_model_selection) <- c(
+	"Model",
+	"RMSE",
+	"MAE",
+	"Predictive R2",
+	"Pearson r",
+	"Base predictors",
+	"Total terms"
+)
+
+numeric_cols <- c(
+	"RMSE",
+	"MAE",
+	"Predictive R2",
+	"Pearson r"
+)
+
+for (col in numeric_cols) {
+	table2_model_selection[[col]] <- sprintf(
+		"%.3f",
+		as.numeric(table2_model_selection[[col]])
+	)
+}
+
+write.csv(
+	table2_model_selection,
+	path_table2_model_selection,
+	row.names = FALSE
+)
+
+write.csv(
+	table2_model_selection,
+	path_manuscript_table2_model_selection,
+	row.names = FALSE
+)
+
+print(table2_model_selection)
+
 ############################################################
 # Table S1: Descriptor redundancy summary
 ############################################################
@@ -429,3 +562,264 @@ cat("  ", path_tableS1_descriptor_redundancy, "\n", sep = "")
 cat("  ", path_manuscript_tableS1_descriptor_redundancy, "\n\n", sep = "")
 
 print(tableS1_descriptor_redundancy)
+
+############################################################
+# Table 4: Benchmark model performance
+############################################################
+
+path_main_benchmark_models <- file.path(
+	"tables",
+	"table_main_benchmark_models.csv"
+)
+
+if (!file.exists(path_main_benchmark_models)) {
+	path_main_benchmark_models <- file.path(
+		"results",
+		"benchmarks",
+		"table_main_benchmark_models.csv"
+	)
+}
+
+if (!file.exists(path_main_benchmark_models)) {
+	stop(
+		"Could not find table_main_benchmark_models.csv.",
+		call. = FALSE
+	)
+}
+
+benchmark_models <- read.csv(
+	path_main_benchmark_models,
+	stringsAsFactors = FALSE,
+	check.names = FALSE
+)
+
+required_cols <- c(
+	"model",
+	"model_label",
+	"n_observations",
+	"RMSE",
+	"MAE",
+	"R2_pred",
+	"proportion_abs_error_gt_1"
+)
+
+missing_cols <- required_cols[
+	!(required_cols %in% names(benchmark_models))
+]
+
+if (length(missing_cols) > 0) {
+	stop(
+		"Missing required columns in benchmark table: ",
+		paste(missing_cols, collapse = ", "),
+		call. = FALSE
+	)
+}
+
+model_labels <- c(
+	"null_mean" = "Null mean",
+	"potts_guy" = "Potts--Guy-style",
+	"linear_selected_predictors" = "Linear selected-predictor model",
+	"selected_model" = "Selected interpretable QSPR model",
+	"random_forest_selected_predictors" = "Random forest, selected predictors",
+	"rdkit_rf_molecular_only_as_reported" = "RDKit random forest, molecular only",
+	"rdkit_rf_with_experimental_as_reported" = "RDKit random forest, molecular + experimental"
+)
+
+input_sets <- c(
+	"null_mean" = "Endpoint mean only",
+	"potts_guy" = "MWa + logKowb",
+	"linear_selected_predictors" = "Selected dataset descriptors",
+	"selected_model" = "Selected dataset descriptors",
+	"random_forest_selected_predictors" = "Selected dataset descriptors",
+	"rdkit_rf_molecular_only_as_reported" = "RDKit molecular descriptors",
+	"rdkit_rf_with_experimental_as_reported" = "RDKit molecular descriptors + experimental variables"
+)
+
+keep_models <- names(model_labels)
+
+table4_benchmark <- benchmark_models[
+	benchmark_models$model %in% keep_models,
+	,
+	drop = FALSE
+]
+
+table4_benchmark$model <- factor(
+	table4_benchmark$model,
+	levels = keep_models
+)
+
+table4_benchmark <- table4_benchmark[
+	order(table4_benchmark$model),
+	,
+	drop = FALSE
+]
+
+table4_benchmark <- data.frame(
+	"Model" = unname(model_labels[as.character(table4_benchmark$model)]),
+	"n" = table4_benchmark$n_observations,
+	"RMSE" = sprintf("%.3f", table4_benchmark$RMSE),
+	"MAE" = sprintf("%.3f", table4_benchmark$MAE),
+	"Predictive R2" = sprintf("%.3f", table4_benchmark$R2_pred),
+	"|Error| > 1 log unit (%)" = sprintf(
+		"%.1f",
+		100 * table4_benchmark$proportion_abs_error_gt_1
+	),
+	check.names = FALSE,
+	stringsAsFactors = FALSE
+)
+
+dir.create(
+	"tables",
+	showWarnings = FALSE,
+	recursive = TRUE
+)
+
+dir.create(
+	file.path("manuscript", "tables"),
+	showWarnings = FALSE,
+	recursive = TRUE
+)
+
+write.csv(
+	table4_benchmark,
+	file.path(
+		"tables",
+		"table4_benchmark_model_performance.csv"
+	),
+	row.names = FALSE
+)
+
+write.csv(
+	table4_benchmark,
+	file.path(
+		"manuscript",
+		"tables",
+		"table4_benchmark_model_performance.csv"
+	),
+	row.names = FALSE
+)
+
+cat("\nTable 4 written to:\n")
+cat("  tables/table4_benchmark_model_performance.csv\n")
+cat("  manuscript/tables/table4_benchmark_model_performance.csv\n\n")
+
+print(table4_benchmark)
+
+############################################################
+# Table S2: Ablation analysis summary
+############################################################
+
+path_ablation_summary <- file.path(
+	"results",
+	"ablation",
+	"09_ablation_summary.csv"
+)
+
+if (!file.exists(path_ablation_summary)) {
+	path_ablation_summary <- file.path(
+	"tables",
+	"tableS_ablation_summary.csv"
+	)
+}
+
+if (!file.exists(path_ablation_summary)) {
+	stop(
+		"Could not find ablation summary table.",
+		call. = FALSE
+	)
+}
+
+ablation_summary <- read.csv(
+	path_ablation_summary,
+	stringsAsFactors = FALSE,
+	check.names = FALSE
+)
+
+required_cols <- c(
+	"ablation_description",
+	"RMSE",
+	"MAE",
+	"R2_pred",
+	"delta_RMSE",
+	"delta_MAE",
+	"delta_R2_pred"
+)
+
+missing_cols <- required_cols[
+	!(required_cols %in% names(ablation_summary))
+]
+
+if (length(missing_cols) > 0) {
+	stop(
+		"Missing required columns in ablation summary table: ",
+		paste(missing_cols, collapse = ", "),
+		call. = FALSE
+	)
+}
+
+tableS2_ablation <- data.frame(
+	"Model variant" = ablation_summary$ablation_description,
+	"RMSE" = sprintf(
+		"%.3f",
+		ablation_summary$RMSE
+	),
+	"Delta RMSE" = sprintf(
+		"%+.3f",
+		ablation_summary$delta_RMSE
+	),
+	"MAE" = sprintf(
+		"%.3f",
+		ablation_summary$MAE
+	),
+	"Delta MAE" = sprintf(
+		"%+.3f",
+		ablation_summary$delta_MAE
+	),
+	"Predictive R2" = sprintf(
+		"%.3f",
+		ablation_summary$R2_pred
+	),
+	"Delta R2" = sprintf(
+		"%+.3f",
+		ablation_summary$delta_R2_pred
+	),
+	check.names = FALSE,
+	stringsAsFactors = FALSE
+)
+
+dir.create(
+	"tables",
+	showWarnings = FALSE,
+	recursive = TRUE
+)
+
+dir.create(
+	file.path("manuscript", "tables"),
+	showWarnings = FALSE,
+	recursive = TRUE
+)
+
+write.csv(
+	tableS2_ablation,
+	file.path(
+		"tables",
+		"tableS2_ablation_analysis_summary.csv"
+	),
+	row.names = FALSE
+)
+
+write.csv(
+	tableS2_ablation,
+	file.path(
+		"manuscript",
+		"tables",
+		"tableS2_ablation_analysis_summary.csv"
+	),
+	row.names = FALSE
+)
+
+cat("\nTable S2 written to:\n")
+cat("  tables/tableS2_ablation_analysis_summary.csv\n")
+cat("  manuscript/tables/tableS2_ablation_analysis_summary.csv\n\n")
+
+print(tableS2_ablation)

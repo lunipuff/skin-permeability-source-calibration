@@ -3,6 +3,7 @@ library("readxl")
 library("knitr")
 library("ggplot2")
 library("bookdown")
+library("PNWColors")
 
 ############################################################
 # 00_config.R
@@ -48,6 +49,7 @@ path_solubility_dataset <- "results/descriptor_redundancy/solubility_gse_dataset
 path_solubility_correlation_matrix <- "results/descriptor_redundancy/solubility_gse_correlation_matrix.csv"
 path_solubility_regression_summary <- "results/descriptor_redundancy/solubility_gse_regression_summary.csv"
 path_solubility_vif <- "results/descriptor_redundancy/solubility_gse_vif.csv"
+path_solubility_redundancy_table <- "tables/solubility_redundancy_table.csv"
 path_table_solubility_redundancy <- "tables/tableS1_solubility_redundancy_summary.csv"
 path_manuscript_table_solubility_redundancy <- "manuscript/tables/tableS1_solubility_redundancy_summary.csv"
 

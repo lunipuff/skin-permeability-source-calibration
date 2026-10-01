@@ -1,0 +1,4 @@
+"Domain category","RMSE","MAE","Median absolute error",">1 log unit (%)"
+"Full dataset","0.680","0.506","0.387","14.3"
+"Central descriptor domain","0.577","0.414","0.298","11.7"
+"Outside 2.5th-97.5th percentile range","0.892","0.703","0.504","30.0"

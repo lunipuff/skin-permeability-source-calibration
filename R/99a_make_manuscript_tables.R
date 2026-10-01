@@ -823,3 +823,384 @@ cat("  tables/tableS2_ablation_analysis_summary.csv\n")
 cat("  manuscript/tables/tableS2_ablation_analysis_summary.csv\n\n")
 
 print(tableS2_ablation)
+
+############################################################
+# Table S3: Coefficient-stability summary
+############################################################
+
+path_coefficient_stability <- file.path(
+	"tables",
+	"tableS_selected_model_coefficient_stability.csv"
+)
+
+if (!file.exists(path_coefficient_stability)) {
+	stop(
+		"Could not find coefficient-stability table.",
+		call. = FALSE
+	)
+}
+
+coefficient_stability <- read.csv(
+	path_coefficient_stability,
+	stringsAsFactors = FALSE,
+	check.names = FALSE
+)
+
+required_cols <- c(
+	"term",
+	"mean",
+	"sd",
+	"rsd_percent",
+	"n_folds",
+	"n_nonmissing"
+)
+
+missing_cols <- required_cols[
+	!(required_cols %in% names(coefficient_stability))
+]
+
+if (length(missing_cols) > 0) {
+	stop(
+		"Missing required columns in coefficient-stability table: ",
+		paste(missing_cols, collapse = ", "),
+		call. = FALSE
+	)
+}
+
+format_term <- function(x) {
+	x <- gsub("I\\(Mptc\\^2\\)", "Mptc^2", x)
+	x <- gsub("I\\(LogSaqd\\^2\\)", "LogSaqd^2", x)
+	x <- gsub("MWa:LogSaqd", "MWa x LogSaqd", x)
+	x
+}
+
+tableS3_coefficient_stability <- data.frame(
+	"Term" = format_term(coefficient_stability$term),
+	"Mean coefficient" = sprintf(
+		"%.4g",
+		coefficient_stability$mean
+	),
+	"SD" = sprintf(
+		"%.4g",
+		coefficient_stability$sd
+	),
+	"RSD (%)" = sprintf(
+		"%.1f",
+		coefficient_stability$rsd_percent
+	),
+	"Folds" = coefficient_stability$n_folds,
+	"Nonmissing estimates" = coefficient_stability$n_nonmissing,
+	check.names = FALSE,
+	stringsAsFactors = FALSE
+)
+
+dir.create(
+	"tables",
+	showWarnings = FALSE,
+	recursive = TRUE
+)
+
+dir.create(
+	file.path("manuscript", "tables"),
+	showWarnings = FALSE,
+	recursive = TRUE
+)
+
+write.csv(
+	tableS3_coefficient_stability,
+	file.path(
+		"tables",
+		"tableS3_coefficient_stability_summary.csv"
+	),
+	row.names = FALSE
+)
+
+write.csv(
+	tableS3_coefficient_stability,
+	file.path(
+		"manuscript",
+		"tables",
+		"tableS3_coefficient_stability_summary.csv"
+	),
+	row.names = FALSE
+)
+
+cat("\nTable S3 written to:\n")
+cat("  tables/tableS3_coefficient_stability_summary.csv\n")
+cat("  manuscript/tables/tableS3_coefficient_stability_summary.csv\n\n")
+
+print(tableS3_coefficient_stability)
+
+############################################################
+# Table S4: Final selected-model coefficients
+############################################################
+
+if (!exists("path_cleaned_dataset")) {
+	source("R/00_config.R")
+}
+
+path_table_final_model_coefficients <- file.path(
+	"tables",
+	"tableS4_final_model_coefficients.csv"
+)
+
+path_manuscript_table_final_model_coefficients <- file.path(
+	"manuscript",
+	"tables",
+	"tableS4_final_model_coefficients.csv"
+)
+
+modeling_data <- read.csv(
+	path_cleaned_dataset,
+	stringsAsFactors = FALSE,
+	check.names = FALSE
+)
+
+selected_formula <- logkpl ~ MWa +
+	log(Mptc) +
+	LogSaqd +
+	LogSoce +
+	log(Texpi) +
+	I(Mptc^2) +
+	I(LogSaqd^2) +
+	MWa:LogSaqd
+
+model_variables <- all.vars(
+	selected_formula
+)
+
+final_model_data <- modeling_data[
+	complete.cases(
+		modeling_data[, model_variables]
+	),
+	,
+	drop = FALSE
+]
+
+final_selected_model <- lm(
+	selected_formula,
+	data = final_model_data
+)
+
+coefficient_summary <- summary(
+	final_selected_model
+)$coefficients
+
+format_term_label <- function(x) {
+	x <- gsub(
+		"\\(Intercept\\)",
+		"Intercept",
+		x
+	)
+
+	x <- gsub(
+		"log\\(Mptc\\)",
+		"log(Mptc)",
+		x
+	)
+
+	x <- gsub(
+		"log\\(Texpi\\)",
+		"log(Texpi)",
+		x
+	)
+
+	x <- gsub(
+		"I\\(Mptc\\^2\\)",
+		"Mptc^2",
+		x
+	)
+
+	x <- gsub(
+		"I\\(LogSaqd\\^2\\)",
+		"LogSaqd^2",
+		x
+	)
+
+	x <- gsub(
+		"MWa:LogSaqd",
+		"MWa x LogSaqd",
+		x
+	)
+
+	x
+}
+
+tableS4_final_model_coefficients <- data.frame(
+	"Term" = format_term_label(
+		rownames(
+			coefficient_summary
+		)
+	),
+	"Estimate" = sprintf(
+		"%.4g",
+		coefficient_summary[, "Estimate"]
+	),
+	"Standard error" = sprintf(
+		"%.4g",
+		coefficient_summary[, "Std. Error"]
+	),
+	"t statistic" = sprintf(
+		"%.3f",
+		coefficient_summary[, "t value"]
+	),
+	"p value" = ifelse(
+		coefficient_summary[, "Pr(>|t|)"] < 0.001,
+		"<0.001",
+		sprintf(
+			"%.3f",
+			coefficient_summary[, "Pr(>|t|)"]
+		)
+	),
+	check.names = FALSE,
+	stringsAsFactors = FALSE
+) %>% select("Term", "Estimate", "Standard error")
+
+write.csv(
+	tableS4_final_model_coefficients,
+	path_table_final_model_coefficients,
+	row.names = FALSE
+)
+
+write.csv(
+	tableS4_final_model_coefficients,
+	path_manuscript_table_final_model_coefficients,
+	row.names = FALSE
+)
+
+message(
+	"Generated final selected-model coefficient table: ",
+	path_table_final_model_coefficients
+)
+
+############################################################
+# Table 6: Applicability-domain error summary
+############################################################
+
+if (!exists("p")) {
+	source("R/00_config.R")
+}
+
+path_applicability_domain_error_summary <- file.path(
+	"results",
+	"applicability_domain",
+	"12_error_by_domain_class.csv"
+)
+
+if (!file.exists(path_applicability_domain_error_summary)) {
+	path_applicability_domain_error_summary <- file.path(
+		"tables",
+		"table_applicability_domain_error_summary.csv"
+	)
+}
+
+if (!file.exists(path_applicability_domain_error_summary)) {
+	stop(
+		"Could not find applicability-domain error summary.",
+		call. = FALSE
+	)
+}
+
+applicability_domain_error_summary <- read.csv(
+	path_applicability_domain_error_summary,
+	stringsAsFactors = FALSE,
+	check.names = FALSE
+)
+
+required_cols <- c(
+	"group",
+	"RMSE",
+	"MAE",
+	"median_abs_error",
+	"proportion_abs_error_gt_1"
+)
+
+missing_cols <- required_cols[
+	!(required_cols %in% names(applicability_domain_error_summary))
+]
+
+if (length(missing_cols) > 0) {
+	stop(
+		"Missing required columns in applicability-domain error summary: ",
+		paste(missing_cols, collapse = ", "),
+		call. = FALSE
+	)
+}
+
+applicability_domain_error_summary <- applicability_domain_error_summary[
+	applicability_domain_error_summary$group %in% c(
+		"overall",
+		"central",
+		"outside"
+	),
+	,
+	drop = FALSE
+]
+
+domain_order <- c(
+	"overall",
+	"central",
+	"outside"
+)
+
+applicability_domain_error_summary <- applicability_domain_error_summary[
+	match(
+		domain_order,
+		applicability_domain_error_summary$group
+	),
+	,
+	drop = FALSE
+]
+
+domain_labels <- c(
+	"overall" = "Full dataset",
+	"central" = "Central descriptor domain",
+	"outside" = "Outside 2.5th-97.5th percentile range"
+)
+
+table_applicability_domain_error_summary <- data.frame(
+	"Domain category" = domain_labels[
+		applicability_domain_error_summary$group
+	],
+	"RMSE" = sprintf(
+		"%.3f",
+		applicability_domain_error_summary$RMSE
+	),
+	"MAE" = sprintf(
+		"%.3f",
+		applicability_domain_error_summary$MAE
+	),
+	"Median absolute error" = sprintf(
+		"%.3f",
+		applicability_domain_error_summary$median_abs_error
+	),
+	">1 log unit (%)" = sprintf(
+		"%.1f",
+		100 * applicability_domain_error_summary$proportion_abs_error_gt_1
+	),
+	check.names = FALSE,
+	stringsAsFactors = FALSE
+)
+
+write.csv(
+	table_applicability_domain_error_summary,
+	file.path(
+		"tables",
+		"table6_applicability_domain_error_summary.csv"
+	),
+	row.names = FALSE
+)
+
+write.csv(
+	table_applicability_domain_error_summary,
+	file.path(
+		"manuscript",
+		"tables",
+		"table6_applicability_domain_error_summary.csv"
+	),
+	row.names = FALSE
+)
+
+message(
+	"Generated applicability-domain error summary table."
+)

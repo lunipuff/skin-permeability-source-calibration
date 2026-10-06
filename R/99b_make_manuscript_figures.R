@@ -87,8 +87,7 @@ make_observed_predicted_plot <- function() {
 
 	residual <- est$logkpl - est$mu
 
-	palette_values <- PNWColors::pnw_palette(
-		"Shuksan2",
+	palette_values <- model_palette(
 		n = 101
 	)
 
@@ -113,7 +112,7 @@ make_observed_predicted_plot <- function() {
 
 	point_colors <- palette_values[color_index]
 
-	legend_residuals <- c(-1,-0.5,0,0.5,1)
+	legend_residuals <- c(-2,-1,-0.5,0,0.5,1,2)
 
 	legend_index <- round(
 		(legend_residuals + max_abs_residual) /
@@ -162,7 +161,8 @@ make_observed_predicted_plot <- function() {
 		pt.bg = legend_colors,
 		col = "black",
 		pch = 21,
-		pt.cex = 1.1,
+		pt.cex = 1,
+		cex = 0.8,
 		bty = "n",
 		title = "Observed - Predicted"
 	)
@@ -1862,4 +1862,546 @@ grDevices::dev.off()
 message(
 	"Generated LOCO-CV error-density figure: ",
 	path_fig_loco_cv_error_density_png
+)
+
+############################################################
+# Figure 2: Candidate descriptor correlation structure
+############################################################
+
+if (!exists("path_cleaned_dataset")) {
+	source("R/00_config.R")
+}
+
+dir.create(
+	"figures",
+	showWarnings = FALSE,
+	recursive = TRUE
+)
+
+dir.create(
+	file.path(
+		"manuscript",
+		"figures"
+	),
+	showWarnings = FALSE,
+	recursive = TRUE
+)
+
+path_fig_descriptor_correlation_png <- file.path(
+	"figures",
+	"figure2_descriptor_correlation.png"
+)
+
+path_fig_descriptor_correlation_pdf <- file.path(
+	"figures",
+	"figure2_descriptor_correlation.pdf"
+)
+
+path_manuscript_fig_descriptor_correlation_png <- file.path(
+	"manuscript",
+	"figures",
+	"figure2_descriptor_correlation.png"
+)
+
+path_manuscript_fig_descriptor_correlation_pdf <- file.path(
+	"manuscript",
+	"figures",
+	"figure2_descriptor_correlation.pdf"
+)
+
+candidate_descriptor_cols <- c(
+	"MWa",
+	"logKowb",
+	"Mptc",
+	"LogSaqd",
+	"LogSoce",
+	"Hdf",
+	"Hag",
+	"MVh",
+	"Texpi",
+	"Skin.thicknessj"
+)
+
+modeling_data <- read.csv(
+	path_cleaned_dataset,
+	stringsAsFactors = FALSE,
+	check.names = FALSE
+)
+
+missing_candidate_descriptor_cols <- candidate_descriptor_cols[
+	!(candidate_descriptor_cols %in% names(modeling_data))
+]
+
+if (length(missing_candidate_descriptor_cols) > 0) {
+	stop(
+		"Missing candidate descriptor columns for Figure 2: ",
+		paste(
+			missing_candidate_descriptor_cols,
+			collapse = ", "
+		),
+		call. = FALSE
+	)
+}
+
+correlation_data <- modeling_data[
+	,
+	candidate_descriptor_cols,
+	drop = FALSE
+]
+
+candidate_correlation_matrix <- stats::cor(
+	correlation_data,
+	use = "pairwise.complete.obs",
+	method = "pearson"
+)
+
+make_correlation_long <- function(correlation_matrix) {
+	correlation_long <- as.data.frame(
+		as.table(
+			correlation_matrix
+		),
+		stringsAsFactors = FALSE
+	)
+
+	names(correlation_long) <- c(
+		"descriptor_1",
+		"descriptor_2",
+		"correlation"
+	)
+
+	correlation_long
+}
+
+plot_correlation_heatmap <- function(correlation_matrix, title, output_png, output_pdf) {
+	correlation_long <- make_correlation_long(correlation_matrix)
+
+	correlation_long$row_index <- match(
+		as.character(correlation_long$descriptor_1),
+		rownames(correlation_matrix)
+	)
+
+	correlation_long$col_index <- match(
+		as.character(correlation_long$descriptor_2),
+		colnames(correlation_matrix)
+	)
+
+	# Keep lower triangle only, excluding the diagonal.
+	correlation_long <- correlation_long[
+		correlation_long$row_index > correlation_long$col_index,
+		,
+		drop = FALSE
+	]
+
+	correlation_long$descriptor_1 <- factor(
+		correlation_long$descriptor_1,
+		levels = rownames(correlation_matrix)
+	)
+
+	correlation_long$descriptor_2 <- factor(
+		correlation_long$descriptor_2,
+		levels = colnames(correlation_matrix)
+	)
+
+	p <- ggplot2::ggplot(
+		correlation_long,
+		ggplot2::aes(
+			x = descriptor_2,
+			y = descriptor_1,
+			fill = correlation
+		)
+	) +
+		ggplot2::geom_tile(
+			color = "white",
+			linewidth = 0.25
+		) +
+		ggplot2::geom_text(
+			ggplot2::aes(label = sprintf("%.2f", correlation)),
+			size = 3
+		) +
+		ggplot2::scale_y_discrete(
+			limits = rev
+		) +
+		ggplot2::scale_fill_gradientn(
+			colours = model_palette(
+				n = 101
+			),
+			limits = c(-1, 1),
+			name = "Pearson r"
+		) +
+		ggplot2::coord_fixed() +
+		ggplot2::labs(
+			title = title,
+			x = NULL,
+			y = NULL
+		) +
+		ggplot2::theme_minimal(base_size = 11) +
+		ggplot2::theme(
+			axis.text.x = ggplot2::element_text(
+				angle = 45,
+				hjust = 1,
+				vjust = 1
+			),
+			panel.grid = ggplot2::element_blank(),
+			plot.title = ggplot2::element_text(face = "bold")
+		)
+
+	ggplot2::ggsave(
+		filename = output_png,
+		plot = p,
+		width = 7.5,
+		height = 6.5,
+		dpi = 300
+	)
+
+	ggplot2::ggsave(
+		filename = output_pdf,
+		plot = p,
+		width = 7.5,
+		height = 6.5
+	)
+
+	p
+}
+
+plot_correlation_heatmap(
+	correlation_matrix = candidate_correlation_matrix,
+	title = "Candidate descriptor correlation structure",
+	output_png = path_fig_descriptor_correlation_png,
+	output_pdf = path_fig_descriptor_correlation_pdf
+)
+
+file.copy(
+	from = path_fig_descriptor_correlation_png,
+	to = path_manuscript_fig_descriptor_correlation_png,
+	overwrite = TRUE
+)
+
+file.copy(
+	from = path_fig_descriptor_correlation_pdf,
+	to = path_manuscript_fig_descriptor_correlation_pdf,
+	overwrite = TRUE
+)
+
+message(
+	"Generated Figure 2: ",
+	path_fig_descriptor_correlation_png
+)
+
+############################################################
+# Figure 4: Descriptor-space applicability-domain plot
+############################################################
+
+if (!exists("path_cleaned_dataset")) {
+	source("R/00_config.R")
+}
+
+if (!exists("model_palette")) {
+	stop(
+		"model_palette() must be defined in R/00_config.R.",
+		call. = FALSE
+	)
+}
+
+path_fig_descriptor_logkp_relationships_png <- file.path(
+	"figures",
+	"figureS_descriptor_logKp_relationships.png"
+)
+
+path_fig_descriptor_logkp_relationships_pdf <- file.path(
+	"figures",
+	"figureS_descriptor_logKp_relationships.pdf"
+)
+
+dir.create(
+	"figures",
+	showWarnings = FALSE,
+	recursive = TRUE
+)
+
+modeling_data <- read.csv(
+	path_cleaned_dataset,
+	stringsAsFactors = FALSE,
+	check.names = FALSE
+)
+
+selected_predictors <- c(
+	"MWa",
+	"Mptc",
+	"LogSaqd",
+	"LogSoce",
+	"Texpi"
+)
+
+outcome_col <- "logkpl"
+
+required_descriptor_plot_cols <- c(
+	outcome_col,
+	selected_predictors
+)
+
+missing_descriptor_plot_cols <- required_descriptor_plot_cols[
+	!(required_descriptor_plot_cols %in% names(modeling_data))
+]
+
+if (length(missing_descriptor_plot_cols) > 0) {
+	stop(
+		"Missing required columns for descriptor relationship plot: ",
+		paste(
+			missing_descriptor_plot_cols,
+			collapse = ", "
+		),
+		call. = FALSE
+	)
+}
+
+plot_df <- modeling_data[
+	complete.cases(
+		modeling_data[, required_descriptor_plot_cols]
+	),
+	,
+	drop = FALSE
+]
+
+predictor_labels <- c(
+	"MWa" = "Molecular weight",
+	"Mptc" = "Melting point",
+	"LogSaqd" = "Aqueous solubility",
+	"LogSoce" = "Octanol solubility",
+	"Texpi" = "Experimental temperature"
+)
+
+predictor_units <- c(
+	"MWa" = "Da",
+	"Mptc" = "K",
+	"LogSaqd" = "log mol/mL",
+	"LogSoce" = "log mol/mL",
+	"Texpi" = "K"
+)
+
+make_descriptor_logkp_relationship_plot <- function() {
+	palette_values <- model_palette(
+		n = 101
+	)
+
+	background_col_furthest <- grDevices::adjustcolor(
+		palette_values[101],
+		alpha.f = 0.7
+	)
+
+	background_col_further <- grDevices::adjustcolor(
+		palette_values[70],
+		alpha.f = 0.7
+	)
+
+	background_col_central <- grDevices::adjustcolor(
+		palette_values[40],
+		alpha.f = 0.7
+	)
+
+	op <- par(
+		mfrow = c(2, 3),
+		mar = c(4.5, 4.5, 3, 1),
+		oma = c(0, 0, 2, 0)
+	)
+
+	on.exit(
+		par(op)
+	)
+
+	for (current_predictor in selected_predictors) {
+		x <- plot_df[[current_predictor]]
+		y <- plot_df[[outcome_col]]
+
+		x_label <- paste0(
+			predictor_labels[[current_predictor]],
+			" (",
+			predictor_units[[current_predictor]],
+			")"
+		)
+
+		q <- quantile(
+			x,
+			probs = c(
+				0.025,
+				0.10,
+				0.90,
+				0.975
+			),
+			na.rm = TRUE
+		)
+
+		plot(
+			x,
+			y,
+			type = "n",
+			xlab = x_label,
+			ylab = "Observed logKp",
+			main = paste(
+				"logKp vs",
+				predictor_labels[[current_predictor]]
+			)
+		)
+
+		usr <- par("usr")
+
+		rect(
+			xleft = usr[1],
+			xright = q[1],
+			ybottom = usr[3],
+			ytop = usr[4],
+			col = background_col_furthest,
+			border = NA
+		)
+
+		rect(
+			xleft = q[1],
+			xright = q[2],
+			ybottom = usr[3],
+			ytop = usr[4],
+			col = background_col_further,
+			border = NA
+		)
+
+		rect(
+			xleft = q[2],
+			xright = q[3],
+			ybottom = usr[3],
+			ytop = usr[4],
+			col = background_col_central,
+			border = NA
+		)
+
+		rect(
+			xleft = q[3],
+			xright = q[4],
+			ybottom = usr[3],
+			ytop = usr[4],
+			col = background_col_further,
+			border = NA
+		)
+
+		rect(
+			xleft = q[4],
+			xright = usr[2],
+			ybottom = usr[3],
+			ytop = usr[4],
+			col = background_col_furthest,
+			border = NA
+		)
+
+		box()
+
+		points(
+			x,
+			y,
+			pch = 21,
+			bg = "black",
+			col = "black",
+			lwd = 0.4,
+			cex = 0.8
+		)
+
+		if (sum(complete.cases(x, y)) > 5) {
+			lines(
+				lowess(
+					x,
+					y
+				),
+				lwd = 2,
+				col = "black"
+			)
+		}
+
+		rug(
+			x,
+			side = 1,
+			col = grDevices::adjustcolor(
+				"black",
+				alpha.f = 0.35
+			)
+		)
+
+		abline(
+			v = q[1],
+			lty = 3,
+			col = "black"
+		)
+
+		abline(
+			v = q[2],
+			lty = 2,
+			col = "black"
+		)
+
+		abline(
+			v = q[3],
+			lty = 2,
+			col = "black"
+		)
+
+		abline(
+			v = q[4],
+			lty = 3,
+			col = "black"
+		)
+
+		legend(
+			"topright",
+			legend = c(
+				"LOWESS",
+				"10-90%",
+				"2.5-97.5%"
+			),
+			lty = c(
+				1,
+				2,
+				3
+			),
+			lwd = c(
+				2,
+				1,
+				1
+			),
+			col = "black",
+			bty = "n",
+			cex = 0.8
+		)
+	}
+
+	plot.new()
+
+	mtext(
+		"Relationships between selected model descriptors and observed logKp",
+		outer = TRUE,
+		cex = 1.2,
+		font = 2
+	)
+}
+
+# Save descriptor relationship figure
+
+grDevices::pdf(
+	file = path_fig_descriptor_logkp_relationships_pdf,
+	width = 11,
+	height = 8.5
+)
+
+make_descriptor_logkp_relationship_plot()
+
+grDevices::dev.off()
+
+grDevices::png(
+	filename = path_fig_descriptor_logkp_relationships_png,
+	width = 2750,
+	height = 2125,
+	res = 250
+)
+
+make_descriptor_logkp_relationship_plot()
+
+grDevices::dev.off()
+
+message(
+	"Generated Figure 4 descriptor relationship plot: ",
+	path_fig_descriptor_logkp_relationships_png
 )

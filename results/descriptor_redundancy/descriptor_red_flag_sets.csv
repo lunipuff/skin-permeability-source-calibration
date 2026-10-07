@@ -1,3 +1,0 @@
-"set_id","predictor_set","n_predictors","reason","source","severity"
-"hard_1","MVh;MWa",2,"Pairwise Pearson correlation with |r| >= 0.85. Candidate formulas containing this descriptor combination should be skipped.","hard_pairwise_correlation","hard"
-"hard_2","logKowb;LogSaqd;LogSoce",3,"Descriptors with VIF >= 100. Candidate formulas containing all descriptors in this multivariable redundancy set should be skipped.","extreme_vif_group","hard"

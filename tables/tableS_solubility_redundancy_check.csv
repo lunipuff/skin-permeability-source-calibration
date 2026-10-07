@@ -1,6 +1,0 @@
-"Analysis","Result","Interpretation"
-"Pearson correlation: LogSaqd vs GSE_logS",0.862,"Agreement between reported aqueous solubility and GSE-derived solubility estimate."
-"Pearson correlation: LogSoce vs GSE_logS",-0.182,"Agreement between reported octanol solubility and GSE-derived aqueous solubility estimate."
-"Regression: LogSaqd explained by logKowb and Mptc",0.743,"Fraction of variation in reported aqueous solubility explained by lipophilicity and melting point."
-"Regression: LogSoce explained by logKowb and Mptc",0.522,"Fraction of variation in reported octanol solubility explained by lipophilicity and melting point."
-"Maximum VIF among solubility-related descriptors",20159162.038,"Collinearity diagnostic for the solubility-related descriptor subset."

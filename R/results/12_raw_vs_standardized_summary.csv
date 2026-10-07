@@ -1,0 +1,9 @@
+metric,value
+Number of compounds,149
+Correlation: raw mean vs standardized logKp,0.8268320752811433
+Median absolute adjustment,0.47511424689318416
+Mean absolute adjustment,0.5177595196060493
+Maximum absolute adjustment,1.4683708872076515
+Compounds adjusted by >0.25 log units,97
+Compounds adjusted by >0.50 log units,71
+Compounds adjusted by >1.00 log units,34

@@ -1,0 +1,149 @@
+compound_id,compound_name,canonical_name,n_mw,n_log_kow,n_melting_point_K,n_log_saq,n_h_donor,n_h_acceptor,descriptor_inconsistency
+CMP_17_alfa_hydroxyprogesterone,17-alfa-Hydroxyprogesterone,17_alfa_hydroxyprogesterone,1,1,1,1,1,1,FALSE
+CMP_1_2_4_benzenetriol,"1,2,4-Benzenetriol",1_2_4_benzenetriol,1,1,1,1,1,1,FALSE
+CMP_1_diphenylmethyl_4_butylpiperazine,1-(diphenylmethyl)-4-butylpiperazine,1_diphenylmethyl_4_butylpiperazine,1,1,1,1,1,1,FALSE
+CMP_1_diphenylmethyl_4_ethylpiperazine,1-(diphenylmethyl)-4-ethylpiperazine,1_diphenylmethyl_4_ethylpiperazine,1,1,1,1,1,1,FALSE
+CMP_1_diphenylmethyl_4_methylpiperazine,1-(diphenylmethyl)-4-methylpiperazine,1_diphenylmethyl_4_methylpiperazine,1,1,1,1,1,1,FALSE
+CMP_1_diphenylmethyl_4_propylpiperazine,1-(diphenylmethyl)-4-propylpiperazine,1_diphenylmethyl_4_propylpiperazine,1,1,1,1,1,1,FALSE
+CMP_2_3_butanediol,"2,3-Butanediol",2_3_butanediol,1,1,1,1,1,1,FALSE
+CMP_2_4_6_trichlorophenol,"2,4,6-Trichlorophenol",2_4_6_trichlorophenol,1,1,1,1,1,1,FALSE
+CMP_2_4_dichloroacetophenone,"2,4-Dichloroacetophenone",2_4_dichloroacetophenone,1,1,1,1,1,1,FALSE
+CMP_2_4_dichlorophenol,"2,4-dichlorophenol",2_4_dichlorophenol,1,2,2,2,1,1,TRUE
+CMP_2_4_dinitrochlorobenzene,"2,4-Dinitrochlorobenzene",2_4_dinitrochlorobenzene,1,1,1,1,1,1,FALSE
+CMP_2_acetylamino_fluorene,2-(Acetylamino)fluorene,2_acetylamino_fluorene,1,1,1,1,1,1,FALSE
+CMP_2_butanone,2-Butanone,2_butanone,1,1,1,1,1,1,FALSE
+CMP_2_ethoxy_ethanol,2-Ethoxy ethanol,2_ethoxy_ethanol,1,1,1,1,1,1,FALSE
+CMP_2_ethylhexyl_acrylate,2-Ethylhexyl acrylate,2_ethylhexyl_acrylate,1,1,1,1,1,1,FALSE
+CMP_2_phenylethanol,2-Phenylethanol,2_phenylethanol,2,2,2,2,1,1,TRUE
+CMP_3_4_xylenol,"3,4-Xylenol",3_4_xylenol,1,1,1,1,1,1,FALSE
+CMP_3_methyl_3h_imidazo_4_5_f_quinolin_2_amine,"3-Methyl-3H-imidazo[4,5-f]quinolin-2-amine",3_methyl_3h_imidazo_4_5_f_quinolin_2_amine,1,1,1,1,1,1,FALSE
+CMP_4_amino_2_nitrophenol,4-Amino-2-Nitrophenol,4_amino_2_nitrophenol,1,1,1,1,1,1,FALSE
+CMP_4_amino_3_nitrophenol,4-Amino-3-nitrophenol,4_amino_3_nitrophenol,1,1,1,1,1,1,FALSE
+CMP_4_bromophenyl_isocyanate,4-Bromophenyl isocyanate,4_bromophenyl_isocyanate,1,1,1,1,1,1,FALSE
+CMP_4_hydroxybenzyl_alcohol,4-Hydroxybenzyl alcohol,4_hydroxybenzyl_alcohol,1,1,1,1,1,1,FALSE
+CMP_4_phenylbutanol,4-phenylbutanol,4_phenylbutanol,1,1,1,1,1,1,FALSE
+CMP_4_propoxyphenol,4-propoxyphenol,4_propoxyphenol,1,1,1,1,1,1,FALSE
+CMP_5_fluorouracil,5-Fluorouracil,5_fluorouracil,1,1,1,2,1,1,TRUE
+CMP_5_phenylpentanol,5-phenylpentanol,5_phenylpentanol,1,1,1,1,1,1,FALSE
+CMP_6_methylcoumarin,6-Methylcoumarin,6_methylcoumarin,1,1,1,1,1,1,FALSE
+CMP_7_ethoxycoumarin,7-Ethoxycoumarin,7_ethoxycoumarin,1,1,1,1,1,1,FALSE
+CMP_acetic_acid,acetic acid,acetic_acid,1,1,1,1,1,1,FALSE
+CMP_acetophenone,Acetophenone,acetophenone,1,1,1,1,1,1,FALSE
+CMP_aldosterone,Aldosterone,aldosterone,2,2,1,5,1,1,TRUE
+CMP_alfa_4_hydroxyphenyl_acetamide,alfa-(4-Hydroxyphenyl) acetamide,alfa_4_hydroxyphenyl_acetamide,1,1,1,1,1,1,FALSE
+CMP_alprenolol,Alprenolol,alprenolol,1,1,1,1,1,1,FALSE
+CMP_atenolol,Atenolol,atenolol,1,1,1,1,1,1,FALSE
+CMP_basic_red_76_chloride_salt,Basic Red 76 (Chloride salt),basic_red_76_chloride_salt,1,1,1,1,1,1,FALSE
+CMP_benzene,Benzene,benzene,1,1,1,1,1,1,FALSE
+CMP_benzoic_acid,Benzoic acid,benzoic_acid,1,2,1,1,1,1,TRUE
+CMP_benzophenone,Benzophenone,benzophenone,1,1,1,1,1,1,FALSE
+CMP_benzyl_alcohol,Benzyl alcohol,benzyl_alcohol,1,1,1,1,1,1,FALSE
+CMP_benzyl_bromide,Benzyl bromide,benzyl_bromide,1,1,1,1,1,1,FALSE
+CMP_benzylideneacetone,Benzylideneacetone,benzylideneacetone,1,1,1,1,1,1,FALSE
+CMP_beta_naphthol_2_naphthol,Beta-naphthol; 2-naphthol,beta_naphthol_2_naphthol,2,1,1,2,1,1,TRUE
+CMP_betamethasone_17_valerate,Betamethasone-17-valerate,betamethasone_17_valerate,1,1,1,1,1,1,FALSE
+CMP_bis_2_ethylhexyl_phthalate,bis(2-ethylhexyl)phthalate,bis_2_ethylhexyl_phthalate,1,1,1,1,1,1,FALSE
+CMP_butanol,Butanol,butanol,2,1,1,1,1,1,TRUE
+CMP_butoxyethanol,butoxyethanol,butoxyethanol,1,1,1,1,1,1,FALSE
+CMP_butylparaben,Butylparaben,butylparaben,2,1,1,2,1,1,TRUE
+CMP_caffeine,Caffeine,caffeine,3,3,2,6,1,1,TRUE
+CMP_catechol,catechol,catechol,1,1,1,1,1,1,FALSE
+CMP_chlorocresol,chlorocresol,chlorocresol,2,2,1,1,1,1,TRUE
+CMP_chloroxylenol,Chloroxylenol,chloroxylenol,2,1,2,2,1,1,TRUE
+CMP_cinnamyl_alcohol,Cinnamyl alcohol,cinnamyl_alcohol,1,1,1,1,1,1,FALSE
+CMP_cortexone,Cortexone,cortexone,1,1,1,1,1,1,FALSE
+CMP_corticosterone,Corticosterone,corticosterone,3,5,1,8,1,1,TRUE
+CMP_cortisone,Cortisone,cortisone,1,1,1,2,1,1,TRUE
+CMP_cyclophosphamide_monohydrate,Cyclophosphamide monohydrate,cyclophosphamide_monohydrate,1,1,1,1,1,1,FALSE
+CMP_decanol,decanol,decanol,2,3,1,2,1,1,TRUE
+CMP_dexamethasone,Dexamethasone,dexamethasone,1,1,1,1,1,1,FALSE
+CMP_diazinon,Diazinon,diazinon,1,1,1,1,1,1,FALSE
+CMP_diethyl_maleate,Diethyl maleate,diethyl_maleate,1,1,1,1,1,1,FALSE
+CMP_diethyl_phthalate,Diethyl phthalate,diethyl_phthalate,1,1,1,1,1,1,FALSE
+CMP_diethylene_glycol_monobutyl_ether,Diethylene glycol monobutyl ether,diethylene_glycol_monobutyl_ether,1,1,1,1,1,1,FALSE
+CMP_dimethyl_phthalate,Dimethyl phthalate,dimethyl_phthalate,1,1,1,1,1,1,FALSE
+CMP_estradiol,Estradiol,estradiol,2,1,1,4,1,1,TRUE
+CMP_estriol,Estriol,estriol,1,1,1,1,1,1,FALSE
+CMP_estrone,Estrone,estrone,1,1,1,1,1,1,FALSE
+CMP_ethacrynic_acid,ethacrynic acid,ethacrynic_acid,1,1,1,1,1,1,FALSE
+CMP_ethanol,Ethanol,ethanol,2,1,1,1,1,1,TRUE
+CMP_ethyl_ether,Ethyl ether,ethyl_ether,1,1,1,1,1,1,FALSE
+CMP_eugenol,Eugenol,eugenol,1,1,1,1,1,1,FALSE
+CMP_fentanyl_base,Fentanyl base,fentanyl_base,1,1,1,1,1,1,FALSE
+CMP_geraniol,Geraniol,geraniol,1,1,1,1,1,1,FALSE
+CMP_glycerol,Glycerol,glycerol,2,2,1,1,1,1,TRUE
+CMP_hc_red_no_3_2_4_amino_2_nitroanilino_ethanol,HC Red No. 3; 2-(4-Amino-2-nitroanilino)-ethanol,hc_red_no_3_2_4_amino_2_nitroanilino_ethanol,1,1,1,1,1,1,FALSE
+CMP_heptanol,Heptanol,heptanol,1,2,2,2,1,1,TRUE
+CMP_hexanol,Hexanol,hexanol,1,2,2,3,1,1,TRUE
+CMP_hydrocortisone,Hydrocortisone,hydrocortisone,2,2,1,4,1,1,TRUE
+CMP_hydrocortisone_21_hemisuccinate,Hydrocortisone-21-hemisuccinate,hydrocortisone_21_hemisuccinate,1,1,1,1,1,1,FALSE
+CMP_hydrocortisone_21_hexanoate_hydrocortisone_caproate,Hydrocortisone-21-hexanoate; Hydrocortisone caproate,hydrocortisone_21_hexanoate_hydrocortisone_caproate,1,1,1,1,1,1,FALSE
+CMP_hydrocortisone_21_propionate,Hydrocortisone-21-propionate,hydrocortisone_21_propionate,1,1,1,1,1,1,FALSE
+CMP_hydroquinone,Hydroquinone,hydroquinone,1,2,2,2,1,1,TRUE
+CMP_hydroxypregnenolone,Hydroxypregnenolone,hydroxypregnenolone,1,1,1,1,1,1,FALSE
+CMP_iso_thymol_carvacrol,Iso-thymol; Carvacrol,iso_thymol_carvacrol,1,1,1,1,1,1,FALSE
+CMP_isoeugenol,Isoeugenol,isoeugenol,1,1,1,1,1,1,FALSE
+CMP_lidocaine,Lidocaine,lidocaine,2,2,1,2,1,1,TRUE
+CMP_linolenic_acid,linolenic acid,linolenic_acid,1,1,1,1,1,1,FALSE
+CMP_m_cresol,m-Cresol,m_cresol,1,1,1,1,1,1,FALSE
+CMP_m_nitrophenol_3_nitrophenol,m-Nitrophenol; 3-nitrophenol,m_nitrophenol_3_nitrophenol,1,1,1,1,1,1,FALSE
+CMP_mannitol,Mannitol,mannitol,3,2,1,5,1,1,TRUE
+CMP_methanol,Methanol,methanol,2,2,1,1,1,1,TRUE
+CMP_methotrexate,Methotrexate,methotrexate,1,1,1,1,1,1,FALSE
+CMP_methyl_4_hydroxyphenylacetate,Methyl 4-hydroxyphenylacetate,methyl_4_hydroxyphenylacetate,1,1,1,1,1,1,FALSE
+CMP_methyl_methanesulfonate,Methyl methanesulfonate,methyl_methanesulfonate,1,1,1,1,1,1,FALSE
+CMP_methyl_salicylate,methyl salicylate,methyl_salicylate,1,1,1,1,1,1,FALSE
+CMP_methylglucose,Methylglucose,methylglucose,1,1,1,1,1,1,FALSE
+CMP_methylparaben,Methylparaben,methylparaben,3,3,2,4,1,1,TRUE
+CMP_metoprolol,Metoprolol,metoprolol,1,1,1,1,1,1,FALSE
+CMP_nadolol,Nadolol,nadolol,1,1,1,1,1,1,FALSE
+CMP_naltrexone,Naltrexone,naltrexone,1,1,1,1,1,1,FALSE
+CMP_naphthalene,Naphthalene,naphthalene,1,1,1,1,1,1,FALSE
+CMP_naphthol,Naphthol,naphthol,1,1,1,1,1,1,FALSE
+CMP_nicotinate_ethyl,"Nicotinate, ethyl",nicotinate_ethyl,1,1,1,2,1,1,TRUE
+CMP_nicotinate_methyl,"Nicotinate, methyl",nicotinate_methyl,1,1,1,2,1,1,TRUE
+CMP_nonanol,Nonanol,nonanol,2,1,1,1,1,1,TRUE
+CMP_o_chlorophenol,o-Chlorophenol,o_chlorophenol,1,1,1,1,1,1,FALSE
+CMP_o_cresol,o-Cresol,o_cresol,1,1,1,1,1,1,FALSE
+CMP_o_phenylenediamine,o-Phenylenediamine,o_phenylenediamine,1,1,1,1,1,1,FALSE
+CMP_o_t_butylphenol,o-t-butylphenol,o_t_butylphenol,1,1,1,1,1,1,FALSE
+CMP_octanol,Octanol,octanol,1,2,1,1,1,1,TRUE
+CMP_octylparaben,octylparaben,octylparaben,1,1,1,1,1,1,FALSE
+CMP_oleic_acid,oleic acid,oleic_acid,1,1,1,1,1,1,FALSE
+CMP_p_bromophenol,p-Bromophenol,p_bromophenol,1,1,1,1,1,1,FALSE
+CMP_p_chlorophenol,p-Chlorophenol,p_chlorophenol,1,1,1,1,1,1,FALSE
+CMP_p_cresol,p-Cresol,p_cresol,1,2,1,2,1,1,TRUE
+CMP_p_ethylphenol,p-Ethylphenol,p_ethylphenol,1,1,1,1,1,1,FALSE
+CMP_p_n_butylphenol_4_butylphenol,p-n-butylphenol; 4-Butylphenol,p_n_butylphenol_4_butylphenol,1,1,1,1,1,1,FALSE
+CMP_p_nitrophenol_4_nitrophenol,p-Nitrophenol; 4-nitrophenol,p_nitrophenol_4_nitrophenol,1,1,1,1,1,1,FALSE
+CMP_p_phenylenediamine,p-Phenylenediamine,p_phenylenediamine,1,1,1,1,1,1,FALSE
+CMP_p_tolunitrile,p-Tolunitrile,p_tolunitrile,1,1,1,1,1,1,FALSE
+CMP_pentanol,Pentanol,pentanol,2,1,1,1,1,1,TRUE
+CMP_phenol,Phenol,phenol,2,2,1,3,1,1,TRUE
+CMP_phloroglucinol,phloroglucinol,phloroglucinol,1,1,1,1,1,1,FALSE
+CMP_pindolol,Pindolol,pindolol,1,1,1,1,1,1,FALSE
+CMP_prednisolone,Prednisolone,prednisolone,1,1,1,1,1,1,FALSE
+CMP_pregnenolone,Pregnenolone,pregnenolone,1,1,1,1,1,1,FALSE
+CMP_progesterone,Progesterone,progesterone,2,3,1,3,1,1,TRUE
+CMP_propanol,Propanol,propanol,2,1,1,1,1,1,TRUE
+CMP_propylparaben,propylparaben,propylparaben,1,1,1,2,1,1,TRUE
+CMP_pyrogallol,pyrogallol,pyrogallol,1,1,1,1,1,1,FALSE
+CMP_raffinose,Raffinose,raffinose,1,2,1,1,1,1,TRUE
+CMP_resorcinol,Resorcinol,resorcinol,2,2,1,3,1,1,TRUE
+CMP_salicylate,salicylate,salicylate,1,1,1,1,1,1,FALSE
+CMP_salicylic_acid,Salicylic acid,salicylic_acid,1,1,1,2,1,1,TRUE
+CMP_sodium_caprate_decanoic_acid_soap_c10_0,Sodium caprate; Decanoic acid soap (C10:0),sodium_caprate_decanoic_acid_soap_c10_0,1,1,1,1,1,1,FALSE
+CMP_sotalol,sotalol,sotalol,1,1,1,1,1,1,FALSE
+CMP_sucrose,Sucrose,sucrose,1,1,1,2,1,1,TRUE
+CMP_sufentanil_base,Sufentanil base,sufentanil_base,1,1,1,1,1,1,FALSE
+CMP_testosterone,Testosterone,testosterone,4,3,1,6,1,1,TRUE
+CMP_tetraethylammonium,Tetraethylammonium,tetraethylammonium,1,1,1,1,1,1,FALSE
+CMP_tetraethylammonium_bromide,Tetraethylammonium bromide (+),tetraethylammonium_bromide,1,1,1,1,1,1,FALSE
+CMP_thymol_2_isopropyl_5_methylphenol,Thymol; 2-Isopropyl-5-methylphenol,thymol_2_isopropyl_5_methylphenol,1,1,1,2,1,1,TRUE
+CMP_timolol,Timolol,timolol,1,1,1,2,1,1,TRUE
+CMP_toluene,Toluene,toluene,1,1,1,1,1,1,FALSE
+CMP_trans_cinnamaldehyde,trans-Cinnamaldehyde,trans_cinnamaldehyde,1,1,1,1,1,1,FALSE
+CMP_triamcinolone,Triamcinolone,triamcinolone,1,1,1,1,1,1,FALSE
+CMP_triamcinolone_acetonide,Triamcinolone acetonide,triamcinolone_acetonide,1,1,1,2,1,1,TRUE
+CMP_urea,Urea,urea,1,1,1,4,1,1,TRUE
+CMP_water,water,water,2,1,1,1,1,1,TRUE

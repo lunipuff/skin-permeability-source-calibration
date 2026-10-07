@@ -1,0 +1,149 @@
+compound_id,canonical_name,n_raw_names,raw_names,n_cas,cas_values
+CMP_estradiol,estradiol,4,beta-Estradiol | Beta-estradiol | Beta-Estradiol | Estradiol,1,50-28-2
+CMP_decanol,decanol,3,decanol | Decanol | n-decanol,1,112-30-1
+CMP_resorcinol,resorcinol,3,"resorcinol | Resorcinol | Resorcinol; 1,3-Benzenediol",1,108-46-3
+CMP_ethanol,ethanol,2,ethanol | Ethanol,2,64-17-5 | 64–17-5
+CMP_2_4_dichlorophenol,2_4_dichlorophenol,2,"2,4-dichlorophenol | 2,4-Dichlorophenol",1,120-83-2
+CMP_2_phenylethanol,2_phenylethanol,2,2-phenylethanol | 2-Phenylethanol,1,60-12-8
+CMP_5_fluorouracil,5_fluorouracil,2,5-Fluorouracil | 5-Fluorouracil (+ - + -),1,51-21-8
+CMP_benzoic_acid,benzoic_acid,2,benzoic acid | Benzoic acid,1,65-85-0
+CMP_butanol,butanol,2,Butanol | n-butanol,1,71-36-3
+CMP_caffeine,caffeine,2,caffeine | Caffeine,1,58-08-2
+CMP_chlorocresol,chlorocresol,2,chlorocresol | Chlorocresol,1,59-50-7
+CMP_chloroxylenol,chloroxylenol,2,chloroxylenol | Chloroxylenol,1,88-04-0
+CMP_cortisone,cortisone,2,cortisone | Cortisone,1,53-06-5
+CMP_heptanol,heptanol,2,Heptanol | n-heptanol,1,53535-33-4
+CMP_hexanol,hexanol,2,Hexanol | n-hexanol,1,111-27-3
+CMP_hydroquinone,hydroquinone,2,hydroquinone | Hydroquinone,1,123-31-9
+CMP_methanol,methanol,2,methanol | Methanol,1,67-56-1
+CMP_nonanol,nonanol,2,n-nonanol | Nonanol,1,143-08-8
+CMP_octanol,octanol,2,n-octanol | Octanol,1,111-87-5
+CMP_pentanol,pentanol,2,n-pentanol | Pentanol,1,71-41-0
+CMP_phenol,phenol,2,phenol | Phenol,1,108-95-2
+CMP_propanol,propanol,2,n-propanol | Propanol,1,71-23-8
+CMP_propylparaben,propylparaben,2,propylparaben | Propylparaben,1,94-13-3
+CMP_sotalol,sotalol,2,sotalol | Sotalol,1,3930-20-9
+CMP_sucrose,sucrose,2,sucrose | Sucrose,1,57-50-1
+CMP_testosterone,testosterone,2,testosterone | Testosterone,1,58-22-0
+CMP_urea,urea,2,urea | Urea,1,57-13-6
+CMP_water,water,2,water | Water,1,7732-18-5
+CMP_17_alfa_hydroxyprogesterone,17_alfa_hydroxyprogesterone,1,17-alfa-Hydroxyprogesterone,1,68-96-2
+CMP_1_2_4_benzenetriol,1_2_4_benzenetriol,1,"1,2,4-Benzenetriol",1,533-73-3
+CMP_2_3_butanediol,2_3_butanediol,1,"2,3-Butanediol",1,513-85-9
+CMP_2_4_6_trichlorophenol,2_4_6_trichlorophenol,1,"2,4,6-Trichlorophenol",1,88-06-2
+CMP_2_4_dichloroacetophenone,2_4_dichloroacetophenone,1,"2,4-Dichloroacetophenone",1,937-20-2
+CMP_2_4_dinitrochlorobenzene,2_4_dinitrochlorobenzene,1,"2,4-Dinitrochlorobenzene",1,97-00-7
+CMP_2_acetylamino_fluorene,2_acetylamino_fluorene,1,2-(Acetylamino)fluorene,1,53-96-3
+CMP_2_butanone,2_butanone,1,2-Butanone,1,78-93-3
+CMP_2_ethoxy_ethanol,2_ethoxy_ethanol,1,2-Ethoxy ethanol,1,110-80-5
+CMP_2_ethylhexyl_acrylate,2_ethylhexyl_acrylate,1,2-Ethylhexyl acrylate,1,103-11-7
+CMP_3_4_xylenol,3_4_xylenol,1,"3,4-Xylenol",1,95-65-8
+CMP_3_methyl_3h_imidazo_4_5_f_quinolin_2_amine,3_methyl_3h_imidazo_4_5_f_quinolin_2_amine,1,"3-Methyl-3H-imidazo[4,5-f]quinolin-2-amine",1,76180-96-6
+CMP_4_amino_2_nitrophenol,4_amino_2_nitrophenol,1,4-Amino-2-Nitrophenol,1,119-34-6
+CMP_4_amino_3_nitrophenol,4_amino_3_nitrophenol,1,4-Amino-3-nitrophenol,1,610-81-1
+CMP_4_bromophenyl_isocyanate,4_bromophenyl_isocyanate,1,4-Bromophenyl isocyanate,1,2493-02-9
+CMP_4_hydroxybenzyl_alcohol,4_hydroxybenzyl_alcohol,1,4-Hydroxybenzyl alcohol,1,623-05-2
+CMP_4_phenylbutanol,4_phenylbutanol,1,4-phenylbutanol,1,3360-41-6
+CMP_4_propoxyphenol,4_propoxyphenol,1,4-propoxyphenol,1,18979-50-5
+CMP_5_phenylpentanol,5_phenylpentanol,1,5-phenylpentanol,1,10521-91-2
+CMP_6_methylcoumarin,6_methylcoumarin,1,6-Methylcoumarin,1,92-48-8
+CMP_7_ethoxycoumarin,7_ethoxycoumarin,1,7-Ethoxycoumarin,1,31005-02-4
+CMP_acetic_acid,acetic_acid,1,acetic acid,1,64-19-7
+CMP_acetophenone,acetophenone,1,Acetophenone,1,98-86-2
+CMP_aldosterone,aldosterone,1,Aldosterone,1,52-39-1
+CMP_alfa_4_hydroxyphenyl_acetamide,alfa_4_hydroxyphenyl_acetamide,1,alfa-(4-Hydroxyphenyl) acetamide,1,17194-82-0
+CMP_alprenolol,alprenolol,1,Alprenolol,1,13655-52-2
+CMP_atenolol,atenolol,1,Atenolol,1,29122-68-7
+CMP_basic_red_76_chloride_salt,basic_red_76_chloride_salt,1,Basic Red 76 (Chloride salt),1,68391-30-0
+CMP_benzene,benzene,1,Benzene,1,71-43-0
+CMP_benzophenone,benzophenone,1,Benzophenone,1,119-61-9
+CMP_benzyl_alcohol,benzyl_alcohol,1,Benzyl alcohol,1,100-51-6
+CMP_benzyl_bromide,benzyl_bromide,1,Benzyl bromide,1,100-39-0
+CMP_benzylideneacetone,benzylideneacetone,1,Benzylideneacetone,1,122-57-6
+CMP_beta_naphthol_2_naphthol,beta_naphthol_2_naphthol,1,Beta-naphthol; 2-naphthol,1,135-19-3
+CMP_betamethasone_17_valerate,betamethasone_17_valerate,1,Betamethasone-17-valerate,1,2152-44-5
+CMP_bis_2_ethylhexyl_phthalate,bis_2_ethylhexyl_phthalate,1,bis(2-ethylhexyl)phthalate,1,117-81-7
+CMP_butoxyethanol,butoxyethanol,1,butoxyethanol,1,111-76-2
+CMP_butylparaben,butylparaben,1,Butylparaben,1,94-26-8
+CMP_catechol,catechol,1,catechol,1,120-80-9
+CMP_cinnamyl_alcohol,cinnamyl_alcohol,1,Cinnamyl alcohol,1,104-54-1
+CMP_cortexone,cortexone,1,Cortexone,1,64-85-7
+CMP_corticosterone,corticosterone,1,Corticosterone,1,50-22-6
+CMP_cyclophosphamide_monohydrate,cyclophosphamide_monohydrate,1,Cyclophosphamide monohydrate,1,6055-19-2
+CMP_dexamethasone,dexamethasone,1,Dexamethasone,1,50--2-2
+CMP_diazinon,diazinon,1,Diazinon,1,333-41-5
+CMP_diethyl_maleate,diethyl_maleate,1,Diethyl maleate,1,141-05-9
+CMP_diethyl_phthalate,diethyl_phthalate,1,Diethyl phthalate,1,84-66-2
+CMP_diethylene_glycol_monobutyl_ether,diethylene_glycol_monobutyl_ether,1,Diethylene glycol monobutyl ether,1,112-34-5
+CMP_dimethyl_phthalate,dimethyl_phthalate,1,Dimethyl phthalate,1,131-11-3
+CMP_estriol,estriol,1,Estriol,1,50-27-1
+CMP_estrone,estrone,1,Estrone,1,53-16-7
+CMP_ethacrynic_acid,ethacrynic_acid,1,ethacrynic acid,1,58-54-8
+CMP_ethyl_ether,ethyl_ether,1,Ethyl ether,1,69-29-7
+CMP_eugenol,eugenol,1,Eugenol,1,97-53-0
+CMP_fentanyl_base,fentanyl_base,1,Fentanyl base,1,437-38-7
+CMP_geraniol,geraniol,1,Geraniol,1,106-24-1
+CMP_glycerol,glycerol,1,Glycerol,1,56-81-5
+CMP_hc_red_no_3_2_4_amino_2_nitroanilino_ethanol,hc_red_no_3_2_4_amino_2_nitroanilino_ethanol,1,HC Red No. 3; 2-(4-Amino-2-nitroanilino)-ethanol,1,2871-01-4
+CMP_hydrocortisone,hydrocortisone,1,Hydrocortisone,1,50-23-7
+CMP_hydrocortisone_21_hemisuccinate,hydrocortisone_21_hemisuccinate,1,Hydrocortisone-21-hemisuccinate,1,2203-97-6
+CMP_hydrocortisone_21_hexanoate_hydrocortisone_caproate,hydrocortisone_21_hexanoate_hydrocortisone_caproate,1,Hydrocortisone-21-hexanoate; Hydrocortisone caproate,1,3593-96-2
+CMP_hydrocortisone_21_propionate,hydrocortisone_21_propionate,1,Hydrocortisone-21-propionate,1,6677-98-1
+CMP_hydroxypregnenolone,hydroxypregnenolone,1,Hydroxypregnenolone,1,145-13-1
+CMP_iso_thymol_carvacrol,iso_thymol_carvacrol,1,Iso-thymol; Carvacrol,1,499-75-2
+CMP_isoeugenol,isoeugenol,1,Isoeugenol,1,97-54-1
+CMP_lidocaine,lidocaine,1,Lidocaine,1,137-58-6
+CMP_linolenic_acid,linolenic_acid,1,linolenic acid,1,463-40-1
+CMP_m_cresol,m_cresol,1,m-Cresol,1,108-39-4
+CMP_m_nitrophenol_3_nitrophenol,m_nitrophenol_3_nitrophenol,1,m-Nitrophenol; 3-nitrophenol,1,554-84-7
+CMP_mannitol,mannitol,1,Mannitol,1,69-65-8
+CMP_methotrexate,methotrexate,1,Methotrexate,1,59-05-2
+CMP_methyl_4_hydroxyphenylacetate,methyl_4_hydroxyphenylacetate,1,Methyl 4-hydroxyphenylacetate,1,14199-15-6
+CMP_methyl_methanesulfonate,methyl_methanesulfonate,1,Methyl methanesulfonate,1,66-27-3
+CMP_methyl_salicylate,methyl_salicylate,1,methyl salicylate,1,119-36-8
+CMP_methylglucose,methylglucose,1,Methylglucose,1,146-72-5
+CMP_methylparaben,methylparaben,1,Methylparaben,1,99-76-3
+CMP_metoprolol,metoprolol,1,Metoprolol,1,51384-51-1
+CMP_nadolol,nadolol,1,Nadolol,1,42200-33-9
+CMP_naltrexone,naltrexone,1,Naltrexone,1,16590-41-3
+CMP_naphthalene,naphthalene,1,Naphthalene,1,91-20-3
+CMP_naphthol,naphthol,1,Naphthol,1,90-15-3
+CMP_nicotinate_ethyl,nicotinate_ethyl,1,"Nicotinate, ethyl",1,614-18-6
+CMP_nicotinate_methyl,nicotinate_methyl,1,"Nicotinate, methyl",1,93-60-7
+CMP_o_chlorophenol,o_chlorophenol,1,o-Chlorophenol,1,95-57-8
+CMP_o_cresol,o_cresol,1,o-Cresol,1,95-48-7
+CMP_o_phenylenediamine,o_phenylenediamine,1,o-Phenylenediamine,1,95-54-5
+CMP_o_t_butylphenol,o_t_butylphenol,1,o-t-butylphenol,1,88-18-6
+CMP_octylparaben,octylparaben,1,octylparaben,1,1219-38-1
+CMP_oleic_acid,oleic_acid,1,oleic acid,1,112-80-1
+CMP_p_bromophenol,p_bromophenol,1,p-Bromophenol,1,106-41-3
+CMP_p_chlorophenol,p_chlorophenol,1,p-Chlorophenol,1,106-48-9
+CMP_p_cresol,p_cresol,1,p-Cresol,1,106-44-5
+CMP_p_ethylphenol,p_ethylphenol,1,p-Ethylphenol,1,123-07-9
+CMP_p_n_butylphenol_4_butylphenol,p_n_butylphenol_4_butylphenol,1,p-n-butylphenol; 4-Butylphenol,1,1638-22-8
+CMP_p_nitrophenol_4_nitrophenol,p_nitrophenol_4_nitrophenol,1,p-Nitrophenol; 4-nitrophenol,1,100-02-7
+CMP_p_phenylenediamine,p_phenylenediamine,1,p-Phenylenediamine,1,106-50-3
+CMP_p_tolunitrile,p_tolunitrile,1,p-Tolunitrile,1,104-85-8
+CMP_phloroglucinol,phloroglucinol,1,phloroglucinol,1,108-73-6
+CMP_pindolol,pindolol,1,Pindolol,1,13523-86-9
+CMP_prednisolone,prednisolone,1,Prednisolone,1,50-24-8
+CMP_pregnenolone,pregnenolone,1,Pregnenolone,1,145-13-1
+CMP_progesterone,progesterone,1,Progesterone,1,57-83-0
+CMP_pyrogallol,pyrogallol,1,pyrogallol,1,87-66-1
+CMP_raffinose,raffinose,1,Raffinose,1,512-69-6
+CMP_salicylate,salicylate,1,salicylate,1,63-36-5
+CMP_salicylic_acid,salicylic_acid,1,Salicylic acid,1,69-72-7
+CMP_sodium_caprate_decanoic_acid_soap_c10_0,sodium_caprate_decanoic_acid_soap_c10_0,1,Sodium caprate; Decanoic acid soap (C10:0),1,1002-62-6
+CMP_sufentanil_base,sufentanil_base,1,Sufentanil base,1,56030-54-7
+CMP_tetraethylammonium,tetraethylammonium,1,Tetraethylammonium,1,71-91-0
+CMP_tetraethylammonium_bromide,tetraethylammonium_bromide,1,Tetraethylammonium bromide (+),1,71-91-0
+CMP_thymol_2_isopropyl_5_methylphenol,thymol_2_isopropyl_5_methylphenol,1,Thymol; 2-Isopropyl-5-methylphenol,1,89-83-8
+CMP_timolol,timolol,1,Timolol,1,26839-75-8
+CMP_toluene,toluene,1,Toluene,1,108-88-3
+CMP_trans_cinnamaldehyde,trans_cinnamaldehyde,1,trans-Cinnamaldehyde,1,14371-10-9
+CMP_triamcinolone,triamcinolone,1,Triamcinolone,1,124-94-7
+CMP_triamcinolone_acetonide,triamcinolone_acetonide,1,Triamcinolone acetonide,1,76-25-5
+CMP_1_diphenylmethyl_4_butylpiperazine,1_diphenylmethyl_4_butylpiperazine,1,1-(diphenylmethyl)-4-butylpiperazine,0,
+CMP_1_diphenylmethyl_4_ethylpiperazine,1_diphenylmethyl_4_ethylpiperazine,1,1-(diphenylmethyl)-4-ethylpiperazine,0,
+CMP_1_diphenylmethyl_4_methylpiperazine,1_diphenylmethyl_4_methylpiperazine,1,1-(diphenylmethyl)-4-methylpiperazine,0,
+CMP_1_diphenylmethyl_4_propylpiperazine,1_diphenylmethyl_4_propylpiperazine,1,1-(diphenylmethyl)-4-propylpiperazine,0,

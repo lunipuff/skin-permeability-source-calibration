@@ -1,0 +1,11 @@
+metric,value
+Observations,499
+Compounds,148
+References,69
+Compound-reference combinations,288
+Compounds with >=2 observations,81
+Compounds in >=2 references,46
+Compounds in >=3 references,25
+Compounds varying in temperature or skin thickness,65
+Median observations per compound,2
+Median within-compound logKp range,0.2893149721337698

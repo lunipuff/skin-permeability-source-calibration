@@ -1,0 +1,10 @@
+metric,value
+Number of observations,499
+Mean residual,4.049310430496563e-15
+Median residual,0.012382738344153044
+Residual SD,0.26534069211849437
+Median absolute residual,0.13008014060276873
+Mean absolute residual,0.18800919199167232
+Maximum absolute residual,1.1781317385556176
+Observations with |standardized residual| >2,15
+Observations with |standardized residual| >3,3

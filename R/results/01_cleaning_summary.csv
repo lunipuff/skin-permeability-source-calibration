@@ -1,0 +1,13 @@
+metric,value
+Raw observations after blank-row removal,478
+Hierarchical-model observations,499
+Excluded observations,2
+Unique canonical compounds,148
+Unique CAS numbers,143
+Compounds without CAS,4
+CAS numbers assigned to >1 compound,2
+Canonical compounds assigned >1 CAS,1
+Unique references,69
+Compounds with >=2 observations,81
+Compounds appearing in >=2 references,46
+Rows belonging to repeated experimental profiles,205

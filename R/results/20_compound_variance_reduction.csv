@@ -1,0 +1,3 @@
+specification,specification_label,baseline_compound_variance,joint_compound_variance,proportion_compound_variance_explained,percent_compound_variance_explained
+S1,Size-lipophilicity,0.6960030173688279,0.27548758044604194,0.6041862268248548,60.41862268248548
+S2,Extended physicochemical,0.6960030173688279,0.2667103707250374,0.6167971056601016,61.67971056601016

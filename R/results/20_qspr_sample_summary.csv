@@ -1,0 +1,3 @@
+specification,specification_label,n_descriptors,descriptors,n_compounds,n_observations,n_references,n_compounds_excluded
+S1,Size-lipophilicity,2,mw + log_kow,148,499,69,0
+S2,Extended physicochemical,6,mw + log_kow + melting_point_K + log_saq + h_donor + h_acceptor,148,499,69,0

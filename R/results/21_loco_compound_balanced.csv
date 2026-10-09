@@ -1,0 +1,5 @@
+"specification","approach","mean_compound_RMSE"
+"S1","Conventional",0.684493569329232
+"S1","Hierarchical",0.562808346786163
+"S2","Conventional",0.659584731776943
+"S2","Hierarchical",0.563387804377183

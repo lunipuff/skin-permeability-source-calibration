@@ -1,0 +1,11 @@
+"metric","value"
+"singular",0
+"residual_mean",2.19817161671844e-15
+"residual_sd",0.265961954756565
+"median_absolute_residual",0.128169798568797
+"max_absolute_residual",1.18378189458491
+"n_abs_std_residual_gt_2",13
+"n_abs_std_residual_gt_3",2
+"cor_residual_fitted",0.151658254537584
+"cor_abs_residual_fitted",-0.125812837286316
+"cor_residual_temperature",-4.75434686104363e-15

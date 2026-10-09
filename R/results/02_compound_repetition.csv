@@ -1,9 +1,0 @@
-metric,value
-Total compounds,149
-Compounds with >=2 observations,81
-Compounds with >=3 observations,33
-Compounds with >=5 observations,21
-Compounds with >=10 observations,6
-Maximum observations for one compound,62
-Median observations per compound,2
-Mean observations per compound,3.348993288590604

@@ -1,3 +1,0 @@
-specification,specification_label,descriptors,selection,rationale
-S1,Size-lipophilicity,MW + logKow,None,Minimal molecular size and lipophilicity representation
-S2,Extended physicochemical,MW + logKow + melting point + logSaq + HBD + HBA,None,"Prespecified interpretable physicochemical panel representing size, lipophilicity, solid-state constraint, aqueous solubility, and hydrogen-bonding capacity"

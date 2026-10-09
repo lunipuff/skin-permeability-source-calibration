@@ -1,0 +1,11 @@
+"scenario","specification","approach","RMSE","MAE","R2","r"
+"Primary S2","S2","Conventional",0.849719450218923,0.674394870315426,0.410732633930853,0.649421505544436
+"Primary S2","S2","Hierarchical",0.691230575657443,0.533859804494745,0.610051591591501,0.783612577913291
+"Multi-reference compounds","Multi-reference compounds","Conventional",0.952060477294875,0.736833704571425,0.286577619647929,0.674254479277109
+"Multi-reference compounds","Multi-reference compounds","Hierarchical",0.76121024766128,0.61806074929035,0.543934827788911,0.770142763820253
+"Exclude |standardized residual| > 3","Exclude |standardized residual| > 3","Conventional",0.839547581527355,0.66787508808309,0.421006679000527,0.656740450462973
+"Exclude |standardized residual| > 3","Exclude |standardized residual| > 3","Hierarchical",0.675149862550437,0.522900884928977,0.625559090635898,0.791934664095738
+"Mean descriptor aggregation","Mean descriptor aggregation","Conventional",0.850415188341343,0.674949983799162,0.409767271511733,0.648684063207098
+"Mean descriptor aggregation","Mean descriptor aggregation","Hierarchical",0.691230575372314,0.533859804761538,0.610051591913206,0.783612577997272
+"Expanded nonlinear specification","Expanded nonlinear specification","Conventional",0.732513961397923,0.559771891712097,0.562081709648746,0.750100166994411
+"Expanded nonlinear specification","Expanded nonlinear specification","Hierarchical",0.67132739752681,0.518955317775399,0.632184510392786,0.801379437725537

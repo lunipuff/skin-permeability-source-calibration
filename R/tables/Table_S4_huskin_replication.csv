@@ -1,0 +1,15 @@
+"metric","value"
+"Observations",546
+"Compounds",251
+"References",95
+"AIC compound only",1819.39
+"AIC compound + reference",1622.44
+"Compound variance (%)",23.5
+"Reference variance (%)",44.4
+"Residual variance (%)",32.1
+"MW + logKow compound variance explained (%)",37.1
+"QSPR delta AIC",-40.34
+"Temperature subset n",391
+"Temperature estimate",-0.0542
+"Temperature p",0.0383
+"Singular fit",0

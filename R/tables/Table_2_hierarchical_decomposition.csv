@@ -1,0 +1,3 @@
+"dataset","compound_variance_percent","source_variance_percent","residual_variance_percent","S1_compound_variance_explained_percent","S2_compound_variance_explained_percent","temperature_estimate_log10_per_C","temperature_p"
+"Cheruvu",66.3914457245787,22.8,10.8,60.3,61.4,0.0425,0.000318
+"HuSkinDB",23.5388326396838,44.4,32.1,37.1,NA,-0.0542,0.0383

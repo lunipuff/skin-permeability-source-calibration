@@ -1,5 +1,0 @@
-scenario,n_observations,n_compounds,n_references,baseline_compound_variance,joint_compound_variance,percent_compound_variance_explained
-Multi-reference compounds,352,46,59,1.242589195074096,0.16623791963905957,86.62165096090774
-Exclude |standardized residual| >3,496,148,69,0.7375805686845716,0.2811987799389779,61.87551680754304
-Mean descriptor values,499,148,69,0.6960030173688279,0.267970844425278,61.4986088080026
-Expanded nonlinear specification,499,148,69,0.6960030173688279,0.1940995997112617,72.11224738004205

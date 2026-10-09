@@ -1,7 +1,0 @@
-quantity,value
-Primary hierarchical model,M2: logKp ~ temperature_c + (1|compound_id) + (1|reference_id)
-Standardization temperature (K),305.577154308617
-Standardization temperature (C),32.4271543086173
-Temperature coefficient,0.0424734762336684
-Reference effect used for standardization,0
-Standardized endpoint definition,fixed intercept + compound random effect

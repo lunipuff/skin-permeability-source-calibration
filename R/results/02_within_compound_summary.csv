@@ -1,9 +1,0 @@
-metric,value
-Compounds with >=2 observations,81
-Median within-compound logKp range,0.2893149721337698
-Mean within-compound logKp range,0.6507885276907599
-25th percentile logKp range,0.08965579775548083
-75th percentile logKp range,0.8556351945975513
-Maximum within-compound logKp range,3.5083020067224195
-Compounds with logKp range >0.5,32
-Compounds with logKp range >1.0,18

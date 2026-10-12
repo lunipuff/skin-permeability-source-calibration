@@ -129,6 +129,12 @@ hu_s1 <- run_source_loco(
 	FALSE
 )
 
+source_loco_predictions <- rbind(
+	ch_s1,
+	ch_s2,
+	hu_s1
+)
+
 source_loco <- rbind(
 	summarize_loco(ch_s1),
 	summarize_loco(ch_s2),
@@ -146,6 +152,7 @@ for (d in unique(source_loco$dataset)) {
 }
 
 write.csv(source_loco, "R/results/50_source_blind_loco.csv", row.names = FALSE)
+write.csv(source_loco_predictions, "R/results/50_source_blind_loco_predictions.csv", row.names = FALSE)
 
 # ------------------------------------------------------------
 # 2. Wrong-source calibration negative control
@@ -304,6 +311,8 @@ cat(
 		),
 		collapse = "\n"
 	),
+	"\n\nLOCO prediction rows: ", nrow(source_loco_predictions),
+	"\nSaved: R/results/50_source_blind_loco_predictions.csv",
 	"\n\nWrong-source calibration control\n",
 	paste(
 		paste0(

@@ -61,6 +61,8 @@ compound_v0 <- v0$vcov[v0$grp == "compound_id"]
 compound_v1 <- v1$vcov[v1$grp == "compound_id"]
 
 m1r <- update(m1, REML = TRUE)
+saveRDS(m1r, "R/results/31_primary_huskindb_model.rds")
+
 vc <- as.data.frame(VarCorr(m1r))
 compound_pct <- 100 * vc$vcov[vc$grp == "compound_id"] / sum(vc$vcov)
 reference_pct <- 100 * vc$vcov[vc$grp == "reference_id"] / sum(vc$vcov)
@@ -267,7 +269,7 @@ calibration_summary <- merge(calibration_summary, eligible, by = c("task", "anch
 calibration_summary <- calibration_summary[order(calibration_summary$task, calibration_summary$anchors), ]
 
 # Matched-reference anchor-size comparison
-# Same references contribute to k = 1, 2, 3, 5 and all contain new test compounds
+# Same references contribute to k = 1, 2, 3, 4, 5 and all contain new test compounds
 
 matched_refs <- unique(calibration$reference_id[calibration$task == "New compound" & calibration$anchors == max(anchor_sizes)])
 matched <- calibration[calibration$task == "New compound" & calibration$reference_id %in% matched_refs, ]

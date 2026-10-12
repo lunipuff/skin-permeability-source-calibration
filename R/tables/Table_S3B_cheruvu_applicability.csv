@@ -1,5 +1,5 @@
-"specification","in_domain","n_compounds","MAE_conventional","MAE_hierarchical"
-"S1",FALSE,11,1.06482798342729,0.948406257724125
-"S2",FALSE,20,0.983418964266099,0.881477088985795
-"S1",TRUE,137,0.621695489993083,0.506208298656862
-"S2",TRUE,128,0.578013568939014,0.484345550653178
+"Specification","In domain","Compounds","MAE conventional","MAE hierarchical"
+"S1","Yes",137,"0.622","0.506"
+"S1","No",11,"1.065","0.948"
+"S2","Yes",128,"0.578","0.484"
+"S2","No",20,"0.983","0.881"

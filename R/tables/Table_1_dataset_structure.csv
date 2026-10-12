@@ -1,4 +1,4 @@
-"Dataset","Measurements","Compounds","Sources","Repeated_compounds","Multi_source_compounds","Role"
+"Dataset","Measurements","Compounds","Sources","Repeated compounds","Multi-source compounds","Role"
 "Cheruvu",476,148,69,81,46,"Development"
-"HuSkinDB",546,251,95,89,61,"Independent replication and held-out-source calibration"
-"SkinPiX",199,108,36,65,14,"Cross-dataset transfer validation"
+"HuSkinDB",546,251,95,89,61,"Replication and held-out-source calibration"
+"SkinPiX",199,108,36,65,14,"Cross-dataset transfer"

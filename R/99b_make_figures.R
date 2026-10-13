@@ -550,7 +550,7 @@ p2 <- ggplot(
 		clip = "off"
 	) +
 	labs(
-		title = "Prediction improves mainly when source information is available",
+		title = "",
 		subtitle = "Points show LOCO RMSE; error bars show 95% compound-bootstrap intervals",
 		x = NULL,
 		y = expression("LOCO RMSE in " * log[10] * K[p])
@@ -576,42 +576,64 @@ ggsave(
 	units = "in"
 )
 
+
 # ============================================================
 # Figure 3
-# SkinPiX cross-dataset transfer
+# External calibration: HuSkinDB to SkinPiX
 # ============================================================
 
 # ------------------------------------------------------------
-# A. One-anchor performance by source
+# A. One-anchor calibration by SkinPiX source
 # ------------------------------------------------------------
 
 p3a_dat <- ref41[ref41$anchors == 1, ]
-
-p3a_dat$improvement <- 100 * (
-	1 - p3a_dat$RMSE_calibrated / p3a_dat$RMSE_uncalibrated
-)
 
 p3a_dat <- p3a_dat[
 	order(p3a_dat$RMSE_uncalibrated, decreasing = TRUE),
 ]
 
-p3a_dat$source <- paste0(
-	"SkinPiX source ",
-	seq_len(nrow(p3a_dat)),
-	"\n(",
-	p3a_dat$reference_id,
-	")"
-)
-
 p3a_dat$source <- factor(
-	p3a_dat$source,
-	levels = rev(p3a_dat$source)
+	p3a_dat$reference_id,
+	levels = rev(p3a_dat$reference_id)
 )
 
-p3a <- ggplot(
-	p3a_dat,
-	aes(y = source)
-) +
+p3a_dat$change <- 100 * (
+	p3a_dat$RMSE_calibrated /
+		p3a_dat$RMSE_uncalibrated - 1
+)
+
+p3a_dat$change_label <- paste0(
+	ifelse(
+		p3a_dat$change < 0,
+		"RMSE reduced ",
+		"RMSE increased "
+	),
+	sprintf("%.1f", abs(p3a_dat$change)),
+	"%"
+)
+
+p3a_points <- rbind(
+	data.frame(
+		source = p3a_dat$source,
+		RMSE = p3a_dat$RMSE_uncalibrated,
+		stage = "Before calibration"
+	),
+	data.frame(
+		source = p3a_dat$source,
+		RMSE = p3a_dat$RMSE_calibrated,
+		stage = "After calibration"
+	)
+)
+
+p3a_points$stage <- factor(
+	p3a_points$stage,
+	levels = c(
+		"Before calibration",
+		"After calibration"
+	)
+)
+
+p3a <- ggplot(p3a_dat, aes(y = source)) +
 	geom_segment(
 		aes(
 			x = RMSE_uncalibrated,
@@ -619,55 +641,63 @@ p3a <- ggplot(
 			yend = source
 		),
 		color = c_grey_light,
-		linewidth = 2
+		linewidth = 2.2
 	) +
 	geom_point(
-		aes(x = RMSE_uncalibrated),
-		shape = 21,
-		size = 4.2,
-		fill = "white",
-		color = c_grey_dark,
-		stroke = 1
-	) +
-	geom_point(
-		aes(x = RMSE_calibrated),
+		data = p3a_points,
+		aes(x = RMSE, fill = stage),
 		shape = 21,
 		size = 4.4,
-		fill = c_teal,
-		color = c_teal
+		stroke = 1,
+		color = c_grey_dark
 	) +
 	geom_text(
 		aes(
 			x = pmax(RMSE_uncalibrated, RMSE_calibrated),
-			label = paste0(
-				ifelse(improvement >= 0, "lower ", "higher "),
-				abs(round(improvement, 1)),
-				"%"
-			)
+			label = change_label
 		),
 		hjust = -0.15,
-		size = 3.2,
+		size = 3.4,
 		fontface = "bold",
 		color = c_blue
 	) +
+	scale_fill_manual(
+		values = c(
+			"Before calibration" = "white",
+			"After calibration" = c_teal
+		)
+	) +
 	scale_x_continuous(
-		expand = expansion(mult = c(0.03, 0.18))
+		breaks = seq(0.4, 1.6, 0.2)
+	) +
+	coord_cartesian(
+		xlim = c(0.38, 1.32),
+		clip = "off"
 	) +
 	labs(
-		title = "One anchor calibrates an unseen SkinPiX source",
-		subtitle = "Open circle: HuSkin prediction; filled circle: calibrated prediction",
-		x = "RMSE on SkinPiX-only compounds [log10(cm/h)]",
+		title = "RMSE before and after one-anchor calibration",
+		x = "RMSE on SkinPiX-only compounds",
 		y = NULL
 	) +
-	theme_manuscript(10.5) +
+	theme_manuscript(11) +
 	theme(
+		legend.position = "bottom",
 		axis.line.y = element_blank(),
 		axis.ticks.y = element_blank(),
-		plot.margin = margin(6, 28, 4, 18)
+		plot.margin = margin(10, 20, 8, 12)
+	) +
+	guides(
+		fill = guide_legend(
+			override.aes = list(
+				shape = 21,
+				size = 4,
+				color = c_grey_dark
+			)
+		)
 	)
 
 # ------------------------------------------------------------
-# B. Compound-level absolute error
+# B. Proportion of compounds with reduced error
 # ------------------------------------------------------------
 
 p3b_dat <- aggregate(
@@ -679,221 +709,204 @@ p3b_dat <- aggregate(
 	mean
 )
 
-p3b_dat$improved <- p3b_dat$abs_error_calibrated < p3b_dat$abs_error_uncalibrated
+n_improved <- sum(
+	p3b_dat$abs_error_calibrated <
+		p3b_dat$abs_error_uncalibrated
+)
 
-n_improved <- sum(p3b_dat$improved)
 n_total <- nrow(p3b_dat)
+n_other <- n_total - n_improved
 
-lim3b <- max(
-	c(
-		p3b_dat$abs_error_uncalibrated,
-		p3b_dat$abs_error_calibrated
-	)
+p3b_summary <- data.frame(
+	outcome = factor(
+		c("Error decreased", "Error increased or unchanged"),
+		levels = c(
+			"Error decreased",
+			"Error increased or unchanged"
+		)
+	),
+	count = c(n_improved, n_other)
+)
+
+p3b_summary$percent <- 100 *
+	p3b_summary$count / n_total
+
+p3b_summary$label <- paste0(
+	p3b_summary$count,
+	"/",
+	n_total,
+	" (",
+	round(p3b_summary$percent),
+	"%)"
 )
 
 p3b <- ggplot(
-	p3b_dat,
-	aes(
-		x = abs_error_uncalibrated,
-		y = abs_error_calibrated
-	)
+	p3b_summary,
+	aes(x = outcome, y = percent, fill = outcome)
 ) +
-	geom_abline(
-		intercept = 0,
-		slope = 1,
-		linetype = 2,
-		color = c_grey
+	geom_col(
+		width = 0.62
 	) +
-	geom_point(
-		aes(fill = improved),
-		shape = 21,
-		size = 2.8,
-		color = "white",
-		stroke = 0.3,
-		alpha = 0.85
+	geom_text(
+		aes(label = label),
+		vjust = -0.6,
+		fontface = "bold",
+		size = 3.6
 	) +
 	scale_fill_manual(
 		values = c(
-			"TRUE" = c_teal,
-			"FALSE" = c_red
-		),
-		labels = c(
-			"TRUE" = "Lower error",
-			"FALSE" = "Higher error"
+			"Error decreased" = c_teal,
+			"Error increased or unchanged" = c_red
 		)
 	) +
-	coord_equal(
-		xlim = c(0, lim3b),
-		ylim = c(0, lim3b)
+	scale_y_continuous(
+		limits = c(0, 105),
+		breaks = seq(0, 100, 25),
+		expand = c(0, 0)
+	) +
+	scale_x_discrete(
+		labels = c(
+			"Error\ndecreased",
+			"Error increased\nor unchanged"
+		)
 	) +
 	labs(
-		title = "Compound-level prediction error",
-		subtitle = paste0(
-			n_improved,
-			"/",
-			n_total,
-			" compounds had lower mean absolute error"
-		),
-		x = "Absolute error before calibration",
-		y = "Absolute error after calibration"
+		title = "Compounds with reduced prediction error",
+		x = NULL,
+		y = "SkinPiX-only compounds (%)"
 	) +
-	theme_manuscript(10.2) +
+	theme_manuscript(10.5) +
 	theme(
-		legend.position = "bottom",
-		legend.direction = "horizontal",
-		plot.title = element_text(size = 11.2),
-		plot.subtitle = element_text(size = 9.2),
-		plot.margin = margin(8, 16, 8, 12)
+		legend.position = "none",
+		axis.line.x = element_blank(),
+		axis.ticks.x = element_blank(),
+		plot.margin = margin(10, 12, 10, 12)
 	)
 
 # ------------------------------------------------------------
-# C. Matched three-source anchor sensitivity
+# C. Combined RMSE reduction with additional anchors
 # ------------------------------------------------------------
 
-matched3_refs <- eligible41$reference_id[
-	eligible41$eligible &
-	eligible41$n_anchors >= 3
+p3c_dat <- match41[
+	match41$anchors %in% 1:3,
 ]
 
-p3c_ind <- ref41[
-	ref41$reference_id %in% matched3_refs &
-	ref41$anchors <= 3,
-]
-
-source_cols <- setNames(
-	c(c_cyan, c_teal, c_orange),
-	matched3_refs
-)
-
-p3c <- ggplot() +
+p3c <- ggplot(
+	p3c_dat,
+	aes(
+		x = anchors,
+		y = RMSE_improvement_percent
+	)
+) +
 	geom_hline(
 		yintercept = 0,
 		linetype = 3,
 		color = c_grey
 	) +
 	geom_line(
-		data = p3c_ind,
-		aes(
-			x = anchors,
-			y = RMSE_improvement_percent,
-			group = reference_id,
-			color = reference_id
-		),
-		linewidth = 0.8
+		color = c_blue,
+		linewidth = 1.5
 	) +
 	geom_point(
-		data = p3c_ind,
-		aes(
-			x = anchors,
-			y = RMSE_improvement_percent,
-			color = reference_id
-		),
-		size = 2.5
-	) +
-	geom_line(
-		data = match41,
-		aes(
-			x = anchors,
-			y = RMSE_improvement_percent
-		),
 		color = c_blue,
-		linewidth = 1.6
-	) +
-	geom_point(
-		data = match41,
-		aes(
-			x = anchors,
-			y = RMSE_improvement_percent
-		),
-		color = c_blue,
-		size = 3.7
+		size = 4
 	) +
 	geom_text(
-		data = match41,
 		aes(
-			x = anchors,
-			y = RMSE_improvement_percent,
 			label = paste0(
-				round(RMSE_improvement_percent, 1),
+				sprintf("%.1f", RMSE_improvement_percent),
 				"%"
 			)
 		),
-		vjust = -1,
-		color = c_blue,
+		vjust = -1.2,
 		fontface = "bold",
-		size = 3
-	) +
-	scale_color_manual(
-		values = source_cols
+		color = c_blue,
+		size = 3.5
 	) +
 	scale_x_continuous(
-		breaks = 1:3,
-		limits = c(0.9, 3.75)
+		breaks = 1:3
 	) +
-	coord_cartesian(clip = "off") +
+	coord_cartesian(
+		xlim = c(0.9,3.1),
+		clip = "off"
+	) +
+	scale_y_continuous(
+		limits = c(0, 35),
+		breaks = seq(0, 30, 10),
+		expand = c(0, 0)
+	) +
 	labs(
-		title = "Matched 3-source sensitivity",
-		subtitle = "Same 3 sources at 1-3 anchors; descriptive only",
-		x = "Number of shared anchor compounds",
-		y = "Source-level RMSE improvement (%)"
+		title = "Calibration with additional anchors",
+		subtitle = "Same three eligible sources",
+		x = "Number of anchor compounds",
+		y = "Combined RMSE reduction (%)"
 	) +
-	theme_manuscript(10.2) +
+	theme_manuscript(10.5) +
 	theme(
-		plot.title = element_text(size = 11.2),
-		plot.subtitle = element_text(size = 9.2),
-		plot.margin = margin(8, 52, 8, 12)
+		plot.margin = margin(10, 12, 10, 12)
 	)
-	
-fig3 <- (
-	p3a /
-		(p3b | p3c)
-) +
+
+# ------------------------------------------------------------
+# Combine and save
+# ------------------------------------------------------------
+
+fig3 <- p3a / (p3b | p3c) +
 	plot_layout(
-		heights = c(0.85, 1.2)
+		heights = c(1, 1.1),
+		widths = c(1, 1)
 	) +
 	plot_annotation(
-		title = "Calibration transfers a HuSkin-trained model to SkinPiX measurements",
-		subtitle = "Evaluation used SkinPiX-only compounds from four sources not used for HuSkin model fitting",
+		title = "",
+		subtitle = paste0(
+			n_total,
+			" SkinPiX-only compounds from ",
+			nrow(p3a_dat),
+			" unseen experimental sources"
+		),
 		tag_levels = "A",
 		theme = theme(
 			plot.title = element_text(
 				face = "bold",
-				size = 14
+				size = 13
 			),
-			plot.subtitle = element_text(
-				size = 10.5
-			),
-			plot.margin = margin(12, 16, 8, 16)
+			plot.subtitle = element_text(size = 10),
+			plot.margin = margin(12, 14, 8, 14)
 		)
 	)
 
 save_fig(
 	fig3,
 	"Figure_3_skinpix_transfer",
-	10.8,
-	8.7
+	10.5,
+	7.8
 )
+
 
 # ============================================================
 # Figure 4
-# Pairwise double-holdout source-specific falsification
+# Source-specific calibration control
 # ============================================================
 
+wrong60 <- read.csv(
+	"R/results/60_wrong_source_ci.csv",
+	stringsAsFactors = FALSE
+)
+
 # ------------------------------------------------------------
-# A. Matched versus different-source calibration
+# A. Prediction improvement by anchor source
 # ------------------------------------------------------------
 
 p4a <- rbind(
 	data.frame(
 		anchors = wrong60$anchors,
-		calibration = "Matched source",
+		calibration = "Anchors from target source",
 		improvement = wrong60$correct_improvement_percent,
 		ci_low = wrong60$correct_ci_low,
 		ci_high = wrong60$correct_ci_high
 	),
 	data.frame(
 		anchors = wrong60$anchors,
-		calibration = "Different source",
+		calibration = "Anchors from different source",
 		improvement = wrong60$wrong_improvement_percent,
 		ci_low = wrong60$wrong_ci_low,
 		ci_high = wrong60$wrong_ci_high
@@ -903,12 +916,15 @@ p4a <- rbind(
 p4a$calibration <- factor(
 	p4a$calibration,
 	levels = c(
-		"Matched source",
-		"Different source"
+		"Anchors from target source",
+		"Anchors from different source"
 	)
 )
 
-dodge4 <- position_dodge(width = 0.16)
+calibration_colors <- c(
+	"Anchors from target source" = c_blue,
+	"Anchors from different source" = c_red
+)
 
 plot4a <- ggplot(
 	p4a,
@@ -925,65 +941,50 @@ plot4a <- ggplot(
 		color = c_grey
 	) +
 	geom_errorbar(
-		aes(
-			ymin = ci_low,
-			ymax = ci_high
-		),
-		width = 0.08,
-		linewidth = 0.7,
-		position = dodge4
+		aes(ymin = ci_low, ymax = ci_high),
+		width = 0.12,
+		linewidth = 0.65
 	) +
-	geom_line(
-		linewidth = 1.2,
-		position = dodge4
-	) +
-	geom_point(
-		size = 3.6,
-		position = dodge4
-	) +
+	geom_line(linewidth = 1.1) +
+	geom_point(size = 3.5) +
 	geom_text(
-		aes(
-			label = paste0(
-				round(improvement, 1),
-				"%"
-			)
-		),
-		position = dodge4,
-		vjust = ifelse(p4a$improvement >= 0, -1.15, 1.55),
+		aes(label = paste0(sprintf("%.1f", improvement), "%")),
+		vjust = ifelse(p4a$improvement >= 0, -1, 1.8),
+		size = 3,
 		fontface = "bold",
-		size = 2.9,
 		show.legend = FALSE
 	) +
-	scale_color_manual(
-		values = c(
-			"Matched source" = c_blue,
-			"Different source" = c_red
-		)
-	) +
-	scale_x_continuous(
-		breaks = 1:5
+	scale_color_manual(values = calibration_colors) +
+	scale_x_continuous(breaks = 1:5) +
+	scale_y_continuous(
+		expand = expansion(mult = c(0.13, 0.16))
 	) +
 	labs(
-		title = "Matched and different-source calibration diverge",
-		subtitle = "95% intervals bootstrap target literature sources",
+		title = "Prediction improvement by anchor source",
 		x = "Number of anchor compounds",
-		y = "RMSE improvement vs no calibration (%)"
+		y = "RMSE reduction relative to no calibration (%)"
 	) +
-	theme_manuscript(10.2) +
+	theme_manuscript(10.5) +
 	theme(
-		legend.position = "bottom"
+		legend.position = "bottom",
+		legend.text = element_text(size = 9),
+		plot.title = element_text(size = 11.5)
 	)
 
 # ------------------------------------------------------------
-# B. Direct paired falsification contrast
+# B. Paired difference in prediction error
 # ------------------------------------------------------------
+
+p4b <- data.frame(
+	anchors = wrong60$anchors,
+	difference = wrong60$RMSE_wrong_minus_correct,
+	ci_low = wrong60$difference_ci_low,
+	ci_high = wrong60$difference_ci_high
+)
 
 plot4b <- ggplot(
-	wrong60,
-	aes(
-		x = anchors,
-		y = RMSE_wrong_minus_correct
-	)
+	p4b,
+	aes(x = anchors, y = difference)
 ) +
 	geom_hline(
 		yintercept = 0,
@@ -991,69 +992,57 @@ plot4b <- ggplot(
 		color = c_grey
 	) +
 	geom_errorbar(
-		aes(
-			ymin = difference_ci_low,
-			ymax = difference_ci_high
-		),
+		aes(ymin = ci_low, ymax = ci_high),
 		width = 0.12,
-		linewidth = 0.8,
+		linewidth = 0.65,
 		color = c_grey_dark
 	) +
 	geom_line(
-		linewidth = 1.2,
-		color = c_teal
+		color = c_teal,
+		linewidth = 1.1
 	) +
 	geom_point(
-		size = 3.7,
-		color = c_teal
+		color = c_teal,
+		size = 3.5
 	) +
 	geom_text(
-		aes(
-			label = sprintf(
-				"%.3f",
-				RMSE_wrong_minus_correct
-			)
-		),
+		aes(label = sprintf("%.3f", difference)),
 		vjust = -1.1,
-		fontface = "bold",
-		size = 3
+		size = 3,
+		fontface = "bold"
 	) +
-	scale_x_continuous(
-		breaks = 1:5
+	scale_x_continuous(breaks = 1:5) +
+	scale_y_continuous(
+		expand = expansion(mult = c(0.07, 0.18))
 	) +
 	labs(
-		title = "The paired contrast consistently favors the target source",
-		subtitle = "Positive values mean different-source calibration produced higher RMSE",
+		title = "Paired difference in prediction error",
 		x = "Number of anchor compounds",
-		y = "Different-source - matched RMSE [log10(cm/h)]"
+		y = "RMSE difference (different minus target source)"
 	) +
-	theme_manuscript(10.2)
+	theme_manuscript(10.5) +
+	theme(
+		plot.title = element_text(size = 11.5)
+	)
 
-fig4 <- (
-	plot4a |
-		plot4b
-) +
+# ------------------------------------------------------------
+# Combine and save
+# ------------------------------------------------------------
+
+fig4 <- (plot4a | plot4b) +
+	plot_layout(widths = c(1.1, 1)) +
 	plot_annotation(
-		title = "Double-holdout falsification supports a source-specific calibration signal",
-		subtitle = "Both offsets were estimated against the same reference model with the target and donor sources withheld",
 		tag_levels = "A",
 		theme = theme(
-			plot.title = element_text(
-				face = "bold",
-				size = 14
-			),
-			plot.subtitle = element_text(
-				size = 10.5
-			),
-			plot.margin = margin(12, 16, 8, 16)
+			plot.margin = margin(12, 12, 8, 12)
 		)
 	)
 
 save_fig(
 	fig4,
 	"Figure_4_source_specific_falsification",
-	10.8,
-	5.6
+	10.5,
+	5.0
 )
 
 # ============================================================

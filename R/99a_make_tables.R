@@ -247,15 +247,35 @@ write.csv(
 # Table 4B. Wrong-source falsification
 # ------------------------------------------------------------
 
+fmt_est_ci <- function(x, low, high, digits) {
+	paste0(
+		fmt(x, digits),
+		" ",
+		fmt_ci(low, high, digits)
+	)
+}
+
 table4b <- data.frame(
 	Anchors = wrong60$anchors,
 	`Target sources` = wrong60$n_references,
-	`Matched-source RMSE improvement (%)` = fmt(wrong60$correct_improvement_percent, 1),
-	`Matched-source 95% CI` = fmt_ci(wrong60$correct_ci_low, wrong60$correct_ci_high, 1),
-	`Different-source RMSE improvement (%)` = fmt(wrong60$wrong_improvement_percent, 1),
-	`Different-source 95% CI` = fmt_ci(wrong60$wrong_ci_low, wrong60$wrong_ci_high, 1),
-	`Different-source - matched RMSE` = fmt(wrong60$RMSE_wrong_minus_correct, 3),
-	`RMSE difference 95% CI` = fmt_ci(wrong60$difference_ci_low, wrong60$difference_ci_high, 3),
+	`Target-source RMSE reduction (%)` = fmt_est_ci(
+		wrong60$correct_improvement_percent,
+		wrong60$correct_ci_low,
+		wrong60$correct_ci_high,
+		1
+	),
+	`Different-source RMSE reduction (%)` = fmt_est_ci(
+		wrong60$wrong_improvement_percent,
+		wrong60$wrong_ci_low,
+		wrong60$wrong_ci_high,
+		1
+	),
+	`RMSE difference` = fmt_est_ci(
+		wrong60$RMSE_wrong_minus_correct,
+		wrong60$difference_ci_low,
+		wrong60$difference_ci_high,
+		3
+	),
 	check.names = FALSE
 )
 

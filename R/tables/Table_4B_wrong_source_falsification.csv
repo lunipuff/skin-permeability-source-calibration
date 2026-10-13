@@ -1,4 +1,4 @@
-"anchors","n_references","matched_RMSE_improvement","matched_RMSE_improvement_95_CI","different_source_RMSE_improvement","different_source_RMSE_improvement_95_CI","RMSE_wrong_minus_matched","RMSE_difference_95_CI"
+"Anchors","Target sources","Matched-source RMSE improvement (%)","Matched-source 95% CI","Different-source RMSE improvement (%)","Different-source 95% CI","Different-source - matched RMSE","RMSE difference 95% CI"
 1,31,"8.6","[-1.2, 17.8]","-8.6","[-14.2, -4.9]","0.212","[0.112, 0.324]"
 2,22,"15.6","[2.0, 28.8]","-11.3","[-19.8, -5.9]","0.313","[0.186, 0.478]"
 3,19,"20.9","[0.9, 37.4]","-14.2","[-24.7, -6.6]","0.352","[0.189, 0.569]"

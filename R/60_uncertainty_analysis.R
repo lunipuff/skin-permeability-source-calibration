@@ -31,6 +31,11 @@ pred <- read.csv(
 	stringsAsFactors = FALSE
 )
 
+comp32 <- read.csv(
+	"R/results/32_calibration_method_reference.csv",
+	stringsAsFactors = FALSE
+)
+
 approaches <- c(
 	"conventional",
 	"hierarchical_source_blind",
@@ -302,6 +307,236 @@ write.csv(
 	wrong_ci,
 	"R/results/60_wrong_source_ci.csv",
 	row.names = FALSE
+)
+
+# ------------------------------------------------------------
+# Conventional vs hierarchical calibration
+# Paired source bootstrap
+# ------------------------------------------------------------
+
+comp1 <- comp32[comp32$anchors == 1, ]
+
+conv1 <- comp1[
+	comp1$method == "Conventional",
+	c(
+		"reference_id",
+		"RMSE_uncalibrated",
+		"RMSE_calibrated"
+	)
+]
+
+hier1 <- comp1[
+	comp1$method == "Hierarchical",
+	c(
+		"reference_id",
+		"RMSE_uncalibrated",
+		"RMSE_calibrated"
+	)
+]
+
+names(conv1)[2:3] <- c(
+	"RMSE_uncalibrated_conventional",
+	"RMSE_calibrated_conventional"
+)
+
+names(hier1)[2:3] <- c(
+	"RMSE_uncalibrated_hierarchical",
+	"RMSE_calibrated_hierarchical"
+)
+
+comp1_pair <- merge(
+	conv1,
+	hier1,
+	by = "reference_id",
+	sort = FALSE
+)
+
+n_comp1 <- nrow(comp1_pair)
+
+comp1_conv_imp <- 100 * (
+	1 -
+	mean(comp1_pair$RMSE_calibrated_conventional) /
+	mean(comp1_pair$RMSE_uncalibrated_conventional)
+)
+
+comp1_hier_imp <- 100 * (
+	1 -
+	mean(comp1_pair$RMSE_calibrated_hierarchical) /
+	mean(comp1_pair$RMSE_uncalibrated_hierarchical)
+)
+
+comp1_diff <- (
+	mean(comp1_pair$RMSE_calibrated_conventional) -
+	mean(comp1_pair$RMSE_calibrated_hierarchical)
+)
+
+comp1_boot <- replicate(n_boot, {
+	i <- sample(
+		seq_len(n_comp1),
+		n_comp1,
+		replace = TRUE
+	)
+
+	conv_uncal <- mean(
+		comp1_pair$RMSE_uncalibrated_conventional[i]
+	)
+
+	conv_cal <- mean(
+		comp1_pair$RMSE_calibrated_conventional[i]
+	)
+
+	hier_uncal <- mean(
+		comp1_pair$RMSE_uncalibrated_hierarchical[i]
+	)
+
+	hier_cal <- mean(
+		comp1_pair$RMSE_calibrated_hierarchical[i]
+	)
+
+	c(
+		conventional_improvement = 100 * (
+			1 - conv_cal / conv_uncal
+		),
+		hierarchical_improvement = 100 * (
+			1 - hier_cal / hier_uncal
+		),
+		RMSE_conventional_minus_hierarchical = (
+			conv_cal - hier_cal
+		)
+	)
+})
+
+comp1_ci <- apply(
+	comp1_boot,
+	1,
+	quantile,
+	probs = c(0.025, 0.975),
+	names = FALSE
+)
+
+comp1_out <- data.frame(
+	n_references = n_comp1,
+	conventional_improvement_percent = comp1_conv_imp,
+	conventional_ci_low = comp1_ci[1, "conventional_improvement"],
+	conventional_ci_high = comp1_ci[2, "conventional_improvement"],
+	hierarchical_improvement_percent = comp1_hier_imp,
+	hierarchical_ci_low = comp1_ci[1, "hierarchical_improvement"],
+	hierarchical_ci_high = comp1_ci[2, "hierarchical_improvement"],
+	RMSE_conventional_minus_hierarchical = comp1_diff,
+	difference_ci_low = comp1_ci[1, "RMSE_conventional_minus_hierarchical"],
+	difference_ci_high = comp1_ci[2, "RMSE_conventional_minus_hierarchical"]
+)
+
+write.csv(
+	comp1_out,
+	"R/results/60_calibration_method_comparison_ci.csv",
+	row.names = FALSE
+)
+
+cat(
+	"\nCalibration-method comparison\n",
+	"Sources: ", n_comp1, "\n",
+	"Conventional improvement: ",
+	round(comp1_conv_imp, 1),
+	"% [",
+	round(comp1_ci[1, "conventional_improvement"], 1),
+	", ",
+	round(comp1_ci[2, "conventional_improvement"], 1),
+	"]\n",
+	"Hierarchical improvement: ",
+	round(comp1_hier_imp, 1),
+	"% [",
+	round(comp1_ci[1, "hierarchical_improvement"], 1),
+	", ",
+	round(comp1_ci[2, "hierarchical_improvement"], 1),
+	"]\n",
+	"RMSE conventional - hierarchical: ",
+	round(comp1_diff, 3),
+	" [",
+	round(comp1_ci[1, "RMSE_conventional_minus_hierarchical"], 3),
+	", ",
+	round(comp1_ci[2, "RMSE_conventional_minus_hierarchical"], 3),
+	"]\n",
+	sep = ""
+)
+
+# ------------------------------------------------------------
+# HuSkin one-anchor deployment estimate: all eligible sources
+# ------------------------------------------------------------
+
+cal31 <- read.csv(
+	"R/results/31_calibration_performance.csv",
+	stringsAsFactors = FALSE
+)
+
+all1 <- cal31[
+	cal31$task == "New compound" &
+	cal31$anchors == 1,
+]
+
+all1_ref <- aggregate(
+	cbind(RMSE_uncalibrated, RMSE_calibrated) ~ reference_id,
+	data = all1,
+	mean
+)
+
+all1_ref$improvement_percent <- 100 * (
+	1 - all1_ref$RMSE_calibrated / all1_ref$RMSE_uncalibrated
+)
+
+n_all1 <- nrow(all1_ref)
+n_all1_improved <- sum(all1_ref$RMSE_calibrated < all1_ref$RMSE_uncalibrated)
+
+all1_rmse_uncalibrated <- mean(all1_ref$RMSE_uncalibrated)
+all1_rmse_calibrated <- mean(all1_ref$RMSE_calibrated)
+all1_improvement <- 100 * (
+	1 - all1_rmse_calibrated / all1_rmse_uncalibrated
+)
+
+set.seed(2026)
+
+all1_boot <- replicate(n_boot, {
+	i <- sample(seq_len(n_all1), n_all1, replace = TRUE)
+
+	100 * (
+		1 -
+		mean(all1_ref$RMSE_calibrated[i]) /
+		mean(all1_ref$RMSE_uncalibrated[i])
+	)
+})
+
+all1_ci <- quantile(
+	all1_boot,
+	c(0.025, 0.975),
+	names = FALSE
+)
+
+all1_ci_out <- data.frame(
+	anchors = 1,
+	n_references = n_all1,
+	n_references_improved = n_all1_improved,
+	RMSE_uncalibrated = all1_rmse_uncalibrated,
+	RMSE_calibrated = all1_rmse_calibrated,
+	improvement_percent = all1_improvement,
+	improvement_ci_low = all1_ci[1],
+	improvement_ci_high = all1_ci[2]
+)
+
+write.csv(
+	all1_ci_out,
+	"R/results/60_huskin_one_anchor_all_eligible_ci.csv",
+	row.names = FALSE
+)
+
+cat(
+	"\nHuSkin one-anchor deployment estimate\n",
+	"Sources: ", n_all1, "\n",
+	"Sources improved: ", n_all1_improved, "/", n_all1, "\n",
+	"RMSE uncalibrated: ", round(all1_rmse_uncalibrated, 3), "\n",
+	"RMSE calibrated: ", round(all1_rmse_calibrated, 3), "\n",
+	"Improvement: ", round(all1_improvement, 1), "%\n",
+	"95% CI: ", round(all1_ci[1], 1), " to ", round(all1_ci[2], 1), "%\n",
+	sep = ""
 )
 
 # ------------------------------------------------------------

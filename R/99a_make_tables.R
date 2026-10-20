@@ -28,6 +28,29 @@ fmt_p <- function(x) {
 	)
 }
 
+# ------------
+# Anchor Check
+# ------------
+
+anchor_check <- read.csv("R/results/31_calibration_performance.csv", stringsAsFactors = FALSE)
+anchor_check <- anchor_check[anchor_check$anchors == 1, ]
+anchor_check <- aggregate(cbind(RMSE_uncalibrated, RMSE_calibrated) ~ reference_id + task, data = anchor_check, FUN = mean)
+
+shared_check <- anchor_check[anchor_check$task == "Known compound", c("reference_id", "RMSE_uncalibrated", "RMSE_calibrated")]
+names(shared_check)[2:3] <- c("shared_before", "shared_after")
+
+novel_check <- anchor_check[anchor_check$task == "New compound", c("reference_id", "RMSE_uncalibrated", "RMSE_calibrated")]
+names(novel_check)[2:3] <- c("novel_before", "novel_after")
+
+anchor_check <- merge(shared_check, novel_check, by = "reference_id")
+anchor_check$shared_improved <- anchor_check$shared_after < anchor_check$shared_before
+anchor_check$novel_improved <- anchor_check$novel_after < anchor_check$novel_before
+anchor_check$shared_reduction_percent <- 100 * (1 - anchor_check$shared_after / anchor_check$shared_before)
+anchor_check$novel_reduction_percent <- 100 * (1 - anchor_check$novel_after / anchor_check$novel_before)
+
+write.csv(anchor_check, "R/tables/Table_anchor_check.csv", row.names = FALSE)
+print(table(anchor_check$shared_improved, anchor_check$novel_improved))
+
 # ------------------------------------------------------------
 # Inputs
 # ------------------------------------------------------------
@@ -601,82 +624,80 @@ write.csv(
 # Supplementary Table S7. Applicability-domain summary
 # ------------------------------------------------------------
 
-domain31 <- read.csv(
-	"R/results/31_applicability_domain.csv",
-	stringsAsFactors = FALSE
-)
+domain31 <- read.csv("R/results/31_applicability_domain.csv", stringsAsFactors = FALSE)
+domain41 <- read.csv("R/results/41_skinpix_transfer_domain.csv", stringsAsFactors = FALSE)
 
-domain41 <- read.csv(
-	"R/results/41_skinpix_transfer_domain.csv",
-	stringsAsFactors = FALSE
-)
-
-s7_ch <- ad21
-s7_ch$dataset <- "Cheruvu"
+s7_ch <- do.call(rbind, lapply(unique(ad21$specification), function(specification) {
+	x <- ad21[ad21$specification == specification, ]
+	inside <- x$in_domain %in% TRUE
+	outside <- x$in_domain %in% FALSE
+	data.frame(Dataset = "Cheruvu", Specification = specification, n_in = sum(x$n_compounds[inside]), n_out = sum(x$n_compounds[outside]), mae_in = x$MAE_hierarchical[inside], mae_out = x$MAE_hierarchical[outside], stringsAsFactors = FALSE)
+}))
 
 s7_hu <- data.frame(
-	dataset = "HuSkinDB",
-	specification = "S1",
-	n_compounds = nrow(domain31),
-	n_in_domain = sum(domain31$in_domain),
-	percent_in_domain = 100 * mean(domain31$in_domain)
+	Dataset = "HuSkinDB",
+	Specification = "S1",
+	n_in = sum(domain31$in_domain %in% TRUE),
+	n_out = sum(domain31$in_domain %in% FALSE),
+	mae_in = mean(domain31$error_hierarchical[domain31$in_domain %in% TRUE]),
+	mae_out = mean(domain31$error_hierarchical[domain31$in_domain %in% FALSE]),
+	stringsAsFactors = FALSE
 )
 
 s7_sp <- data.frame(
-	dataset = "SkinPiX transfer",
-	specification = "HuSkin S1 domain",
-	n_compounds = nrow(domain41),
-	n_in_domain = sum(domain41$in_domain),
-	percent_in_domain = 100 * mean(domain41$in_domain)
+	Dataset = "SkinPiX external test",
+	Specification = "S1",
+	n_in = sum(domain41$in_domain %in% TRUE),
+	n_out = sum(domain41$in_domain %in% FALSE),
+	mae_in = NA_real_,
+	mae_out = NA_real_,
+	stringsAsFactors = FALSE
 )
 
-if (all(c("specification", "n_compounds", "n_in_domain", "percent_in_domain") %in% names(s7_ch))) {
-	s7_ch <- s7_ch[, c("dataset", "specification", "n_compounds", "n_in_domain", "percent_in_domain")]
+s7 <- rbind(s7_ch, s7_hu, s7_sp)
+s7$mae_in <- ifelse(is.na(s7$mae_in), "Not reported", fmt(s7$mae_in, 3))
+s7$mae_out <- ifelse(is.na(s7$mae_out), "Not reported", fmt(s7$mae_out, 3))
+names(s7) <- c("Dataset", "Specification", "In domain n", "Outside domain n", "MAE in domain", "MAE outside domain")
 
-	s7 <- rbind(
-		s7_ch,
-		s7_hu,
-		s7_sp
-	)
-
-	s7$percent_in_domain <- fmt(s7$percent_in_domain, 1)
-
-	names(s7) <- c(
-		"Dataset",
-		"Specification",
-		"Compounds",
-		"In domain",
-		"In domain (%)"
-	)
-
-	write.csv(
-		s7,
-		"R/tables/Table_S7_applicability_domain.csv",
-		row.names = FALSE
-	)
-}
+write.csv(s7, "R/tables/Table_S7_applicability_domain.csv", row.names = FALSE)
 
 # ------------------------------------------------------------
 # Supplementary Table S8A. SkinPiX transfer audit
 # ------------------------------------------------------------
 
-s8a_path <- "R/tables/Table_S8A_skinpix_transfer_audit.csv"
+skinpix <- read.csv("data/processed/40_skinpix.csv", stringsAsFactors = FALSE)
+eligible41 <- read.csv("R/results/41_skinpix_eligible_references.csv", stringsAsFactors = FALSE)
+overlap40 <- read.csv("R/results/40_skinpix_reference_overlap.csv", stringsAsFactors = FALSE)
+descriptor40 <- read.csv("R/results/40_descriptor_compatibility_audit.csv", stringsAsFactors = FALSE)
 
-if (file.exists(s8a_path)) {
-	s8a <- read.csv(
-		s8a_path,
-		stringsAsFactors = FALSE,
-		check.names = FALSE
-	)
+s8a <- data.frame(
+	Metric = c(
+		"Retained measurements",
+		"Compounds",
+		"References",
+		"HuSkin-overlapping compounds",
+		"SkinPiX-only compounds",
+		"Eligible transfer references",
+		"References with DOI overlap",
+		"Median absolute RDKit MW difference among matched compounds",
+		"Median absolute RDKit logP difference among matched compounds"
+	),
+	Value = c(
+		nrow(skinpix),
+		length(unique(skinpix$compound_id)),
+		length(unique(skinpix$reference_id)),
+		length(unique(skinpix$compound_id[skinpix$overlap_huskin %in% TRUE])),
+		length(unique(skinpix$compound_id[skinpix$overlap_huskin %in% FALSE])),
+		length(unique(eligible41$reference_id[eligible41$eligible %in% TRUE])),
+		length(unique(overlap40$reference_id[overlap40$doi_overlaps_huskin %in% TRUE])),
+		median(abs(descriptor40$delta_mw_rdkit), na.rm = TRUE),
+		median(abs(descriptor40$delta_logp_rdkit), na.rm = TRUE)
+	),
+	stringsAsFactors = FALSE
+)
 
-	names(s8a) <- gsub("_", " ", names(s8a), fixed = TRUE)
-
-	write.csv(
-		s8a,
-		s8a_path,
-		row.names = FALSE
-	)
-}
+write.csv(s8a, "R/tables/Table_S8A_skinpix_transfer_audit.csv", row.names = FALSE)
+write.csv(s8a, "R/tables/Table_S8A_skinpix_transfer_audit_display.csv", row.names = FALSE)
 
 # ------------------------------------------------------------
 # Supplementary Table S8B. HuSkin-SkinPiX overlap
@@ -803,6 +824,79 @@ write.csv(
 	"R/tables/Table_S11_calibration_method_comparison.csv",
 	row.names = FALSE
 )
+
+# ------------------------------------------------------------
+# Supplementary Table. Experimental metadata availability
+# ------------------------------------------------------------
+
+skinpix <- read.csv("data/processed/40_skinpix.csv", stringsAsFactors = FALSE)
+
+metadata_fields <- c("Skin donor type", "Anatomical site", "Skin layer", "Skin preparation", "Skin thickness", "Diffusion cell type", "Donor medium", "Receptor medium", "Donor or skin temperature", "Receptor temperature", "Donor pH", "Receptor pH", "Skin integrity test")
+
+metadata_columns <- list(
+	Cheruvu = c(NA, NA, NA, NA, "skin_thickness_mm", NA, NA, NA, "temperature_c", NA, NA, NA, "skin_integrity_test"),
+	HuSkinDB = c("skin_source_type", "skin_source_site", "used_layer", "skin_preparation", NA, "cell_type", "donor_type", "acceptor_type", "temperature_c", "acceptor_temperature_c", "donor_ph", "acceptor_ph", NA),
+	SkinPiX = c("skin_donor_type", "skin_source_site", "used_layer", "skin_preparation", NA, "cell_type", "donor_type", "acceptor_type", "temperature_c", "acceptor_temperature_c", "donor_ph", "acceptor_ph", NA)
+)
+
+metadata_notes <- c(
+	"Donor origin labels require review",
+	"Anatomical site labels require review",
+	"Layer labels require harmonization",
+	"Preparation labels require harmonization",
+	"Separate numeric field available only in Cheruvu",
+	"Cell labels require harmonization",
+	"Medium descriptions require review",
+	"Medium descriptions require review",
+	"Expressed in degrees Celsius after preprocessing",
+	"Expressed in degrees Celsius",
+	"Does not describe full medium composition",
+	"Does not describe full medium composition",
+	"Test descriptions require review"
+)
+
+metadata_clean <- function(x) {
+	x <- tolower(trimws(as.character(x)))
+	x <- gsub("[[:space:]]+", " ", x)
+	x[x %in% c("", "na", "n/a", "n.a.", "nan", "unknown", "not reported", "not specified", "-", "--")] <- NA_character_
+	x
+}
+
+metadata_datasets <- list(Cheruvu = cheruvu, HuSkinDB = huskin, SkinPiX = skinpix)
+
+table_metadata <- data.frame(Metadata = metadata_fields, stringsAsFactors = FALSE)
+
+for (dataset in names(metadata_datasets)) {
+	x <- metadata_datasets[[dataset]]
+	coverage <- character(length(metadata_fields))
+	for (i in seq_along(metadata_fields)) {
+		column <- metadata_columns[[dataset]][i]
+		if (is.na(column)) {
+			coverage[i] <- "Field not provided"
+		} else {
+			if (!column %in% names(x)) stop(paste("Missing metadata column:", dataset, column))
+			values <- metadata_clean(x[[column]])
+			n_reported <- sum(!is.na(values))
+			coverage[i] <- paste0(n_reported, "/", nrow(x), " (", fmt(100 * n_reported / nrow(x), 1), "%)")
+		}
+	}
+	table_metadata[[dataset]] <- coverage
+}
+
+write.csv(table_metadata, "R/tables/Table_metadata_availability.csv", row.names = FALSE, na = "")
+
+# ------------------------------------------------------------
+# Supplementary source summary. Primary one-anchor setting.
+# ------------------------------------------------------------
+
+summary70 <- read.csv("R/results/70_failure_source_summary.csv", stringsAsFactors = FALSE)
+primary70 <- summary70[summary70$anchors == 1, ]
+primary70 <- primary70[order(primary70$dataset, primary70$reference_id), ]
+table70 <- primary70[c("dataset", "reference_id", "available_anchors", "test_compounds", "median_anchor_replication", "median_test_replication", "RMSE_uncalibrated", "RMSE_calibrated", "test_mean_residual", "offset_mean", "offset_sd", "improved_percent", "anchor_distance_mean", "protocol_fields_varying")]
+for (v in names(table70)[7:13]) table70[[v]] <- round(table70[[v]], 3)
+names(table70) <- c("Dataset", "Source", "Available anchors", "Test compounds", "Median anchor records", "Median test records", "RMSE before", "Mean RMSE after", "Mean test residual", "Mean offset", "Offset SD", "Selections improved (%)", "Mean anchor distance", "Metadata fields varying")
+write.csv(table70, "R/tables/Table_S_calibration_failure.csv", row.names = FALSE, na = "")
+
 
 # ------------------------------------------------------------
 # Summary

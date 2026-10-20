@@ -887,163 +887,42 @@ save_fig(
 # Source-specific calibration control
 # ============================================================
 
-wrong60 <- read.csv(
-	"R/results/60_wrong_source_ci.csv",
-	stringsAsFactors = FALSE
-)
+wrong60 <- read.csv("R/results/60_wrong_source_ci.csv", stringsAsFactors = FALSE)
 
-# ------------------------------------------------------------
-# A. Prediction improvement by anchor source
-# ------------------------------------------------------------
+y_limits <- range(c(wrong60$correct_ci_low, wrong60$correct_ci_high, wrong60$wrong_ci_low, wrong60$wrong_ci_high, 0))
+y_padding <- diff(y_limits) * 0.1
+x_target <- wrong60$anchors - 0.12
+x_other <- wrong60$anchors + 0.12
 
-p4a <- rbind(
-	data.frame(
-		anchors = wrong60$anchors,
-		calibration = "Anchors from target source",
-		improvement = wrong60$correct_improvement_percent,
-		ci_low = wrong60$correct_ci_low,
-		ci_high = wrong60$correct_ci_high
-	),
-	data.frame(
-		anchors = wrong60$anchors,
-		calibration = "Anchors from different source",
-		improvement = wrong60$wrong_improvement_percent,
-		ci_low = wrong60$wrong_ci_low,
-		ci_high = wrong60$wrong_ci_high
-	)
-)
+pdf("R/figures/Figure_4_source_specific_falsification.pdf", width = 8.2, height = 4.8)
+par(mar = c(4.6, 5.4, 1, 1), cex.lab = 1.1, cex.axis = 1)
 
-p4a$calibration <- factor(
-	p4a$calibration,
-	levels = c(
-		"Anchors from target source",
-		"Anchors from different source"
-	)
-)
+plot(wrong60$anchors, wrong60$correct_improvement_percent,
+	type = "n", xlim = range(wrong60$anchors) + c(-0.5, 0.5),
+	ylim = y_limits + c(-y_padding, y_padding),
+	xaxt = "n", yaxt = "n",
+	xlab = "Number of anchor compounds",
+	ylab = "RMSE reduction relative to no calibration (%)")
+axis(1, at = wrong60$anchors)
+axis(2, las = 1)
+abline(h = 0, lty = 3, col = "grey65")
 
-calibration_colors <- c(
-	"Anchors from target source" = c_blue,
-	"Anchors from different source" = c_red
-)
+segments(x_target, wrong60$correct_ci_low, x_target, wrong60$correct_ci_high, col = pal[1], lwd = 1.5)
+segments(x_target - 0.04, wrong60$correct_ci_low, x_target + 0.04, wrong60$correct_ci_low, col = pal[1], lwd = 1.5)
+segments(x_target - 0.04, wrong60$correct_ci_high, x_target + 0.04, wrong60$correct_ci_high, col = pal[1], lwd = 1.5)
+points(x_target, wrong60$correct_improvement_percent, pch = 16, col = pal[1], cex = 1.3)
 
-plot4a <- ggplot(
-	p4a,
-	aes(
-		x = anchors,
-		y = improvement,
-		color = calibration,
-		group = calibration
-	)
-) +
-	geom_hline(
-		yintercept = 0,
-		linetype = 3,
-		color = c_grey
-	) +
-	geom_errorbar(
-		aes(ymin = ci_low, ymax = ci_high),
-		width = 0.12,
-		linewidth = 0.65
-	) +
-	geom_line(linewidth = 1.1) +
-	geom_point(size = 3.5) +
-	geom_text(
-		aes(label = paste0(sprintf("%.1f", improvement), "%")),
-		vjust = ifelse(p4a$improvement >= 0, -1, 1.8),
-		size = 3,
-		fontface = "bold",
-		show.legend = FALSE
-	) +
-	scale_color_manual(values = calibration_colors) +
-	scale_x_continuous(breaks = 1:5) +
-	scale_y_continuous(
-		expand = expansion(mult = c(0.13, 0.16))
-	) +
-	labs(
-		title = "Prediction improvement by anchor source",
-		x = "Number of anchor compounds",
-		y = "RMSE reduction relative to no calibration (%)"
-	) +
-	theme_manuscript(10.5) +
-	theme(
-		legend.position = "bottom",
-		legend.text = element_text(size = 9),
-		plot.title = element_text(size = 11.5)
-	)
+segments(x_other, wrong60$wrong_ci_low, x_other, wrong60$wrong_ci_high, col = pal[7], lwd = 1.5)
+segments(x_other - 0.04, wrong60$wrong_ci_low, x_other + 0.04, wrong60$wrong_ci_low, col = pal[7], lwd = 1.5)
+segments(x_other - 0.04, wrong60$wrong_ci_high, x_other + 0.04, wrong60$wrong_ci_high, col = pal[7], lwd = 1.5)
+points(x_other, wrong60$wrong_improvement_percent, pch = 17, col = pal[7], cex = 1.3)
 
-# ------------------------------------------------------------
-# B. Paired difference in prediction error
-# ------------------------------------------------------------
+legend("topleft",
+	legend = c("Target-source anchors", "Other-source anchors"),
+	col = c(pal[1], pal[7]), pch = c(16, 17),
+	bty = "n", cex = 0.9)
 
-p4b <- data.frame(
-	anchors = wrong60$anchors,
-	difference = wrong60$RMSE_wrong_minus_correct,
-	ci_low = wrong60$difference_ci_low,
-	ci_high = wrong60$difference_ci_high
-)
-
-plot4b <- ggplot(
-	p4b,
-	aes(x = anchors, y = difference)
-) +
-	geom_hline(
-		yintercept = 0,
-		linetype = 3,
-		color = c_grey
-	) +
-	geom_errorbar(
-		aes(ymin = ci_low, ymax = ci_high),
-		width = 0.12,
-		linewidth = 0.65,
-		color = c_grey_dark
-	) +
-	geom_line(
-		color = c_teal,
-		linewidth = 1.1
-	) +
-	geom_point(
-		color = c_teal,
-		size = 3.5
-	) +
-	geom_text(
-		aes(label = sprintf("%.3f", difference)),
-		vjust = -1.1,
-		size = 3,
-		fontface = "bold"
-	) +
-	scale_x_continuous(breaks = 1:5) +
-	scale_y_continuous(
-		expand = expansion(mult = c(0.07, 0.18))
-	) +
-	labs(
-		title = "Paired difference in prediction error",
-		x = "Number of anchor compounds",
-		y = "RMSE difference (different minus target source)"
-	) +
-	theme_manuscript(10.5) +
-	theme(
-		plot.title = element_text(size = 11.5)
-	)
-
-# ------------------------------------------------------------
-# Combine and save
-# ------------------------------------------------------------
-
-fig4 <- (plot4a | plot4b) +
-	plot_layout(widths = c(1.1, 1)) +
-	plot_annotation(
-		tag_levels = "A",
-		theme = theme(
-			plot.margin = margin(12, 12, 8, 12)
-		)
-	)
-
-save_fig(
-	fig4,
-	"Figure_4_source_specific_falsification",
-	10.5,
-	5.0
-)
+dev.off()
 
 # ============================================================
 # Figure S1
@@ -1363,6 +1242,87 @@ save_fig(
 	9.2,
 	5.8
 )
+
+# ------------------------------------------------------------
+# Calibration failure analysis
+# ------------------------------------------------------------
+
+summary70 <- read.csv("R/results/70_failure_source_summary.csv", stringsAsFactors = FALSE)
+selection70 <- read.csv("R/results/70_failure_anchor_selections.csv", stringsAsFactors = FALSE)
+calibration31 <- read.csv("R/results/31_calibration_performance.csv", stringsAsFactors = FALSE)
+
+primary70 <- summary70[summary70$anchors == 1, ]
+primary70 <- primary70[order(primary70$dataset, primary70$reference_id), ]
+
+# Use the original paired one-anchor evaluations for the advance check.
+check_rows <- calibration31[calibration31$anchors == 1, ]
+check_rows$RMSE_reduction <- check_rows$RMSE_uncalibrated - check_rows$RMSE_calibrated
+known70 <- aggregate(RMSE_reduction ~ reference_id, data = check_rows[check_rows$task == "Known compound", ], mean)
+novel70 <- aggregate(RMSE_reduction ~ reference_id, data = check_rows[check_rows$task == "New compound", ], mean)
+check70 <- merge(known70, novel70, by = "reference_id", suffixes = c("_known", "_novel"))
+check70$agrees <- (check70$RMSE_reduction_known > 0) == (check70$RMSE_reduction_novel > 0)
+
+pdf("R/figures/Figure_calibration_failure.pdf", width = 9, height = 7)
+par(mfrow = c(2, 2), mar = c(4.7, 4.8, 3.2, 1), mgp = c(2.8, 0.7, 0), cex.axis = 1.05, cex.lab = 1.05, cex.main = 1.05)
+
+# A. Retrospective comparison with the test residual.
+improved70 <- primary70$RMSE_calibrated < primary70$RMSE_uncalibrated
+cols70 <- ifelse(improved70, pal[1], pal[7])
+symbols70 <- ifelse(primary70$dataset == "HuSkinDB", 19, 17)
+lims70 <- range(c(primary70$test_mean_residual, primary70$offset_min, primary70$offset_max))
+
+plot(primary70$test_mean_residual, primary70$offset_mean,
+	xlim = lims70, ylim = lims70, type = "n", asp = 1,
+	xlab = "Mean uncalibrated test residual",
+	ylab = "Mean anchor offset",
+	main = "A. Offset and test bias")
+abline(h = 0, v = 0, col = "grey85")
+abline(0, 1, lty = 2, col = "grey45")
+segments(primary70$test_mean_residual, primary70$offset_min, primary70$test_mean_residual, primary70$offset_max, col = cols70)
+points(primary70$test_mean_residual, primary70$offset_mean, pch = symbols70, col = cols70)
+
+legend("topleft",
+	legend = c("HuSkinDB", "SkinPiX", "RMSE decreased", "RMSE increased"),
+	col = c("grey30", "grey30", pal[1], pal[7]),
+	pch = c(19, 17, 15, 15), bty = "n", cex = 0.8)
+
+# B. Check available before evaluating unseen compounds.
+check_cols70 <- ifelse(check70$agrees, pal[1], pal[7])
+plot(check70$RMSE_reduction_known, check70$RMSE_reduction_novel,
+	type = "n",
+	xlab = "RMSE reduction on remaining shared compounds",
+	ylab = "RMSE reduction on unseen compounds",
+	main = "B. Do the two outcomes agree?")
+abline(h = 0, v = 0, col = "grey65")
+points(check70$RMSE_reduction_known, check70$RMSE_reduction_novel, pch = 19, col = check_cols70)
+legend("topleft", c("Same outcome", "Different outcome"),
+	col = c(pal[1], pal[7]), pch = 19, bty = "n", cex = 0.8)
+
+# C and D. Variation across anchor panels for two failure examples.
+for (ref in c("HUR_48", "SPX_R18")) {
+	x <- selection70[selection70$reference_id == ref, ]
+	panel_counts70 <- table(x$anchors)
+	offset_limits70 <- range(c(x$offset, x$test_mean_residual[1], 0))
+	offset_padding70 <- max(diff(offset_limits70) * 0.16, 0.04)
+
+	boxplot(offset ~ anchors, data = x, outline = FALSE,
+		col = adjustcolor(pal[2], alpha.f = 0.2),
+		xlab = "Number of anchors", ylab = "Estimated source offset",
+		main = paste(if (ref == "HUR_48") "C." else "D.", ref),
+		ylim = offset_limits70 + c(-offset_padding70, offset_padding70))
+	stripchart(offset ~ anchors, data = x, vertical = TRUE,
+		method = "jitter", jitter = 0.12, add = TRUE,
+		pch = 16, cex = 0.5, col = adjustcolor(pal[1], alpha.f = 0.45))
+	abline(h = 0, col = "grey80")
+	abline(h = x$test_mean_residual[1], col = pal[7], lwd = 2)
+	axis(3, at = seq_along(panel_counts70), labels = paste0("n=", panel_counts70),
+		tick = FALSE, line = -0.7, cex.axis = 0.7)
+}
+
+dev.off()
+
+cat("Diagnostic sources: ", nrow(primary70), "\n", sep = "")
+
 
 cat(
 	"\nManuscript figures created\n",

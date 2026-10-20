@@ -1,5 +1,5 @@
-"Dataset","Specification","In-domain n","Out-of-domain n","MAE in domain","MAE out of domain"
+"Dataset","Specification","In domain n","Outside domain n","MAE in domain","MAE outside domain"
 "Cheruvu","S1",137,11,"0.506","0.948"
 "Cheruvu","S2",128,20,"0.484","0.881"
 "HuSkinDB","S1",243,8,"0.807","2.137"
-"SkinPiX external test","S1",54,0,"--","--"
+"SkinPiX external test","S1",54,0,"Not reported","Not reported"

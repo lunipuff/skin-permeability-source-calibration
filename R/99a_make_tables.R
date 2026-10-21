@@ -890,7 +890,18 @@ write.csv(table_metadata, "R/tables/Table_metadata_availability.csv", row.names 
 # ------------------------------------------------------------
 
 summary70 <- read.csv("R/results/70_failure_source_summary.csv", stringsAsFactors = FALSE)
+selection70 <- read.csv("R/results/70_failure_anchor_selections.csv", stringsAsFactors = FALSE)
+
 primary70 <- summary70[summary70$anchors == 1, ]
+
+primary70$test_bias_squared <- primary70$test_mean_residual^2
+primary70$mean_MSE_change <- primary70$offset_variance + primary70$offset_bias_squared - primary70$test_bias_squared
+
+for (i in seq_len(nrow(primary70))) {
+	x <- selection70[selection70$dataset == primary70$dataset[i] & selection70$reference_id == primary70$reference_id[i] & selection70$anchors == 1, ]
+	direct_change <- mean(x$RMSE_calibrated^2) - x$RMSE_uncalibrated[1]^2
+	stopifnot(abs(primary70$mean_MSE_change[i] - direct_change) < 1e-8)
+}
 primary70 <- primary70[order(primary70$dataset, primary70$reference_id), ]
 table70 <- primary70[c("dataset", "reference_id", "available_anchors", "test_compounds", "median_anchor_replication", "median_test_replication", "RMSE_uncalibrated", "RMSE_calibrated", "test_mean_residual", "offset_mean", "offset_sd", "improved_percent", "anchor_distance_mean", "protocol_fields_varying")]
 for (v in names(table70)[7:13]) table70[[v]] <- round(table70[[v]], 3)

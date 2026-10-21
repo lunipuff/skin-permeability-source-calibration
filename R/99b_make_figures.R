@@ -409,173 +409,36 @@ save_fig(
 # Figure 2. Source information and prediction
 # ------------------------------------------------------------
 
-loco_ci <- read.csv(
-	"R/results/60_loco_bootstrap_ci.csv",
-	stringsAsFactors = FALSE
-)
+fig2 <- loco60[loco60$approach %in% c("hierarchical_source_blind", "hierarchical_known_source") & (loco60$dataset == "Cheruvu" | (loco60$dataset == "HuSkinDB" & loco60$specification == "S1")), ]
+fig2$group <- paste(fig2$dataset, fig2$specification)
+fig2_order <- c("Cheruvu S1", "Cheruvu S2", "HuSkinDB S1")
+stopifnot(nrow(fig2) == 6L, all(table(fig2$group) == 2L))
 
-fig2 <- loco_ci[loco_ci$dataset %in% c("Cheruvu", "HuSkinDB"), ]
-fig2 <- fig2[!(fig2$dataset == "HuSkinDB" & fig2$specification != "S1"), ]
+fig2$blind <- fig2$approach == "hierarchical_source_blind"
+fig2$y <- 4 - match(fig2$group, fig2_order) + ifelse(fig2$blind, 0.14, -0.14)
+fig2$plot_col <- ifelse(fig2$blind, pal[7], pal[1])
+fig2$plot_pch <- ifelse(fig2$blind, 17, 16)
 
-fig2$panel <- ifelse(
-	fig2$dataset == "Cheruvu" & fig2$specification == "S1",
-	"Cheruvu et al., 2022 - S1\n148 compounds, 476 observations",
-	ifelse(
-		fig2$dataset == "Cheruvu" & fig2$specification == "S2",
-		"Cheruvu et al., 2022 - S2\n148 compounds, 476 observations",
-		"HuSkinDB - S1\n251 compounds, 546 observations"
-	)
-)
+fig2_ticks <- seq(floor(min(c(0, fig2$improvement_ci_low)) / 10) * 10, ceiling(max(c(0, fig2$improvement_ci_high)) / 10) * 10, by = 10)
 
-fig2$panel <- factor(
-	fig2$panel,
-	levels = c(
-		"Cheruvu et al., 2022 - S1\n148 compounds, 476 observations",
-		"Cheruvu et al., 2022 - S2\n148 compounds, 476 observations",
-		"HuSkinDB - S1\n251 compounds, 546 observations"
-	)
-)
+pdf("R/figures/Figure_2_source_information_prediction.pdf", width = 7.6, height = 3.8)
+par(mar = c(4.3, 6.7, 1.4, 0.8), mgp = c(2.2, 0.6, 0), tcl = -0.25)
 
-fig2$approach_label <- ifelse(
-	fig2$approach == "conventional",
-	"Aggregate\nQSPR",
-	ifelse(
-		fig2$approach == "hierarchical_source_blind",
-		"Hierarchy\nonly",
-		"Hierarchy\n+ source"
-	)
-)
+plot(NA_real_, NA_real_, type = "n", xlim = range(fig2_ticks) + c(-1, 1), ylim = c(0.6, 3.8), axes = FALSE, xlab = "RMSE reduction relative to conventional QSPR (%)", ylab = "")
+abline(v = fig2_ticks, col = "grey92")
+abline(h = c(1.5, 2.5), col = "grey94")
+abline(v = 0, col = "grey45", lwd = 1.2)
 
-fig2$approach_label <- factor(
-	fig2$approach_label,
-	levels = c("Aggregate\nQSPR", "Hierarchy\nonly", "Hierarchy\n+ source")
-)
+segments(fig2$improvement_ci_low, fig2$y, fig2$improvement_ci_high, fig2$y, col = fig2$plot_col, lwd = 2)
+segments(fig2$improvement_ci_low, fig2$y - 0.055, fig2$improvement_ci_low, fig2$y + 0.055, col = fig2$plot_col, lwd = 1.5)
+segments(fig2$improvement_ci_high, fig2$y - 0.055, fig2$improvement_ci_high, fig2$y + 0.055, col = fig2$plot_col, lwd = 1.5)
+points(fig2$improvement_percent, fig2$y, pch = fig2$plot_pch, col = fig2$plot_col, cex = 1.35)
 
-fmt_num <- function(x, digits = 3) {
-	formatC(x, format = "f", digits = digits)
-}
+axis(1, at = fig2_ticks)
+axis(2, at = c(3, 2, 1), labels = fig2_order, las = 1, tick = FALSE, cex.axis = 1.05)
+legend("topright", legend = c("Source blind", "Source aware"), col = c(pal[7], pal[1]), pch = c(17, 16), horiz = TRUE, bty = "n", cex = 0.9, inset = c(0.01, 0.01))
 
-fig2$rmse_label <- fmt_num(fig2$RMSE, 3)
-
-fig2$change_label <- ifelse(
-	fig2$approach == "conventional",
-	"reference",
-	ifelse(
-		fig2$improvement_percent >= 0,
-		paste0(formatC(fig2$improvement_percent, format = "f", digits = 1), "% lower"),
-		paste0(formatC(abs(fig2$improvement_percent), format = "f", digits = 1), "% higher")
-	)
-)
-
-cols <- palette(7)
-fig2_cols <- c(
-	"Aggregate\nQSPR" = cols[2],
-	"Hierarchy\nonly" = cols[4],
-	"Hierarchy\n+ source" = cols[7]
-)
-
-y_min <- min(fig2$RMSE_ci_low, na.rm = TRUE)
-y_max <- max(fig2$RMSE_ci_high, na.rm = TRUE)
-y_pad <- 0.18 * (y_max - y_min)
-
-panel_tags <- data.frame(
-	panel = factor(
-		c(
-			"Cheruvu et al., 2022 - S1\n148 compounds, 476 observations",
-			"Cheruvu et al., 2022 - S2\n148 compounds, 476 observations",
-			"HuSkinDB - S1\n251 compounds, 546 observations"
-		),
-		levels = levels(fig2$panel)
-	),
-	approach_label = factor(
-		c("Aggregate\nQSPR", "Aggregate\nQSPR", "Aggregate\nQSPR"),
-		levels = levels(fig2$approach_label)
-	),
-	y = c(y_max + y_pad * 0.80, y_max + y_pad * 0.80, y_max + y_pad * 0.80),
-	label = c("A", "B", "C"),
-	stringsAsFactors = FALSE
-)
-
-p2 <- ggplot(
-	fig2,
-	aes(x = approach_label, y = RMSE, group = 1)
-) +
-	geom_line(
-		linewidth = 0.7,
-		colour = "grey55"
-	) +
-	geom_errorbar(
-		aes(ymin = RMSE_ci_low, ymax = RMSE_ci_high),
-		width = 0.10,
-		linewidth = 0.6,
-		colour = "grey35"
-	) +
-	geom_point(
-		aes(fill = approach_label),
-		shape = 21,
-		size = 4.0,
-		stroke = 0.5,
-		colour = "black"
-	) +
-	geom_text(
-		aes(label = rmse_label),
-		vjust = -0.95,
-		size = 3.4
-	) +
-	geom_text(
-		data = fig2[fig2$approach != "conventional", ],
-		aes(label = change_label),
-		vjust = 1.85,
-		size = 3.0
-	) +
-	geom_text(
-		data = panel_tags,
-		aes(x = approach_label, y = y, label = label),
-		inherit.aes = FALSE,
-		hjust = -0.45,
-		vjust = 1,
-		fontface = "bold",
-		size = 5.2
-	) +
-	facet_wrap(
-		~ panel,
-		nrow = 1
-	) +
-	scale_fill_manual(
-		values = fig2_cols,
-		guide = "none"
-	) +
-	coord_cartesian(
-		ylim = c(y_min - 0.02, y_max + y_pad),
-		clip = "off"
-	) +
-	labs(
-		title = "",
-		subtitle = "Points show LOCO RMSE; error bars show 95% compound-bootstrap intervals",
-		x = NULL,
-		y = expression("LOCO RMSE in " * log[10] * K[p])
-	) +
-	theme_bw(base_size = 11) +
-	theme(
-		plot.title = element_text(face = "bold", size = 15),
-		plot.subtitle = element_text(size = 10),
-		strip.background = element_rect(fill = "grey94", colour = "grey75"),
-		strip.text = element_text(face = "bold", size = 10.5),
-		panel.grid.minor = element_blank(),
-		panel.grid.major.x = element_blank(),
-		axis.text.x = element_text(size = 9),
-		axis.title.y = element_text(size = 11),
-		plot.margin = margin(12, 18, 12, 12)
-	)
-
-ggsave(
-	"R/figures/Figure_2_source_information_prediction.pdf",
-	p2,
-	width = 11.2,
-	height = 5.0,
-	units = "in"
-)
-
+dev.off()
 
 # ============================================================
 # Figure 3
@@ -587,61 +450,25 @@ ggsave(
 # ------------------------------------------------------------
 
 p3a_dat <- ref41[ref41$anchors == 1, ]
-
-p3a_dat <- p3a_dat[
-	order(p3a_dat$RMSE_uncalibrated, decreasing = TRUE),
-]
-
-p3a_dat$source <- factor(
-	p3a_dat$reference_id,
-	levels = rev(p3a_dat$reference_id)
-)
-
-p3a_dat$change <- 100 * (
-	p3a_dat$RMSE_calibrated /
-		p3a_dat$RMSE_uncalibrated - 1
-)
-
-p3a_dat$change_label <- paste0(
-	ifelse(
-		p3a_dat$change < 0,
-		"RMSE reduced ",
-		"RMSE increased "
-	),
-	sprintf("%.1f", abs(p3a_dat$change)),
-	"%"
-)
+p3a_dat <- p3a_dat[order(p3a_dat$RMSE_uncalibrated, decreasing = TRUE), ]
+p3a_dat$source <- factor(p3a_dat$reference_id, levels = rev(p3a_dat$reference_id))
+p3a_dat$change <- 100 * (p3a_dat$RMSE_calibrated / p3a_dat$RMSE_uncalibrated - 1)
+p3a_dat$change_label <- paste0(sprintf("%.1f", abs(p3a_dat$change)), "% ", ifelse(p3a_dat$change < 0, "lower", "higher"))
+p3a_dat$change_group <- ifelse(p3a_dat$change < 0, "Lower RMSE", "Higher RMSE")
+p3a_dat$arrow_end <- p3a_dat$RMSE_calibrated + sign(p3a_dat$RMSE_uncalibrated - p3a_dat$RMSE_calibrated) * 0.015
 
 p3a_points <- rbind(
-	data.frame(
-		source = p3a_dat$source,
-		RMSE = p3a_dat$RMSE_uncalibrated,
-		stage = "Before calibration"
-	),
-	data.frame(
-		source = p3a_dat$source,
-		RMSE = p3a_dat$RMSE_calibrated,
-		stage = "After calibration"
-	)
+	data.frame(source = p3a_dat$source, RMSE = p3a_dat$RMSE_uncalibrated, stage = "Before calibration"),
+	data.frame(source = p3a_dat$source, RMSE = p3a_dat$RMSE_calibrated, stage = "After calibration")
 )
-
-p3a_points$stage <- factor(
-	p3a_points$stage,
-	levels = c(
-		"Before calibration",
-		"After calibration"
-	)
-)
+p3a_points$stage <- factor(p3a_points$stage, levels = c("Before calibration", "After calibration"))
 
 p3a <- ggplot(p3a_dat, aes(y = source)) +
 	geom_segment(
-		aes(
-			x = RMSE_uncalibrated,
-			xend = RMSE_calibrated,
-			yend = source
-		),
-		color = c_grey_light,
-		linewidth = 2.2
+		aes(x = RMSE_uncalibrated, xend = arrow_end, yend = source),
+		color = c_grey,
+		linewidth = 1.2,
+		arrow = grid::arrow(type = "closed", length = grid::unit(0.09, "inches"))
 	) +
 	geom_point(
 		data = p3a_points,
@@ -652,235 +479,118 @@ p3a <- ggplot(p3a_dat, aes(y = source)) +
 		color = c_grey_dark
 	) +
 	geom_text(
-		aes(
-			x = pmax(RMSE_uncalibrated, RMSE_calibrated),
-			label = change_label
-		),
-		hjust = -0.15,
-		size = 3.4,
-		fontface = "bold",
-		color = c_blue
+		aes(x = pmax(RMSE_uncalibrated, RMSE_calibrated), label = change_label, color = change_group),
+		hjust = -0.18,
+		size = 3.6,
+		fontface = "bold"
 	) +
-	scale_fill_manual(
-		values = c(
-			"Before calibration" = "white",
-			"After calibration" = c_teal
-		)
-	) +
-	scale_x_continuous(
-		breaks = seq(0.4, 1.6, 0.2)
-	) +
-	coord_cartesian(
-		xlim = c(0.38, 1.32),
-		clip = "off"
-	) +
+	scale_fill_manual(values = c("Before calibration" = "white", "After calibration" = c_blue)) +
+	scale_color_manual(values = c("Lower RMSE" = c_teal, "Higher RMSE" = c_red), guide = "none") +
+	scale_x_continuous(breaks = seq(0.4, 1.2, 0.2)) +
+	coord_cartesian(xlim = c(0.34, 1.32), clip = "off") +
 	labs(
 		title = "RMSE before and after one-anchor calibration",
 		x = "RMSE on SkinPiX-only compounds",
 		y = NULL
 	) +
-	theme_manuscript(11) +
+	theme_manuscript(12) +
 	theme(
-		legend.position = "bottom",
+	    legend.position = c(0.8, 1.2),
+    	legend.justification = c(0, 1),
 		axis.line.y = element_blank(),
 		axis.ticks.y = element_blank(),
-		plot.margin = margin(10, 20, 8, 12)
+		plot.margin = margin(8, 34, 6, 8)
 	) +
-	guides(
-		fill = guide_legend(
-			override.aes = list(
-				shape = 21,
-				size = 4,
-				color = c_grey_dark
-			)
-		)
-	)
+	guides(fill = guide_legend(override.aes = list(shape = 21, size = 4, color = c_grey_dark)))
 
 # ------------------------------------------------------------
-# B. Proportion of compounds with reduced error
+# B. Compounds with reduced absolute error
 # ------------------------------------------------------------
 
 p3b_dat <- aggregate(
-	cbind(
-		abs_error_uncalibrated,
-		abs_error_calibrated
-	) ~ compound_id,
+	cbind(abs_error_uncalibrated, abs_error_calibrated) ~ compound_id,
 	data = pred41,
 	mean
 )
 
-n_improved <- sum(
-	p3b_dat$abs_error_calibrated <
-		p3b_dat$abs_error_uncalibrated
-)
-
+n_improved <- sum(p3b_dat$abs_error_calibrated < p3b_dat$abs_error_uncalibrated)
 n_total <- nrow(p3b_dat)
 n_other <- n_total - n_improved
 
 p3b_summary <- data.frame(
 	outcome = factor(
 		c("Error decreased", "Error increased or unchanged"),
-		levels = c(
-			"Error decreased",
-			"Error increased or unchanged"
-		)
+		levels = c("Error decreased", "Error increased or unchanged")
 	),
 	count = c(n_improved, n_other)
 )
+p3b_summary$percent <- 100 * p3b_summary$count / n_total
+p3b_summary$label <- paste0(p3b_summary$count, "/", n_total, " (", round(p3b_summary$percent), "%)")
 
-p3b_summary$percent <- 100 *
-	p3b_summary$count / n_total
-
-p3b_summary$label <- paste0(
-	p3b_summary$count,
-	"/",
-	n_total,
-	" (",
-	round(p3b_summary$percent),
-	"%)"
-)
-
-p3b <- ggplot(
-	p3b_summary,
-	aes(x = outcome, y = percent, fill = outcome)
-) +
-	geom_col(
-		width = 0.62
-	) +
-	geom_text(
-		aes(label = label),
-		vjust = -0.6,
-		fontface = "bold",
-		size = 3.6
-	) +
-	scale_fill_manual(
-		values = c(
-			"Error decreased" = c_teal,
-			"Error increased or unchanged" = c_red
-		)
-	) +
-	scale_y_continuous(
-		limits = c(0, 105),
-		breaks = seq(0, 100, 25),
-		expand = c(0, 0)
-	) +
-	scale_x_discrete(
-		labels = c(
-			"Error\ndecreased",
-			"Error increased\nor unchanged"
-		)
-	) +
+p3b <- ggplot(p3b_summary, aes(x = outcome, y = percent, fill = outcome)) +
+	geom_col(width = 0.62) +
+	geom_text(aes(label = label), vjust = -0.6, fontface = "bold", size = 3.8) +
+	scale_fill_manual(values = c("Error decreased" = c_teal, "Error increased or unchanged" = c_red)) +
+	scale_y_continuous(limits = c(0, 105), breaks = seq(0, 100, 25), expand = c(0, 0)) +
+	scale_x_discrete(labels = c("Error\ndecreased", "Error increased\nor unchanged")) +
 	labs(
-		title = "Compounds with reduced prediction error",
+		title = "Change in compound-level error",
 		x = NULL,
 		y = "SkinPiX-only compounds (%)"
 	) +
-	theme_manuscript(10.5) +
+	theme_manuscript(11.5) +
 	theme(
 		legend.position = "none",
+		axis.title.y = element_text(margin = margin(r = 5)),
 		axis.line.x = element_blank(),
 		axis.ticks.x = element_blank(),
-		plot.margin = margin(10, 12, 10, 12)
+		plot.margin = margin(8, 10, 8, 8)
 	)
 
 # ------------------------------------------------------------
-# C. Combined RMSE reduction with additional anchors
+# C. Anchor panels in the same three sources
 # ------------------------------------------------------------
 
-p3c_dat <- match41[
-	match41$anchors %in% 1:3,
-]
+p3c_dat <- match41[match41$anchors %in% 1:3, ]
 
-p3c <- ggplot(
-	p3c_dat,
-	aes(
-		x = anchors,
-		y = RMSE_improvement_percent
-	)
-) +
-	geom_hline(
-		yintercept = 0,
-		linetype = 3,
-		color = c_grey
-	) +
-	geom_line(
-		color = c_blue,
-		linewidth = 1.5
-	) +
-	geom_point(
-		color = c_blue,
-		size = 4
-	) +
+p3c <- ggplot(p3c_dat, aes(x = anchors, y = RMSE_improvement_percent)) +
+	geom_hline(yintercept = 0, linetype = 3, color = c_grey) +
+	geom_line(color = c_blue, linewidth = 1.4) +
+	geom_point(color = c_blue, size = 3.8) +
 	geom_text(
-		aes(
-			label = paste0(
-				sprintf("%.1f", RMSE_improvement_percent),
-				"%"
-			)
-		),
-		vjust = -1.2,
+		aes(label = paste0(sprintf("%.1f", RMSE_improvement_percent), "%")),
+		vjust = -1.1,
 		fontface = "bold",
 		color = c_blue,
-		size = 3.5
+		size = 3.8
 	) +
-	scale_x_continuous(
-		breaks = 1:3
-	) +
-	coord_cartesian(
-		xlim = c(0.9,3.1),
-		clip = "off"
-	) +
-	scale_y_continuous(
-		limits = c(0, 35),
-		breaks = seq(0, 30, 10),
-		expand = c(0, 0)
-	) +
+	scale_x_continuous(breaks = 1:3) +
+	scale_y_continuous(limits = c(0, 35), breaks = seq(0, 30, 10), expand = c(0, 0)) +
+	coord_cartesian(xlim = c(0.9, 3.1), clip = "off") +
 	labs(
-		title = "Calibration with additional anchors",
-		subtitle = "Same three eligible sources",
+		title = "Same three SkinPiX sources",
 		x = "Number of anchor compounds",
-		y = "Combined RMSE reduction (%)"
+		y = "Mean source-level RMSE reduction (%)"
 	) +
-	theme_manuscript(10.5) +
-	theme(
-		plot.margin = margin(10, 12, 10, 12)
-	)
+	theme_manuscript(11.5) +
+	theme(plot.margin = margin(8, 12, 8, 8),
+		axis.title.y = element_text(margin = margin(r = 5)),
+		plot.tag = element_text(margin = margin(r = 20)) 
+		)
 
 # ------------------------------------------------------------
 # Combine and save
 # ------------------------------------------------------------
 
-fig3 <- p3a / (p3b | p3c) +
-	plot_layout(
-		heights = c(1, 1.1),
-		widths = c(1, 1)
-	) +
-	plot_annotation(
-		title = "",
-		subtitle = paste0(
-			n_total,
-			" SkinPiX-only compounds from ",
-			nrow(p3a_dat),
-			" unseen experimental sources"
-		),
-		tag_levels = "A",
-		theme = theme(
-			plot.title = element_text(
-				face = "bold",
-				size = 13
-			),
-			plot.subtitle = element_text(size = 10),
-			plot.margin = margin(12, 14, 8, 14)
-		)
+fig3 <- p3a / (free(p3b, type = "label") | p3c) +
+	plot_layout(heights = c(1.05, 1), widths = c(1, 1)) +
+	plot_annotation(tag_levels = "A") & # USE THE & OPERATOR HERE
+	theme(
+		plot.tag = element_text(size = 18, face = "bold"), # Changes A, B, C size globally
+		plot.margin = margin(8, 10, 8, 10)
 	)
 
-save_fig(
-	fig3,
-	"Figure_3_skinpix_transfer",
-	10.5,
-	7.8
-)
-
+save_fig(fig3, "Figure_3_skinpix_transfer", 10, 8)
 
 # ============================================================
 # Figure 4
@@ -888,36 +598,38 @@ save_fig(
 # ============================================================
 
 wrong60 <- read.csv("R/results/60_wrong_source_ci.csv", stringsAsFactors = FALSE)
+wrong60 <- wrong60[order(wrong60$anchors), ]
 
-y_limits <- range(c(wrong60$correct_ci_low, wrong60$correct_ci_high, wrong60$wrong_ci_low, wrong60$wrong_ci_high, 0))
-y_padding <- diff(y_limits) * 0.1
-x_target <- wrong60$anchors - 0.12
-x_other <- wrong60$anchors + 0.12
+rows <- seq_len(nrow(wrong60))
+x_limits <- range(c(wrong60$correct_ci_low, wrong60$correct_ci_high, wrong60$wrong_ci_low, wrong60$wrong_ci_high, 0))
+x_padding <- diff(x_limits) * 0.07
+x_limits <- x_limits + c(-x_padding, x_padding)
 
-pdf("R/figures/Figure_4_source_specific_falsification.pdf", width = 8.2, height = 4.8)
-par(mar = c(4.6, 5.4, 1, 1), cex.lab = 1.1, cex.axis = 1)
+pdf("R/figures/Figure_4_source_specific_falsification.pdf", width = 8.2, height = 4.7)
+par(mar = c(4.5, 8, 1.2, 1), cex.axis = 1, cex.lab = 1.1)
 
-plot(wrong60$anchors, wrong60$correct_improvement_percent,
-	type = "n", xlim = range(wrong60$anchors) + c(-0.5, 0.5),
-	ylim = y_limits + c(-y_padding, y_padding),
-	xaxt = "n", yaxt = "n",
-	xlab = "Number of anchor compounds",
-	ylab = "RMSE reduction relative to no calibration (%)")
-axis(1, at = wrong60$anchors)
-axis(2, las = 1)
-abline(h = 0, lty = 3, col = "grey65")
+plot(0, 0, type = "n", xlim = x_limits, ylim = c(0.5, nrow(wrong60) + 0.5),
+	axes = FALSE, xlab = "RMSE reduction relative to no calibration (%)", ylab = "")
+abline(v = pretty(x_limits), col = "grey92")
+abline(v = 0, col = "grey55", lwd = 1.3)
 
-segments(x_target, wrong60$correct_ci_low, x_target, wrong60$correct_ci_high, col = pal[1], lwd = 1.5)
-segments(x_target - 0.04, wrong60$correct_ci_low, x_target + 0.04, wrong60$correct_ci_low, col = pal[1], lwd = 1.5)
-segments(x_target - 0.04, wrong60$correct_ci_high, x_target + 0.04, wrong60$correct_ci_high, col = pal[1], lwd = 1.5)
-points(x_target, wrong60$correct_improvement_percent, pch = 16, col = pal[1], cex = 1.3)
+segments(wrong60$correct_ci_low, rows, wrong60$correct_ci_high, rows, col = pal[1], lwd = 1.7)
+segments(wrong60$correct_ci_low, rows - 0.09, wrong60$correct_ci_low, rows + 0.09, col = pal[1], lwd = 1.7)
+segments(wrong60$correct_ci_high, rows - 0.09, wrong60$correct_ci_high, rows + 0.09, col = pal[1], lwd = 1.7)
+points(wrong60$correct_improvement_percent, rows, pch = 16, col = pal[1], cex = 1.35)
 
-segments(x_other, wrong60$wrong_ci_low, x_other, wrong60$wrong_ci_high, col = pal[7], lwd = 1.5)
-segments(x_other - 0.04, wrong60$wrong_ci_low, x_other + 0.04, wrong60$wrong_ci_low, col = pal[7], lwd = 1.5)
-segments(x_other - 0.04, wrong60$wrong_ci_high, x_other + 0.04, wrong60$wrong_ci_high, col = pal[7], lwd = 1.5)
-points(x_other, wrong60$wrong_improvement_percent, pch = 17, col = pal[7], cex = 1.3)
+segments(wrong60$wrong_ci_low, rows, wrong60$wrong_ci_high, rows, col = pal[7], lwd = 1.7)
+segments(wrong60$wrong_ci_low, rows - 0.09, wrong60$wrong_ci_low, rows + 0.09, col = pal[7], lwd = 1.7)
+segments(wrong60$wrong_ci_high, rows - 0.09, wrong60$wrong_ci_high, rows + 0.09, col = pal[7], lwd = 1.7)
+points(wrong60$wrong_improvement_percent, rows, pch = 17, col = pal[7], cex = 1.35)
 
-legend("topleft",
+axis(1, at = pretty(x_limits))
+axis(2, at = rows,
+	labels = paste0(wrong60$anchors, ifelse(wrong60$anchors == 1, " anchor", " anchors"),
+		"  (n=", wrong60$n_references, ")"),
+	las = 1, tick = FALSE)
+
+legend("bottomright",
 	legend = c("Target-source anchors", "Other-source anchors"),
 	col = c(pal[1], pal[7]), pch = c(16, 17),
 	bty = "n", cex = 0.9)
@@ -1262,62 +974,147 @@ novel70 <- aggregate(RMSE_reduction ~ reference_id, data = check_rows[check_rows
 check70 <- merge(known70, novel70, by = "reference_id", suffixes = c("_known", "_novel"))
 check70$agrees <- (check70$RMSE_reduction_known > 0) == (check70$RMSE_reduction_novel > 0)
 
-pdf("R/figures/Figure_calibration_failure.pdf", width = 9, height = 7)
-par(mfrow = c(2, 2), mar = c(4.7, 4.8, 3.2, 1), mgp = c(2.8, 0.7, 0), cex.axis = 1.05, cex.lab = 1.05, cex.main = 1.05)
+pdf("R/figures/Figure_calibration_failure.pdf", width = 8, height = 7)
+layout(
+	matrix(c(1, 1, 2, 3), nrow = 2, byrow = TRUE),
+	heights = c(1, 1)
+)
+par(mar = c(4.5, 4.5, 4.5, 1))
 
-# A. Retrospective comparison with the test residual.
-improved70 <- primary70$RMSE_calibrated < primary70$RMSE_uncalibrated
-cols70 <- ifelse(improved70, pal[1], pal[7])
-symbols70 <- ifelse(primary70$dataset == "HuSkinDB", 19, 17)
-lims70 <- range(c(primary70$test_mean_residual, primary70$offset_min, primary70$offset_max))
+# A. Anchor offset compared with test bias
+scale_a <- function(x) asinh(x)
+values_a <- c(primary70$test_mean_residual, primary70$offset_min, primary70$offset_max)
+limit_a <- max(abs(values_a), na.rm = TRUE)
+limit_x <- 4.2
+limit_y <- 3
+ticks_a <- c(-4, -2, -1, -0.5, 0, 0.5, 1, 2, 4)
+ticks_a <- ticks_a[abs(ticks_a) <= limit_a]
 
-plot(primary70$test_mean_residual, primary70$offset_mean,
-	xlim = lims70, ylim = lims70, type = "n", asp = 1,
+cols_a <- ifelse(
+	primary70$RMSE_calibrated > primary70$RMSE_uncalibrated,
+	pal[7],
+	pal[1]
+)
+pch_a <- ifelse(primary70$dataset == "SkinPiX", 17, 16)
+
+plot(
+	scale_a(primary70$test_mean_residual),
+	scale_a(primary70$offset_mean),
+	type = "n",
+	axes = FALSE,
+	xlim = scale_a(c(-limit_x, limit_x)),
+	ylim = scale_a(c(-limit_y, limit_y)),
 	xlab = "Mean uncalibrated test residual",
 	ylab = "Mean anchor offset",
-	main = "A. Offset and test bias")
+	main = "Does the anchor offset match test bias?"
+)
+
+wrong_sign_fill <- adjustcolor("grey50", alpha.f = 0.10)
+
+rect(
+	scale_a(-6), 0, 0, scale_a(6),
+	col = wrong_sign_fill, border = NA
+)
+rect(
+	0, scale_a(-6), scale_a(6), 0,
+	col = wrong_sign_fill, border = NA
+)
+
 abline(h = 0, v = 0, col = "grey85")
 abline(0, 1, lty = 2, col = "grey45")
-segments(primary70$test_mean_residual, primary70$offset_min, primary70$test_mean_residual, primary70$offset_max, col = cols70)
-points(primary70$test_mean_residual, primary70$offset_mean, pch = symbols70, col = cols70)
 
-legend("topleft",
-	legend = c("HuSkinDB", "SkinPiX", "RMSE decreased", "RMSE increased"),
-	col = c("grey30", "grey30", pal[1], pal[7]),
-	pch = c(19, 17, 15, 15), bty = "n", cex = 0.8)
+segments(
+	scale_a(primary70$test_mean_residual),
+	scale_a(primary70$offset_min),
+	scale_a(primary70$test_mean_residual),
+	scale_a(primary70$offset_max),
+	col = adjustcolor(cols_a, alpha.f = 0.55)
+)
+points(
+	scale_a(primary70$test_mean_residual),
+	scale_a(primary70$offset_mean),
+	pch = pch_a,
+	col = cols_a,
+	cex = 0.85
+)
+axis(1, at = scale_a(ticks_a), labels = ticks_a)
+axis(2, at = scale_a(ticks_a), labels = ticks_a, las = 1)
+box()
 
-# B. Check available before evaluating unseen compounds.
-check_cols70 <- ifelse(check70$agrees, pal[1], pal[7])
-plot(check70$RMSE_reduction_known, check70$RMSE_reduction_novel,
-	type = "n",
-	xlab = "RMSE reduction on remaining shared compounds",
-	ylab = "RMSE reduction on unseen compounds",
-	main = "B. Do the two outcomes agree?")
-abline(h = 0, v = 0, col = "grey65")
-points(check70$RMSE_reduction_known, check70$RMSE_reduction_novel, pch = 19, col = check_cols70)
-legend("topleft", c("Same outcome", "Different outcome"),
-	col = c(pal[1], pal[7]), pch = 19, bty = "n", cex = 0.8)
+legend(
+	"topleft",
+	legend = c("RMSE decreased", "RMSE increased", "SkinPiX source"),
+	pch = c(16, 16, 17),
+	col = c(pal[1], pal[7], "grey35"),
+	bty = "n",
+	cex = 0.8
+)
 
-# C and D. Variation across anchor panels for two failure examples.
-for (ref in c("HUR_48", "SPX_R18")) {
-	x <- selection70[selection70$reference_id == ref, ]
-	panel_counts70 <- table(x$anchors)
-	offset_limits70 <- range(c(x$offset, x$test_mean_residual[1], 0))
-	offset_padding70 <- max(diff(offset_limits70) * 0.16, 0.04)
+mtext("A", side = 3, line = 2, adj = 0, cex = 1.4, font = 2)
 
-	boxplot(offset ~ anchors, data = x, outline = FALSE,
-		col = adjustcolor(pal[2], alpha.f = 0.2),
-		xlab = "Number of anchors", ylab = "Estimated source offset",
-		main = paste(if (ref == "HUR_48") "C." else "D.", ref),
-		ylim = offset_limits70 + c(-offset_padding70, offset_padding70))
-	stripchart(offset ~ anchors, data = x, vertical = TRUE,
-		method = "jitter", jitter = 0.12, add = TRUE,
-		pch = 16, cex = 0.5, col = adjustcolor(pal[1], alpha.f = 0.45))
-	abline(h = 0, col = "grey80")
-	abline(h = x$test_mean_residual[1], col = pal[7], lwd = 2)
-	axis(3, at = seq_along(panel_counts70), labels = paste0("n=", panel_counts70),
-		tick = FALSE, line = -0.7, cex.axis = 0.7)
+# B. HUR_48
+hur48 <- selection70[selection70$reference_id == "HUR_48", ]
+hur48_limits <- range(c(hur48$offset, hur48$test_mean_residual[1], 0))
+hur48_padding <- max(diff(hur48_limits) * 0.1, 0.02)
+
+boxplot(
+	offset ~ anchors,
+	data = hur48,
+	outline = FALSE,
+	col = adjustcolor(pal[2], alpha.f = 0.2),
+	xlab = "Number of anchors",
+	ylab = "Estimated source offset",
+	main = "HUR_48",
+	ylim = hur48_limits + c(-hur48_padding, hur48_padding)
+)
+set.seed(2026)
+stripchart(
+	offset ~ anchors,
+	data = hur48,
+	vertical = TRUE,
+	method = "jitter",
+	jitter = 0.12,
+	add = TRUE,
+	pch = 16,
+	cex = 0.55,
+	col = adjustcolor(pal[1], alpha.f = 0.45)
+)
+abline(h = 0, col = "grey80")
+abline(h = hur48$test_mean_residual[1], col = pal[7], lwd = 2, lty = 2)
+
+for (k in sort(unique(hur48$anchors))) {
+	mtext(paste0("n=", sum(hur48$anchors == k)), side = 3, at = k, line = 0.4, cex = 0.8)
 }
+mtext("B", side = 3, line = 2, adj = 0, cex = 1.4, font = 2)
+
+# C. SPX_R18
+spx18 <- selection70[selection70$reference_id == "SPX_R18", ]
+spx18_limits <- range(c(spx18$offset, spx18$test_mean_residual[1], 0))
+spx18_padding <- max(diff(spx18_limits) * 0.1, 0.02)
+
+plot(
+	1, 0,
+	type = "n",
+	xlim = c(0.5, 3.5),
+	ylim = spx18_limits + c(-spx18_padding, spx18_padding),
+	xaxt = "n",
+	xlab = "Number of anchors",
+	ylab = "Estimated source offset",
+	main = "SPX_R18"
+)
+axis(1, at = 1:3)
+abline(h = 0, col = "grey80")
+abline(h = spx18$test_mean_residual[1], col = pal[7], lwd = 2, lty = 2)
+
+for (k in sort(unique(spx18$anchors))) {
+	offsets <- spx18$offset[spx18$anchors == k]
+	x_jitter <- if (length(offsets) == 1) 0 else seq(-0.08, 0.08, length.out = length(offsets))
+
+	segments(k - 0.13, mean(offsets), k + 0.13, mean(offsets), lwd = 2, col = "black")
+	points(k + x_jitter, offsets, pch = 16, cex = 1.25, col = pal[1])
+	mtext(paste0("n=", length(offsets)), side = 3, at = k, line = 0.4, cex = 0.8)
+}
+mtext("C", side = 3, line = 2, adj = 0, cex = 1.4, font = 2)
 
 dev.off()
 

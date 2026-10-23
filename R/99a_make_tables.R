@@ -908,6 +908,27 @@ for (v in names(table70)[7:13]) table70[[v]] <- round(table70[[v]], 3)
 names(table70) <- c("Dataset", "Source", "Available anchors", "Test compounds", "Median anchor records", "Median test records", "RMSE before", "Mean RMSE after", "Mean test residual", "Mean offset", "Offset SD", "Selections improved (%)", "Mean anchor distance", "Metadata fields varying")
 write.csv(table70, "R/tables/Table_S_calibration_failure.csv", row.names = FALSE, na = "")
 
+summary70 <- read.csv("R/results/70_failure_source_summary.csv", stringsAsFactors = FALSE)
+selection70 <- read.csv("R/results/70_failure_anchor_selections.csv", stringsAsFactors = FALSE)
+
+decomp70 <- summary70[summary70$anchors == 1, ]
+decomp70 <- decomp70[order(decomp70$dataset, decomp70$reference_id), ]
+decomp70$test_bias_squared <- decomp70$test_mean_residual^2
+decomp70$mean_MSE_change <- decomp70$offset_variance + decomp70$offset_bias_squared - decomp70$test_bias_squared
+
+direct70 <- vapply(seq_len(nrow(decomp70)), function(i) {
+	x <- selection70[selection70$dataset == decomp70$dataset[i] & selection70$reference_id == decomp70$reference_id[i] & selection70$anchors == 1, ]
+	stopifnot(nrow(x) == decomp70$selections[i])
+	mean(x$RMSE_calibrated^2) - x$RMSE_uncalibrated[1]^2
+}, numeric(1))
+
+stopifnot(max(abs(decomp70$mean_MSE_change - direct70)) < 1e-8)
+
+show_decomp70 <- decomp70[, c("dataset", "reference_id", "test_bias_squared", "offset_bias_squared", "offset_variance", "mean_MSE_change")]
+for (v in names(show_decomp70)[3:6]) show_decomp70[[v]] <- round(show_decomp70[[v]], 4)
+names(show_decomp70) <- c("Dataset", "Source", "Test bias sq.", "Mismatch sq.", "Offset var.", "Mean MSE change")
+
+write.csv(show_decomp70, "R/tables/Table_S_calibration_failure_decomposition.csv", row.names = FALSE)
 
 # ------------------------------------------------------------
 # Summary

@@ -77,18 +77,33 @@ skinpix$in_domain <- skinpix$mahalanobis <= domain_threshold & skinpix$within_ra
 # Eligible SkinPiX references
 # ------------------------------------------------------------
 
+huskin_with_temperature <- unique(as.character(huskin$compound_id[!is.na(huskin$temperature_c)]))
 refs <- unique(skinpix$reference_id)
 
 eligible <- do.call(rbind, lapply(refs, function(ref) {
 	x <- skinpix[skinpix$reference_id == ref, ]
+	x_temperature <- x[!is.na(x$temperature_c), ]
+
 	anchors <- unique(x$huskin_compound_id[x$overlap_huskin & !is.na(x$huskin_compound_id)])
 	novel <- unique(x$compound_id[!x$overlap_huskin])
+
+	temperature_anchors <- unique(x_temperature$huskin_compound_id[
+		x_temperature$overlap_huskin &
+			!is.na(x_temperature$huskin_compound_id) &
+			x_temperature$huskin_compound_id %in% huskin_with_temperature
+	])
+	temperature_novel <- unique(x_temperature$compound_id[!x_temperature$overlap_huskin])
 
 	data.frame(
 		reference_id = ref,
 		n_anchors = length(anchors),
 		n_novel_compounds = length(novel),
-		eligible = length(anchors) >= 1 && length(novel) >= 1 && !any(x$doi_overlaps_huskin)
+		eligible = length(anchors) >= 1 && length(novel) >= 1 && !any(x$doi_overlaps_huskin),
+		n_temperature_anchors = length(temperature_anchors),
+		n_temperature_test_compounds = length(temperature_novel),
+		n_recorded_temperatures = length(unique(x_temperature$temperature_c)),
+		temperature_min = if (nrow(x_temperature)) min(x_temperature$temperature_c) else NA_real_,
+		temperature_max = if (nrow(x_temperature)) max(x_temperature$temperature_c) else NA_real_
 	)
 }))
 

@@ -28,7 +28,7 @@ make_profile <- function(x, descriptors, FUN = median) {
 	merge(p, y, by = "compound_id", sort = FALSE)
 }
 
-run_loco <- function(x, descriptors, label, FUN = median, nonlinear = FALSE, domain = FALSE) {
+run_loco <- function(x, descriptors, label, FUN = median, domain = FALSE) {
 	compounds <- unique(x$compound_id)
 	out <- vector("list", length(compounds))
 
@@ -47,11 +47,7 @@ run_loco <- function(x, descriptors, label, FUN = median, nonlinear = FALSE, dom
 			test[[paste0(v, "_z")]] <- (test[[v]] - center[v]) / scale[v]
 		}
 
-		if (nonlinear) {
-			fixed <- "mw_z + log_kow_z + melting_point_k_z + log_saq_z + I(log_saq_z^2) + h_acceptor_z + log_kow_z:h_acceptor_z"
-		} else {
-			fixed <- paste(paste0(descriptors, "_z"), collapse = " + ")
-		}
+		fixed <- paste(paste0(descriptors, "_z"), collapse = " + ")
 
 		lm_fit <- lm(as.formula(paste("mean_log_kp ~", fixed)), data = profile)
 
@@ -166,22 +162,19 @@ multi <- names(which(tapply(dat$reference_id, dat$compound_id, function(x) lengt
 sens_multi <- run_loco(dat[dat$compound_id %in% multi, ], s2, "Multi-reference compounds")
 sens_outlier <- run_loco(dat[!dat$source_row %in% large$source_row, ], s2, "Exclude |standardized residual| > 3")
 sens_mean <- run_loco(dat, s2, "Mean descriptor aggregation", FUN = mean)
-sens_nonlinear <- run_loco(dat, s2, "Expanded nonlinear specification", nonlinear = TRUE)
 
 sens <- rbind(
 	data.frame(scenario = "Primary S2", summarize_loco(p2)),
 	data.frame(scenario = "Multi-reference compounds", summarize_loco(sens_multi)),
 	data.frame(scenario = "Exclude |standardized residual| > 3", summarize_loco(sens_outlier)),
-	data.frame(scenario = "Mean descriptor aggregation", summarize_loco(sens_mean)),
-	data.frame(scenario = "Expanded nonlinear specification", summarize_loco(sens_nonlinear))
+	data.frame(scenario = "Mean descriptor aggregation", summarize_loco(sens_mean))
 )
 
 sens_bal <- rbind(
 	data.frame(scenario = "Primary S2", compound_balanced(p2)),
 	data.frame(scenario = "Multi-reference compounds", compound_balanced(sens_multi)),
 	data.frame(scenario = "Exclude |standardized residual| > 3", compound_balanced(sens_outlier)),
-	data.frame(scenario = "Mean descriptor aggregation", compound_balanced(sens_mean)),
-	data.frame(scenario = "Expanded nonlinear specification", compound_balanced(sens_nonlinear))
+	data.frame(scenario = "Mean descriptor aggregation", compound_balanced(sens_mean))
 )
 
 # Outputs

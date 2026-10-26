@@ -164,6 +164,42 @@ anchor_sizes <- 1:5
 calibration <- list()
 z <- 1
 
+temperature_eligibility <- do.call(rbind, lapply(references, function(ref) {
+	train <- dat[as.character(dat$reference_id) != ref, ]
+	held <- dat[as.character(dat$reference_id) == ref, ]
+
+	train_compounds <- unique(as.character(train$compound_id))
+	held_compounds <- unique(as.character(held$compound_id))
+	shared <- intersect(held_compounds, train_compounds)
+	novel <- setdiff(held_compounds, train_compounds)
+
+	train_with_temperature <- unique(as.character(train$compound_id[!is.na(train$temperature_c)]))
+	held_with_temperature <- unique(as.character(held$compound_id[!is.na(held$temperature_c)]))
+
+	n_temperature_anchors <- length(intersect(shared, intersect(train_with_temperature, held_with_temperature)))
+	n_temperature_test_compounds <- length(intersect(novel, held_with_temperature))
+
+	data.frame(
+		reference_id = ref,
+		originally_eligible = length(shared) >= 1 && length(novel) >= 1,
+		n_temperature_anchors = n_temperature_anchors,
+		n_temperature_test_compounds = n_temperature_test_compounds,
+		n_recorded_temperatures = length(unique(held$temperature_c[!is.na(held$temperature_c)]))
+	)
+}))
+
+temperature_eligible <- with(
+	temperature_eligibility,
+	originally_eligible & n_temperature_anchors >= 1 & n_temperature_test_compounds >= 1
+)
+
+replication$temperature_calibration_n_sources <- sum(temperature_eligible)
+replication$temperature_calibration_max_source_temperatures <- if (any(temperature_eligible)) {
+	max(temperature_eligibility$n_recorded_temperatures[temperature_eligible])
+} else {
+	NA_integer_
+}
+
 for (ref in references) {
 	train <- dat[as.character(dat$reference_id) != ref, ]
 	held <- dat[as.character(dat$reference_id) == ref, ]

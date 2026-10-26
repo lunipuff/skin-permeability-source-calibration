@@ -7,5 +7,3 @@
 "Exclude |standardized residual| > 3","Exclude |standardized residual| > 3","Hierarchical","0.675","0.523",0.625559090635898,0.791934664095738
 "Mean descriptor aggregation","Mean descriptor aggregation","Conventional","0.850","0.675",0.409767271511733,0.648684063207098
 "Mean descriptor aggregation","Mean descriptor aggregation","Hierarchical","0.691","0.534",0.610051591913206,0.783612577997272
-"Expanded nonlinear specification","Expanded nonlinear specification","Conventional","0.733","0.560",0.562081709648746,0.750100166994411
-"Expanded nonlinear specification","Expanded nonlinear specification","Hierarchical","0.671","0.519",0.632184510392786,0.801379437725537

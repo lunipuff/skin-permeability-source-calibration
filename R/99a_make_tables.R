@@ -102,14 +102,16 @@ dataset_summary <- function(x) {
 
 ch <- dataset_summary(cheruvu)
 hu <- dataset_summary(huskin)
+skinpix <- read.csv("data/processed/40_skinpix.csv", stringsAsFactors = FALSE)
+sp <- dataset_summary(skinpix)
 
 table1 <- data.frame(
 	Dataset = c("Cheruvu", "HuSkinDB", "SkinPiX"),
-	Measurements = c(ch["measurements"], hu["measurements"], 199),
-	Compounds = c(ch["compounds"], hu["compounds"], 108),
-	Sources = c(ch["sources"], hu["sources"], 36),
-	`Repeated compounds` = c(ch["repeated"], hu["repeated"], 65),
-	`Multi-source compounds` = c(ch["multisource"], hu["multisource"], 14),
+	Measurements = c(ch["measurements"], hu["measurements"], sp["measurements"]),
+	Compounds = c(ch["compounds"], hu["compounds"], sp["compounds"]),
+	Sources = c(ch["sources"], hu["sources"], sp["sources"]),
+	`Repeated compounds` = c(ch["repeated"], hu["repeated"], sp["repeated"]),
+	`Multi-source compounds` = c(ch["multisource"], hu["multisource"], sp["multisource"]),
 	Role = c(
 		"Development",
 		"Replication and held-out-source calibration",

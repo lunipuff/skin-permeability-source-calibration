@@ -1,3 +1,2 @@
-"term","estimate","se"
-"(Intercept)",-2.69707562308603,0.100468174636479
-"temperature_c",0.0425237266064127,0.0114836698714244
+"term","estimate"
+"temperature_c",0.0425237266064127

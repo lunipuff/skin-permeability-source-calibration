@@ -1,9 +1,0 @@
-"scenario","specification","approach","RMSE","MAE","R2","r"
-"Primary S2","S2","Conventional","0.850","0.674",0.410732633930853,0.649421505544436
-"Primary S2","S2","Hierarchical","0.691","0.534",0.610051591591501,0.783612577913291
-"Multi-reference compounds","Multi-reference compounds","Conventional","0.952","0.737",0.286577619647929,0.674254479277109
-"Multi-reference compounds","Multi-reference compounds","Hierarchical","0.761","0.618",0.543934827788911,0.770142763820253
-"Exclude |standardized residual| > 3","Exclude |standardized residual| > 3","Conventional","0.840","0.668",0.421006679000527,0.656740450462973
-"Exclude |standardized residual| > 3","Exclude |standardized residual| > 3","Hierarchical","0.675","0.523",0.625559090635898,0.791934664095738
-"Mean descriptor aggregation","Mean descriptor aggregation","Conventional","0.850","0.675",0.409767271511733,0.648684063207098
-"Mean descriptor aggregation","Mean descriptor aggregation","Hierarchical","0.691","0.534",0.610051591913206,0.783612577997272

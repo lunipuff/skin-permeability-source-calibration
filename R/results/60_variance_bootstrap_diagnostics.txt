@@ -1,0 +1,39 @@
+Variance-component bootstrap diagnostics
+
+Dataset: Cheruvu
+Requested replicates: 2000
+Usable replicates: 2000
+Excluded non-finite replicates: 0
+Model-fitting errors:
+[1] 0
+Error messages:
+NULL
+All messages, warnings, and errors:
+$`factory-message`
+< table of extent 0 >
+
+$`factory-warning`
+< table of extent 0 >
+
+$`factory-error`
+< table of extent 0 >
+ 
+
+Dataset: HuSkinDB
+Requested replicates: 2000
+Usable replicates: 2000
+Excluded non-finite replicates: 0
+Model-fitting errors:
+[1] 0
+Error messages:
+NULL
+All messages, warnings, and errors:
+$`factory-message`
+< table of extent 0 >
+
+$`factory-warning`
+< table of extent 0 >
+
+$`factory-error`
+< table of extent 0 >
+ 

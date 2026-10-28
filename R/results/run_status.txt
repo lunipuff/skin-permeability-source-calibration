@@ -1,0 +1,16 @@
+RUNNING 2026-10-28 23:15:37.167584
+OK R/01_prepare_describe_cheruvu.R 
+OK R/10_fit_diagnose_cheruvu_hierarchical.R 
+OK R/20_fit_cheruvu_qspr_models.R 
+OK R/21_validate_cheruvu_qspr.R 
+OK R/30_prepare_describe_huskindb.R 
+OK R/31_fit_validate_huskindb.R 
+OK R/32_compare_calibration_methods.R 
+OK R/40_prepare_describe_skinpix.R 
+OK R/41_validate_skinpix_transfer.R 
+OK R/50_falsification_checks.R 
+OK R/60_uncertainty_analysis.R 
+OK R/70_calibration_failure_analysis.R 
+OK R/99a_make_tables.R 
+OK R/99b_make_figures.R 
+SUCCESS 2026-10-28 23:18:26.981349 

@@ -1,2 +1,2 @@
-"n_references","conventional_improvement_percent","conventional_ci_low","conventional_ci_high","hierarchical_improvement_percent","hierarchical_ci_low","hierarchical_ci_high","RMSE_conventional_minus_hierarchical","difference_ci_low","difference_ci_high"
-31,9.88067183940735,-3.46457085766778,20.498786124852,9.64930173818765,-3.67211268840696,21.8157179730327,-0.00370128344469878,-0.0470132557899363,0.0423168354978605
+"RMSE_conventional_minus_hierarchical","difference_ci_low","difference_ci_high"
+-0.00386101177565146,-0.0471634232979082,0.0423832105269782

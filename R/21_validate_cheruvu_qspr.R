@@ -1,15 +1,13 @@
-# ============================================================
 # 21_validate_cheruvu_qspr.R
-# ============================================================
 
 library(lme4)
 
 dat <- read.csv("data/processed/01_cheruvu.csv", stringsAsFactors = FALSE)
 large <- read.csv("R/results/10_large_residuals.csv", stringsAsFactors = FALSE)
 
-vars <- c("mw", "log_kow", "melting_point_k", "log_saq", "h_donor", "h_acceptor")
 s1 <- c("mw", "log_kow")
-s2 <- vars
+s2 <- c("mw", "log_kow", "melting_point_k", "log_saq", "h_donor", "h_acceptor")
+
 ctrl <- lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 100000))
 
 metrics <- function(obs, pred) {
@@ -31,80 +29,63 @@ make_profile <- function(x, descriptors, FUN = median) {
 run_loco <- function(x, descriptors, label, FUN = median, domain = FALSE) {
 	compounds <- unique(x$compound_id)
 	out <- vector("list", length(compounds))
-
 	for (i in seq_along(compounds)) {
 		test_id <- compounds[i]
 		train <- x[x$compound_id != test_id, ]
 		test <- x[x$compound_id == test_id, ]
 		profile <- make_profile(train, descriptors, FUN)
-
 		center <- sapply(profile[descriptors], mean)
 		scale <- sapply(profile[descriptors], sd)
-
 		for (v in descriptors) {
 			profile[[paste0(v, "_z")]] <- (profile[[v]] - center[v]) / scale[v]
 			train[[paste0(v, "_z")]] <- (train[[v]] - center[v]) / scale[v]
 			test[[paste0(v, "_z")]] <- (test[[v]] - center[v]) / scale[v]
 		}
-
 		fixed <- paste(paste0(descriptors, "_z"), collapse = " + ")
-
 		lm_fit <- lm(as.formula(paste("mean_log_kp ~", fixed)), data = profile)
-
 		train$compound_id <- factor(train$compound_id)
 		train$reference_id <- factor(train$reference_id)
-		train$temperature_c <- train$temperature_c - mean(train$temperature_c)
-		test$temperature_c <- test$temperature_c - mean(x[x$compound_id != test_id, "temperature_c"])
-
+		temperature_mean <- mean(train$temperature_c)
+		train$temperature_c <- train$temperature_c - temperature_mean
+		test$temperature_c <- test$temperature_c - temperature_mean
 		mix_fit <- lmer(
 			as.formula(paste("log_kp ~ temperature_c +", fixed, "+ (1 | compound_id) + (1 | reference_id)")),
-			data = train,
-			REML = TRUE,
-			control = ctrl
+			data = train, REML = TRUE, control = ctrl
 		)
-
-		test_profile <- test[1, descriptors, drop = FALSE]
+		test_profile <- aggregate(
+			test[descriptors],
+			list(compound_id = test$compound_id),
+			FUN
+		)
 		for (v in descriptors) test_profile[[paste0(v, "_z")]] <- (test_profile[[v]] - center[v]) / scale[v]
-
 		pred_lm <- as.numeric(predict(lm_fit, newdata = test_profile))
 		pred_mix <- as.numeric(predict(mix_fit, newdata = test, re.form = ~(1 | reference_id), allow.new.levels = TRUE))
-
-		md <- NA
-		threshold <- NA
-		within_range <- NA
+		md <- NA_real_
 		in_domain <- NA
-
 		if (domain) {
 			zvars <- paste0(descriptors, "_z")
 			ztrain <- as.matrix(profile[zvars])
 			ztest <- as.numeric(test_profile[zvars])
 			md <- mahalanobis(ztest, colMeans(ztrain), cov(ztrain))
-			threshold <- qchisq(0.95, length(descriptors))
 			within_range <- all(sapply(descriptors, function(v) test_profile[[v]] >= min(profile[[v]]) & test_profile[[v]] <= max(profile[[v]])))
-			in_domain <- md <= threshold & within_range
+			in_domain <- md <= qchisq(0.95, length(descriptors)) & within_range
 		}
-
 		out[[i]] <- data.frame(
 			specification = label,
 			compound_id = test_id,
-			source_row = test$source_row,
 			observed = test$log_kp,
 			conventional = pred_lm,
 			hierarchical = pred_mix,
 			mahalanobis = md,
-			domain_threshold = threshold,
-			within_range = within_range,
 			in_domain = in_domain
 		)
 	}
-
 	do.call(rbind, out)
 }
 
 summarize_loco <- function(x) {
 	a <- metrics(x$observed, x$conventional)
 	b <- metrics(x$observed, x$hierarchical)
-
 	data.frame(
 		specification = unique(x$specification),
 		approach = c("Conventional", "Hierarchical"),
@@ -115,33 +96,16 @@ summarize_loco <- function(x) {
 	)
 }
 
-compound_balanced <- function(x) {
-	cmp <- split(x, x$compound_id)
-
-	a <- sapply(cmp, function(z) sqrt(mean((z$observed - z$conventional)^2)))
-	b <- sapply(cmp, function(z) sqrt(mean((z$observed - z$hierarchical)^2)))
-
-	data.frame(
-		specification = unique(x$specification),
-		approach = c("Conventional", "Hierarchical"),
-		mean_compound_RMSE = c(mean(a), mean(b))
-	)
-}
-
-# Primary LOCO validation
+# Primary LOCO validation and applicability domain
 
 p1 <- run_loco(dat, s1, "S1", domain = TRUE)
 p2 <- run_loco(dat, s2, "S2", domain = TRUE)
+
 pred <- rbind(p1, p2)
 
-performance <- rbind(summarize_loco(p1), summarize_loco(p2))
-balanced <- rbind(compound_balanced(p1), compound_balanced(p2))
-
-# Applicability domain
-
 domain <- aggregate(
-	cbind(abs_error_conventional = abs(pred$observed - pred$conventional), abs_error_hierarchical = abs(pred$observed - pred$hierarchical)),
-	list(specification = pred$specification, compound_id = pred$compound_id, mahalanobis = pred$mahalanobis, domain_threshold = pred$domain_threshold, within_range = pred$within_range, in_domain = pred$in_domain),
+	list(abs_error_hierarchical = abs(pred$observed - pred$hierarchical)),
+	list(specification = pred$specification, compound_id = pred$compound_id, mahalanobis = pred$mahalanobis, in_domain = pred$in_domain),
 	mean
 )
 
@@ -150,7 +114,6 @@ domain_summary <- do.call(rbind, lapply(split(domain, list(domain$specification,
 		specification = x$specification[1],
 		in_domain = x$in_domain[1],
 		n_compounds = nrow(x),
-		MAE_conventional = mean(x$abs_error_conventional),
 		MAE_hierarchical = mean(x$abs_error_hierarchical)
 	)
 }))
@@ -170,25 +133,12 @@ sens <- rbind(
 	data.frame(scenario = "Mean descriptor aggregation", summarize_loco(sens_mean))
 )
 
-sens_bal <- rbind(
-	data.frame(scenario = "Primary S2", compound_balanced(p2)),
-	data.frame(scenario = "Multi-reference compounds", compound_balanced(sens_multi)),
-	data.frame(scenario = "Exclude |standardized residual| > 3", compound_balanced(sens_outlier)),
-	data.frame(scenario = "Mean descriptor aggregation", compound_balanced(sens_mean))
-)
-
-# Outputs
-
-write.csv(performance, "R/results/21_loco_performance.csv", row.names = FALSE)
-write.csv(balanced, "R/results/21_loco_compound_balanced.csv", row.names = FALSE)
-write.csv(pred, "R/results/21_loco_predictions.csv", row.names = FALSE)
-write.csv(domain, "R/results/21_applicability_domain.csv", row.names = FALSE)
+write.csv(domain[c("specification", "compound_id", "mahalanobis", "in_domain")], "R/results/21_applicability_domain.csv", row.names = FALSE)
 write.csv(domain_summary, "R/results/21_applicability_summary.csv", row.names = FALSE)
 write.csv(sens, "R/results/21_sensitivity_performance.csv", row.names = FALSE)
-write.csv(sens_bal, "R/results/21_sensitivity_compound_balanced.csv", row.names = FALSE)
 
-s1_rmse <- performance$RMSE[performance$specification == "S1"]
-s2_rmse <- performance$RMSE[performance$specification == "S2"]
+s1_rmse <- c(sqrt(mean((p1$observed - p1$conventional)^2)), sqrt(mean((p1$observed - p1$hierarchical)^2)))
+s2_rmse <- sens$RMSE[sens$scenario == "Primary S2"]
 
 cat(
 	"\nCheruvu QSPR validation complete\n",

@@ -1,0 +1,2 @@
+"n observations","n compounds","n references","AIC compound only","AIC compound reference","compound variance percent","reference variance percent","residual variance percent","qspr compound variance explained","qspr delta AIC","temperature n","temperature estimate","temperature p","singular","temperature calibration n sources","temperature calibration max source temperatures"
+546,251,95,1819.39106396966,1622.43750894697,23.5388326396838,44.3805472365065,32.0806201238098,37.1101807594349,-40.3440283972175,391,-0.054196410250227,0.0382516220486772,FALSE,20,1

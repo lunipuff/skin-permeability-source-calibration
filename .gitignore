@@ -1,11 +1,18 @@
 # macOS
 .DS_Store
 
+# Excel temporary files
+~$*
+
+# macOS archive metadata
+__MACOSX/
+
 # R
 .Rapp.history
 .Rhistory
 .RData
 .Rproj.user/
+
 *.Rproj
 renv/library/
 renv/staging/
@@ -25,4 +32,4 @@ env/
 *.log
 
 # Omitted data
-results/cross_validation/04_loco_cv_coefficient_long.csv
+manuscript/

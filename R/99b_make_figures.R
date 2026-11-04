@@ -112,8 +112,7 @@ save_fig <- function(p, filename, width, height, caption) {
     width = width,
     height = height,
     units = "in",
-    device = grDevices::pdf,
-    useDingbats = FALSE
+    device = grDevices::cairo_pdf
   )
 
   if (save_png) {

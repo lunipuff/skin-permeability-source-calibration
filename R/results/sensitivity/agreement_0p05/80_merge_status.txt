@@ -1,0 +1,24 @@
+Scenario: agreement_0p05
+Curation policy: agreement
+Log tolerance: 0.05
+Analysis-ready pooled file: TRUE
+Valid input records: 1221
+Excluded by source/compound decisions: 80
+Unresolved identity/structure records: 0
+Measurement records awaiting review: 0
+Retained preview measurements: 837
+Retained preview compounds: 337
+Retained preview publications: 158
+
+Anchor eligibility in the currently resolved preview:
+ anchors n_sources
+       1        36
+       2        27
+       3        21
+       4        16
+       5        13
+
+Eligibility can change as unresolved records are added.
+Publication matches require bibliographic verification.
+Shared structures do not establish shared original measurements.
+Inspect original experimental conditions before deduplication.

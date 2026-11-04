@@ -1,0 +1,17 @@
+Requested replicates: 2000
+Usable replicates: 2000
+Non-finite replicates: 0
+Bootstrap fitting failures:
+[1] 0
+Failure messages:
+NULL
+All bootstrap messages:
+$`factory-message`
+< table of extent 0 >
+
+$`factory-warning`
+< table of extent 0 >
+
+$`factory-error`
+< table of extent 0 >
+

@@ -3,8 +3,25 @@
 # Removes one evaluation publication at a time from the summaries.
 # Does not refit models or alter the pooled data.
 
-input <- "R/results/81_pooled_calibration_by_source.csv"
-output_dir <- "R/results"
+# Optional settings use --name=value; no arguments retain main-analysis defaults.
+parse_options <- function(defaults) {
+  for (arg in commandArgs(trailingOnly = TRUE)) {
+    if (!grepl("^--[^=]+=", arg)) stop("Use --name=value: ", arg)
+    key <- sub("^--([^=]+)=.*$", "\\1", arg)
+    if (!key %in% names(defaults)) stop("Unknown option: --", key)
+    defaults[[key]] <- sub("^--[^=]+=", "", arg)
+  }
+  defaults
+}
+
+options_run <- parse_options(list(
+  "input-file" = "R/results/81_pooled_calibration_by_source.csv", "output-dir" = "R/results"
+))
+input <- options_run[["input-file"]]
+output_dir <- options_run[["output-dir"]]
+if (!nzchar(input) || !nzchar(output_dir)) stop("Input and output paths must be nonempty.")
+
+dir.create(output_dir, recursive = TRUE, showWarnings = FALSE)
 
 n_boot <- 20000L
 set.seed(2026)
@@ -229,3 +246,7 @@ cat(
   "\nDo not exclude publications merely because they weaken the result.\n",
   sep = ""
 )
+write.csv(data.frame(
+  input_file = normalizePath(input, winslash = "/", mustWork = TRUE),
+  input_md5 = unname(tools::md5sum(input)), n_boot = n_boot, seed = 2026L
+), file.path(output_dir, "82_analysis_settings.csv"), row.names = FALSE)

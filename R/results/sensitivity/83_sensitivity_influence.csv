@@ -1,0 +1,9 @@
+"scenario","analysis","full_effect","minimum_omission_effect","maximum_omission_effect","largest_absolute_change","most_influential_source","n_direction_reversals","n_intervals_including_zero","n_omissions"
+"primary","One-anchor RMSE reduction (%)",12.0046944662363,10.4022296345093,13.3993531782399,1.60246483172705,"DOI:10.1289/ehp.8774223",0,0,37
+"primary","RMSE decrease from one to five anchors (log units)",0.140186676022747,0.122839266994141,0.168373096597494,0.0281864205747473,"DOI:10.1038/jid.1969.9",0,0,13
+"agreement_0p01","One-anchor RMSE reduction (%)",9.56127772403226,7.92160538579395,11.3096973516939,1.74841962766162,"DOI:10.1002/jps.2600821017",0,1,37
+"agreement_0p01","RMSE decrease from one to five anchors (log units)",0.105352134938586,0.0870440077310333,0.130991675276393,0.0256395403378061,"DOI:10.1038/jid.1969.9",0,3,13
+"agreement_0p02","One-anchor RMSE reduction (%)",10.3076205653732,8.69161829763951,11.9769912829946,1.66937071762145,"DOI:10.1002/jps.2600821017",0,0,36
+"agreement_0p02","RMSE decrease from one to five anchors (log units)",0.133423168544974,0.114453586142352,0.164616081592795,0.031192913047821,"DOI:10.1038/jid.1969.9",0,0,12
+"agreement_0p05","One-anchor RMSE reduction (%)",11.2289828065032,9.62093756187932,12.7520557186852,1.60804524462388,"DOI:10.1016/j.ijpharm.2006.01.033",0,0,36
+"agreement_0p05","RMSE decrease from one to five anchors (log units)",0.123507557704879,0.106099311622282,0.149749730855395,0.0262421731505156,"DOI:10.1038/jid.1969.9",0,0,13

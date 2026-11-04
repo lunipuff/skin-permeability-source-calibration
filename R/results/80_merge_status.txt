@@ -1,3 +1,6 @@
+Scenario: primary
+Curation policy: priority
+Log tolerance: not used
 Analysis-ready pooled file: TRUE
 Valid input records: 1221
 Excluded by source/compound decisions: 80

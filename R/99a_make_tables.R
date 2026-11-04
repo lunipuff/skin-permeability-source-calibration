@@ -1,439 +1,348 @@
 # 99a_make_tables.R
+# Run from the project root after 80-85:
+# Rscript R/99a_make_tables.R
+# Formats saved results only. No models, bootstraps or curation are rerun.
 
-fmt <- function(x, digits) formatC(x, format = "f", digits = digits)
-fmt_ci <- function(low, high, digits) paste0("[", fmt(low, digits), ", ", fmt(high, digits), "]")
-fmt_est_ci <- function(x, low, high, digits) paste(fmt(x, digits), fmt_ci(low, high, digits))
+result_dir <- "R/results"
+table_dir <- "R/tables"
+sensitivity_dir <- file.path(result_dir, "sensitivity")
 
-write_table <- function(x, filename, clean_names = FALSE) {
-	if (clean_names) names(x) <- gsub("_", " ", names(x), fixed = TRUE)
-	write.csv(x, file.path("R/tables", filename), row.names = FALSE, na = "")
+read_checked <- function(path, required = character()) {
+  if (!file.exists(path)) stop("Missing input: ", path)
+  x <- read.csv(path, stringsAsFactors = FALSE, check.names = FALSE)
+  if (!all(required %in% names(x))) {
+    stop("Missing columns in ", path, ": ", paste(setdiff(required, names(x)), collapse = ", "))
+  }
+  x
+}
+read_result <- function(name, required = character()) {
+  read_checked(file.path(result_dir, name), required)
+}
+fmt <- function(x, digits = 3) {
+  out <- rep("", length(x))
+  ok <- is.finite(x)
+  out[ok] <- formatC(x[ok], format = "f", digits = digits)
+  out
+}
+fmt_ci <- function(low, high, digits = 3) {
+  out <- rep("", length(low))
+  ok <- is.finite(low) & is.finite(high)
+  out[ok] <- paste0("[", fmt(low[ok], digits), ", ", fmt(high[ok], digits), "]")
+  out
+}
+fmt_est_ci <- function(x, low, high, digits = 3) {
+  trimws(paste(fmt(x, digits), fmt_ci(low, high, digits)))
+}
+close_enough <- function(x, y) {
+  length(x) == length(y) && all(is.finite(x) & is.finite(y) &
+    abs(x - y) <= 1e-7 * pmax(1, abs(y)))
+}
+index <- list()
+write_table <- function(x, filename, caption, note = "") {
+  write.csv(x, file.path(table_dir, filename), row.names = FALSE, na = "")
+  index[[length(index) + 1L]] <<- data.frame(
+    file = filename, caption = caption, note = note, rows = nrow(x), stringsAsFactors = FALSE
+  )
 }
 
-# Inputs
+# 1. Inputs from the pooled pipeline only.
+pooled <- read_checked("data/processed/80_pooled.csv", c(
+  "record_id", "publication_id", "compound_id", "dataset_origin"
+))
+structure <- read_result("85_dataset_structure.csv", c(
+  "dataset", "raw_measurements", "retained_measurements", "compounds", "publications"
+))
+metadata <- read_result("85_metadata_availability.csv", c(
+  "dataset", "metadata", "field_provided", "n_reported", "n_records", "percent_reported"
+))
+variance <- read_result("85_variance_components.csv", c(
+  "component", "variance", "variance_ci_low", "variance_ci_high",
+  "percent", "percent_ci_low", "percent_ci_high", "n_boot_requested", "n_boot_usable"
+))
+cal_cols <- c("anchors", "n_sources", "n_sources_improved",
+              "mean_source_RMSE_uncalibrated", "mean_source_RMSE_calibrated",
+              "RMSE_reduction_percent", "reduction_ci_low", "reduction_ci_high")
+all_cal <- read_result("81_pooled_calibration_summary_all.csv", cal_cols)
+matched_cal <- read_result("81_pooled_calibration_summary_matched.csv", cal_cols)
+paired <- read_result("81_pooled_one_vs_five_anchors.csv", c(
+  "n_sources", "mean_RMSE_one_anchor", "mean_RMSE_five_anchors",
+  "mean_RMSE_decrease", "decrease_ci_low", "decrease_ci_high"
+))
+by_source <- read_result("81_pooled_calibration_by_source.csv", c(
+  "source_id", "anchors", "RMSE_uncalibrated", "RMSE_calibrated",
+  "RMSE_reduction_percent", "n_available_anchors", "n_test_compounds"
+))
+eligibility <- read_result("81_pooled_source_eligibility.csv", c(
+  "source_id", "n_measurements", "n_compounds", "n_anchors",
+  "n_test_compounds", "n_test_measurements"
+))
+fits <- read_result("81_pooled_fit_diagnostics.csv", c("source_id", "success", "singular"))
+influence <- read_result("82_source_influence_summary.csv", c(
+  "analysis", "full_effect", "minimum_omission_effect", "maximum_omission_effect",
+  "most_influential_source", "n_intervals_including_zero", "n_omissions"
+))
+sensitivity <- read_checked(file.path(sensitivity_dir, "83_sensitivity_comparison.csv"), c(
+  "scenario", "curation_policy", "log_tolerance", "temperature_tolerance", "n_measurements",
+  "one_anchor_publications", "matched_publications", "one_anchor_reduction_percent",
+  "one_anchor_ci_low", "one_anchor_ci_high", "one_to_five_RMSE_decrease",
+  "one_to_five_ci_low", "one_to_five_ci_high"
+))
+sensitivity_influence <- read_checked(file.path(sensitivity_dir, "83_sensitivity_influence.csv"), c("scenario", names(influence)))
+run_status <- read_checked(file.path(sensitivity_dir, "83_sensitivity_run_status.csv"), c("scenario", "status"))
+failure <- read_result("84_failure_source_summary.csv", c(
+  "source_id", "anchors", "available_anchors", "test_compounds", "draws_improved_percent",
+  "RMSE_uncalibrated", "RMSE_calibrated", "RMSE_reduction_percent",
+  "test_mean_residual", "offset_mean", "offset_sd", "mean_offset_wrong_direction",
+  "MSE_uncalibrated", "offset_variance", "offset_mismatch_squared",
+  "correctable_test_bias_squared", "mean_MSE_change", "dominant_penalty"
+))
+failure_overview <- read_result("84_failure_overview.csv", c("anchors", "publications"))
+failure_paired <- read_result("84_one_vs_five_diagnostics.csv", c(
+  "source_id", "RMSE_calibrated_one", "RMSE_calibrated_five", "RMSE_decrease",
+  "offset_variance_one", "offset_variance_five",
+  "offset_mismatch_squared_one", "offset_mismatch_squared_five"
+))
+corrections <- read_result("80_verified_unit_corrections.csv", c(
+  "record_id", "previous_log_kp", "corrected_log_kp", "original_kp_cm_h", "evidence"
+))
+coverage <- read_result("80_descriptor_coverage.csv", c("variable", "n_available", "n_records"))
 
-cheruvu <- read.csv("data/processed/01_cheruvu.csv", stringsAsFactors = FALSE)
-huskin <- read.csv("data/processed/30_huskindb.csv", stringsAsFactors = FALSE)
-skinpix <- read.csv("data/processed/40_skinpix.csv", stringsAsFactors = FALSE)
-m10 <- read.csv("R/results/10_model_comparison.csv", stringsAsFactors = FALSE)
-m20 <- read.csv("R/results/20_model_summary.csv", stringsAsFactors = FALSE)
-coef20 <- read.csv("R/results/20_coefficients.csv", stringsAsFactors = FALSE)
-ad21 <- read.csv("R/results/21_applicability_summary.csv", stringsAsFactors = FALSE)
-sens21 <- read.csv("R/results/21_sensitivity_performance.csv", stringsAsFactors = FALSE)
-rep31 <- read.csv("R/results/31_replication_summary.csv", stringsAsFactors = FALSE)
-matchref31 <- read.csv("R/results/31_calibration_matched_reference.csv", stringsAsFactors = FALSE)
-calibration31 <- read.csv("R/results/31_calibration_performance.csv", stringsAsFactors = FALSE)
-domain31 <- read.csv("R/results/31_applicability_domain.csv", stringsAsFactors = FALSE)
-comp32 <- read.csv("R/results/32_calibration_method_summary.csv", stringsAsFactors = FALSE)
-overlap40 <- read.csv("R/results/40_skinpix_reference_overlap.csv", stringsAsFactors = FALSE)
-descriptor40 <- read.csv("R/results/40_descriptor_compatibility_audit.csv", stringsAsFactors = FALSE)
-audit40 <- read.csv("R/results/40_skinpix_huskin_overlap_audit.csv", stringsAsFactors = FALSE)
-eligible41 <- read.csv("R/results/41_skinpix_eligible_references.csv", stringsAsFactors = FALSE)
-ref41 <- read.csv("R/results/41_skinpix_calibration_reference.csv", stringsAsFactors = FALSE)
-match41 <- read.csv("R/results/41_skinpix_calibration_matched_3anchor.csv", stringsAsFactors = FALSE)
-domain41 <- read.csv("R/results/41_skinpix_transfer_domain.csv", stringsAsFactors = FALSE)
-wrongref50 <- read.csv("R/results/50_wrong_source_reference.csv", stringsAsFactors = FALSE)
-loco60 <- read.csv("R/results/60_loco_bootstrap_ci.csv", stringsAsFactors = FALSE)
-var60 <- read.csv("R/results/60_variance_component_ci.csv", stringsAsFactors = FALSE)
-deploy60 <- read.csv("R/results/60_huskin_one_anchor_all_eligible_ci.csv", stringsAsFactors = FALSE)
-cal60 <- read.csv("R/results/60_huskin_calibration_ci.csv", stringsAsFactors = FALSE)
-wrong60 <- read.csv("R/results/60_wrong_source_ci.csv", stringsAsFactors = FALSE)
-summary70 <- read.csv("R/results/70_failure_source_summary.csv", stringsAsFactors = FALSE)
-selection70 <- read.csv("R/results/70_failure_anchor_selections.csv", stringsAsFactors = FALSE)
-
-# 01. Hierarchical variance decomposition
-
-components <- c("Compound", "Source", "Residual")
-
-variance_order <- unlist(lapply(c("Cheruvu", "HuSkinDB"), function(dataset) {
-	match(paste(dataset, components), paste(var60$dataset, var60$component))
-}), use.names = FALSE)
-
-variance <- var60[variance_order, ]
-
-table01 <- data.frame(
-	Dataset = variance$dataset,
-	Component = variance$component,
-	`Component (%)` = fmt(variance$estimate_percent, 1),
-	`95% CI` = fmt_ci(variance$ci_low, variance$ci_high, 1),
-	check.names = FALSE
-)
-
-write_table(table01, "01_hierarchical_decomposition.csv")
-
-# 02. Source information and LOCO prediction
-
-approach_names <- c(
-	conventional = "Conventional aggregate QSPR",
-	hierarchical_source_blind = "Hierarchical, source blind",
-	hierarchical_known_source = "Hierarchical, source aware"
-)
-
-table02 <- data.frame(
-	Dataset = loco60$dataset,
-	Specification = loco60$specification,
-	`Prediction setting` = unname(approach_names[loco60$approach]),
-	`RMSE (95% CI)` = fmt_est_ci(loco60$RMSE, loco60$RMSE_ci_low, loco60$RMSE_ci_high, 3),
-	`RMSE improvement vs conventional (%)` = ifelse(
-		loco60$approach == "conventional", "Reference",
-		fmt_est_ci(loco60$improvement_percent, loco60$improvement_ci_low, loco60$improvement_ci_high, 1)
-	),
-	check.names = FALSE
-)
-
-write_table(table02, "02_source_information_prediction.csv")
-
-# 03. HuSkinDB source calibration
-
-matched_improved <- aggregate(RMSE_improvement_percent ~ anchors, data = matchref31, function(x) sum(x > 0, na.rm = TRUE))
-
-names(matched_improved)[2] <- "n_improved"
-
-primary03 <- data.frame(
-	Cohort = "All eligible sources (primary deployment)",
-	Anchors = deploy60$anchors,
-	Sources = deploy60$n_references,
-	`Sources improved` = paste0(deploy60$n_references_improved, "/", deploy60$n_references),
-	`RMSE uncalibrated` = fmt(deploy60$RMSE_uncalibrated, 3),
-	`RMSE calibrated` = fmt(deploy60$RMSE_calibrated, 3),
-	`RMSE improvement (%)` = fmt(deploy60$improvement_percent, 1),
-	`95% CI` = fmt_ci(deploy60$improvement_ci_low, deploy60$improvement_ci_high, 1),
-	check.names = FALSE
-)
-
-matched03 <- data.frame(
-	Cohort = paste0("Matched ", max(cal60$anchors), "-anchor-capable cohort"),
-	Anchors = cal60$anchors,
-	Sources = cal60$n_references,
-	`Sources improved` = paste0(matched_improved$n_improved[match(cal60$anchors, matched_improved$anchors)], "/", cal60$n_references),
-	`RMSE uncalibrated` = fmt(cal60$RMSE_uncalibrated, 3),
-	`RMSE calibrated` = fmt(cal60$RMSE_calibrated, 3),
-	`RMSE improvement (%)` = fmt(cal60$improvement_percent, 1),
-	`95% CI` = fmt_ci(cal60$improvement_ci_low, cal60$improvement_ci_high, 1),
-	check.names = FALSE
-)
-
-table03 <- rbind(primary03, matched03)
-
-write_table(table03, "03_huskin_calibration.csv")
-
-# 04. SkinPiX transfer
-
-one41 <- ref41[ref41$anchors == 1, ]
-
-primary04 <- data.frame(
-	Cohort = "All eligible sources",
-	Anchors = 1,
-	Sources = length(unique(one41$reference_id)),
-	`RMSE uncalibrated` = mean(one41$RMSE_uncalibrated),
-	`RMSE calibrated` = mean(one41$RMSE_calibrated),
-	check.names = FALSE
-)
-
-primary04$`RMSE improvement (%)` <- 100 * (1 - primary04$`RMSE calibrated` / primary04$`RMSE uncalibrated`)
-
-matched04 <- data.frame(
-	Cohort = "Matched cohort",
-	Anchors = match41$anchors,
-	Sources = match41$n_references,
-	`RMSE uncalibrated` = match41$RMSE_uncalibrated,
-	`RMSE calibrated` = match41$RMSE_calibrated,
-	`RMSE improvement (%)` = match41$RMSE_improvement_percent,
-	check.names = FALSE
-)
-
-table04 <- rbind(primary04, matched04)
-
-for (v in c("RMSE uncalibrated", "RMSE calibrated")) table04[[v]] <- fmt(table04[[v]], 3)
-
-table04$`RMSE improvement (%)` <- fmt(table04$`RMSE improvement (%)`, 1)
-
-write_table(table04, "04_skinpix_transfer.csv")
-
-# 05. Dataset structure
-
-datasets <- list(Cheruvu = cheruvu, HuSkinDB = huskin, SkinPiX = skinpix)
-
-roles <- c(
-	Cheruvu = "Development",
-	HuSkinDB = "Replication and held-out-source calibration",
-	SkinPiX = "Cross-dataset transfer"
-)
-
-table05 <- do.call(rbind, lapply(names(datasets), function(dataset) {
-	x <- datasets[[dataset]]
-	data.frame(
-		Dataset = dataset,
-		Measurements = nrow(x),
-		Compounds = length(unique(x$compound_id)),
-		Sources = length(unique(x$reference_id)),
-		`Repeated compounds` = sum(table(x$compound_id) > 1),
-		`Multi-source compounds` = sum(tapply(x$reference_id, x$compound_id, function(z) length(unique(z))) > 1),
-		Role = unname(roles[dataset]),
-		check.names = FALSE
-	)
-}))
-
-write_table(table05, "05_dataset_structure.csv")
-
-# S1. Cheruvu hierarchical model comparison
-
-s1 <- m10
-
-for (v in c("AIC", "BIC", "logLik")) s1[[v]] <- fmt(s1[[v]], 2)
-
-write_table(s1, "S1_cheruvu_hierarchical_models.csv", clean_names = TRUE)
-
-# S2. Experimental metadata availability
-
-metadata_fields <- c(
-	"Skin donor type", "Anatomical site", "Skin layer", "Skin preparation",
-	"Skin thickness", "Diffusion cell type", "Donor medium", "Receptor medium",
-	"Donor or skin temperature", "Receptor temperature", "Donor pH", "Receptor pH",
-	"Skin integrity test"
-)
-
-metadata_columns <- list(
-	Cheruvu = c(
-		NA, NA, NA, NA, "skin_thickness_mm", NA, NA, NA,
-		"temperature_c", NA, NA, NA, "skin_integrity_test"
-	),
-	HuSkinDB = c(
-		"skin_source_type", "skin_source_site", "used_layer", "skin_preparation",
-		NA, "cell_type", "donor_type", "acceptor_type", "temperature_c",
-		"acceptor_temperature_c", "donor_ph", "acceptor_ph", NA
-	),
-	SkinPiX = c(
-		"skin_donor_type", "skin_source_site", "used_layer", "skin_preparation",
-		NA, "cell_type", "donor_type", "acceptor_type", "temperature_c",
-		"acceptor_temperature_c", "donor_ph", "acceptor_ph", NA
-	)
-)
-
-metadata_clean <- function(x) {
-	x <- tolower(trimws(as.character(x)))
-	x <- gsub("[[:space:]]+", " ", x)
-	x[x %in% c("", "na", "n/a", "n.a.", "nan", "unknown", "not reported", "not specified", "-", "--")] <- NA_character_
-	x
+# 2. Check that the primary outputs agree before writing tables.
+one <- all_cal[all_cal$anchors == 1, , drop = FALSE]
+primary_sensitivity <- sensitivity[sensitivity$scenario == "primary", , drop = FALSE]
+pooled_counts <- structure[structure$dataset == "Pooled", , drop = FALSE]
+if (nrow(one) != 1L || nrow(primary_sensitivity) != 1L ||
+    nrow(pooled_counts) != 1L || nrow(paired) != 1L) stop("Unexpected summary rows.")
+if (anyDuplicated(pooled$record_id) || anyNA(pooled[c("publication_id", "compound_id")])) {
+  stop("Invalid pooled identities.")
+}
+if (pooled_counts$retained_measurements != nrow(pooled) ||
+    pooled_counts$compounds != length(unique(pooled$compound_id)) ||
+    pooled_counts$publications != length(unique(pooled$publication_id))) stop("Dataset counts disagree.")
+if (primary_sensitivity$n_measurements != nrow(pooled) ||
+    primary_sensitivity$one_anchor_publications != one$n_sources ||
+    primary_sensitivity$matched_publications != paired$n_sources) {
+  stop("Sensitivity sample counts disagree with the main analysis. Rerun 83.")
+}
+if (!close_enough(
+  c(one$RMSE_reduction_percent, one$reduction_ci_low, one$reduction_ci_high,
+    paired$mean_RMSE_decrease, paired$decrease_ci_low, paired$decrease_ci_high),
+  c(primary_sensitivity$one_anchor_reduction_percent, primary_sensitivity$one_anchor_ci_low,
+    primary_sensitivity$one_anchor_ci_high, primary_sensitivity$one_to_five_RMSE_decrease,
+    primary_sensitivity$one_to_five_ci_low, primary_sensitivity$one_to_five_ci_high)
+)) {
+  stop("Sensitivity summary is stale. Rerun 83.")
+}
+requested <- sensitivity$scenario[sensitivity$scenario != "primary"]
+if (!length(requested) || anyDuplicated(run_status$scenario) ||
+    !setequal(requested, run_status$scenario) || any(run_status$status != "SUCCESS")) {
+  stop("Sensitivity runs are incomplete or do not match the comparison table.")
+}
+f1 <- failure[failure$anchors == 1, , drop = FALSE]
+j <- match(paste(failure$source_id, failure$anchors), paste(by_source$source_id, by_source$anchors))
+if (anyNA(j) || nrow(failure) != nrow(by_source) ||
+    !close_enough(failure$RMSE_calibrated, by_source$RMSE_calibrated[j])) {
+  stop("Publication-level failure results disagree with 81. Rerun 84.")
+}
+if (nrow(f1) != one$n_sources ||
+    !close_enough(mean(f1$RMSE_calibrated), one$mean_source_RMSE_calibrated)) {
+  stop("Failure diagnostics disagree with primary calibration. Rerun 84.")
+}
+if (!close_enough(sum(variance$percent), 100)) stop("Variance percentages do not sum to 100.")
+for (stage in c("81", "85")) {
+  settings <- read_result(paste0(stage, "_analysis_settings.csv"))
+  hash <- if (stage == "81") settings$input_md5 else settings$md5
+  if (length(hash) != 1L || is.na(hash) || hash != unname(tools::md5sum("data/processed/80_pooled.csv"))) {
+    stop("Input fingerprint differs for stage ", stage, ". Rerun that stage.")
+  }
 }
 
-s2 <- data.frame(Metadata = metadata_fields, stringsAsFactors = FALSE)
+dir.create(table_dir, recursive = TRUE, showWarnings = FALSE)
 
-for (dataset in names(datasets)) {
-	x <- datasets[[dataset]]
-	s2[[dataset]] <- vapply(metadata_columns[[dataset]], function(column) {
-		if (is.na(column)) return("Field not provided")
-		if (!column %in% names(x)) stop("Missing metadata column: ", dataset, " ", column)
-		n_reported <- sum(!is.na(metadata_clean(x[[column]])))
-		paste0(n_reported, "/", nrow(x), " (", fmt(100 * n_reported / nrow(x), 1), "%)")
-	}, character(1))
+# Stable publication labels for both tables and future figures.
+ids <- sort(unique(as.character(pooled$publication_id)))
+publication_key <- data.frame(
+  publication_label = sprintf("P%03d", seq_along(ids)), source_id = ids,
+  stringsAsFactors = FALSE
+)
+label <- function(x) {
+  j <- match(x, publication_key$source_id)
+  if (anyNA(j)) stop("Publication missing from primary index: ", paste(x[is.na(j)], collapse = ", "))
+  publication_key$publication_label[j]
 }
-
-write_table(s2, "S2_metadata_availability.csv")
-
-# S3. HuSkinDB replication
-write_table(rep31, "S3_huskin_replication.csv", clean_names = TRUE)
-
-# S4. Cheruvu sensitivity analyses
-s4 <- sens21
-for (v in c("RMSE", "MAE", "R2", "r")) s4[[v]] <- fmt(s4[[v]], 3)
-write_table(s4, "S4_cheruvu_sensitivity.csv", clean_names = TRUE)
-
-# S5. QSPR model summary
-# Retain numeric values because the Rmd formats this transposed table.
-write_table(m20, "S5_qspr_model_summary.csv", clean_names = TRUE)
-
-# S6. QSPR coefficients
-s6 <- coef20
-for (v in c("estimate", "se")) s6[[v]] <- fmt(s6[[v]], 4)
-write_table(s6, "S6_qspr_coefficients.csv", clean_names = TRUE)
-
-# S7. Matched HuSkinDB calibration by source
-s7 <- matchref31
-
-for (v in c("RMSE_uncalibrated", "RMSE_calibrated", "MAE_uncalibrated", "MAE_calibrated")) s7[[v]] <- fmt(s7[[v]], 3)
-for (v in c("RMSE_improvement_percent", "MAE_improvement_percent")) s7[[v]] <- fmt(s7[[v]], 1)
-
-write_table(s7, "S7_huskin_reference_calibration.csv", clean_names = TRUE)
-
-# S8. Conventional versus hierarchical calibration
-s8 <- comp32[c("cohort", "anchors", "method", "n_references", "RMSE_uncalibrated", "RMSE_calibrated", "RMSE_improvement_percent")]
-
-for (v in c("RMSE_uncalibrated", "RMSE_calibrated")) s8[[v]] <- fmt(s8[[v]], 3)
-
-s8$RMSE_improvement_percent <- fmt(s8$RMSE_improvement_percent, 1)
-names(s8) <- c("Cohort", "Anchors", "Method", "Sources", "RMSE uncalibrated", "RMSE calibrated", "RMSE improvement (%)")
-
-write_table(s8, "S8_calibration_method_comparison.csv")
-
-# S9. Wrong-source control
-
-s9 <- data.frame(
-	Anchors = wrong60$anchors,
-	`Target sources` = wrong60$n_references,
-	`Target-source RMSE reduction (%)` = fmt_est_ci(wrong60$correct_improvement_percent, wrong60$correct_ci_low, wrong60$correct_ci_high, 1),
-	`Different-source RMSE reduction (%)` = fmt_est_ci(wrong60$wrong_improvement_percent, wrong60$wrong_ci_low, wrong60$wrong_ci_high, 1),
-	`RMSE difference` = fmt_est_ci(wrong60$RMSE_wrong_minus_correct, wrong60$difference_ci_low, wrong60$difference_ci_high, 3),
-	check.names = FALSE
-)
-
-write_table(s9, "S9_wrong_source_falsification.csv")
-
-# S10. Wrong-source control by target source
-# Retain numeric values because the Rmd applies display formatting.
-s10 <- wrongref50[c("reference_id", "anchors", "n_donors", "n_test", "RMSE_uncalibrated", "RMSE_correct", "RMSE_wrong", "RMSE_wrong_minus_correct")]
-write_table(s10, "S10_wrong_source_by_reference.csv", clean_names = TRUE)
-
-# S11. SkinPiX transfer audit
-
-s11 <- data.frame(
-	Metric = c(
-		"Retained measurements", "Compounds", "References", "HuSkin-overlapping compounds",
-		"SkinPiX-only compounds", "Eligible transfer references", "References with DOI overlap",
-		"Median absolute RDKit MW difference among matched compounds",
-		"Median absolute RDKit logP difference among matched compounds"
-	),
-	Value = c(
-		nrow(skinpix),
-		length(unique(skinpix$compound_id)),
-		length(unique(skinpix$reference_id)),
-		length(unique(skinpix$compound_id[skinpix$overlap_huskin %in% TRUE])),
-		length(unique(skinpix$compound_id[skinpix$overlap_huskin %in% FALSE])),
-		length(unique(eligible41$reference_id[eligible41$eligible %in% TRUE])),
-		length(unique(overlap40$reference_id[overlap40$doi_overlaps_huskin %in% TRUE])),
-		median(abs(descriptor40$delta_mw_rdkit), na.rm = TRUE),
-		median(abs(descriptor40$delta_logp_rdkit), na.rm = TRUE)
-	),
-	stringsAsFactors = FALSE
-)
-
-write_table(s11, "S11_skinpix_transfer_audit.csv")
-
-# S12. HuSkinDB–SkinPiX compound matches
-s12 <- audit40[c("huskin_compound_id", "huskin_compound_name", "compound_id", "compound_name", "match_method")]
-names(s12) <- c("HuSkin ID", "HuSkin compound", "SkinPiX ID", "SkinPiX compound", "Match method")
-write_table(s12, "S12_skinpix_compound_overlap.csv")
-
-# S13. SkinPiX calibration by source
-# Retain numeric values because the Rmd applies display formatting.
-s13 <- ref41[c(
-	"reference_id", "anchors", "RMSE_uncalibrated", "RMSE_calibrated",
-	"MAE_uncalibrated", "MAE_calibrated", "RMSE_improvement_percent", "MAE_improvement_percent"
-)]
-write_table(s13, "S13_skinpix_reference_calibration.csv", clean_names = TRUE)
-
-# S14. Applicability-domain summary
-
-s14_ch <- do.call(rbind, lapply(unique(ad21$specification), function(specification) {
-	x <- ad21[ad21$specification == specification, ]
-	inside <- x$in_domain %in% TRUE
-	outside <- x$in_domain %in% FALSE
-	data.frame(
-		Dataset = "Cheruvu",
-		Specification = specification,
-		n_in = sum(x$n_compounds[inside]),
-		n_out = sum(x$n_compounds[outside]),
-		mae_in = if (any(inside)) x$MAE_hierarchical[inside] else NA_real_,
-		mae_out = if (any(outside)) x$MAE_hierarchical[outside] else NA_real_
-	)
-}))
-
-s14_hu <- data.frame(
-	Dataset = "HuSkinDB",
-	Specification = "S1",
-	n_in = sum(domain31$in_domain %in% TRUE),
-	n_out = sum(domain31$in_domain %in% FALSE),
-	mae_in = mean(domain31$error_hierarchical[domain31$in_domain %in% TRUE]),
-	mae_out = mean(domain31$error_hierarchical[domain31$in_domain %in% FALSE])
-)
-
-s14_sp <- data.frame(
-	Dataset = "SkinPiX external test",
-	Specification = "S1",
-	n_in = sum(domain41$in_domain %in% TRUE),
-	n_out = sum(domain41$in_domain %in% FALSE),
-	mae_in = NA_real_,
-	mae_out = NA_real_
-)
-
-s14 <- rbind(s14_ch, s14_hu, s14_sp)
-
-for (v in c("mae_in", "mae_out")) s14[[v]] <- ifelse(is.na(s14[[v]]), "Not reported", fmt(s14[[v]], 3))
-
-names(s14) <- c("Dataset", "Specification", "In domain n", "Outside domain n", "MAE in domain", "MAE outside domain")
-
-write_table(s14, "S14_applicability_domain.csv")
-
-# S15a and S15b. Failure summaries and squared-error decomposition
-
-primary70 <- summary70[summary70$anchors == 1, ]
-primary70 <- primary70[order(primary70$dataset, primary70$reference_id), ]
-
-primary70$test_bias_squared <- primary70$test_mean_residual^2
-primary70$mean_MSE_change <- primary70$offset_variance + primary70$offset_bias_squared - primary70$test_bias_squared
-
-direct_change <- vapply(seq_len(nrow(primary70)), function(i) {
-	x <- selection70[
-		selection70$dataset == primary70$dataset[i] &
-		selection70$reference_id == primary70$reference_id[i] &
-		selection70$anchors == 1,
-	]
-	stopifnot(nrow(x) == primary70$selections[i])
-	mean(x$RMSE_calibrated^2) - x$RMSE_uncalibrated[1]^2
-}, numeric(1))
-stopifnot(max(abs(primary70$mean_MSE_change - direct_change)) < 1e-8)
-
-s15a <- primary70[c(
-	"dataset", "reference_id", "available_anchors", "test_compounds",
-	"median_anchor_replication", "median_test_replication", "RMSE_uncalibrated",
-	"RMSE_calibrated", "test_mean_residual", "offset_mean", "offset_sd",
-	"improved_percent", "anchor_distance_mean", "protocol_fields_varying"
-)]
-
-for (v in c("RMSE_uncalibrated", "RMSE_calibrated", "test_mean_residual", "offset_mean", "offset_sd", "improved_percent", "anchor_distance_mean")) {
-	s15a[[v]] <- round(s15a[[v]], 3)
+calibration_table <- function(x, cohort) {
+  data.frame(
+    Cohort = rep(cohort, nrow(x)), Anchors = x$anchors,
+    Publications = x$n_sources,
+    `Publications improved` = paste0(x$n_sources_improved, "/", x$n_sources),
+    `RMSE before` = fmt(x$mean_source_RMSE_uncalibrated),
+    `RMSE after` = fmt(x$mean_source_RMSE_calibrated),
+    `RMSE reduction (%) [95% CI]` = fmt_est_ci(x$RMSE_reduction_percent, x$reduction_ci_low, x$reduction_ci_high, 1),
+    check.names = FALSE
+  )
 }
-
-names(s15a) <- c(
-	"Dataset", "Source", "Available anchors", "Test compounds",
-	"Median anchor records", "Median test records", "RMSE before", "Mean RMSE after",
-	"Mean test residual", "Mean offset", "Offset SD", "Selections improved (%)",
-	"Mean anchor distance", "Metadata fields varying"
+cal_note <- paste(
+  "RMSE is in log10 Kp units, with Kp in cm/h. Metrics are averaged across anchor draws within",
+  "publication and then across publications with equal weight. Percentage reduction is the ratio",
+  "of mean RMSE values, not the mean of publication-specific percentage reductions.",
+  "Confidence intervals resample publications without refitting models."
 )
 
-write_table(s15a, "S15a_calibration_failure.csv")
+# 3. Main tables.
+t1 <- structure
+names(t1) <- c("Dataset", "Raw records", "Retained measurements", "Compounds", "Publications")
+write_table(t1, "01_dataset_structure.csv", "Dataset provenance and retained pooled sample.",
+  paste("Raw records precede eligibility filtering. Publication-priority selection was SkinPiX, HuSkinDB,",
+        "then Cheruvu. Compounds can occur in more than one database contribution; compound counts",
+        "are not additive. The pooled total counts unique compound and publication identities."))
 
-s15b <- primary70[c("dataset", "reference_id", "test_bias_squared", "offset_bias_squared", "offset_variance", "mean_MSE_change")]
-
-for (v in c("test_bias_squared", "offset_bias_squared", "offset_variance", "mean_MSE_change")) s15b[[v]] <- round(s15b[[v]], 4)
-
-names(s15b) <- c("Dataset", "Source", "Test bias sq.", "Mismatch sq.", "Offset var.", "Mean MSE change")
-
-write_table(s15b, "S15b_calibration_failure_decomposition.csv")
-
-# Shared-compound check used by manuscript calculations
-
-anchor_check <- aggregate(
-	cbind(RMSE_uncalibrated, RMSE_calibrated) ~ reference_id + task,
-	data = calibration31[calibration31$anchors == 1, ], mean
+rows <- rbind(
+  calibration_table(one, "All eligible publications"),
+  calibration_table(matched_cal[matched_cal$anchors %in% c(1, 5), , drop = FALSE], "Fixed five-anchor-eligible subset")
 )
+write_table(rows, "02a_primary_calibration.csv", "Primary pooled calibration performance.", cal_note)
+write_table(data.frame(
+  Publications = paired$n_sources,
+  `One-anchor RMSE` = fmt(paired$mean_RMSE_one_anchor),
+  `Five-anchor RMSE` = fmt(paired$mean_RMSE_five_anchors),
+  `RMSE decrease [95% CI]` = fmt_est_ci(paired$mean_RMSE_decrease, paired$decrease_ci_low, paired$decrease_ci_high),
+  check.names = FALSE
+), "02b_one_vs_five_anchors.csv", "Paired comparison of one and five anchors.",
+  "The same publications and test measurements are compared. Positive differences indicate lower RMSE with five anchors. Units are log10 Kp; this is an absolute difference, not a percentage.")
 
-shared_check <- anchor_check[anchor_check$task == "Known compound", c("reference_id", "RMSE_uncalibrated", "RMSE_calibrated")]
-novel_check <- anchor_check[anchor_check$task == "New compound", c("reference_id", "RMSE_uncalibrated", "RMSE_calibrated")]
-
-names(shared_check)[2:3] <- c("shared_before", "shared_after")
-names(novel_check)[2:3] <- c("novel_before", "novel_after")
-anchor_check <- merge(shared_check, novel_check, by = "reference_id")
-anchor_check$shared_improved <- anchor_check$shared_after < anchor_check$shared_before
-anchor_check$novel_improved <- anchor_check$novel_after < anchor_check$novel_before
-
-write_table(anchor_check[c("reference_id", "shared_improved", "novel_improved")], "anchor_check.csv")
-
-cat(
-	"\nManuscript tables complete\n",
-	"Main tables: 5\n",
-	"Supplementary table files: 16\n",
-	"Shared-compound check sources: ", nrow(anchor_check), "\n",
-	"Failure-diagnostic sources: ", nrow(primary70), "\n",
-	"Squared-error decomposition verified\n",
-	sep = ""
+policy_labels <- ifelse(sensitivity$curation_policy == "priority", "Database priority (primary)",
+                        paste0("Agreement threshold ", sensitivity$log_tolerance))
+t3 <- data.frame(
+  Policy = policy_labels, Measurements = sensitivity$n_measurements,
+  `Publications: one / five anchors` = paste0(sensitivity$one_anchor_publications, " / ", sensitivity$matched_publications),
+  `One-anchor reduction (%) [95% CI]` = fmt_est_ci(sensitivity$one_anchor_reduction_percent, sensitivity$one_anchor_ci_low, sensitivity$one_anchor_ci_high, 1),
+  `One-to-five RMSE decrease [95% CI]` = fmt_est_ci(sensitivity$one_to_five_RMSE_decrease, sensitivity$one_to_five_ci_low, sensitivity$one_to_five_ci_high),
+  check.names = FALSE
 )
+write_table(t3, "03a_curation_sensitivity.csv", "Sensitivity to measurement-curation policy.",
+  paste("Agreement thresholds are in log10 units. Recorded temperature tolerances (degrees Celsius):",
+        paste(unique(sensitivity$temperature_tolerance[sensitivity$curation_policy == "agreement"]), collapse = ", "),
+        "Evaluation publications and test measurements can differ between policies.",
+        "The one-to-five comparison uses each policy's fixed five-anchor-eligible subset."))
+
+influence_table <- function(x, include_scenario = FALSE) {
+  d <- ifelse(grepl("reduction", x$analysis, fixed = TRUE), 1L, 3L)
+  # Endpoints have different units, so each is labelled explicitly.
+  effects <- vapply(seq_len(nrow(x)), function(i) fmt(x$full_effect[i], d[i]), character(1))
+  ranges <- vapply(seq_len(nrow(x)), function(i) paste0(
+    fmt(x$minimum_omission_effect[i], d[i]), " to ", fmt(x$maximum_omission_effect[i], d[i])
+  ), character(1))
+  out <- data.frame(
+    Endpoint = x$analysis, `Full effect` = effects, `Omission estimate range` = ranges,
+    `Intervals including zero` = paste0(x$n_intervals_including_zero, "/", x$n_omissions),
+    `Most influential publication` = label(x$most_influential_source), check.names = FALSE
+  )
+  if (include_scenario) out <- cbind(Scenario = x$scenario, out)
+  out
+}
+influence_note <- paste("One evaluation publication is omitted from the summary at a time; models are not refitted.",
+                        "Omission ranges contain point estimates, not confidence bounds.",
+                        "Publication labels are defined in Supplementary Table S1.")
+write_table(influence_table(influence), "03b_publication_influence.csv",
+            "Influence of individual evaluation publications in the primary analysis.", influence_note)
+
+# 4. Supplementary tables.
+pub <- merge(publication_key, eligibility, by = "source_id", all.x = TRUE, sort = FALSE)
+if (anyNA(pub$n_measurements)) stop("Incomplete publication eligibility index.")
+pub$dataset_origins <- vapply(pub$source_id, function(id) {
+  paste(sort(unique(pooled$dataset_origin[pooled$publication_id == id])), collapse = "; ")
+}, character(1))
+pub <- pub[order(pub$publication_label), ]
+write_table(pub, "S1_publication_index.csv", "Publication identities, provenance and calibration eligibility.",
+            "Publication labels are assigned from sorted primary publication identifiers and are shared with the figures.")
+
+meta_table <- data.frame(Metadata = unique(metadata$metadata), check.names = FALSE)
+for (origin in c("Cheruvu", "HuSkinDB", "SkinPiX", "Pooled")) {
+  x <- metadata[metadata$dataset == origin, ]
+  j <- match(meta_table$Metadata, x$metadata)
+  if (anyNA(j) || anyDuplicated(x$metadata)) stop("Incomplete metadata audit: ", origin)
+  x <- x[j, ]
+  meta_table[[origin]] <- ifelse(x$n_records == 0, "No retained records",
+    ifelse(!x$field_provided, "Field not provided",
+      paste0(x$n_reported, "/", x$n_records, " (", fmt(x$percent_reported, 1), "%)")))
+}
+write_table(meta_table, "S2_metadata_availability.csv", "Experimental metadata availability among retained measurements.",
+  "Counts describe reported fields, not harmonised protocol equivalence. Pooled percentages use all retained measurements as the denominator, including contributions without that field.")
+
+write_table(data.frame(
+  Component = variance$component,
+  `Variance [95% CI]` = fmt_est_ci(variance$variance, variance$variance_ci_low, variance$variance_ci_high),
+  `Variance fraction (%) [95% CI]` = fmt_est_ci(variance$percent, variance$percent_ci_low, variance$percent_ci_high, 1),
+  `Bootstrap replicates usable / requested` = paste0(variance$n_boot_usable, " / ", variance$n_boot_requested),
+  check.names = FALSE
+), "S3_variance_components.csv", "Pooled variance decomposition.",
+  "REML intercept-only model with compound and publication random intercepts. Molecular descriptors and temperature are omitted. Confidence intervals use a parametric bootstrap with both random effects simulated anew.")
+
+fits <- cbind(Publication = label(fits$source_id), fits)
+write_table(fits, "S4_fit_diagnostics.csv", "Diagnostics for publication-held-out calibration fits.")
+write_table(calibration_table(all_cal, "All eligible publications at each count"),
+            "S5_calibration_all_eligible.csv", "Calibration across all eligible publications at each anchor count.",
+            paste(cal_note, "Publication composition changes across anchor counts."))
+write_table(calibration_table(matched_cal, "Fixed five-anchor-eligible subset"),
+            "S6_calibration_matched.csv", "Anchor-number comparison within a fixed publication subset.", cal_note)
+
+write_table(data.frame(
+  Publication = label(by_source$source_id), Anchors = by_source$anchors,
+  `Available anchors` = by_source$n_available_anchors, `Test compounds` = by_source$n_test_compounds,
+  `RMSE before` = fmt(by_source$RMSE_uncalibrated), `RMSE after` = fmt(by_source$RMSE_calibrated),
+  `RMSE reduction (%)` = fmt(by_source$RMSE_reduction_percent, 1), check.names = FALSE
+), "S7_calibration_by_publication.csv", "Calibration performance by publication and anchor count.",
+  "Values average the sampled panels within each publication. Positive reductions indicate lower RMSE; publication-specific confidence intervals are not calculated.")
+write_table(influence_table(sensitivity_influence, TRUE), "S8_sensitivity_influence.csv",
+            "Evaluation-publication influence under each curation policy.", influence_note)
+
+write_table(data.frame(
+  Publication = label(failure$source_id), Anchors = failure$anchors,
+  `Available anchors` = failure$available_anchors, `Test compounds` = failure$test_compounds,
+  `RMSE before` = fmt(failure$RMSE_uncalibrated), `RMSE after` = fmt(failure$RMSE_calibrated),
+  `Draws improved (%)` = fmt(failure$draws_improved_percent, 1), check.names = FALSE
+), "S9_failure_performance.csv", "Prediction performance across sampled anchor panels.",
+  "The proportion of draws improving is conditional on the saved panel sampling and is not a prospective success probability.")
+write_table(data.frame(
+  Publication = label(failure$source_id), Anchors = failure$anchors,
+  `Offset variance` = fmt(failure$offset_variance),
+  `Squared mean-offset mismatch` = fmt(failure$offset_mismatch_squared),
+  `Squared mean test bias` = fmt(failure$correctable_test_bias_squared),
+  `Mean MSE change` = fmt(failure$mean_MSE_change),
+  `Larger penalty term` = failure$dominant_penalty, check.names = FALSE
+), "S10_failure_decomposition.csv", "Decomposition of mean test MSE change across anchor panels.",
+  "Mean MSE change equals offset variance plus squared mean-offset mismatch minus squared mean test bias. Offset variance uses denominator n. These are retrospective algebraic terms, not identified experimental causes.")
+write_table(data.frame(
+  Publication = label(failure_paired$source_id),
+  `One-anchor RMSE` = fmt(failure_paired$RMSE_calibrated_one),
+  `Five-anchor RMSE` = fmt(failure_paired$RMSE_calibrated_five),
+  `RMSE decrease` = fmt(failure_paired$RMSE_decrease),
+  `Offset variance: one` = fmt(failure_paired$offset_variance_one),
+  `Offset variance: five` = fmt(failure_paired$offset_variance_five),
+  `Squared mismatch: one` = fmt(failure_paired$offset_mismatch_squared_one),
+  `Squared mismatch: five` = fmt(failure_paired$offset_mismatch_squared_five), check.names = FALSE
+), "S11_one_vs_five_diagnostics.csv", "Changes in error, offset variability and mismatch from one to five anchors.",
+  "Comparisons use the same publications and test measurements. Increasing panel size changes both anchor averaging and shrinkage.")
+
+write_table(data.frame(
+  Record = corrections$record_id,
+  `Previous log10 Kp (cm/h)` = fmt(corrections$previous_log_kp, 6),
+  `Corrected log10 Kp (cm/h)` = fmt(corrections$corrected_log_kp, 6),
+  `Original Kp (cm/h)` = formatC(corrections$original_kp_cm_h, format = "e", digits = 3),
+  Evidence = corrections$evidence, check.names = FALSE
+), "S12_verified_unit_corrections.csv", "Verified permeability corrections from original publications.",
+  "Previous values refer to the processing output before correction, not the original database column. Raw files were preserved.")
+write_table(data.frame(
+  Variable = coverage$variable, Available = coverage$n_available, Measurements = coverage$n_records,
+  `Available (%)` = fmt(ifelse(coverage$n_records > 0, 100*coverage$n_available/coverage$n_records, NA_real_), 1),
+  check.names = FALSE
+), "S13_descriptor_coverage.csv", "Descriptor and temperature availability in the retained pooled dataset.",
+  "Molecular descriptors were calculated consistently from curated structures; availability does not imply inclusion in the primary model.")
+write_table(failure_overview, "S14_failure_overview.csv", "Overview of calibration failures by anchor count.",
+  "Eligible publication sets can differ across anchor counts. Wrong-direction counts overlap with the mismatch/variability classifications.")
+
+# Sidecar captions/notes for use when writing the revised Rmd.
+write.csv(do.call(rbind, index), file.path(table_dir, "table_index.csv"), row.names = FALSE, na = "")
+cat("\nPooled manuscript tables written to ", table_dir, ".\n", sep = "")
+cat("Captions and footnotes: R/tables/table_index.csv\n")
+cat("Update the Rmd to these new filenames; old table imports are not compatible.\n")

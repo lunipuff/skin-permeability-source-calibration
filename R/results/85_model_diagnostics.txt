@@ -3,20 +3,20 @@ Formula: log_kp ~ 1 + (1 | compound_id) + (1 | publication_id)
    Data: model_data
 Control: ctrl
 
-REML criterion at convergence: 2390.1
+REML criterion at convergence: 2377
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--4.6782 -0.4327  0.0489  0.4435  3.3961 
+-4.6545 -0.4319  0.0508  0.4534  3.3735 
 
 Random effects:
  Groups         Name        Variance Std.Dev.
- compound_id    (Intercept) 0.4334   0.6584  
- publication_id (Intercept) 0.6263   0.7914  
- Residual                   0.4587   0.6773  
-Number of obs: 882, groups:  compound_id, 348; publication_id, 161
+ compound_id    (Intercept) 0.4298   0.6556  
+ publication_id (Intercept) 0.6328   0.7955  
+ Residual                   0.4635   0.6808  
+Number of obs: 875, groups:  compound_id, 348; publication_id, 160
 
 Fixed effects:
             Estimate Std. Error t value
-(Intercept) -3.07400    0.08486  -36.22
+(Intercept) -3.07720    0.08543  -36.02
 Singular fit: FALSE

@@ -1,17 +1,17 @@
 "dataset","metadata","field_provided","n_reported","n_records","percent_reported"
-"Cheruvu","Skin donor type",FALSE,0,137,0
-"Cheruvu","Anatomical site",FALSE,0,137,0
-"Cheruvu","Skin layer",FALSE,0,137,0
-"Cheruvu","Skin preparation",FALSE,0,137,0
-"Cheruvu","Skin thickness",TRUE,137,137,100
-"Cheruvu","Diffusion cell type",FALSE,0,137,0
-"Cheruvu","Donor medium",FALSE,0,137,0
-"Cheruvu","Receptor medium",FALSE,0,137,0
-"Cheruvu","Donor or skin temperature",TRUE,137,137,100
-"Cheruvu","Receptor temperature",FALSE,0,137,0
-"Cheruvu","Donor pH",FALSE,0,137,0
-"Cheruvu","Receptor pH",FALSE,0,137,0
-"Cheruvu","Skin integrity test",TRUE,110,137,80.2919708029197
+"Cheruvu","Skin donor type",FALSE,0,130,0
+"Cheruvu","Anatomical site",FALSE,0,130,0
+"Cheruvu","Skin layer",FALSE,0,130,0
+"Cheruvu","Skin preparation",FALSE,0,130,0
+"Cheruvu","Skin thickness",TRUE,130,130,100
+"Cheruvu","Diffusion cell type",FALSE,0,130,0
+"Cheruvu","Donor medium",FALSE,0,130,0
+"Cheruvu","Receptor medium",FALSE,0,130,0
+"Cheruvu","Donor or skin temperature",TRUE,130,130,100
+"Cheruvu","Receptor temperature",FALSE,0,130,0
+"Cheruvu","Donor pH",FALSE,0,130,0
+"Cheruvu","Receptor pH",FALSE,0,130,0
+"Cheruvu","Skin integrity test",TRUE,110,130,84.6153846153846
 "HuSkinDB","Skin donor type",TRUE,479,546,87.7289377289377
 "HuSkinDB","Anatomical site",TRUE,458,546,83.8827838827839
 "HuSkinDB","Skin layer",TRUE,532,546,97.4358974358974
@@ -38,16 +38,16 @@
 "SkinPiX","Donor pH",TRUE,18,199,9.04522613065327
 "SkinPiX","Receptor pH",TRUE,167,199,83.9195979899498
 "SkinPiX","Skin integrity test",FALSE,0,199,0
-"Pooled","Skin donor type",TRUE,678,882,76.8707482993197
-"Pooled","Anatomical site",TRUE,644,882,73.015873015873
-"Pooled","Skin layer",TRUE,731,882,82.8798185941043
-"Pooled","Skin preparation",TRUE,622,882,70.5215419501134
-"Pooled","Skin thickness",TRUE,137,882,15.5328798185941
-"Pooled","Diffusion cell type",TRUE,639,882,72.4489795918367
-"Pooled","Donor medium",TRUE,507,882,57.4829931972789
-"Pooled","Receptor medium",TRUE,571,882,64.7392290249433
-"Pooled","Donor or skin temperature",TRUE,674,882,76.4172335600907
-"Pooled","Receptor temperature",TRUE,482,882,54.6485260770975
-"Pooled","Donor pH",TRUE,242,882,27.437641723356
-"Pooled","Receptor pH",TRUE,415,882,47.0521541950113
-"Pooled","Skin integrity test",TRUE,110,882,12.4716553287982
+"Pooled","Skin donor type",TRUE,678,875,77.4857142857143
+"Pooled","Anatomical site",TRUE,644,875,73.6
+"Pooled","Skin layer",TRUE,731,875,83.5428571428571
+"Pooled","Skin preparation",TRUE,622,875,71.0857142857143
+"Pooled","Skin thickness",TRUE,130,875,14.8571428571429
+"Pooled","Diffusion cell type",TRUE,639,875,73.0285714285714
+"Pooled","Donor medium",TRUE,507,875,57.9428571428571
+"Pooled","Receptor medium",TRUE,571,875,65.2571428571429
+"Pooled","Donor or skin temperature",TRUE,667,875,76.2285714285714
+"Pooled","Receptor temperature",TRUE,482,875,55.0857142857143
+"Pooled","Donor pH",TRUE,242,875,27.6571428571429
+"Pooled","Receptor pH",TRUE,415,875,47.4285714285714
+"Pooled","Skin integrity test",TRUE,110,875,12.5714285714286

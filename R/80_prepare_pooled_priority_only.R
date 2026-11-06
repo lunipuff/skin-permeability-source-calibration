@@ -145,6 +145,18 @@ sync_review <- function(template, path, key, manual) {
     }
   }
 
+  # Normalize curated DOI identities before saving the crosswalk or grouping data.
+  # Keep source keys unchanged so existing manual decisions still match.
+  if ("publication_id" %in% names(template)) {
+    ids <- clean(template$publication_id)
+    is_doi <- !is.na(ids) & grepl(
+      "^(doi:|https?://(dx\\.)?doi\\.org/|10\\.[0-9]{4,9}/)",
+      ids, ignore.case = TRUE
+    )
+    ids[is_doi] <- paste0("DOI:", doi_key(ids[is_doi]))
+    template$publication_id <- ids
+  }
+
   template$decision <- tolower(trimws(blank(template$decision)))
 
   if (any(!template$decision %in% c("keep", "exclude", "review"))) {

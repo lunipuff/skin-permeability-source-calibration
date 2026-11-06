@@ -16,7 +16,7 @@ figure_dir <- "R/figures"
 save_png <- FALSE
 
 example_sources <- c(
-  "DOI:10.1016/S0928-0987(03)00176-3",
+  "DOI:10.1016/s0928-0987(03)00176-3",
   "DOI:10.1038/jid.1969.9"
 )
 

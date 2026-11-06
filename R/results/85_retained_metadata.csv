@@ -13,7 +13,7 @@
 "Cheruvu_85","Cheruvu","DOI:10.1111/j.2042-7158.1992.tb05485.x","O",,,,,"0.1",,,,"29.85",,,,"tritiated water permeation"
 "Cheruvu_90","Cheruvu","CHREF:(Anderson et al. 1988), (Raykar 1988)","C[C@]12CCC(=O)C=C1CC[C@@H]1[C@@H]2[C@@H](O)C[C@@]2(C)[C@H]1CC[C@]2(O)C(=O)COC(=O)CCC(=O)O",,,,,"0.01",,,,"36.85",,,,
 "Cheruvu_91","Cheruvu","CHREF:(Anderson et al. 1988), (Raykar 1988)","CCC(=O)OCC(=O)[C@@]1(O)CC[C@H]2[C@@H]3CCC4=CC(=O)CC[C@]4(C)[C@H]3[C@@H](O)C[C@@]21C",,,,,"0.01",,,,"36.85",,,,
-"Cheruvu_139","Cheruvu","DOI:10.1016/S0378-5173(00)00561-5","O=C(O)c1ccccc1O",,,,,"0.1",,,,"36.85",,,,
+"Cheruvu_139","Cheruvu","DOI:10.1016/s0378-5173(00)00561-5","O=C(O)c1ccccc1O",,,,,"0.1",,,,"36.85",,,,
 "Cheruvu_140","Cheruvu","DOI:10.1111/j.2042-7158.1985.tb04954.x","CN(Cc1cnc2nc(N)nc(N)c2n1)c1ccc(C(=O)N[C@@H](CCC(=O)O)C(=O)O)cc1",,,,,"0.01",,,,"24.85",,,,"tritiated water permeation"
 "Cheruvu_141","Cheruvu","DOI:10.1111/j.2042-7158.1985.tb04954.x","CN(Cc1cnc2nc(N)nc(N)c2n1)c1ccc(C(=O)N[C@@H](CCC(=O)O)C(=O)O)cc1",,,,,"0.01",,,,"24.85",,,,"tritiated water permeation"
 "Cheruvu_200","Cheruvu","DOI:10.3109/109158183091420","CCCCCCCCCC(=O)[O-].[Na+]",,,,,"0.1",,,,"36.85",,,,"transepidermal electrical resistance"
@@ -87,47 +87,40 @@
 "Cheruvu_297","Cheruvu","DOI:10.1002/jps.21666","C[C@]12C[C@H](O)[C@H]3[C@@H](CCC4=CC(=O)CC[C@@]43C)[C@@H]1CC[C@@H]2C(=O)CO",,,,,"0.1",,,,"36.85",,,,"transepidermal electrical resistance"
 "Cheruvu_298","Cheruvu","DOI:10.1002/jps.21666","C[C@]12C[C@H](O)[C@H]3[C@@H](CCC4=CC(=O)CC[C@@]43C)[C@@H]1CC[C@@H]2C(=O)CO",,,,,"0.1",,,,"36.85",,,,"transepidermal electrical resistance"
 "Cheruvu_299","Cheruvu","DOI:10.1002/jps.21666","C[C@]12C[C@H](O)[C@H]3[C@@H](CCC4=CC(=O)CC[C@@]43C)[C@@H]1CC[C@@H]2C(=O)CO",,,,,"0.1",,,,"36.85",,,,"transepidermal electrical resistance"
-"Cheruvu_324","Cheruvu","DOI:10.1016/S0928-0987(03)00176-3","OC[C@H]1O[C@H](OC[C@H]2O[C@H](O[C@]3(CO)O[C@H](CO)[C@@H](O)[C@@H]3O)[C@H](O)[C@@H](O)[C@@H]2O)[C@H](O)[C@@H](O)[C@H]1O",,,,,"0.1",,,,"36.85",,,,"Visual check"
-"Cheruvu_325","Cheruvu","DOI:10.1016/S0928-0987(03)00176-3","OC[C@H]1O[C@@](CO)(O[C@H]2O[C@H](CO)[C@@H](O)[C@H](O)[C@H]2O)[C@@H](O)[C@@H]1O",,,,,"0.1",,,,"36.85",,,,"Visual check"
-"Cheruvu_326","Cheruvu","DOI:10.1016/S0928-0987(03)00176-3","OC[C@@H](O)[C@@H](O)[C@H](O)[C@H](O)CO",,,,,"0.1",,,,"36.85",,,,"Visual check"
-"Cheruvu_327","Cheruvu","DOI:10.1016/S0928-0987(03)00176-3","CO[C@@H]([C@H](O)[C@H](O)CO)[C@@H](O)C=O",,,,,"0.1",,,,"36.85",,,,"Visual check"
-"Cheruvu_328","Cheruvu","DOI:10.1016/S0928-0987(03)00176-3","OCC(O)CO",,,,,"0.1",,,,"36.85",,,,"Visual check"
-"Cheruvu_329","Cheruvu","DOI:10.1016/S0928-0987(03)00176-3","CC(C)NCC(O)COc1ccc(CC(N)=O)cc1",,,,,"0.1",,,,"36.85",,,,"Visual check"
-"Cheruvu_330","Cheruvu","DOI:10.1016/S0928-0987(03)00176-3","CC(C)(C)NCC(O)COc1cccc2c1C[C@H](O)[C@H](O)C2",,,,,"0.1",,,,"36.85",,,,"Visual check"
-"Cheruvu_331","Cheruvu","DOI:10.1016/S0928-0987(03)00176-3","CC(C)NCC(O)COc1cccc2[nH]ccc12",,,,,"0.1",,,,"36.85",,,,"Visual check"
-"Cheruvu_332","Cheruvu","DOI:10.1016/S0928-0987(03)00176-3","COCCc1ccc(OCC(O)CNC(C)C)cc1",,,,,"0.1",,,,"36.85",,,,"Visual check"
-"Cheruvu_333","Cheruvu","DOI:10.1016/S0928-0987(03)00176-3","CC(C)(C)NC[C@H](O)COc1nsnc1N1CCOCC1",,,,,"0.1",,,,"36.85",,,,"Visual check"
-"Cheruvu_334","Cheruvu","DOI:10.1016/S0928-0987(03)00176-3","C=CCc1ccccc1OCC(O)CNC(C)C",,,,,"0.1",,,,"36.85",,,,"Visual check"
-"Cheruvu_335","Cheruvu","DOI:10.1016/S0928-0987(03)00176-3","C[C@]12CCC(=O)C=C1CC[C@@H]1[C@@H]2[C@@H](O)C[C@]2(C=O)[C@@H](C(=O)CO)CC[C@@H]12",,,,,"0.1",,,,"36.85",,,,"Visual check"
-"Cheruvu_336","Cheruvu","DOI:10.1016/S0928-0987(03)00176-3","C[C@]12C[C@H](O)[C@H]3[C@@H](CCC4=CC(=O)CC[C@@]43C)[C@@H]1CC[C@@H]2C(=O)CO",,,,,"0.1",,,,"36.85",,,,"Visual check"
-"Cheruvu_337","Cheruvu","DOI:10.1016/S0928-0987(03)00176-3","C[C@]12CC[C@H]3[C@@H](CCC4=CC(=O)CC[C@@]43C)[C@@H]1CC[C@@H]2O",,,,,"0.1",,,,"36.85",,,,"Visual check"
-"Cheruvu_338","Cheruvu","DOI:10.1016/S0928-0987(03)00176-3","C[C@]12CC[C@@H]3c4ccc(O)cc4CC[C@H]3[C@@H]1CC[C@@H]2O",,,,,"0.1",,,,"36.85",,,,"Visual check"
+"Cheruvu_324","Cheruvu","DOI:10.1016/s0928-0987(03)00176-3","OC[C@H]1O[C@H](OC[C@H]2O[C@H](O[C@]3(CO)O[C@H](CO)[C@@H](O)[C@@H]3O)[C@H](O)[C@@H](O)[C@@H]2O)[C@H](O)[C@@H](O)[C@H]1O",,,,,"0.1",,,,"36.85",,,,"Visual check"
+"Cheruvu_325","Cheruvu","DOI:10.1016/s0928-0987(03)00176-3","OC[C@H]1O[C@@](CO)(O[C@H]2O[C@H](CO)[C@@H](O)[C@H](O)[C@H]2O)[C@@H](O)[C@@H]1O",,,,,"0.1",,,,"36.85",,,,"Visual check"
+"Cheruvu_326","Cheruvu","DOI:10.1016/s0928-0987(03)00176-3","OC[C@@H](O)[C@@H](O)[C@H](O)[C@H](O)CO",,,,,"0.1",,,,"36.85",,,,"Visual check"
+"Cheruvu_327","Cheruvu","DOI:10.1016/s0928-0987(03)00176-3","CO[C@@H]([C@H](O)[C@H](O)CO)[C@@H](O)C=O",,,,,"0.1",,,,"36.85",,,,"Visual check"
+"Cheruvu_328","Cheruvu","DOI:10.1016/s0928-0987(03)00176-3","OCC(O)CO",,,,,"0.1",,,,"36.85",,,,"Visual check"
+"Cheruvu_329","Cheruvu","DOI:10.1016/s0928-0987(03)00176-3","CC(C)NCC(O)COc1ccc(CC(N)=O)cc1",,,,,"0.1",,,,"36.85",,,,"Visual check"
+"Cheruvu_330","Cheruvu","DOI:10.1016/s0928-0987(03)00176-3","CC(C)(C)NCC(O)COc1cccc2c1C[C@H](O)[C@H](O)C2",,,,,"0.1",,,,"36.85",,,,"Visual check"
+"Cheruvu_331","Cheruvu","DOI:10.1016/s0928-0987(03)00176-3","CC(C)NCC(O)COc1cccc2[nH]ccc12",,,,,"0.1",,,,"36.85",,,,"Visual check"
+"Cheruvu_332","Cheruvu","DOI:10.1016/s0928-0987(03)00176-3","COCCc1ccc(OCC(O)CNC(C)C)cc1",,,,,"0.1",,,,"36.85",,,,"Visual check"
+"Cheruvu_333","Cheruvu","DOI:10.1016/s0928-0987(03)00176-3","CC(C)(C)NC[C@H](O)COc1nsnc1N1CCOCC1",,,,,"0.1",,,,"36.85",,,,"Visual check"
+"Cheruvu_334","Cheruvu","DOI:10.1016/s0928-0987(03)00176-3","C=CCc1ccccc1OCC(O)CNC(C)C",,,,,"0.1",,,,"36.85",,,,"Visual check"
+"Cheruvu_335","Cheruvu","DOI:10.1016/s0928-0987(03)00176-3","C[C@]12CCC(=O)C=C1CC[C@@H]1[C@@H]2[C@@H](O)C[C@]2(C=O)[C@@H](C(=O)CO)CC[C@@H]12",,,,,"0.1",,,,"36.85",,,,"Visual check"
+"Cheruvu_336","Cheruvu","DOI:10.1016/s0928-0987(03)00176-3","C[C@]12C[C@H](O)[C@H]3[C@@H](CCC4=CC(=O)CC[C@@]43C)[C@@H]1CC[C@@H]2C(=O)CO",,,,,"0.1",,,,"36.85",,,,"Visual check"
+"Cheruvu_337","Cheruvu","DOI:10.1016/s0928-0987(03)00176-3","C[C@]12CC[C@H]3[C@@H](CCC4=CC(=O)CC[C@@]43C)[C@@H]1CC[C@@H]2O",,,,,"0.1",,,,"36.85",,,,"Visual check"
+"Cheruvu_338","Cheruvu","DOI:10.1016/s0928-0987(03)00176-3","C[C@]12CC[C@@H]3c4ccc(O)cc4CC[C@H]3[C@@H]1CC[C@@H]2O",,,,,"0.1",,,,"36.85",,,,"Visual check"
 "Cheruvu_339","Cheruvu","DOI:10.1016/s0378-5173(02)00107-2","OC[C@@H](O)[C@@H](O)[C@H](O)[C@H](O)CO",,,,,"0.1",,,,"36.85",,,,
 "Cheruvu_340","Cheruvu","DOI:10.1016/s0378-5173(02)00107-2","C[C@]12CC[C@@H]3c4ccc(O)cc4CC[C@H]3[C@@H]1CC[C@@H]2O",,,,,"0.1",,,,"36.85",,,,
 "Cheruvu_341","Cheruvu","DOI:10.1016/j.ejps.2004.11.001","CN1CCN(C(c2ccccc2)c2ccccc2)CC1",,,,,"0.1",,,,"36.85",,,,
 "Cheruvu_342","Cheruvu","DOI:10.1016/j.ejps.2004.11.001","CCN1CCN(C(c2ccccc2)c2ccccc2)CC1",,,,,"0.1",,,,"36.85",,,,
 "Cheruvu_343","Cheruvu","DOI:10.1016/j.ejps.2004.11.001","CCCN1CCN(C(c2ccccc2)c2ccccc2)CC1",,,,,"0.1",,,,"36.85",,,,
 "Cheruvu_344","Cheruvu","DOI:10.1016/j.ejps.2004.11.001","CCCCN1CCN(C(c2ccccc2)c2ccccc2)CC1",,,,,"0.1",,,,"36.85",,,,
-"Cheruvu_345","Cheruvu","DOI:10.1016/S0928-0987(02)00085-4","Oc1ccccc1",,,,,"0.1",,,,"36.85",,,,
-"Cheruvu_346","Cheruvu","DOI:10.1016/S0928-0987(02)00085-4","Oc1ccccc1O",,,,,"0.1",,,,"36.85",,,,
-"Cheruvu_347","Cheruvu","DOI:10.1016/S0928-0987(02)00085-4","Oc1cccc(O)c1",,,,,"0.1",,,,"36.85",,,,
-"Cheruvu_348","Cheruvu","DOI:10.1016/S0928-0987(02)00085-4","Oc1ccc(O)cc1",,,,,"0.1",,,,"36.85",,,,
-"Cheruvu_349","Cheruvu","DOI:10.1016/S0928-0987(02)00085-4","Oc1ccc(O)c(O)c1",,,,,"0.1",,,,"36.85",,,,
-"Cheruvu_350","Cheruvu","DOI:10.1016/S0928-0987(02)00085-4","Oc1cccc(O)c1O",,,,,"0.1",,,,"36.85",,,,
-"Cheruvu_351","Cheruvu","DOI:10.1016/S0928-0987(02)00085-4","Oc1cc(O)cc(O)c1",,,,,"0.1",,,,"36.85",,,,
 "Cheruvu_352","Cheruvu","DOI:10.1016/0378-5173(94)00253-2","C[C@]12CC[C@@H]3c4ccc(O)cc4CC[C@H]3[C@@H]1CC[C@@H]2O",,,,,"0.1",,,,"31.85",,,,
-"Cheruvu_377","Cheruvu","DOI:10.1016/0378-5173(93)90368-P","CC(C)NCC(O)c1ccc(NS(C)(=O)=O)cc1",,,,,"0.1",,,,"31.85",,,,"tritiated water permeation"
-"Cheruvu_378","Cheruvu","DOI:10.1016/0378-5173(93)90368-P","O",,,,,"0.1",,,,"31.85",,,,
-"Cheruvu_379","Cheruvu","DOI:10.1016/0378-5173(93)90368-P","O",,,,,"0.1",,,,"31.85",,,,
+"Cheruvu_377","Cheruvu","DOI:10.1016/0378-5173(93)90368-p","CC(C)NCC(O)c1ccc(NS(C)(=O)=O)cc1",,,,,"0.1",,,,"31.85",,,,"tritiated water permeation"
+"Cheruvu_378","Cheruvu","DOI:10.1016/0378-5173(93)90368-p","O",,,,,"0.1",,,,"31.85",,,,
+"Cheruvu_379","Cheruvu","DOI:10.1016/0378-5173(93)90368-p","O",,,,,"0.1",,,,"31.85",,,,
 "Cheruvu_390","Cheruvu","DOI:10.1021/js970012r","NC(N)=O",,,,,"0.1",,,,"36.85",,,,"transepidermal electrical resistance"
 "Cheruvu_391","Cheruvu","DOI:10.1021/js970012r","OC[C@H]1O[C@@](CO)(O[C@H]2O[C@H](CO)[C@@H](O)[C@H](O)[C@H]2O)[C@@H](O)[C@@H]1O",,,,,"0.1",,,,"36.85",,,,"transepidermal electrical resistance"
 "Cheruvu_392","Cheruvu","DOI:10.1021/js950044j","NC(N)=O",,,,,"0.1",,,,"36.85",,,,"transepidermal electrical resistance"
 "Cheruvu_393","Cheruvu","DOI:10.1021/js950044j","OC[C@H]1O[C@@](CO)(O[C@H]2O[C@H](CO)[C@@H](O)[C@H](O)[C@H]2O)[C@@H](O)[C@@H]1O",,,,,"0.1",,,,"36.85",,,,"transepidermal electrical resistance"
-"Cheruvu_394","Cheruvu","DOI:10.1016/0378-5173(93)90050-P","CC[N+](CC)(CC)CC",,,,,"0.1",,,,"36.85",,,,"transepidermal electrical resistance"
+"Cheruvu_394","Cheruvu","DOI:10.1016/0378-5173(93)90050-p","CC[N+](CC)(CC)CC",,,,,"0.1",,,,"36.85",,,,"transepidermal electrical resistance"
 "Cheruvu_395","Cheruvu","DOI:10.1023/a:1015898510531","CC[N+](CC)(CC)CC",,,,,"0.1",,,,"24.85",,,,"Visual check"
-"Cheruvu_396","Cheruvu","DOI:10.1016/0378-5173(91)90216-B","OC[C@@H](O)[C@@H](O)[C@H](O)[C@H](O)CO",,,,,"0.1",,,,"24.85",,,,"Visual check"
-"Cheruvu_461","Cheruvu","DOI:10.1016/0378-5173(93)90073-O","Cn1c(=O)c2c(ncn2C)n(C)c1=O",,,,,"0.1",,,,"29.85",,,,
-"Cheruvu_462","Cheruvu","DOI:10.1016/0378-5173(93)90073-O","C[C@]12CC[C@H]3[C@@H](CCC4=CC(=O)CC[C@@]43C)[C@@H]1CC[C@@H]2O",,,,,"0.1",,,,"29.85",,,,
+"Cheruvu_396","Cheruvu","DOI:10.1016/0378-5173(91)90216-b","OC[C@@H](O)[C@@H](O)[C@H](O)[C@H](O)CO",,,,,"0.1",,,,"24.85",,,,"Visual check"
+"Cheruvu_461","Cheruvu","DOI:10.1016/0378-5173(93)90073-o","Cn1c(=O)c2c(ncn2C)n(C)c1=O",,,,,"0.1",,,,"29.85",,,,
+"Cheruvu_462","Cheruvu","DOI:10.1016/0378-5173(93)90073-o","C[C@]12CC[C@H]3[C@@H](CCC4=CC(=O)CC[C@@]43C)[C@@H]1CC[C@@H]2O",,,,,"0.1",,,,"29.85",,,,
 "Cheruvu_463","Cheruvu","DOI:10.3390/pharmaceutics12100958","Cn1c(=O)c2c(ncn2C)n(C)c1=O",,,,,"0.1",,,,"31.85",,,,
 "Cheruvu_464","Cheruvu","DOI:10.3390/pharmaceutics12100958","COC(=O)c1ccc(O)cc1",,,,,"0.1",,,,"31.85",,,,
 "Cheruvu_465","Cheruvu","DOI:10.3390/pharmaceutics12100958","CCCCOC(=O)c1ccc(O)cc1",,,,,"0.1",,,,"31.85",,,,

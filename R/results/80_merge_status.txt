@@ -6,15 +6,15 @@ Valid input records: 1221
 Excluded by source/compound decisions: 80
 Unresolved identity/structure records: 0
 Measurement records awaiting review: 0
-Retained preview measurements: 882
+Retained preview measurements: 875
 Retained preview compounds: 348
-Retained preview publications: 161
+Retained preview publications: 160
 
 Anchor eligibility in the currently resolved preview:
  anchors n_sources
-       1        37
-       2        27
-       3        22
+       1        38
+       2        28
+       3        23
        4        16
        5        13
 

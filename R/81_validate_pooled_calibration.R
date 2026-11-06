@@ -17,7 +17,8 @@
 #
 # Uncertainty:
 #   Publication-level bootstrap of source-level performance.
-#   Models and anchor panels are not refitted during this bootstrap.
+#   Training models are not refitted during this bootstrap.
+#   Performance is averaged across all panels within source before resampling.
 
 if (!requireNamespace("lme4", quietly = TRUE)) {
   stop("Install lme4 before running this script.")
@@ -35,10 +36,15 @@ parse_options <- function(defaults) {
 }
 
 options_run <- parse_options(list(
-  "input-file" = "data/processed/80_pooled.csv", "output-dir" = "R/results"
+  "input-file" = "data/processed/80_pooled.csv", "output-dir" = "R/results",
+  "reuse-predictions" = "false"
 ))
 input_file <- options_run[["input-file"]]
 output_dir <- options_run[["output-dir"]]
+if (!options_run[["reuse-predictions"]] %in% c("true", "false")) {
+  stop("--reuse-predictions must be true or false.")
+}
+reuse_predictions <- options_run[["reuse-predictions"]] == "true"
 if (!nzchar(input_file) || !nzchar(output_dir)) stop("Input and output paths must be nonempty.")
 
 dir.create(output_dir, recursive = TRUE, showWarnings = FALSE)
@@ -48,7 +54,9 @@ if (!file.exists(input_file)) {
 }
 
 anchor_sizes <- 1:5
-n_draws <- 100L
+panel_method <- "exhaustive"
+# Legacy settings field. There are no random panel draws in this analysis.
+n_draws <- 0L
 n_boot <- 2000L
 seed <- 2026L
 
@@ -72,6 +80,65 @@ metrics <- function(observed, predicted) {
     RMSE = sqrt(mean((observed - predicted)^2)),
     MAE = mean(abs(observed - predicted))
   )
+}
+
+# Each unordered panel is evaluated once. Panel sizes are evaluated separately.
+# The legacy 'draw' column is a panel identifier within source and panel size.
+evaluate_panels <- function(source, anchor_residuals, test, variance) {
+  anchor_residuals <- anchor_residuals[
+    order(anchor_residuals$compound_id), , drop = FALSE
+  ]
+  shared <- as.character(anchor_residuals$compound_id)
+  if (!length(shared) || anyDuplicated(shared) || !nrow(test)) {
+    stop("Invalid saved anchors or test measurements for ", source)
+  }
+  if (any(shared %in% test$compound_id)) {
+    stop("Anchor and test compounds overlap for ", source)
+  }
+  if (any(!is.finite(anchor_residuals$mean_residual)) ||
+      any(!is.finite(test$log_kp)) ||
+      any(!is.finite(test$uncalibrated_prediction)) ||
+      any(!is.finite(variance[c("source", "residual")])) ||
+      any(variance[c("source", "residual")] < 0) ||
+      sum(variance[c("source", "residual")]) <= 0) {
+    stop("Invalid predictions or variance estimates for ", source)
+  }
+  baseline <- metrics(test$log_kp, test$uncalibrated_prediction)
+  results <- list()
+  for (k in anchor_sizes[anchor_sizes <= length(shared)]) {
+    expected <- choose(length(shared), k)
+    if (!is.finite(expected) || expected > .Machine$integer.max) {
+      stop("Too many panels to enumerate for ", source, " at ", k, " anchors.")
+    }
+    combinations <- utils::combn(seq_along(shared), k)
+    if (ncol(combinations) != expected) stop("Panel enumeration failed.")
+    shrinkage <- unname(k * variance["source"] /
+      (variance["residual"] + k * variance["source"]))
+    size_results <- lapply(seq_len(ncol(combinations)), function(panel) {
+      selected <- combinations[, panel]
+      offset_raw <- mean(anchor_residuals$mean_residual[selected])
+      offset <- shrinkage * offset_raw
+      calibrated <- metrics(
+        test$log_kp, test$uncalibrated_prediction + offset
+      )
+      data.frame(
+        source_id = source, anchors = k, draw = panel,
+        selected_compounds = paste(shared[selected], collapse = " | "),
+        n_available_anchors = length(shared),
+        n_test_compounds = length(unique(test$compound_id)),
+        n_test_measurements = nrow(test),
+        offset_raw = offset_raw, shrinkage = shrinkage, offset = offset,
+        RMSE_uncalibrated = unname(baseline["RMSE"]),
+        RMSE_calibrated = unname(calibrated["RMSE"]),
+        MAE_uncalibrated = unname(baseline["MAE"]),
+        MAE_calibrated = unname(calibrated["MAE"]),
+        panel_method = panel_method,
+        stringsAsFactors = FALSE
+      )
+    })
+    results[[length(results) + 1L]] <- bind_rows(size_results)
+  }
+  bind_rows(results)
 }
 
 dat <- read.csv(
@@ -310,11 +377,6 @@ evaluate_source <- function(source) {
   )
   anchor_residuals$source_id <- source
 
-  residual_lookup <- setNames(
-    anchor_residuals$mean_residual,
-    anchor_residuals$compound_id
-  )
-
   test <- sc$test[
     sc$test$compound_id %in% novel, , drop = FALSE
   ]
@@ -332,58 +394,8 @@ evaluate_source <- function(source) {
     stop("Non-finite predictions.")
   }
 
-  baseline <- metrics(
-    test$log_kp,
-    test$uncalibrated_prediction
-  )
-
-  results <- list()
-  z <- 1L
-
-  for (draw in seq_len(n_draws)) {
-    # Prefixes give nested panels across anchor counts in each draw.
-    order_of_anchors <- sample(shared, length(shared), replace = FALSE)
-
-    for (k in anchor_sizes[anchor_sizes <= length(shared)]) {
-      selected <- order_of_anchors[seq_len(k)]
-
-      offset_raw <- mean(residual_lookup[selected])
-
-      shrinkage <- unname(
-        k * variance["source"] /
-          (variance["residual"] + k * variance["source"])
-      )
-
-      offset <- shrinkage * offset_raw
-
-      calibrated <- metrics(
-        test$log_kp,
-        test$uncalibrated_prediction + offset
-      )
-
-      results[[z]] <- data.frame(
-        source_id = source,
-        anchors = k,
-        draw = draw,
-        selected_compounds = paste(selected, collapse = " | "),
-        n_available_anchors = length(shared),
-        n_test_compounds = length(novel),
-        n_test_measurements = nrow(test),
-        offset_raw = offset_raw,
-        shrinkage = shrinkage,
-        offset = offset,
-        RMSE_uncalibrated = unname(baseline["RMSE"]),
-        RMSE_calibrated = unname(calibrated["RMSE"]),
-        MAE_uncalibrated = unname(baseline["MAE"]),
-        MAE_calibrated = unname(calibrated["MAE"]),
-        stringsAsFactors = FALSE
-      )
-      z <- z + 1L
-    }
-  }
-
   list(
-    draws = bind_rows(results),
+    draws = evaluate_panels(source, anchor_residuals, test, variance),
     anchors = anchor_residuals,
     tests = test[c(
       "record_id", "dataset_origin", "source_id",
@@ -404,6 +416,65 @@ anchor_results <- list()
 test_results <- list()
 diagnostics <- list()
 
+if (reuse_predictions) {
+  read_cached <- function(filename, columns) {
+    path <- file.path(output_dir, filename)
+    if (!file.exists(path)) stop("Missing cached output ", filename, ". Run 81 without --reuse-predictions.")
+    x <- read.csv(path, stringsAsFactors = FALSE, check.names = FALSE)
+    if (!nrow(x) || !all(columns %in% names(x))) stop("Invalid cached output ", filename)
+    x
+  }
+  cached_settings <- read_cached("81_analysis_settings.csv", "input_md5")
+  if (nrow(cached_settings) != 1L ||
+      !identical(as.character(cached_settings$input_md5), unname(tools::md5sum(input_file)))) {
+    stop("The pooled input has changed. Run 81 without --reuse-predictions first.")
+  }
+  diagnostics <- read_cached("81_pooled_fit_diagnostics.csv",
+    c("source_id", "success", "singular", "convergence", "warnings", "error",
+      "source_variance", "residual_variance"))
+  for (field in c("convergence", "warnings", "error")) {
+    diagnostics[[field]][is.na(diagnostics[[field]])] <- ""
+  }
+  cached_anchors <- read_cached("81_pooled_anchor_residuals.csv",
+    c("source_id", "compound_id", "mean_residual", "n_measurements"))
+  cached_tests <- read_cached("81_pooled_uncalibrated_test_predictions.csv",
+    c("source_id", "record_id", "compound_id", "log_kp", "uncalibrated_prediction"))
+  if (anyDuplicated(cached_anchors[c("source_id", "compound_id")]) ||
+      anyDuplicated(cached_tests$record_id)) {
+    stop("Duplicate cached records. Run 81 without --reuse-predictions.")
+  }
+  j <- match(cached_tests$record_id, dat$record_id)
+  if (anyNA(j) || anyNA(cached_tests[c("source_id", "compound_id", "log_kp")]) ||
+      any(cached_tests$source_id != dat$source_id[j]) ||
+      any(cached_tests$compound_id != dat$compound_id[j]) ||
+      any(abs(cached_tests$log_kp - dat$log_kp[j]) > 1e-12)) {
+    stop("Cached test records differ from the input. Run 81 without --reuse-predictions.")
+  }
+  if (anyDuplicated(diagnostics$source_id) || anyNA(diagnostics$success) ||
+      !all(diagnostics$success) ||
+      !setequal(diagnostics$source_id, eligible_sources) ||
+      !setequal(cached_anchors$source_id, eligible_sources) ||
+      !setequal(cached_tests$source_id, eligible_sources)) {
+    stop("Cached folds are incomplete. Run 81 without --reuse-predictions.")
+  }
+  for (source in eligible_sources) {
+    a <- cached_anchors[cached_anchors$source_id == source, , drop = FALSE]
+    t <- cached_tests[cached_tests$source_id == source, , drop = FALSE]
+    v <- diagnostics[diagnostics$source_id == source, ]
+    held_ids <- unique(dat$compound_id[dat$source_id == source])
+    train_ids <- unique(dat$compound_id[dat$source_id != source])
+    if (!setequal(a$compound_id, intersect(held_ids, train_ids)) ||
+        !setequal(t$compound_id, setdiff(held_ids, train_ids))) {
+      stop("Cached compound partitions differ for ", source)
+    }
+    draw_results[[length(draw_results) + 1L]] <- evaluate_panels(
+      source, a, t,
+      c(source = v$source_variance, residual = v$residual_variance)
+    )
+  }
+  anchor_results <- list(cached_anchors)
+  test_results <- list(cached_tests)
+} else {
 for (i in seq_along(eligible_sources)) {
   source <- eligible_sources[i]
   warnings_seen <- character()
@@ -453,6 +524,7 @@ for (i in seq_along(eligible_sources)) {
 }
 
 diagnostics <- bind_rows(diagnostics)
+}
 write_csv(diagnostics, "81_pooled_fit_diagnostics.csv")
 
 if (!length(draw_results)) {
@@ -472,7 +544,7 @@ write_csv(
 )
 
 # ------------------------------------------------------------
-# 5. Average anchor draws within each source
+# 5. Average all panels within each source and anchor count
 # ------------------------------------------------------------
 
 source_results <- aggregate(
@@ -495,6 +567,12 @@ source_results <- merge(
   by = c("source_id", "anchors"),
   sort = FALSE
 )
+
+panel_counts <- aggregate(
+  list(n_panels = draws$draw), draws[c("source_id", "anchors")], length
+)
+source_results <- merge(source_results, panel_counts,
+  by = c("source_id", "anchors"), sort = FALSE)
 
 source_results$RMSE_reduction_percent <- with(
   source_results,
@@ -701,7 +779,9 @@ status <- c(
     sum(diagnostics$success & nzchar(diagnostics$convergence))
   ),
   paste("Fixed-source five-anchor subset:", length(matched_sources)),
-  paste("Anchor draws per publication:", n_draws),
+  "Anchor panels were evaluated exhaustively at each eligible panel size.",
+  paste("Total panels evaluated:", nrow(draws)),
+  paste("Saved predictions reused:", reuse_predictions),
   paste("Publication bootstrap replicates:", n_boot),
   paste("Seed:", seed),
   "",
@@ -711,10 +791,11 @@ status <- c(
   "All records of the target publication were excluded from fitting.",
   "Test compounds were absent from all training publications.",
   "Anchor residuals were averaged within each compound.",
-  "Panels were nested across anchor counts within each draw.",
+  "Every unordered panel was evaluated once at each anchor count.",
+  "Panel identifiers do not link or pair panels across anchor counts.",
   "Test errors were evaluated across measurement rows.",
   "Source-level metrics were averaged with equal source weights.",
-  "Intervals resample publications, not models or anchor draws.",
+  "Intervals resample publications after averaging over all anchor panels.",
   "Singular fits and fits with convergence messages were retained and flagged.",
   "Failed folds were omitted from summaries and explicitly reported.",
   "Results are conditional on pooled curation and identity mappings.",
@@ -741,5 +822,7 @@ cat(paste(status, collapse = "\n"), "\n")
 write_csv(data.frame(
   input_file = normalizePath(input_file, winslash = "/", mustWork = TRUE),
   input_md5 = unname(tools::md5sum(input_file)),
-  n_draws = n_draws, n_boot = n_boot, seed = seed
+  n_draws = n_draws, n_boot = n_boot, seed = seed,
+  panel_method = panel_method, total_panels = nrow(draws),
+  reused_predictions = reuse_predictions
 ), "81_analysis_settings.csv")

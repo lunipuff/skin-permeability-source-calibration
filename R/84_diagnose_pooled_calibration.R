@@ -60,7 +60,7 @@ draws <- read_result(
   c(
     "source_id", "anchors", "draw", "selected_compounds",
     "offset", "offset_raw", "shrinkage",
-    "RMSE_uncalibrated", "RMSE_calibrated"
+    "RMSE_uncalibrated", "RMSE_calibrated", "panel_method"
   )
 )
 
@@ -93,6 +93,10 @@ primary <- read_result(
 # ------------------------------------------------------------
 # 2. Check input consistency
 # ------------------------------------------------------------
+
+if (any(draws$panel_method != "exhaustive")) {
+  stop("Run the exhaustive version of 81 before these diagnostics.")
+}
 
 for (check in list(
   draws[c("source_id", "anchors", "draw")],
@@ -135,7 +139,7 @@ if (
 }
 
 # ------------------------------------------------------------
-# 3. Diagnose the primary sampled anchor panels
+# 3. Diagnose all primary anchor panels
 # ------------------------------------------------------------
 
 # Uncalibrated residual:
@@ -178,6 +182,20 @@ for (source in sort(unique(draws$source_id))) {
   for (k in sort(unique(d$anchors))) {
 
     x <- d[d$anchors == k, , drop = FALSE]
+
+    # Unique valid sets plus the binomial count establish complete enumeration.
+    panel_sets <- strsplit(x$selected_compounds, " | ", fixed = TRUE)
+    valid_sets <- vapply(panel_sets, function(ids) {
+      length(ids) == k && !anyDuplicated(ids) && all(ids %in% a$compound_id)
+    }, logical(1))
+    panel_keys <- vapply(panel_sets, function(ids) {
+      paste(sort(ids), collapse = " | ")
+    }, character(1))
+    if (!all(valid_sets) || anyDuplicated(panel_keys) ||
+        nrow(x) != choose(nrow(a), k)) {
+      stop("Incomplete or duplicated panel enumeration for ", source,
+           " at ", k, " anchors. Rerun 81.")
+    }
 
     p <- primary[
       primary$source_id == source &
@@ -316,11 +334,7 @@ for (source in sort(unique(draws$source_id))) {
 
       offset_mean = mean_offset,
 
-      offset_sd = if (nrow(x) > 1) {
-        sd(x$offset)
-      } else {
-        0
-      },
+      offset_sd = sqrt(offset_variance),
 
       offset_min = min(x$offset),
       offset_max = max(x$offset),
@@ -354,11 +368,10 @@ for (source in sort(unique(draws$source_id))) {
   }
 
   # ----------------------------------------------------------
-  # Supplementary diagnostic: every single anchor evaluated once
+  # Single-anchor diagnostic export from the same exhaustive primary analysis
   # ----------------------------------------------------------
 
-  # This is distinct from the sampled primary analysis above.
-  # Reuse saved residuals and the fitted one-anchor shrinkage.
+  # Reuse saved residuals and verify agreement with the primary single anchors.
 
   one <- d[d$anchors == 1, , drop = FALSE]
 
@@ -402,6 +415,10 @@ for (source in sort(unique(draws$source_id))) {
 
   a$offset_wrong_direction <-
     a$offset * mu < -tolerance
+
+  if (!close_enough(a$RMSE_calibrated[j], one$RMSE_calibrated)) {
+    stop("Single-anchor export disagrees with the primary panels for ", source)
+  }
 
   single_anchors[[length(single_anchors) + 1L]] <- a
 }
@@ -543,13 +560,13 @@ notes <- c(
   "Pooled calibration diagnostics completed without model refitting.",
 
   paste(
-    "Primary summaries use exactly the sampled panels saved by 81,",
-    "including repeated selections."
+    "Primary summaries use every unique unordered panel saved by 81,",
+    "with equal weight within publication and anchor count."
   ),
 
   paste(
-    "Exhaustive single-anchor diagnostics are supplementary and",
-    "can differ from primary sampled summaries."
+    "The single-anchor diagnostic export uses the same anchors as the primary analysis.",
+    "Their mean RMSE values agree."
   ),
 
   paste(

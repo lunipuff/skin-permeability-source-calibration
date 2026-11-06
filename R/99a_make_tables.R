@@ -45,6 +45,19 @@ write_table <- function(x, filename, caption, note = "") {
   )
 }
 
+# Reporting must not describe old sampled outputs as exhaustive evaluation.
+panel_settings_files <- c(
+  file.path(result_dir, "81_analysis_settings.csv"),
+  list.files(file.path(result_dir, "sensitivity"),
+    pattern = "^81_analysis_settings\\.csv$", recursive = TRUE, full.names = TRUE)
+)
+for (settings_file in panel_settings_files) {
+  panel_settings <- read_checked(settings_file, "panel_method")
+  if (nrow(panel_settings) != 1L || panel_settings$panel_method != "exhaustive") {
+    stop("Rerun exhaustive calibration and sensitivity analyses before reporting: ", settings_file)
+  }
+}
+
 # 1. Inputs from the pooled pipeline only.
 pooled <- read_checked("data/processed/80_pooled.csv", c(
   "record_id", "publication_id", "compound_id", "dataset_origin"
@@ -182,7 +195,7 @@ calibration_table <- function(x, cohort) {
   )
 }
 cal_note <- paste(
-  "RMSE is in log10 Kp units, with Kp in cm/h. Metrics are averaged across anchor draws within",
+  "RMSE is in log10 Kp units, with Kp in cm/h. Metrics are averaged across all possible anchor panels within",
   "publication and then across publications with equal weight. Percentage reduction is the ratio",
   "of mean RMSE values, not the mean of publication-specific percentage reductions.",
   "Confidence intervals resample publications without refitting models."
@@ -292,7 +305,7 @@ write_table(data.frame(
   `RMSE before` = fmt(by_source$RMSE_uncalibrated), `RMSE after` = fmt(by_source$RMSE_calibrated),
   `RMSE reduction (%)` = fmt(by_source$RMSE_reduction_percent, 1), check.names = FALSE
 ), "S7_calibration_by_publication.csv", "Calibration performance by publication and anchor count.",
-  "Values average the sampled panels within each publication. Positive reductions indicate lower RMSE; publication-specific confidence intervals are not calculated.")
+  "Values average all possible panels within each publication and anchor count. Positive reductions indicate lower RMSE; publication-specific confidence intervals are not calculated.")
 write_table(influence_table(sensitivity_influence, TRUE), "S8_sensitivity_influence.csv",
             "Evaluation-publication influence under each curation policy.", influence_note)
 
@@ -300,9 +313,9 @@ write_table(data.frame(
   Publication = label(failure$source_id), Anchors = failure$anchors,
   `Available anchors` = failure$available_anchors, `Test compounds` = failure$test_compounds,
   `RMSE before` = fmt(failure$RMSE_uncalibrated), `RMSE after` = fmt(failure$RMSE_calibrated),
-  `Draws improved (%)` = fmt(failure$draws_improved_percent, 1), check.names = FALSE
-), "S9_failure_performance.csv", "Prediction performance across sampled anchor panels.",
-  "The proportion of draws improving is conditional on the saved panel sampling and is not a prospective success probability.")
+  `Panels improved (%)` = fmt(failure$draws_improved_percent, 1), check.names = FALSE
+), "S9_failure_performance.csv", "Prediction performance across all possible anchor panels.",
+  "The proportion of panels improving describes all possible panels from the available anchors at each panel size. It is conditional on these data and is not a prospective success probability.")
 write_table(data.frame(
   Publication = label(failure$source_id), Anchors = failure$anchors,
   `Offset variance` = fmt(failure$offset_variance),

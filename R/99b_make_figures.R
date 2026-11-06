@@ -140,6 +140,19 @@ save_fig <- function(p, filename, width, height, caption) {
 # 1. Read pooled outputs
 # ------------------------------------------------------------
 
+# Reporting must not describe old sampled outputs as exhaustive evaluation.
+panel_settings_files <- c(
+  file.path(result_dir, "81_analysis_settings.csv"),
+  list.files(file.path(result_dir, "sensitivity"),
+    pattern = "^81_analysis_settings\\.csv$", recursive = TRUE, full.names = TRUE)
+)
+for (settings_file in panel_settings_files) {
+  panel_settings <- read_checked(settings_file, "panel_method")
+  if (nrow(panel_settings) != 1L || panel_settings$panel_method != "exhaustive") {
+    stop("Rerun exhaustive calibration and sensitivity analyses before reporting: ", settings_file)
+  }
+}
+
 key <- read_checked(
   "R/tables/S1_publication_index.csv",
   c("publication_label", "source_id")
@@ -638,7 +651,7 @@ save_fig(
   paste(
     "One-anchor calibration by held-out publication.",
     "Open points are uncalibrated RMSE and filled points",
-    "calibrated RMSE, averaged over the saved random anchor selections.",
+    "calibrated RMSE, averaged over every available single anchor.",
     "Red indicates increased mean RMSE.",
     "Publications are ordered by RMSE change.",
     "The overall percentage reduction is calculated from",
@@ -902,7 +915,7 @@ p4a <- ggplot(
     x = "Mean uncalibrated test residual (retrospective)",
     y = "Mean estimated offset",
     caption = paste(
-      "Vertical lines: sampled offset ranges,",
+      "Vertical lines: full offset ranges,",
       "not confidence intervals."
     )
   ) +
@@ -995,16 +1008,16 @@ save_fig(
 
   paste(
     "Retrospective calibration diagnostics.",
-    "A: Mean offset and sampled range across single-anchor choices",
+    "A: Mean offset and full range across all single-anchor choices",
     "against mean uncalibrated test residual.",
     "Dashed diagonal indicates equality.",
     "Mean offsets alone do not determine mean RMSE",
     "across varying anchor choices.",
-    "B-C: Sampled offset distributions for",
+    "B-C: Offset distributions across all possible panels for",
     paste(label(example_sources), collapse = " and "),
     "across anchor counts.",
     "Boxplots and point ranges are not confidence intervals,",
-    "and sampled panels are not independent experiments.",
+    "and panels can overlap and are not independent experiments.",
     "Test residuals were not used to select anchors",
     "or estimate calibration offsets."
   )

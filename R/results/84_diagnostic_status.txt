@@ -1,6 +1,6 @@
 Pooled calibration diagnostics completed without model refitting.
-Primary summaries use exactly the sampled panels saved by 81, including repeated selections.
-Exhaustive single-anchor diagnostics are supplementary and can differ from primary sampled summaries.
+Primary summaries use every unique unordered panel saved by 81, with equal weight within publication and anchor count.
+The single-anchor diagnostic export uses the same anchors as the primary analysis. Their mean RMSE values agree.
 Test residuals and optimal-offset RMSE are retrospective diagnostics, not deployment rules.
 MSE change = offset variance + squared mean-offset mismatch - squared mean test bias.
 Offset variance uses denominator n. Mean squared RMSE differs from squared mean RMSE.

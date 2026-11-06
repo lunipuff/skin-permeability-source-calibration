@@ -1,2 +1,2 @@
-"input_file","input_md5","n_draws","n_boot","seed"
-"/Users/chayada_p/Data/CUDENT/202604_skin_permeability_qspr_model/data/processed/80_pooled.csv","3c267112ade2d930592262e13b79ad54",100,2000,2026
+"input_file","input_md5","n_draws","n_boot","seed","panel_method","total_panels","reused_predictions"
+"/Users/chayada_p/Data/CUDENT/202604_skin_permeability_qspr_model/data/processed/80_pooled.csv","3c267112ade2d930592262e13b79ad54",0,2000,2026,"exhaustive",4876,FALSE

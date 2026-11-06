@@ -30,11 +30,17 @@ options80 <- parse_options(list(
   "log-tolerance" = "0.01",
   "temperature-tolerance" = "0.2",
   "scenario" = "primary",
+  "database-priority" = "SkinPiX,HuSkinDB,Cheruvu",
   "read-only-curation" = "false"
 ))
 output_dir <- options80[["output-dir"]]
 curation_policy <- options80[["curation-policy"]]
 scenario <- options80[["scenario"]]
+database_priority <- trimws(strsplit(options80[["database-priority"]], ",", fixed = TRUE)[[1]])
+if (length(database_priority) != 3L || anyDuplicated(database_priority) ||
+    !setequal(database_priority, c("SkinPiX", "HuSkinDB", "Cheruvu"))) {
+  stop("--database-priority must list SkinPiX,HuSkinDB,Cheruvu once each, in the desired order.")
+}
 log_tolerance <- suppressWarnings(as.numeric(options80[["log-tolerance"]]))
 temperature_tolerance <- suppressWarnings(as.numeric(options80[["temperature-tolerance"]]))
 if (!curation_policy %in% c("priority", "agreement")) stop("Unknown curation policy.")
@@ -566,7 +572,6 @@ write.csv(
 # 6. Curate overlaps using the selected policy
 # ------------------------------------------------------------
 
-database_priority <- c("SkinPiX", "HuSkinDB", "Cheruvu")
 if (any(!pool$dataset_origin %in% database_priority)) stop("Unexpected dataset origin.")
 
 if (curation_policy == "priority") {

@@ -1,4 +1,4 @@
-"Component","Variance [95% CI]","Variance fraction (%) [95% CI]","Bootstrap replicates usable / requested"
-"Compound","0.430 [0.315, 0.557]","28.2 [21.0, 35.7]","2000 / 2000"
-"Publication","0.633 [0.448, 0.842]","41.5 [32.4, 49.3]","2000 / 2000"
-"Residual","0.464 [0.406, 0.523]","30.4 [25.0, 36.6]","2000 / 2000"
+"Component","Variance [95% CI]","Variance fraction (%) [95% CI]"
+"Compound","0.430 [0.315, 0.557]","28.2 [21.0, 35.7]"
+"Publication","0.633 [0.448, 0.842]","41.5 [32.4, 49.3]"
+"Residual","0.464 [0.406, 0.523]","30.4 [25.0, 36.6]"

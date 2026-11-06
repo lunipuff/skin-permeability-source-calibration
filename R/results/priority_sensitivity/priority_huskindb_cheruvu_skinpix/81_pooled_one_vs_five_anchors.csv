@@ -1,0 +1,2 @@
+"n_sources","mean_RMSE_one_anchor","mean_RMSE_five_anchors","mean_RMSE_decrease","decrease_ci_low","decrease_ci_high","n_boot"
+13,0.792929708496027,0.652062236460399,0.140867472035628,0.05939254645113,0.211942029278715,2000

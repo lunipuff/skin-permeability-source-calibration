@@ -1,0 +1,7 @@
+"Database priority","Measurements","Sources with one / five anchors","One-anchor reduction (%) [95% CI]","One-to-five decrease [95% CI]"
+"SkinPiX > HuSkinDB > Cheruvu",875,"38 / 13","11.7 [3.8, 18.8]","0.136 [0.056, 0.205]"
+"SkinPiX > Cheruvu > HuSkinDB",826,"35 / 10","9.4 [-1.3, 19.6]","0.076 [0.003, 0.136]"
+"HuSkinDB > SkinPiX > Cheruvu",875,"38 / 13","11.7 [3.8, 18.8]","0.136 [0.056, 0.205]"
+"HuSkinDB > Cheruvu > SkinPiX",844,"37 / 13","12.3 [4.0, 20.0]","0.141 [0.059, 0.212]"
+"Cheruvu > SkinPiX > HuSkinDB",795,"34 / 10","10.7 [0.3, 21.0]","0.075 [0.004, 0.134]"
+"Cheruvu > HuSkinDB > SkinPiX",795,"34 / 10","10.7 [0.3, 21.0]","0.075 [0.004, 0.134]"

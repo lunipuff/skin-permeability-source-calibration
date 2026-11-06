@@ -279,43 +279,89 @@ for (origin in c("Cheruvu", "HuSkinDB", "SkinPiX", "Pooled")) {
     ifelse(!x$field_provided, "Field not provided",
       paste0(x$n_reported, "/", x$n_records, " (", fmt(x$percent_reported, 1), "%)")))
 }
+
 write_table(meta_table, "S2_metadata_availability.csv", "Experimental metadata availability among retained measurements.",
   "Counts describe reported fields, not harmonised protocol equivalence. Pooled percentages use all retained measurements as the denominator, including contributions without that field.")
 
-write_table(data.frame(
-  Component = variance$component,
-  `Variance [95% CI]` = fmt_est_ci(variance$variance, variance$variance_ci_low, variance$variance_ci_high),
-  `Variance fraction (%) [95% CI]` = fmt_est_ci(variance$percent, variance$percent_ci_low, variance$percent_ci_high, 1),
-  `Bootstrap replicates usable / requested` = paste0(variance$n_boot_usable, " / ", variance$n_boot_requested),
-  check.names = FALSE
-), "S3_variance_components.csv", "Pooled variance decomposition.",
-  "REML intercept-only model with compound and publication random intercepts. Molecular descriptors and temperature are omitted. Confidence intervals use a parametric bootstrap with both random effects simulated anew.")
+write_table(
+	data.frame(
+		Component = variance$component,
+		`Variance [95% CI]` = fmt_est_ci(
+			variance$variance,
+			variance$variance_ci_low,
+			variance$variance_ci_high
+		),
+		`Variance fraction (%) [95% CI]` = fmt_est_ci(
+			variance$percent,
+			variance$percent_ci_low,
+			variance$percent_ci_high,
+			1
+		),
+		check.names = FALSE
+	),
+	"S3_variance_components.csv",
+	"Pooled variance decomposition.",
+	"REML intercept-only model with compound and publication random intercepts. Molecular descriptors and temperature are omitted. Confidence intervals use a parametric bootstrap with both random effects simulated anew."
+)
 
 fits <- cbind(Publication = label(fits$source_id), fits)
 write_table(fits, "S4_fit_diagnostics.csv", "Diagnostics for publication-held-out calibration fits.")
 write_table(calibration_table(all_cal, "All eligible publications at each count"),
             "S5_calibration_all_eligible.csv", "Calibration across all eligible publications at each anchor count.",
             paste(cal_note, "Publication composition changes across anchor counts."))
-write_table(calibration_table(matched_cal, "Fixed five-anchor-eligible subset"),
-            "S6_calibration_matched.csv", "Anchor-number comparison within a fixed publication subset.", cal_note)
 
-write_table(data.frame(
-  Publication = label(by_source$source_id), Anchors = by_source$anchors,
-  `Available anchors` = by_source$n_available_anchors, `Test compounds` = by_source$n_test_compounds,
-  `RMSE before` = fmt(by_source$RMSE_uncalibrated), `RMSE after` = fmt(by_source$RMSE_calibrated),
-  `RMSE reduction (%)` = fmt(by_source$RMSE_reduction_percent, 1), check.names = FALSE
-), "S7_calibration_by_publication.csv", "Calibration performance by publication and anchor count.",
-  "Values average all possible panels within each publication and anchor count. Positive reductions indicate lower RMSE; publication-specific confidence intervals are not calculated.")
+matched_table <- calibration_table(
+	matched_cal,
+	"Fixed five-anchor-eligible subset"
+)
+matched_table$Publications <- NULL
+write_table(
+	matched_table,
+	"S6_calibration_matched.csv",
+	"Anchor-number comparison within a fixed publication subset.",
+	cal_note
+)
+
+performance_key <- paste(by_source$source_id, by_source$anchors)
+diagnostic_key <- paste(failure$source_id, failure$anchors)
+
+if (anyDuplicated(performance_key) ||
+	anyDuplicated(diagnostic_key) ||
+	!setequal(performance_key, diagnostic_key)) {
+	stop("Performance and diagnostic rows do not match.")
+}
+
+diagnostic_index <- match(performance_key, diagnostic_key)
+
+write_table(
+	data.frame(
+		Publication = label(by_source$source_id),
+		Anchors = by_source$anchors,
+		`Available anchors` = by_source$n_available_anchors,
+		`Test compounds` = by_source$n_test_compounds,
+		`Test measurements` = by_source$n_test_measurements,
+		`Panels evaluated` = by_source$n_panels,
+		`RMSE before` = by_source$RMSE_uncalibrated,
+		`RMSE after` = by_source$RMSE_calibrated,
+		`RMSE reduction (%)` = by_source$RMSE_reduction_percent,
+		`Panels improved (%)` =
+			failure$draws_improved_percent[diagnostic_index],
+		check.names = FALSE
+	),
+	"S7_calibration_by_publication.csv",
+	"Calibration performance and panel summaries by source and anchor count.",
+	paste(
+		"Performance estimates average all possible panels within each source and anchor count.",
+		"Positive RMSE reductions indicate lower error after calibration.",
+		"Panels improved reports the percentage of all possible panels with lower RMSE after calibration.",
+		"This percentage is conditional on the available anchors, test measurements, and fitted model.",
+		"It is not a prospective probability of calibration success."
+	)
+)
+
 write_table(influence_table(sensitivity_influence, TRUE), "S8_sensitivity_influence.csv",
             "Evaluation-publication influence under each curation policy.", influence_note)
 
-write_table(data.frame(
-  Publication = label(failure$source_id), Anchors = failure$anchors,
-  `Available anchors` = failure$available_anchors, `Test compounds` = failure$test_compounds,
-  `RMSE before` = fmt(failure$RMSE_uncalibrated), `RMSE after` = fmt(failure$RMSE_calibrated),
-  `Panels improved (%)` = fmt(failure$draws_improved_percent, 1), check.names = FALSE
-), "S9_failure_performance.csv", "Prediction performance across all possible anchor panels.",
-  "The proportion of panels improving describes all possible panels from the available anchors at each panel size. It is conditional on these data and is not a prospective success probability.")
 write_table(data.frame(
   Publication = label(failure$source_id), Anchors = failure$anchors,
   `Offset variance` = fmt(failure$offset_variance),
@@ -325,6 +371,7 @@ write_table(data.frame(
   `Larger penalty term` = failure$dominant_penalty, check.names = FALSE
 ), "S10_failure_decomposition.csv", "Decomposition of mean test MSE change across anchor panels.",
   "Mean MSE change equals offset variance plus squared mean-offset mismatch minus squared mean test bias. Offset variance uses denominator n. These are retrospective algebraic terms, not identified experimental causes.")
+
 write_table(data.frame(
   Publication = label(failure_paired$source_id),
   `One-anchor RMSE` = fmt(failure_paired$RMSE_calibrated_one),
@@ -337,14 +384,53 @@ write_table(data.frame(
 ), "S11_one_vs_five_diagnostics.csv", "Changes in error, offset variability and mismatch from one to five anchors.",
   "Comparisons use the same publications and test measurements. Increasing panel size changes both anchor averaging and shrinkage.")
 
-write_table(data.frame(
-  Record = corrections$record_id,
-  `Previous log10 Kp (cm/h)` = fmt(corrections$previous_log_kp, 6),
-  `Corrected log10 Kp (cm/h)` = fmt(corrections$corrected_log_kp, 6),
-  `Original Kp (cm/h)` = formatC(corrections$original_kp_cm_h, format = "e", digits = 3),
-  Evidence = corrections$evidence, check.names = FALSE
-), "S12_verified_unit_corrections.csv", "Verified permeability corrections from original publications.",
-  "Previous values refer to the processing output before correction, not the original database column. Raw files were preserved.")
+correction_index <- match(corrections$record_id, pooled$record_id)
+
+if (anyNA(correction_index)) {
+	stop("Correction records are missing from the pooled dataset.")
+}
+
+correction_study <- ifelse(
+	grepl("Barber 1992", corrections$evidence, fixed = TRUE),
+	"Barber et al. (1992)",
+	ifelse(
+		grepl("Barber 1995", corrections$evidence, fixed = TRUE),
+		"Barber et al. (1995)",
+		NA_character_
+	)
+)
+
+if (anyNA(correction_study)) {
+	stop("Missing study citation for a correction record.")
+}
+
+write_table(
+	data.frame(
+		Record = corrections$record_id,
+		Compound = pooled$compound_name[correction_index],
+		`Previously processed log10 Kp` =
+			fmt(corrections$previous_log_kp, 3),
+		`Corrected log10 Kp` =
+			fmt(corrections$corrected_log_kp, 3),
+		`Original Kp (cm/h)` =
+			formatC(
+				corrections$original_kp_cm_h,
+				format = "e",
+				digits = 3
+			),
+		Study = correction_study,
+		check.names = FALSE
+	),
+	"S12_verified_unit_corrections.csv",
+	"Verified permeability corrections from original publications.",
+	paste(
+		"Previously processed values refer to the processing output before correction.",
+		"They are not the original database entries.",
+		"Corrected values are log10 Kp with Kp expressed in cm/h.",
+		"Raw files were preserved."
+	)
+)
+
 write_table(data.frame(
   Variable = coverage$variable, Available = coverage$n_available, Measurements = coverage$n_records,
   `Available (%)` = fmt(ifelse(coverage$n_records > 0, 100*coverage$n_available/coverage$n_records, NA_real_), 1),

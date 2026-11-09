@@ -260,6 +260,13 @@ dat$compound_key <- paste(
   sep = " || "
 )
 
+hirvonen_1998b_salts <- dat$record_id %in% c("Cheruvu_380", "Cheruvu_382")
+
+dat$compound_key[hirvonen_1998b_salts] <- paste0(
+  trimws(dat$compound_key[hirvonen_1998b_salts]),
+  " Hirvonen 1998b"
+)
+
 # ------------------------------------------------------------
 # 2. Source crosswalk
 # ------------------------------------------------------------

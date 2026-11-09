@@ -143,9 +143,11 @@
 "Cheruvu || pyrogallol || 87-66-1 || ","Cheruvu","pyrogallol","87-66-1",,"Oc1cccc(O)c1O","keep",
 "Cheruvu || phloroglucinol || 108-73-6 || ","Cheruvu","phloroglucinol","108-73-6",,"Oc1cc(O)cc(O)c1","keep",
 "Cheruvu || Dexamethasone || 50--2-2 || ","Cheruvu","Dexamethasone","50--2-2",,"C[C@@H]1C[C@H]2[C@@H]3CCC4=CC(=O)C=C[C@]4(C)[C@@]3(F)[C@@H](O)C[C@]2(C)[C@@]1(O)C(=O)CO","keep",
-"Cheruvu || sotalol || 3930-20-9 || ","Cheruvu","sotalol","3930-20-9",,"CC(C)NCC(O)c1ccc(NS(C)(=O)=O)cc1","keep",
-"Cheruvu || salicylate || 63-36-5 || ","Cheruvu","salicylate","63-36-5",,"O=C(O)c1ccccc1[O-]","keep",
-"Cheruvu || Sotalol || 3930-20-9 || ","Cheruvu","Sotalol","3930-20-9",,"CC(C)NCC(O)c1ccc(NS(C)(=O)=O)cc1","keep",
+"Cheruvu || sotalol || 3930-20-9 || ","Cheruvu","sotalol","3930-20-9",,"CC(C)[NH2+]CC(O)c1ccc(NS(C)(=O)=O)cc1.[Cl-]","keep","Confirmed SMILES from source publication"
+"Cheruvu || salicylate || 63-36-5 || ","Cheruvu","salicylate","63-36-5",,"O=C([O-])c1ccccc1O.[Na+]","keep","Confirmed SMILES from source publication"
+"Cheruvu || Sotalol || 3930-20-9 || ","Cheruvu","Sotalol","3930-20-9",,"CC(C)[NH2+]CC(O)c1ccc(NS(C)(=O)=O)cc1.[Cl-]","keep",
+"Cheruvu || Sotalol || 3930-20-9 || Hirvonen 1998b","Cheruvu","Sotalol","3930-20-9",,"CC(C)[NH2+]CC(O)c1ccc(NS(C)(=O)=O)cc1.[Cl-]","keep",
+"Cheruvu || Timolol || 26839-75-8 || Hirvonen 1998b","Cheruvu","Timolol","26839-75-8",,"CC(C)(C)NC[C@@H](COc1c(nsn1)N2CCOCC2)O.C(=C/C(=O)O)/C(=O)O","keep",
 "Cheruvu || urea || 57-13-6 || ","Cheruvu","urea","57-13-6",,"NC(N)=O","keep",
 "Cheruvu || sucrose || 57-50-1 || ","Cheruvu","sucrose","57-50-1",,"OC[C@H]1O[C@@](CO)(O[C@H]2O[C@H](CO)[C@@H](O)[C@H](O)[C@H]2O)[C@@H](O)[C@@H]1O","keep",
 "Cheruvu || Tetraethylammonium bromide (+) || 71-91-0 || ","Cheruvu","Tetraethylammonium bromide (+)","71-91-0",,"CC[N+](CC)(CC)CC","keep",

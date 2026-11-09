@@ -1,15 +1,15 @@
 Pooled publication-held-out calibration completed.
 Input measurements: 890
-Input compounds: 339
+Input compounds: 340
 Input publications: 164
-Eligible publications: 37
-Successful publication folds: 37
+Eligible publications: 38
+Successful publication folds: 38
 Failed publication folds: 0
 Singular successful fits: 0
 Successful fits with convergence messages: 0
 Fixed-source five-anchor subset: 13
 Anchor panels were evaluated exhaustively at each eligible panel size.
-Total panels evaluated: 3094
+Total panels evaluated: 2711
 Saved predictions reused: FALSE
 Publication bootstrap replicates: 2000
 Seed: 2026
@@ -31,29 +31,29 @@ Results are conditional on pooled curation and identity mappings.
 
 All-eligible results:
                                   analysis anchors n_sources n_sources_improved
- All eligible sources at each anchor count       1        37                 21
- All eligible sources at each anchor count       2        27                 15
+ All eligible sources at each anchor count       1        38                 21
+ All eligible sources at each anchor count       2        28                 16
  All eligible sources at each anchor count       3        22                 14
  All eligible sources at each anchor count       4        16                 13
  All eligible sources at each anchor count       5        13                 11
  mean_source_RMSE_uncalibrated mean_source_RMSE_calibrated
-                      1.197250                   1.0682583
-                      1.119488                   0.9251714
-                      1.053408                   0.8092276
-                      1.003125                   0.7190594
-                      1.033814                   0.6595754
+                      1.160908                   1.0464439
+                      1.072627                   0.9044116
+                      1.051631                   0.8100547
+                      1.000216                   0.7189893
+                      1.028969                   0.6588741
  RMSE_reduction_percent reduction_ci_low reduction_ci_high
-               10.77398         1.806004          19.70271
-               17.35765         6.364379          27.55179
-               23.18006         9.178342          34.29221
-               28.31807        12.127986          40.76613
-               36.19981        19.584393          48.56547
+               9.859881        0.7648091          18.32547
+              15.682582        3.5360541          26.00757
+              22.971608        8.4593397          34.08741
+              28.116562       10.6424239          40.81639
+              35.967537       19.3946297          48.95426
  mean_source_MAE_uncalibrated mean_source_MAE_calibrated n_boot
-                    1.1265763                  0.9874658   2000
-                    1.0521849                  0.8458593   2000
-                    0.9747537                  0.7347693   2000
-                    0.9150087                  0.6549385   2000
-                    0.9422431                  0.5942410   2000
+                    1.0912426                  0.9677878   2000
+                    1.0066261                  0.8279062   2000
+                    0.9717345                  0.7355880   2000
+                    0.9104562                  0.6548916   2000
+                    0.9356345                  0.5936556   2000
 
 Matched-source results:
                                      analysis anchors n_sources
@@ -63,20 +63,20 @@ Matched-source results:
  Fixed sources eligible for all anchor counts       4        13
  Fixed sources eligible for all anchor counts       5        13
  n_sources_improved mean_source_RMSE_uncalibrated mean_source_RMSE_calibrated
-                 11                      1.033814                   0.8001619
-                 11                      1.033814                   0.7298928
-                 11                      1.033814                   0.6944596
-                 11                      1.033814                   0.6734123
-                 11                      1.033814                   0.6595754
+                 11                      1.028969                   0.7983543
+                 11                      1.028969                   0.7285598
+                 11                      1.028969                   0.6934160
+                 11                      1.028969                   0.6725677
+                 11                      1.028969                   0.6588741
  RMSE_reduction_percent reduction_ci_low reduction_ci_high
-               22.60099         10.88876          31.70512
-               29.39807         14.93544          40.82068
-               32.82548         16.90116          44.90535
-               34.86138         17.00319          46.98665
-               36.19981         19.34112          48.66463
+               22.41220         10.80837          31.64438
+               29.19515         14.94214          40.65893
+               32.61059         16.55559          44.88095
+               34.63673         17.36844          46.99454
+               35.96754         18.89601          48.10837
  mean_source_MAE_uncalibrated mean_source_MAE_calibrated n_boot
-                    0.9422431                  0.7138225   2000
-                    0.9422431                  0.6501273   2000
-                    0.9422431                  0.6214455   2000
-                    0.9422431                  0.6051141   2000
-                    0.9422431                  0.5942410   2000
+                    0.9356345                  0.7118391   2000
+                    0.9356345                  0.6485597   2000
+                    0.9356345                  0.6204257   2000
+                    0.9356345                  0.6042925   2000
+                    0.9356345                  0.5936556   2000

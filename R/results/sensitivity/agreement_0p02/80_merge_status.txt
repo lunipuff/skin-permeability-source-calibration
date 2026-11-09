@@ -9,13 +9,13 @@ Excluded by experimental protocol: 14
 Unresolved identity/structure records: 0
 Measurement records awaiting review: 0
 Retained preview measurements: 861
-Retained preview compounds: 333
+Retained preview compounds: 334
 Retained preview publications: 160
 
 Anchor eligibility in the currently resolved preview:
  anchors n_sources
-       1        37
-       2        27
+       1        38
+       2        28
        3        21
        4        15
        5        12

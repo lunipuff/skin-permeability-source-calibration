@@ -1,3 +1,3 @@
 "analysis","full_effect","minimum_omission_effect","maximum_omission_effect","largest_absolute_change","most_influential_source","n_direction_reversals","n_intervals_including_zero","n_omissions"
-"One-anchor RMSE reduction (%)",10.1893104510463,7.52512308265204,12.3739237191481,2.66418736839424,"DOI:10.1289/ehp.8774223",0,29,34
-"RMSE decrease from one to five anchors (log units)",0.0759134616165852,0.0640010709280915,0.101691305685861,0.0257778440692763,"DOI:10.1038/jid.1969.9",0,6,10
+"One-anchor RMSE reduction (%)",9.27792469104959,6.52935587720607,11.3727441964961,2.74856881384352,"DOI:10.1289/ehp.8774223",0,35,35
+"RMSE decrease from one to five anchors (log units)",0.0738982931962002,0.0618205856557177,0.0993382035008218,0.0254399103046216,"DOI:10.1038/jid.1969.9",0,8,10

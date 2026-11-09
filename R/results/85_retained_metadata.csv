@@ -146,16 +146,16 @@
 "Cheruvu_343","Cheruvu","DOI:10.1016/j.ejps.2004.11.001","CCCN1CCN(C(c2ccccc2)c2ccccc2)CC1",,,,,"0.1",,,,"36.85",,,,
 "Cheruvu_344","Cheruvu","DOI:10.1016/j.ejps.2004.11.001","CCCCN1CCN(C(c2ccccc2)c2ccccc2)CC1",,,,,"0.1",,,,"36.85",,,,
 "Cheruvu_352","Cheruvu","DOI:10.1016/0378-5173(94)00253-2","C[C@]12CC[C@@H]3c4ccc(O)cc4CC[C@H]3[C@@H]1CC[C@@H]2O",,,,,"0.1",,,,"31.85",,,,
-"Cheruvu_363","Cheruvu","DOI:10.1016/s0168-3659(98)00063-7","CC(C)NCC(O)c1ccc(NS(C)(=O)=O)cc1",,,,,"0.1",,,,"31.85",,,,"tritiated water permeation"
+"Cheruvu_363","Cheruvu","DOI:10.1016/s0168-3659(98)00063-7","CC(C)[NH2+]CC(O)c1ccc(NS(C)(=O)=O)cc1.[Cl-]",,,,,"0.1",,,,"31.85",,,,"tritiated water permeation"
 "Cheruvu_364","Cheruvu","DOI:10.1016/s0168-3659(98)00063-7","O",,,,,"0.1",,,,"31.85",,,,
-"Cheruvu_371","Cheruvu","DOI:10.1016/s0168-3659(98)00063-7","O=C(O)c1ccccc1[O-]",,,,,"0.1",,,,"31.85",,,,"tritiated water permeation"
+"Cheruvu_371","Cheruvu","DOI:10.1016/s0168-3659(98)00063-7","O=C([O-])c1ccccc1O.[Na+]",,,,,"0.1",,,,"31.85",,,,"tritiated water permeation"
 "Cheruvu_372","Cheruvu","DOI:10.1016/s0168-3659(98)00063-7","O",,,,,"0.1",,,,"31.85",,,,
-"Cheruvu_377","Cheruvu","DOI:10.1016/0378-5173(93)90368-p","CC(C)NCC(O)c1ccc(NS(C)(=O)=O)cc1",,,,,"0.1",,,,"31.85",,,,"tritiated water permeation"
+"Cheruvu_377","Cheruvu","DOI:10.1016/0378-5173(93)90368-p","CC(C)[NH2+]CC(O)c1ccc(NS(C)(=O)=O)cc1.[Cl-]",,,,,"0.1",,,,"31.85",,,,"tritiated water permeation"
 "Cheruvu_378","Cheruvu","DOI:10.1016/0378-5173(93)90368-p","O",,,,,"0.1",,,,"31.85",,,,
 "Cheruvu_379","Cheruvu","DOI:10.1016/0378-5173(93)90368-p","O",,,,,"0.1",,,,"31.85",,,,
-"Cheruvu_380","Cheruvu","DOI:10.1016/s0168-3659(98)00088-1","CC(C)NCC(O)c1ccc(NS(C)(=O)=O)cc1",,,,,"0.1",,,,"31.85",,,,"tritiated water permeation"
+"Cheruvu_380","Cheruvu","DOI:10.1016/s0168-3659(98)00088-1","CC(C)[NH2+]CC(O)c1ccc(NS(C)(=O)=O)cc1.[Cl-]",,,,,"0.1",,,,"31.85",,,,"tritiated water permeation"
 "Cheruvu_381","Cheruvu","DOI:10.1016/s0168-3659(98)00088-1","O",,,,,"0.1",,,,"31.85",,,,
-"Cheruvu_382","Cheruvu","DOI:10.1016/s0168-3659(98)00088-1","CC(C)(C)NC[C@H](O)COc1nsnc1N1CCOCC1",,,,,"0.1",,,,"31.85",,,,"tritiated water permeation"
+"Cheruvu_382","Cheruvu","DOI:10.1016/s0168-3659(98)00088-1","CC(C)(C)NC[C@H](O)COc1nsnc1N1CCOCC1.O=C(O)/C=C\C(=O)O",,,,,"0.1",,,,"31.85",,,,"tritiated water permeation"
 "Cheruvu_383","Cheruvu","DOI:10.1016/s0168-3659(98)00088-1","O",,,,,"0.1",,,,"31.85",,,,
 "Cheruvu_384","Cheruvu","DOI:10.1016/s0168-3659(98)00088-1","O",,,,,"0.1",,,,"31.85",,,,
 "Cheruvu_390","Cheruvu","DOI:10.1021/js970012r","NC(N)=O",,,,,"0.1",,,,"36.85",,,,"transepidermal electrical resistance"

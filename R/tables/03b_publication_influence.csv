@@ -1,3 +1,3 @@
 "Endpoint","Full effect","Omission estimate range","Intervals including zero","Most influential publication"
-"One-anchor RMSE reduction (%)","11.7","10.2 to 13.0","0/38","P155"
-"RMSE decrease from one to five anchors (log units)","0.136","0.120 to 0.163","0/13","P119"
+"One-anchor RMSE reduction (%)","10.1","8.5 to 11.5","2/38","P065"
+"RMSE decrease from one to five anchors (log units)","0.136","0.120 to 0.163","0/13","P123"

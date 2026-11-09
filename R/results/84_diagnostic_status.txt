@@ -10,14 +10,14 @@ No confidence intervals are calculated here. Panel ranges are not confidence int
 Use 81's fixed-source estimates for the overall anchor-number conclusion.
 
  anchors publications publications_improved publications_worsened
-       1           38                    24                    14
-       2           28                    16                    12
-       3           23                    15                     8
+       1           38                    22                    16
+       2           28                    17                    11
+       3           22                    14                     8
        4           16                    13                     3
        5           13                    11                     2
  failures_with_mean_offset_wrong_direction failures_dominated_by_mean_mismatch
-                                         9                                  10
-                                         7                                   9
+                                        11                                  12
+                                         7                                   8
                                          5                                   6
                                          2                                   3
                                          1                                   2

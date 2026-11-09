@@ -3,18 +3,20 @@ Curation policy: agreement
 Log tolerance: 0.02
 Analysis-ready pooled file: TRUE
 Valid input records: 1221
-Excluded by source/compound decisions: 80
+Excluded by source/compound decisions: 15
+Excluded as a potentially overlapping summary: 1
+Excluded by experimental protocol: 14
 Unresolved identity/structure records: 0
 Measurement records awaiting review: 0
-Retained preview measurements: 817
-Retained preview compounds: 332
-Retained preview publications: 157
+Retained preview measurements: 861
+Retained preview compounds: 333
+Retained preview publications: 160
 
 Anchor eligibility in the currently resolved preview:
  anchors n_sources
        1        37
        2        27
-       3        22
+       3        21
        4        15
        5        12
 

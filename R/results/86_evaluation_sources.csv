@@ -9,7 +9,6 @@
 "one_anchor","DOI:10.1007/s11095-010-0181-z",3,5,TRUE
 "one_anchor","DOI:10.1016/0272-0590(92)90086-w",2,2,TRUE
 "one_anchor","DOI:10.1016/0378-5173(87)90210-9",5,5,TRUE
-"one_anchor","DOI:10.1016/0378-5173(93)90368-p",1,1,FALSE
 "one_anchor","DOI:10.1016/j.ejps.2014.11.002",5,5,TRUE
 "one_anchor","DOI:10.1016/j.ijpharm.2005.05.030",9,9,TRUE
 "one_anchor","DOI:10.1016/j.ijpharm.2006.01.033",2,2,TRUE
@@ -18,16 +17,17 @@
 "one_anchor","DOI:10.1016/j.tiv.2020.104990",35,70,TRUE
 "one_anchor","DOI:10.1016/j.toxlet.2020.09.017",1,1,FALSE
 "one_anchor","DOI:10.1016/j.yrtph.2010.02.008",6,6,TRUE
+"one_anchor","DOI:10.1016/s0168-3659(98)00063-7",1,1,FALSE
 "one_anchor","DOI:10.1016/s0378-5173(00)00665-7",2,2,TRUE
 "one_anchor","DOI:10.1016/s0378-5173(98)00113-6",2,2,TRUE
 "one_anchor","DOI:10.1016/s0378-5173(99)00380-4",2,2,TRUE
 "one_anchor","DOI:10.1016/s0928-0987(02)00085-4",4,4,TRUE
-"one_anchor","DOI:10.1016/s0928-0987(03)00176-3",5,5,TRUE
+"one_anchor","DOI:10.1016/s0928-0987(03)00176-3",4,4,TRUE
 "one_anchor","DOI:10.1021/js960079z",1,1,FALSE
 "one_anchor","DOI:10.1023/a:1007547809430",1,1,FALSE
 "one_anchor","DOI:10.1023/a:1015824100788",2,2,TRUE
 "one_anchor","DOI:10.1023/a:1015944018555",2,2,TRUE
-"one_anchor","DOI:10.1023/a:1015989929342",10,11,TRUE
+"one_anchor","DOI:10.1023/a:1015989929342",12,14,TRUE
 "one_anchor","DOI:10.1038/jid.1969.9",7,7,TRUE
 "one_anchor","DOI:10.1111/1523-1747.ep12263302",4,6,TRUE
 "one_anchor","DOI:10.1111/1523-1747.ep12277592",5,5,TRUE
@@ -45,7 +45,7 @@
 "one_to_five","DOI:10.1016/j.tiv.2020.104990",35,70,TRUE
 "one_to_five","DOI:10.1016/j.yrtph.2010.02.008",6,6,TRUE
 "one_to_five","DOI:10.1016/s0378-5173(98)00113-6",2,2,TRUE
-"one_to_five","DOI:10.1016/s0928-0987(03)00176-3",5,5,TRUE
+"one_to_five","DOI:10.1016/s0928-0987(03)00176-3",4,4,TRUE
 "one_to_five","DOI:10.1023/a:1007547809430",1,1,FALSE
 "one_to_five","DOI:10.1038/jid.1969.9",7,7,TRUE
 "one_to_five","DOI:10.1111/j.2042-7158.1977.tb11434.x",10,10,TRUE

@@ -476,8 +476,19 @@ descriptor_fields <- c(
 )
 for (field in descriptor_fields) dat[[field]] <- desc[[field]][di]
 
-excluded <- dat$source_decision == "exclude" |
+identity_excluded <- dat$source_decision == "exclude" |
   dat$compound_decision == "exclude"
+
+# Exclude the potentially overlapping Williams and Barry summary.
+summary_excluded <- !identity_excluded &
+  dat$record_id %in% "Cheruvu_137"
+
+# Retain only Hirvonen 1998 control protocols III and VII.
+protocol_excluded <- !identity_excluded &
+  dat$record_id %in% paste0("Cheruvu_", c(359:362, 365:370, 373:376))
+
+excluded <- identity_excluded | summary_excluded | protocol_excluded
+
 
 resolved <- !excluded &
   dat$source_decision == "keep" &
@@ -881,7 +892,9 @@ summary_lines <- c(
   paste("Log tolerance:", if (curation_policy == "agreement") log_tolerance else "not used"),
   paste("Analysis-ready pooled file:", ready),
   paste("Valid input records:", nrow(dat)),
-  paste("Excluded by source/compound decisions:", sum(excluded)),
+  paste("Excluded by source/compound decisions:", sum(identity_excluded)),
+  paste("Excluded as a potentially overlapping summary:", sum(summary_excluded)),
+  paste("Excluded by experimental protocol:", sum(protocol_excluded)),
   paste("Unresolved identity/structure records:", n_unresolved),
   paste("Measurement records awaiting review:", n_measurement_review),
   paste("Retained preview measurements:", nrow(preview)),
@@ -904,7 +917,10 @@ settings <- data.frame(
   database_priority = paste(database_priority, collapse = " > "),
   read_only_curation = read_only_curation, verified_unit_corrections = nrow(unit_corrections),
   analysis_ready = ready, n_valid_input = nrow(dat),
-  n_excluded_identity = sum(excluded), n_unresolved = n_unresolved,
+  n_excluded_identity = sum(identity_excluded),
+  n_excluded_overlapping_summary = sum(summary_excluded),
+  n_excluded_protocol = sum(protocol_excluded),
+  n_unresolved = n_unresolved,
   n_measurements = nrow(preview), n_compounds = length(unique(preview$compound_id)),
   n_publications = length(unique(preview$publication_id)),
   stringsAsFactors = FALSE

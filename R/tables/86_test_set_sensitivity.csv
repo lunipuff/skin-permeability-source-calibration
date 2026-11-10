@@ -1,5 +1,0 @@
-"Comparison","Minimum test compounds","Sources","RMSE before","RMSE after","Effect [95% CI]"
-"One-anchor reduction (%)",1,39,"1.152","1.046","9.2 [0.2, 17.4]"
-"One-anchor reduction (%)",2,28,"1.152","1.053","8.6 [-0.2, 17.3]"
-"One-to-five decrease (log units)",1,13,"0.813","0.678","0.135 [0.055, 0.204]"
-"One-to-five decrease (log units)",2,12,"0.802","0.665","0.137 [0.054, 0.217]"

@@ -1,3 +1,0 @@
-"n_sources","mean_RMSE_before","mean_RMSE_after","effect","ci_low","ci_high","analysis"
-39,1.10141855073764,1.0294007125693,6.53864401685588,-2.6756461304708,14.7499846559442,"One-anchor RMSE reduction (%)"
-13,0.762948065054774,0.654180717167859,0.108767347886915,0.0200390256010021,0.191770782122995,"RMSE decrease from one to five anchors (log units)"

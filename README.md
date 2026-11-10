@@ -19,7 +19,7 @@ python -c "from rdkit import Chem, rdBase; print(rdBase.rdkitVersion)"
 Rscript -e 'stopifnot(isTRUE(grDevices::grSoftVersion()[["cairo"]] != ""))'
 ```
 
-**Running the pipeline clears existing contents of `data/processed/`, `R/results/`, `R/tables/`, and `R/figures/` before rebuilding them.** The runner preserves `R/figures/00_GA.pdf`, the manually prepared graphical abstract. Raw inputs and curation crosswalks are read in place.
+**Running the pipeline clears existing contents of `data/processed/`, `R/results/`, `R/tables/`, `R/figures/`, and `R/additional_files/` before rebuilding them.** The runner preserves `R/figures/00_GA.pdf`, the manually prepared graphical abstract. Raw inputs and curation crosswalks are read in place.
 
 ```bash
 Rscript run_all.R
@@ -65,8 +65,23 @@ Bootstrap settings and seeds are recorded with the analysis outputs. The workflo
 | --- | --- |
 | [`data/processed/80_pooled.csv`](data/processed/80_pooled.csv) | Primary analysis dataset with record, compound, and publication identifiers. |
 | [`R/results/`](R/results/) | Uncalibrated test predictions, anchor-panel results, fit diagnostics, bootstrap summaries, and sensitivity analyses. Start with the [one-anchor summary](R/results/81_pooled_calibration_summary_all.csv) or the [paired one-versus-five comparison](R/results/81_pooled_one_vs_five_anchors.csv). |
-| [`R/tables/`](R/tables/) | Manuscript table inputs and additional files, including the [publication index](R/tables/S1_publication_index.csv), [calibration summaries by publication and anchor count](R/tables/S7_calibration_by_publication.csv), and [calibration error decomposition](R/tables/S10_failure_decomposition.csv). |
+| [`R/tables/`](R/tables/) | CSV inputs for the manuscript tables and figures. |
+| [`R/additional_files/`](R/additional_files/) | Numbered CSV files for manuscript submission. |
 | [`R/figures/`](R/figures/) | The graphical abstract and four analysis figures. |
+
+### Additional files for submission
+
+| Manuscript reference | CSV |
+| --- | --- |
+| Additional file 1 | [Publication identities and calibration eligibility](R/additional_files/Additional_file_1_publication_index.csv) |
+| Additional file 2 | [Calibration performance and panel summaries by publication and anchor count](R/additional_files/Additional_file_2_calibration_by_publication.csv) |
+| Additional file 3 | [Decomposition of calibration error](R/additional_files/Additional_file_3_failure_decomposition.csv) |
+
+Stage 99a exports these files from the corresponding CSVs in `R/tables/`. To refresh the tables and additional files from existing analysis results, run this command from the repository root.
+
+```bash
+Rscript R/99a_make_tables.R
+```
 
 After a successful run, you can regenerate an output without clearing the full set of results. For example, run `Rscript R/99b_make_figures.R` from the repository root to regenerate the figures from the existing analysis outputs.
 

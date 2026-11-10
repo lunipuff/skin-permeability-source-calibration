@@ -299,4 +299,24 @@ write_table(
 	"S12_verified_unit_corrections.csv"
 )
 
+# Export the three submission files with names that match the manuscript.
+additional_dir <- "R/additional_files"
+if (!dir.exists(additional_dir) && !dir.create(additional_dir)) {
+	stop("Cannot create: ", additional_dir, call. = FALSE)
+}
+additional_files <- c(
+	"S1_publication_index.csv" = "Additional_file_1_publication_index.csv",
+	"S7_calibration_by_publication.csv" = "Additional_file_2_calibration_by_publication.csv",
+	"S10_failure_decomposition.csv" = "Additional_file_3_failure_decomposition.csv"
+)
+copied <- file.copy(
+	file.path(table_dir, names(additional_files)),
+	file.path(additional_dir, additional_files),
+	overwrite = TRUE
+)
+if (!all(copied)) {
+	stop("Could not export: ", paste(additional_files[!copied], collapse = ", "), call. = FALSE)
+}
+
 message("Manuscript tables written to ", table_dir, ".")
+message("Additional files written to ", additional_dir, ".")

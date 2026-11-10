@@ -46,7 +46,7 @@ if (!is.null(attr(python_info, "status"))) {
 }
 
 # Check every cleanup path before deleting anything.
-output_dirs <- c("data/processed", "R/results", "R/tables", "R/figures")
+output_dirs <- c("data/processed", "R/results", "R/tables", "R/figures", "R/additional_files")
 for (path in output_dirs) {
 	parent <- normalizePath(dirname(path), winslash = "/", mustWork = TRUE)
 	link <- Sys.readlink(path)

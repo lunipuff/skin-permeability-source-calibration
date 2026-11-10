@@ -76,8 +76,9 @@ Bootstrap settings and seeds are recorded with the analysis outputs. The workflo
 | Additional file 1 | [Publication identities and calibration eligibility](R/additional_files/Additional_file_1_publication_index.csv) |
 | Additional file 2 | [Calibration performance and panel summaries by publication and anchor count](R/additional_files/Additional_file_2_calibration_by_publication.csv) |
 | Additional file 3 | [Decomposition of calibration error](R/additional_files/Additional_file_3_failure_decomposition.csv) |
+| Additional file 4 | [Curated pooled dataset used in the primary analysis](R/additional_files/Additional_file_4_pooled_dataset.csv) |
 
-Stage 99a exports these files from the corresponding CSVs in `R/tables/`. To refresh the tables and additional files from existing analysis results, run this command from the repository root.
+Stage 99a exports Additional files 1–3 from `R/tables/` and copies Additional file 4 from `data/processed/80_pooled.csv`. To refresh the tables and additional files from existing analysis results, run this command from the repository root.
 
 ```bash
 Rscript R/99a_make_tables.R

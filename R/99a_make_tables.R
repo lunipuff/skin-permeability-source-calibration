@@ -52,7 +52,8 @@ for (settings_file in panel_settings_files) {
 }
 
 # Read pooled analysis outputs.
-pooled <- read_checked("data/processed/80_pooled.csv", c(
+pooled_path <- "data/processed/80_pooled.csv"
+pooled <- read_checked(pooled_path, c(
 	"record_id", "publication_id", "compound_id", "compound_name", "dataset_origin"
 ))
 structure <- read_result("85_dataset_structure.csv", c(
@@ -147,7 +148,7 @@ if (!close_enough(by_source$RMSE_calibrated, failure$RMSE_calibrated[diagnostic_
 	stop("Publication-level failure results disagree with 81. Rerun 84.")
 }
 
-pooled_md5 <- unname(tools::md5sum("data/processed/80_pooled.csv"))
+pooled_md5 <- unname(tools::md5sum(pooled_path))
 for (stage in c("81", "85")) {
 	settings <- read_result(paste0(stage, "_analysis_settings.csv"))
 	hash <- if (stage == "81") settings$input_md5 else settings$md5
@@ -299,23 +300,24 @@ write_table(
 	"S12_verified_unit_corrections.csv"
 )
 
-# Export the three submission files with names that match the manuscript.
+# Export the submission files with names that match the manuscript.
 additional_dir <- "R/additional_files"
 if (!dir.exists(additional_dir) && !dir.create(additional_dir)) {
 	stop("Cannot create: ", additional_dir, call. = FALSE)
 }
 additional_files <- c(
-	"S1_publication_index.csv" = "Additional_file_1_publication_index.csv",
-	"S7_calibration_by_publication.csv" = "Additional_file_2_calibration_by_publication.csv",
-	"S10_failure_decomposition.csv" = "Additional_file_3_failure_decomposition.csv"
+	"Additional_file_1_publication_index.csv" = file.path(table_dir, "S1_publication_index.csv"),
+	"Additional_file_2_calibration_by_publication.csv" = file.path(table_dir, "S7_calibration_by_publication.csv"),
+	"Additional_file_3_failure_decomposition.csv" = file.path(table_dir, "S10_failure_decomposition.csv"),
+	"Additional_file_4_pooled_dataset.csv" = pooled_path
 )
 copied <- file.copy(
-	file.path(table_dir, names(additional_files)),
-	file.path(additional_dir, additional_files),
+	unname(additional_files),
+	file.path(additional_dir, names(additional_files)),
 	overwrite = TRUE
 )
 if (!all(copied)) {
-	stop("Could not export: ", paste(additional_files[!copied], collapse = ", "), call. = FALSE)
+	stop("Could not export: ", paste(names(additional_files)[!copied], collapse = ", "), call. = FALSE)
 }
 
 message("Manuscript tables written to ", table_dir, ".")

@@ -1,2 +1,2 @@
 "scenario","curation_policy","log_tolerance","temperature_tolerance","database_priority","read_only_curation","verified_unit_corrections","analysis_ready","n_valid_input","n_excluded_identity","n_excluded_overlapping_summary","n_excluded_protocol","n_unresolved","n_measurements","n_compounds","n_publications"
-"priority_cheruvu_huskindb_skinpix","priority",,,"Cheruvu > HuSkinDB > SkinPiX",TRUE,9,TRUE,1221,15,1,14,0,843,319,164
+"priority_cheruvu_huskindb_skinpix","priority",,,"Cheruvu > HuSkinDB > SkinPiX",TRUE,9,TRUE,1221,15,1,14,0,843,318,164

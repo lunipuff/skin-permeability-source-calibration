@@ -61,6 +61,7 @@ if (any(draws$anchors < 1 | draws$anchors != floor(draws$anchors)) ||
 tests$uncalibrated_residual <- tests$log_kp - tests$uncalibrated_prediction
 summaries <- list()
 panels <- list()
+fixed_shrinkage <- list()
 for (source in sort(unique(draws$source_id))) {
 	d <- draws[draws$source_id == source, , drop = FALSE]
 	a <- anchors[anchors$source_id == source, , drop = FALSE]
@@ -104,6 +105,23 @@ for (source in sort(unique(draws$source_id))) {
 			!close_enough(x$RMSE_calibrated, sqrt(mse1)) ||
 			!close_enough(rmse1_mean, p$RMSE_calibrated)) {
 			stop("Saved predictions and primary RMSE disagree: ", source)
+		}
+
+		if (k == 5L) {
+			# Keep the one-anchor shrinkage factor while averaging five residuals.
+			fixed_offset <- x$offset_raw * one$shrinkage[1]
+			one_rmse <- mean(one$RMSE_calibrated)
+			fixed_rmse <- mean(sqrt(residual_variance + (mu - fixed_offset)^2))
+			fixed_shrinkage[[source]] <- data.frame(
+				source_id = source,
+				shrinkage_one = one$shrinkage[1],
+				shrinkage_five = mean(x$shrinkage),
+				RMSE_one = one_rmse,
+				RMSE_five_primary = rmse1_mean,
+				RMSE_five_fixed = fixed_rmse,
+				RMSE_decrease_primary = one_rmse - rmse1_mean,
+				RMSE_decrease_fixed = one_rmse - fixed_rmse
+			)
 		}
 
 		mean_offset <- mean(x$offset)
@@ -199,5 +217,11 @@ overview84 <- do.call(rbind, lapply(sort(unique(summary84$anchors)), function(k)
 write_result(summary84, "84_failure_source_summary.csv")
 write_result(do.call(rbind, panels), "84_failure_anchor_selections.csv")
 write_result(paired84, "84_one_vs_five_diagnostics.csv")
+fixed84 <- if (length(fixed_shrinkage)) do.call(rbind, fixed_shrinkage) else data.frame(
+	source_id = character(), shrinkage_one = numeric(), shrinkage_five = numeric(),
+	RMSE_one = numeric(), RMSE_five_primary = numeric(), RMSE_five_fixed = numeric(),
+	RMSE_decrease_primary = numeric(), RMSE_decrease_fixed = numeric()
+)
+write_result(fixed84, "84_fixed_shrinkage_sensitivity.csv")
 write_result(overview84, "84_failure_overview.csv")
 message("Summarized calibration diagnostics for ", length(unique(summary84$source_id)), " publications.")

@@ -128,9 +128,9 @@ Cheruvu || Methylglucose || 146-72-5 ||,Cheruvu,Methylglucose,146-72-5,,CO[C@@H]
 Cheruvu || Atenolol || 29122-68-7 ||,Cheruvu,Atenolol,29122-68-7,,CC(C)NCC(O)COc1ccc(CC(N)=O)cc1,keep,
 Cheruvu || Nadolol || 42200-33-9 ||,Cheruvu,Nadolol,42200-33-9,,CC(C)(C)NCC(O)COc1cccc2c1C[C@H](O)[C@H](O)C2,keep,
 Cheruvu || Pindolol || 13523-86-9 ||,Cheruvu,Pindolol,13523-86-9,,CC(C)NCC(O)COc1cccc2[nH]ccc12,keep,
-Cheruvu || Metoprolol || 51384-51-1 ||,Cheruvu,Metoprolol,51384-51-1,,COCCc1ccc(OCC(O)CNC(C)C)cc1,keep,
+Cheruvu || Metoprolol || 51384-51-1 ||,Cheruvu,Metoprolol,51384-51-1,,O[C@H]([C@@H](O)C(O)=O)C(O)=O.COCCc1ccc(OCC(O)CNC(C)C)cc1.COCCc2ccc(OCC(O)CNC(C)C)cc2,keep,"Suhonen et al. 2003, p. 108"
 Cheruvu || Timolol || 26839-75-8 ||,Cheruvu,Timolol,26839-75-8,,CC(C)(C)NC[C@@H](COc1c(nsn1)N2CCOCC2)O.C(=C/C(=O)O)/C(=O)O,keep,"Cheruvu_333. Suhonen et al. (2003), section 2.1, p. 108, specifies timolol maleate."
-Cheruvu || Alprenolol || 13655-52-2 ||,Cheruvu,Alprenolol,13655-52-2,,C=CCc1ccccc1OCC(O)CNC(C)C,keep,
+Cheruvu || Alprenolol || 13655-52-2 ||,Cheruvu,Alprenolol,13655-52-2,,Cl[H].CC(C)NCC(O)COc1ccccc1CC=C,keep,"Suhonen et al. 2003, p. 108"
 Cheruvu || 1-(diphenylmethyl)-4-methylpiperazine ||  ||,Cheruvu,1-(diphenylmethyl)-4-methylpiperazine,,,CN1CCN(C(c2ccccc2)c2ccccc2)CC1,keep,SMILES constructed manually from the reported chemical name.
 Cheruvu || 1-(diphenylmethyl)-4-ethylpiperazine ||  ||,Cheruvu,1-(diphenylmethyl)-4-ethylpiperazine,,,CCN1CCN(C(c2ccccc2)c2ccccc2)CC1,keep,SMILES constructed manually from the reported chemical name.
 Cheruvu || 1-(diphenylmethyl)-4-propylpiperazine ||  ||,Cheruvu,1-(diphenylmethyl)-4-propylpiperazine,,,CCCN1CCN(C(c2ccccc2)c2ccccc2)CC1,keep,SMILES constructed manually from the reported chemical name.
@@ -315,7 +315,7 @@ HuSkinDB || Naphthol ||  || Oc1cccc2c1cccc2,HuSkinDB,Naphthol,,Oc1cccc2c1cccc2,O
 HuSkinDB || Bisoprolol Fumarate ||  || OC(COc1ccc(cc1)COCCOC(C)C)CNC(C)C.OC(=O)/C=C/C(=O)O,HuSkinDB,Bisoprolol Fumarate,,OC(COc1ccc(cc1)COCCOC(C)C)CNC(C)C.OC(=O)/C=C/C(=O)O,OC(COc1ccc(cc1)COCCOC(C)C)CNC(C)C.OC(=O)/C=C/C(=O)O,keep,
 HuSkinDB || Celiprolol Hydrochloride ||  || CCN(C(=O)Nc1ccc(c(c1)C(=O)C)OCC(CNC(C)(C)C)O)CC.Cl,HuSkinDB,Celiprolol Hydrochloride,,CCN(C(=O)Nc1ccc(c(c1)C(=O)C)OCC(CNC(C)(C)C)O)CC.Cl,CCN(C(=O)Nc1ccc(c(c1)C(=O)C)OCC(CNC(C)(C)C)O)CC.Cl,keep,
 HuSkinDB || Atenolol ||  || OC(COc1ccc(cc1)CC(=O)N)CNC(C)C,HuSkinDB,Atenolol,,OC(COc1ccc(cc1)CC(=O)N)CNC(C)C,OC(COc1ccc(cc1)CC(=O)N)CNC(C)C,keep,
-HuSkinDB || Metoprolol ||  || COCCc1ccc(cc1)OCC(CNC(C)C)O,HuSkinDB,Metoprolol,,COCCc1ccc(cc1)OCC(CNC(C)C)O,COCCc1ccc(cc1)OCC(CNC(C)C)O,keep,
+HuSkinDB || Metoprolol ||  || COCCc1ccc(cc1)OCC(CNC(C)C)O,HuSkinDB,Metoprolol,,COCCc1ccc(cc1)OCC(CNC(C)C)O,O[C@H]([C@@H](O)C(O)=O)C(O)=O.COCCc1ccc(OCC(O)CNC(C)C)cc1.COCCc2ccc(OCC(O)CNC(C)C)cc2,keep,"Modamio et al., p. 250"
 HuSkinDB || Oxprenolol ||  || C=CCOc1ccccc1OCC(CNC(C)C)O,HuSkinDB,Oxprenolol,,C=CCOc1ccccc1OCC(CNC(C)C)O,C=CCOc1ccccc1OCC(CNC(C)C)O,keep,
 HuSkinDB || Propranolol ||  || OC(COc1cccc2c1cccc2)CNC(C)C,HuSkinDB,Propranolol,,OC(COc1cccc2c1cccc2)CNC(C)C,OC(COc1cccc2c1cccc2)CNC(C)C,keep,
 HuSkinDB || Mannitol ||  || OC[C@H]([C@H]([C@@H]([C@@H](CO)O)O)O)O,HuSkinDB,Mannitol,,OC[C@H]([C@H]([C@@H]([C@@H](CO)O)O)O)O,OC[C@H]([C@H]([C@@H]([C@@H](CO)O)O)O)O,keep,

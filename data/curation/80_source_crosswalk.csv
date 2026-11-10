@@ -1,201 +1,201 @@
-"source_key","dataset_origin","original_reference","doi","candidate_publication_id","publication_id","decision","notes","author_year_candidates"
-"Cheruvu || REF:(Blank and McAuliffe 1985)","Cheruvu","(Blank and McAuliffe 1985)",,"DOI:10.1111/1523-1747.ep12277325","DOI:10.1111/1523-1747.ep12277325","keep",,"DOI:10.1111/1523-1747.ep12277325"
-"Cheruvu || REF:(Parry et al. 1990)","Cheruvu","(Parry et al. 1990)",,"CHREF:(Parry et al. 1990)","DOI:10.1023/a:1015861709758","keep",,""
-"Cheruvu || REF:(Roberts 1976)","Cheruvu","(Roberts 1976)",,"CHREF:(Roberts 1976)","DOI:10.1111/j.2042-7158.1977.tb11434.x","keep",,""
-"Cheruvu || REF:(Siddiqui et al. 1989)","Cheruvu","(Siddiqui et al. 1989)",,"DOI:10.1007/bf01061455","DOI:10.1007/bf01061455","keep",,"DOI:10.1007/bf01061455"
-"Cheruvu || REF:(Roberts et al. 1977)","Cheruvu","(Roberts et al. 1977)",,"DOI:10.1111/j.2042-7158.1977.tb11434.x","DOI:10.1111/j.2042-7158.1977.tb11434.x","keep",,"DOI:10.1111/j.2042-7158.1977.tb11434.x"
-"Cheruvu || REF:(Blank et al. 1967)","Cheruvu","(Blank et al. 1967)",,"DOI:10.1038/jid.1967.184","DOI:10.1038/jid.1967.184","keep",,"DOI:10.1038/jid.1967.184"
-"Cheruvu || REF:(Scheuplein and Blank 1973)","Cheruvu","(Scheuplein and Blank 1973)",,"DOI:10.1111/1523-1747.ep12723090","DOI:10.1111/1523-1747.ep12723090","keep",,"DOI:10.1111/1523-1747.ep12723090"
-"Cheruvu || REF:(Scheuplein et al. 1969)","Cheruvu","(Scheuplein et al. 1969)",,"DOI:10.1038/jid.1969.9","DOI:10.1038/jid.1969.9","keep",,"DOI:10.1038/jid.1969.9"
-"Cheruvu || REF:(Peck et al. 1995)","Cheruvu","(Peck et al. 1995)",,"CHREF:(Peck et al. 1995)","DOI:10.1002/jps.2600840813","keep",,""
-"Cheruvu || REF:(Anderson and Raykar 1989)","Cheruvu","(Anderson and Raykar 1989)",,"DOI:10.1111/1523-1747.ep12277592","DOI:10.1111/1523-1747.ep12277592","keep",,"DOI:10.1111/1523-1747.ep12277592"
-"Cheruvu || REF:(Liu et al. 1994)","Cheruvu","(Liu et al. 1994)",,"CHREF:(Liu et al. 1994)","CHREF:(DOI:10.1002/jps.21459)","keep",,""
-"Cheruvu || REF:(Williams et al. 1992)","Cheruvu","(Williams et al. 1992)",,"DOI:10.1016/0378-5173(92)90032-w","DOI:10.1016/0378-5173(92)90032-w","keep","Verified against Table I, p. 74. Cheruvu_29 and Cheruvu_99 are the all-data geometric means. HuSkinDB_344 and HuSkinDB_345 report the arithmetic means from the same experiments.","DOI:10.1016/0378-5173(92)90032-w"
-"Cheruvu || REF:(Williams and Barry 1991a)","Cheruvu","(Williams and Barry 1991a)",,"CHREF:(Williams and Barry 1991a)","DOI:10.1023/a:1015813803205","keep","Seventeen initial controls match Table I. Cheruvu_36 matches the separate reversibility control in Table IV.",""
-"Cheruvu || REF:(Dick and Scott 1992)","Cheruvu","(Dick and Scott 1992)",,"CHREF:(Dick and Scott 1992)","DOI:10.1111/j.2042-7158.1992.tb05485.x","keep",,""
-"Cheruvu || REF:(Southwell et al. 1984)","Cheruvu","(Southwell et al. 1984)",,"DOI:10.1016/0378-5173(84)90145-5","DOI:10.1016/0378-5173(84)90145-5","keep",,"DOI:10.1016/0378-5173(84)90145-5"
-"Cheruvu || REF:(DalPozzo et al. 1991)","Cheruvu","(DalPozzo et al. 1991)",,"DOI:10.1002/jps.2600800114","DOI:10.1002/jps.2600800114","keep",,"DOI:10.1002/jps.2600800114"
-"Cheruvu || REF:(Singh and Roberts 1994a)","Cheruvu","(Singh and Roberts 1994a)",,"CHREF:(Singh and Roberts 1994a)","PMID:8301551","keep",,""
-"Cheruvu || REF:(Bronaugh and Congdon 1984)","Cheruvu","(Bronaugh and Congdon 1984)",,"DOI:10.1111/1523-1747.ep12263302","DOI:10.1111/1523-1747.ep12263302","keep",,"DOI:10.1111/1523-1747.ep12263302"
-"Cheruvu || REF:(Anderson et al. 1988)","Cheruvu","(Anderson et al. 1988)",,"DOI:10.1023/a:1015989929342","DOI:10.1023/a:1015989929342","keep",,"DOI:10.1023/a:1015989929342"
-"Cheruvu || REF:(Barber et al. 1992)","Cheruvu","(Barber et al. 1992)",,"DOI:10.1016/0272-0590(92)90086-w","DOI:10.1016/0272-0590(92)90086-w","keep",,"DOI:10.1016/0272-0590(92)90086-w"
-"Cheruvu || REF:(Bronaugh et al. 1986)","Cheruvu","(Bronaugh et al. 1986)",,"DOI:10.1111/j.1365-2133.1986.tb06214.x","DOI:10.1111/j.1365-2133.1986.tb06214.x","keep",,"DOI:10.1111/j.1365-2133.1986.tb06214.x"
-"Cheruvu || REF:(Anderson et al. 1988), (Raykar 1988)","Cheruvu","(Anderson et al. 1988), (Raykar 1988)",,"CHREF:(Anderson et al. 1988), (Raykar 1988)","DOI:10.1023/a:1015989929342","keep","Verified against Anderson et al. 1988, Scheme I p. 567 and Table II p. 570. Cheruvu_90 and Cheruvu_91 match compounds 1d and 1h measured through isolated human stratum corneum at 37 C. Corresponding HuSkinDB records are HuSkinDB_6 and HuSkinDB_16.","DOI:10.1023/a:1015989929342"
-"Cheruvu || REF:(Roy et al. 1990)","Cheruvu","(Roy et al. 1990)",,"DOI:10.1023/a:1015912932416","DOI:10.1023/a:1015912932416","keep",,"DOI:10.1023/a:1015912932416"
-"Cheruvu || REF:(Williams and Barry 1989) (Williams and Barry 1991a)","Cheruvu","(Williams and Barry 1989) (Williams and Barry 1991a)",,"CHREF:(Williams and Barry 1989) (Williams and Barry 1991a)","DOI:10.1016/0378-5173(89)90310-4","keep","Four pretreatment controls match Table 1 of the 1989 paper. The same values are reproduced in the 1991a paper.",""
-"Cheruvu || REF:(Williams and Barry 1991b)","Cheruvu","(Williams and Barry 1991b)",,"CHREF:(Williams and Barry 1991b)","DOI:10.1016/0378-5173(91)90232-d","keep","Sixteen initial controls match Table 2. Cheruvu_138 matches the isolated stratum corneum result in Table 1. Exclude Cheruvu_137 separately because the overall epidermal mean may overlap the Table 2 controls.",""
-"Cheruvu || REF:(Smith and Irwin 2000)","Cheruvu","(Smith and Irwin 2000)",,"CHREF:(Smith and Irwin 2000)","DOI:10.1016/s0378-5173(00)00561-5","keep",,""
-"Cheruvu || REF:(Siddiqui et al. 1985)","Cheruvu","(Siddiqui et al. 1985)",,"CHREF:(Siddiqui et al. 1985)","DOI:10.1111/j.2042-7158.1985.tb04954.x","keep",,""
-"Cheruvu || REF:(Buist et al. 2010)","Cheruvu","(Buist et al. 2010)",,"DOI:10.1016/j.yrtph.2010.02.008","DOI:10.1016/j.yrtph.2010.02.008","keep",,"DOI:10.1016/j.yrtph.2010.02.008"
-"Cheruvu || REF:(Johnson et al.1995)","Cheruvu","(Johnson et al.1995)",,"DOI:10.1002/jps.2600840922","DOI:10.1002/jps.2600840922","keep",,"DOI:10.1002/jps.2600840922"
-"Cheruvu || REF:(Clowes et al. 1994)","Cheruvu","(Clowes et al. 1994)",,"DOI:10.1016/0887-2333(94)90078-7","DOI:10.1016/0887-2333(94)90078-7","keep",,"DOI:10.1016/0887-2333(94)90078-7"
-"Cheruvu || REF:(Barber et al. 1995)","Cheruvu","(Barber et al. 1995)",,"DOI:10.1016/0378-4274(95)03393-y","DOI:10.1016/0378-4274(95)03393-y","keep",,"DOI:10.1016/0378-4274(95)03393-y"
-"Cheruvu || REF:(Howes et al. 1975)","Cheruvu","(Howes et al. 1975)",,"CHREF:(Howes et al. 1975)","DOI:10.3109/109158183091420","keep",,""
-"Cheruvu || REF:(Dias et al. 1999)","Cheruvu","(Dias et al. 1999)",,"DOI:10.1016/s0378-5173(99)00067-8","DOI:10.1016/s0378-5173(99)00067-8","keep",,"DOI:10.1016/s0378-5173(99)00067-8"
-"Cheruvu || REF:(Mitragotri et al. 1996)","Cheruvu","(Mitragotri et al. 1996)",,"DOI:10.1023/a:1016096626810","DOI:10.1023/a:1016096626810","keep",,"DOI:10.1023/a:1016096626810"
-"Cheruvu || REF:(Mitragotri et al. 1995)","Cheruvu","(Mitragotri et al. 1995)",,"DOI:10.1002/jps.2600840607","DOI:10.1002/jps.2600840607","keep",,"DOI:10.1002/jps.2600840607"
-"Cheruvu || REF:(Zhang et al. 2009)","Cheruvu","(Zhang et al. 2009)",,"DOI:10.1007/s11095-009-9912-4","DOI:10.1007/s11095-009-9912-4","keep",,"DOI:10.1007/s11095-009-9912-4"
-"Cheruvu || REF:(Chantasart et al. 2007)","Cheruvu","(Chantasart et al. 2007)",,"CHREF:(Chantasart et al. 2007)","DOI:10.1002/jps.20865","keep",,""
-"Cheruvu || REF:(Krishnan et al. 2010)","Cheruvu","(Krishnan et al. 2010)",,"CHREF:(Krishnan et al. 2010)","DOI:10.1002/jps.22024","keep",,""
-"Cheruvu || REF:(Lawrence et al. 1997)","Cheruvu","(Lawrence et al. 1997)",,"CHREF:(Lawrence et al. 1997)","DOI:10.1016/s0887-2333(97)00044-1","keep",,""
-"Cheruvu || REF:(Copovi et al. 2006)","Cheruvu","(Copovi et al. 2006)",,"CHREF:(Copovi et al. 2006)","DOI:10.1016/j.ijpharm.2006.01.033","keep",,""
-"Cheruvu || REF:(Akomeah et al. 2007)","Cheruvu","(Akomeah et al. 2007)",,"DOI:10.1002/jps.20773","DOI:10.1002/jps.20773","keep",,"DOI:10.1002/jps.20773"
-"Cheruvu || REF:(Barbero et al. 2016)","Cheruvu","(Barbero et al. 2016)",,"CHREF:(Barbero et al. 2016)","DOI:10.1159/000441038","keep",,""
-"Cheruvu || REF:(Intarakumhaeng et al. 2017)","Cheruvu","(Intarakumhaeng et al. 2017)",,"CHREF:(Intarakumhaeng et al. 2017)","DOI:10.1016/j.ijpharm.2017.11.042","keep",,""
-"Cheruvu || REF:(Eman et al. 2019)","Cheruvu","(Eman et al. 2019)",,"CHREF:(Eman et al. 2019)","DOI:10.1159/000497225","keep",,""
-"Cheruvu || REF:(Chantasart et al. 2009)","Cheruvu","(Chantasart et al. 2009)",,"CHREF:(Chantasart et al. 2009)","DOI:10.1002/jps.21666","keep",,""
-"Cheruvu || REF:(Mitragotri et al. 2000)","Cheruvu","(Mitragotri et al. 2000)",,"DOI:10.1023/a:1007547809430","DOI:10.1023/a:1007547809430","keep",,"DOI:10.1023/a:1007547809430"
-"Cheruvu || REF:(Mitragotri et al. 2001)","Cheruvu","(Mitragotri et al. 2001)",,"CHREF:(Mitragotri et al. 2001)","CHREF:(Mitragotri et al. 2001)","exclude","Table 1 attributes all five passive values to Mitragotri 2000, DOI 10.1023/a:1007547809430. Excluded as re-reported measurements.",""
-"Cheruvu || REF:(Durrheim et al. 1980) (Scheuplein 1965)","Cheruvu","(Durrheim et al. 1980) (Scheuplein 1965)",,"CHREF:(Durrheim et al. 1980) (Scheuplein 1965)","CHREF:(Durrheim et al. 1980) (Scheuplein 1965)","exclude","All ten values match the published 25 °C human comparison series in Durrheim Table III and have matching entries in HuSkinDB under Scheuplein and Blank 1973. Excluded to avoid double counting.",""
-"Cheruvu || REF:(Suhonen et al. 2003)","Cheruvu","(Suhonen et al. 2003)",,"CHREF:(Suhonen et al. 2003)","DOI:10.1016/s0928-0987(03)00176-3","keep",,""
-"Cheruvu || REF:(Essa et al. 2002)","Cheruvu","(Essa et al. 2002)",,"CHREF:(Essa et al. 2002)","DOI:10.1016/s0378-5173(02)00107-2","keep",,""
-"Cheruvu || REF:(Monene et al. 2005)","Cheruvu","(Monene et al. 2005)",,"CHREF:(Monene et al. 2005)","DOI:10.1016/j.ejps.2004.11.001","keep",,""
-"Cheruvu || REF:(Plessis et al. 2002)","Cheruvu","(Plessis et al. 2002)",,"CHREF:(Plessis et al. 2002)","DOI:10.1016/s0928-0987(02)00085-4","keep",,""
-"Cheruvu || REF:(Cettina et al. 1995)","Cheruvu","(Cettina et al. 1995)",,"CHREF:(Cettina et al. 1995)","DOI:10.1016/0378-5173(94)00253-2","keep",,""
-"Cheruvu || REF:(Knutson et al. 1993)","Cheruvu","(Knutson et al. 1993)",,"DOI:10.1016/0168-3659(93)90170-a","DOI:10.1016/0168-3659(93)90170-a","keep",,"DOI:10.1016/0168-3659(93)90170-a"
-"Cheruvu || REF:(Johnson et al. 1996)","Cheruvu","(Johnson et al. 1996)",,"DOI:10.1021/js960079z","DOI:10.1021/js960079z","keep",,"DOI:10.1021/js960079z"
-"Cheruvu || REF:(Hirvonen et al. 1998)","Cheruvu","(Hirvonen et al. 1998)",,"CHREF:(Hirvonen et al. 1998)","DOI:10.1016/s0168-3659(98)00063-7","keep","Drug values match Table 1 and water values agree with Figure 2. Script 80 retains the four records from control protocols III and VII.",""
-"Cheruvu || REF:(Hirvonen et al. 1993)","Cheruvu","(Hirvonen et al. 1993)",,"CHREF:(Hirvonen et al. 1993)","DOI:10.1016/0378-5173(93)90368-p","keep",,""
-"Cheruvu || REF:(Hirvonen et al. 1998b)","Cheruvu","(Hirvonen et al. 1998b)",,"CHREF:(Hirvonen et al. 1998b)","DOI:10.1016/s0168-3659(98)00088-1","keep","Cheruvu_380 to Cheruvu_384 match the 0 V passive controls in Figures 1 and 2, pp. 171 and 173, to plotting precision. Human epidermis at 32 C. Water measurements are tritiated-water tracer controls.",""
-"Cheruvu || REF:(Peck et al. 1994)","Cheruvu","(Peck et al. 1994)",,"DOI:10.1023/a:1018998529283","DOI:10.1023/a:1018998529283","keep",,"DOI:10.1023/a:1018998529283"
-"Cheruvu || REF:(Peck et al. 1998)","Cheruvu","(Peck et al. 1998)",,"CHREF:(Peck et al. 1998)","DOI:10.1021/js970012r","keep",,""
-"Cheruvu || REF:(Peck et al. 1996)","Cheruvu","(Peck et al. 1996)",,"CHREF:(Peck et al. 1996)","DOI:10.1021/js950044j","keep",,""
-"Cheruvu || REF:(Peck et al. 1993)","Cheruvu","(Peck et al. 1993)",,"CHREF:(Peck et al. 1993)","DOI:10.1016/0378-5173(93)90050-p","keep",,""
-"Cheruvu || REF:(Sims et al. 1992)","Cheruvu","(Sims et al. 1992)",,"CHREF:(Sims et al. 1992)","DOI:10.1023/a:1015898510531","keep",,""
-"Cheruvu || REF:(Sims et al. 1991)","Cheruvu","(Sims et al. 1991)",,"CHREF:(Sims et al. 1991)","DOI:10.1016/0378-5173(91)90216-b","keep",,""
-"Cheruvu || REF:(Ellison et al. 2020)","Cheruvu","(Ellison et al. 2020)",,"DOI:10.1016/j.tiv.2020.104990","DOI:10.1016/j.tiv.2020.104990","keep",,"DOI:10.1016/j.tiv.2020.104990"
-"Cheruvu || REF:(Bonina et al. 1993)","Cheruvu","(Bonina et al. 1993)",,"CHREF:(Bonina et al. 1993)","DOI:10.1016/0378-5173(93)90073-o","keep",,""
-"Cheruvu || REF:(Najib et al.2020)","Cheruvu","(Najib et al.2020)",,"CHREF:(Najib et al.2020)","DOI:10.3390/pharmaceutics12100958","keep",,""
-"Cheruvu || REF:(Magnusson et al. 2006)","Cheruvu","(Magnusson et al. 2006)",,"CHREF:(Magnusson et al. 2006)","DOI:10.1159/000095254","keep",,""
-"Cheruvu || REF:(Cross et al. 2003)","Cheruvu","(Cross et al. 2003)",,"DOI:10.1046/j.1523-1747.2003.12131.x","DOI:10.1046/j.1523-1747.2003.12131.x","keep",,"DOI:10.1046/j.1523-1747.2003.12131.x"
-"HuSkinDB || DOI:10.1002/jps.20773","HuSkinDB","Akomeah, 2007","10.1002/jps.20773","DOI:10.1002/jps.20773","DOI:10.1002/jps.20773","keep",,""
-"HuSkinDB || DOI:10.1023/a:1015989929342","HuSkinDB","Anderson, 1988","10.1023/a:1015989929342","DOI:10.1023/a:1015989929342","DOI:10.1023/a:1015989929342","keep",,""
-"HuSkinDB || DOI:10.1111/1523-1747.ep12277592","HuSkinDB","Anderson, 1989","10.1111/1523-1747.ep12277592","DOI:10.1111/1523-1747.ep12277592","DOI:10.1111/1523-1747.ep12277592","keep",,""
-"HuSkinDB || DOI:10.1002/jps.2600650210","HuSkinDB","Astley, 1976","10.1002/jps.2600650210","DOI:10.1002/jps.2600650210","DOI:10.1002/jps.2600650210","keep",,""
-"HuSkinDB || DOI:10.1016/0272-0590(92)90086-w","HuSkinDB","Barber, 1992","10.1016/0272-0590(92)90086-w","DOI:10.1016/0272-0590(92)90086-w","DOI:10.1016/0272-0590(92)90086-w","keep",,""
-"HuSkinDB || DOI:10.1038/jid.1964.174","HuSkinDB","Blank, 1964","10.1038/jid.1964.174","DOI:10.1038/jid.1964.174","DOI:10.1038/jid.1964.174","keep",,""
-"HuSkinDB || DOI:10.1038/jid.1967.184","HuSkinDB","Blank, 1967","10.1038/jid.1967.184","DOI:10.1038/jid.1967.184","DOI:10.1038/jid.1967.184","keep",,""
-"HuSkinDB || DOI:10.1111/1523-1747.ep12277325","HuSkinDB","Blank, 1985","10.1111/1523-1747.ep12277325","DOI:10.1111/1523-1747.ep12277325","DOI:10.1111/1523-1747.ep12277325","keep",,""
-"HuSkinDB || DOI:10.1111/1523-1747.ep12263302","HuSkinDB","Bronaugh, 1984","10.1111/1523-1747.ep12263302","DOI:10.1111/1523-1747.ep12263302","DOI:10.1111/1523-1747.ep12263302","keep",,""
-"HuSkinDB || DOI:10.1016/j.yrtph.2010.02.008","HuSkinDB","Buist, 2010","10.1016/j.yrtph.2010.02.008","DOI:10.1016/j.yrtph.2010.02.008","DOI:10.1016/j.yrtph.2010.02.008","keep",,""
-"HuSkinDB || DOI:10.1007/s11095-010-0181-z","HuSkinDB","Chantasart, 2010","10.1007/s11095-010-0181-z","DOI:10.1007/s11095-010-0181-z","DOI:10.1007/s11095-010-0181-z","keep",,""
-"HuSkinDB || DOI:10.1046/j.1523-1747.2003.12131.x","HuSkinDB","Cross, 2003","10.1046/j.1523-1747.2003.12131.x","DOI:10.1046/j.1523-1747.2003.12131.x","DOI:10.1046/j.1523-1747.2003.12131.x","keep",,""
-"HuSkinDB || DOI:10.1002/jps.2600800114","HuSkinDB","Dalpozzo, 1991","10.1002/jps.2600800114","DOI:10.1002/jps.2600800114","DOI:10.1002/jps.2600800114","keep",,""
-"HuSkinDB || DOI:10.1016/s0378-5173(98)00113-6","HuSkinDB","Degim, 1998","10.1016/s0378-5173(98)00113-6","DOI:10.1016/s0378-5173(98)00113-6","DOI:10.1016/s0378-5173(98)00113-6","keep",,""
-"HuSkinDB || DOI:10.1002/jps.10312","HuSkinDB","Degim, 2003","10.1002/jps.10312","DOI:10.1002/jps.10312","DOI:10.1002/jps.10312","keep",,""
-"HuSkinDB || DOI:10.1023/a:1018914806761","HuSkinDB","Dolezal, 1993","10.1023/a:1018914806761","DOI:10.1023/a:1018914806761","DOI:10.1023/a:1018914806761","keep",,""
-"HuSkinDB || DOI:10.1016/s0928-0987(02)00085-4","HuSkinDB","du Plessis, 2002","10.1016/s0928-0987(02)00085-4","DOI:10.1016/s0928-0987(02)00085-4","DOI:10.1016/s0928-0987(02)00085-4","keep",,""
-"HuSkinDB || DOI:10.1111/1523-1747.ep12598596","HuSkinDB","Galey, 1976","10.1111/1523-1747.ep12598596","DOI:10.1111/1523-1747.ep12598596","DOI:10.1111/1523-1747.ep12598596","keep",,""
-"HuSkinDB || DOI:10.1111/1523-1747.ep12475655","HuSkinDB","Goodman, 1988","10.1111/1523-1747.ep12475655","DOI:10.1111/1523-1747.ep12475655","DOI:10.1111/1523-1747.ep12475655","keep",,""
-"HuSkinDB || DOI:10.1016/0378-5173(87)90210-9","HuSkinDB","Hadgraft, 1987","10.1016/0378-5173(87)90210-9","DOI:10.1016/0378-5173(87)90210-9","DOI:10.1016/0378-5173(87)90210-9","keep",,""
-"HuSkinDB || DOI:10.1159/000112958","HuSkinDB","Henning, 2008","10.1159/000112958","DOI:10.1159/000112958","DOI:10.1159/000112958","keep",,""
-"HuSkinDB || DOI:10.1023/a:1015824100788","HuSkinDB","Hirvonen, 1991","10.1023/a:1015824100788","DOI:10.1023/a:1015824100788","DOI:10.1023/a:1015824100788","keep",,""
-"HuSkinDB || DOI:10.1002/jps.2600840922","HuSkinDB","Johnson, 1995","10.1002/jps.2600840922","DOI:10.1002/jps.2600840922","DOI:10.1002/jps.2600840922","keep",,""
-"HuSkinDB || DOI:10.1021/js960079z","HuSkinDB","Johnson, 1996","10.1021/js960079z","DOI:10.1021/js960079z","DOI:10.1021/js960079z","keep",,""
-"HuSkinDB || DOI:10.1016/0168-3659(93)90170-a","HuSkinDB","Knutson, 1993","10.1016/0168-3659(93)90170-a","DOI:10.1016/0168-3659(93)90170-a","DOI:10.1016/0168-3659(93)90170-a","keep",,""
-"HuSkinDB || DOI:10.1002/bip.21520","HuSkinDB","Krishnan, 2011","10.1002/bip.21520","DOI:10.1002/bip.21520","DOI:10.1002/bip.21520","keep",,""
-"HuSkinDB || DOI:10.1002/jps.2600821017","HuSkinDB","Kubota, 1993","10.1002/jps.2600821017","DOI:10.1002/jps.2600821017","DOI:10.1002/jps.2600821017","keep",,""
-"HuSkinDB || DOI:10.1211/jpp.62.06.0012","HuSkinDB","Legoabe, 2010","10.1211/jpp.62.06.0012","DOI:10.1211/jpp.62.06.0012","DOI:10.1211/jpp.62.06.0012","keep",,""
-"HuSkinDB || DOI:10.1007/s004200050223","HuSkinDB","Lundh, 1997","10.1007/s004200050223","DOI:10.1007/s004200050223","DOI:10.1007/s004200050223","keep",,""
-"HuSkinDB || DOI:10.1016/j.ejpb.2007.11.012","HuSkinDB","Melero, 2008","10.1016/j.ejpb.2007.11.012","DOI:10.1016/j.ejpb.2007.11.012","DOI:10.1016/j.ejpb.2007.11.012","keep",,""
-"HuSkinDB || DOI:10.1002/aic.690210522","HuSkinDB","Michaels A. S., 1975","10.1002/aic.690210522","DOI:10.1002/aic.690210522","DOI:10.1002/aic.690210522","keep",,""
-"HuSkinDB || DOI:10.1002/jps.2600840607","HuSkinDB","Mitragotri, 1995","10.1002/jps.2600840607","DOI:10.1002/jps.2600840607","DOI:10.1002/jps.2600840607","keep",,""
-"HuSkinDB || DOI:10.1023/a:1016096626810","HuSkinDB","Mitragotri, 1996","10.1023/a:1016096626810","DOI:10.1023/a:1016096626810","DOI:10.1023/a:1016096626810","keep",,""
-"HuSkinDB || DOI:10.1023/a:1007547809430","HuSkinDB","Mitragotri, 2000","10.1023/a:1007547809430","DOI:10.1023/a:1007547809430","DOI:10.1023/a:1007547809430","keep",,""
-"HuSkinDB || DOI:10.1016/s0378-5173(98)00214-2","HuSkinDB","Modamio, 1998","10.1016/s0378-5173(98)00214-2","DOI:10.1016/s0378-5173(98)00214-2","DOI:10.1016/s0378-5173(98)00214-2","keep",,""
-"HuSkinDB || DOI:10.1016/s0378-5173(99)00380-4","HuSkinDB","Modamio, 2000","10.1016/s0378-5173(99)00380-4","DOI:10.1016/s0378-5173(99)00380-4","DOI:10.1016/s0378-5173(99)00380-4","keep",,""
-"HuSkinDB || DOI:10.1023/a:1018998529283","HuSkinDB","Peck, 1994","10.1023/a:1018998529283","DOI:10.1023/a:1018998529283","DOI:10.1023/a:1018998529283","keep",,""
-"HuSkinDB || DOI:10.1016/s0928-0987(00)00091-9","HuSkinDB","Qvist, 2000","10.1016/s0928-0987(00)00091-9","DOI:10.1016/s0928-0987(00)00091-9","DOI:10.1016/s0928-0987(00)00091-9","keep",,""
-"HuSkinDB || DOI:10.1111/j.2042-7158.1977.tb11434.x","HuSkinDB","Roberts, 1977","10.1111/j.2042-7158.1977.tb11434.x","DOI:10.1111/j.2042-7158.1977.tb11434.x","DOI:10.1111/j.2042-7158.1977.tb11434.x","keep",,""
-"HuSkinDB || DOI:10.1159/000272121","HuSkinDB","Romonchuk, 2010","10.1159/000272121","DOI:10.1159/000272121","DOI:10.1159/000272121","keep",,""
-"HuSkinDB || DOI:10.1023/a:1015944018555","HuSkinDB","Roy, 1989","10.1023/a:1015944018555","DOI:10.1023/a:1015944018555","DOI:10.1023/a:1015944018555","keep",,""
-"HuSkinDB || DOI:10.1023/a:1015912932416","HuSkinDB","Roy, 1990","10.1023/a:1015912932416","DOI:10.1023/a:1015912932416","DOI:10.1023/a:1015912932416","keep",,""
-"HuSkinDB || DOI:10.1002/jps.2600821217","HuSkinDB","Roy, 1993","10.1002/jps.2600821217","DOI:10.1002/jps.2600821217","DOI:10.1002/jps.2600821217","keep",,""
-"HuSkinDB || DOI:10.1002/jps.2600831215","HuSkinDB","Roy, 1994","10.1002/jps.2600831215","DOI:10.1002/jps.2600831215","DOI:10.1002/jps.2600831215","keep",,""
-"HuSkinDB || DOI:10.1002/jps.2600841010","HuSkinDB","Roy, 1995","10.1002/jps.2600841010","DOI:10.1002/jps.2600841010","DOI:10.1002/jps.2600841010","keep",,""
-"HuSkinDB || DOI:10.1038/jid.1965.140","HuSkinDB","Scheuplein, 1965","10.1038/jid.1965.140","DOI:10.1038/jid.1965.140","DOI:10.1038/jid.1965.140","keep",,""
-"HuSkinDB || DOI:10.1038/jid.1967.11","HuSkinDB","Scheuplein, 1967","10.1038/jid.1967.11","DOI:10.1038/jid.1967.11","DOI:10.1038/jid.1967.11","keep",,""
-"HuSkinDB || DOI:10.1038/jid.1969.9","HuSkinDB","Scheuplein, 1969","10.1038/jid.1969.9","DOI:10.1038/jid.1969.9","DOI:10.1038/jid.1969.9","keep",,""
-"HuSkinDB || DOI:10.1152/physrev.1971.51.4.702","HuSkinDB","Scheuplein, 1971","10.1152/physrev.1971.51.4.702","DOI:10.1152/physrev.1971.51.4.702","DOI:10.1152/physrev.1971.51.4.702","keep",,""
-"HuSkinDB || DOI:10.1111/1523-1747.ep12723090","HuSkinDB","Scheuplein, 1973","10.1111/1523-1747.ep12723090","DOI:10.1111/1523-1747.ep12723090","DOI:10.1111/1523-1747.ep12723090","keep",,""
-"HuSkinDB || DOI:10.1007/bf01061455","HuSkinDB","Siddiqui, 1989","10.1007/bf01061455","DOI:10.1007/bf01061455","DOI:10.1007/bf01061455","keep",,""
-"HuSkinDB || DOI:10.1016/j.ijpharm.2005.05.030","HuSkinDB","Swart, 2005","10.1016/j.ijpharm.2005.05.030","DOI:10.1016/j.ijpharm.2005.05.030","DOI:10.1016/j.ijpharm.2005.05.030","keep",,""
-"HuSkinDB || DOI:10.1016/0378-5173(93)90321-6","HuSkinDB","Sznitowska, 1993","10.1016/0378-5173(93)90321-6","DOI:10.1016/0378-5173(93)90321-6","DOI:10.1016/0378-5173(93)90321-6","keep",,""
-"HuSkinDB || DOI:10.1002/jat.1657","HuSkinDB","Trabaris, 2012","10.1002/jat.1657","DOI:10.1002/jat.1657","DOI:10.1002/jat.1657","keep",,""
-"HuSkinDB || DOI:10.1248/cpb.49.1395","HuSkinDB","Vaddi, 2001","10.1248/cpb.49.1395","DOI:10.1248/cpb.49.1395","DOI:10.1248/cpb.49.1395","keep",,""
-"HuSkinDB || DOI:10.1016/s0928-0987(00)00120-2","HuSkinDB","Valjakka-Koskela, 2000","10.1016/s0928-0987(00)00120-2","DOI:10.1016/s0928-0987(00)00120-2","DOI:10.1016/s0928-0987(00)00120-2","keep",,""
-"HuSkinDB || DOI:10.1016/j.tiv.2004.03.004","HuSkinDB","Venier, 2004","10.1016/j.tiv.2004.03.004","DOI:10.1016/j.tiv.2004.03.004","DOI:10.1016/j.tiv.2004.03.004","keep",,""
-"HuSkinDB || DOI:10.1016/s0168-3659(97)00152-1","HuSkinDB","Volpato, 1998","10.1016/s0168-3659(97)00152-1","DOI:10.1016/s0168-3659(97)00152-1","DOI:10.1016/s0168-3659(97)00152-1","keep",,""
-"HuSkinDB || DOI:10.1007/s00420-002-0367-8","HuSkinDB","Wilkinson, 2002","10.1007/s00420-002-0367-8","DOI:10.1007/s00420-002-0367-8","DOI:10.1007/s00420-002-0367-8","keep",,""
-"HuSkinDB || DOI:10.1016/0378-5173(92)90032-w","HuSkinDB","Williams, 1992","10.1016/0378-5173(92)90032-w","DOI:10.1016/0378-5173(92)90032-w","DOI:10.1016/0378-5173(92)90032-w","keep",,""
-"HuSkinDB || DOI:10.1006/taap.2002.9494","HuSkinDB","Xu, 2002","10.1006/taap.2002.9494","DOI:10.1006/taap.2002.9494","DOI:10.1006/taap.2002.9494","keep",,""
-"HuSkinDB || DOI:10.1007/s11095-009-9912-4","HuSkinDB","Zhang, 2009","10.1007/s11095-009-9912-4","DOI:10.1007/s11095-009-9912-4","DOI:10.1007/s11095-009-9912-4","keep",,""
-"HuSkinDB || DOI:10.1111/1523-1747.ep12460958","HuSkinDB","Bond, 1988","10.1111/1523-1747.ep12460958","DOI:10.1111/1523-1747.ep12460958","DOI:10.1111/1523-1747.ep12460958","keep",,""
-"HuSkinDB || DOI:10.1080/004982500237488","HuSkinDB","Boogaard, 2000","10.1080/004982500237488","DOI:10.1080/004982500237488","DOI:10.1080/004982500237488","keep",,""
-"HuSkinDB || DOI:10.1111/j.1365-2133.1986.tb06214.x","HuSkinDB","Bronaugh, 1986","10.1111/j.1365-2133.1986.tb06214.x","DOI:10.1111/j.1365-2133.1986.tb06214.x","DOI:10.1111/j.1365-2133.1986.tb06214.x","keep",,""
-"HuSkinDB || DOI:10.1016/0887-2333(94)90078-7","HuSkinDB","Clowes, 1994","10.1016/0887-2333(94)90078-7","DOI:10.1016/0887-2333(94)90078-7","DOI:10.1016/0887-2333(94)90078-7","keep",,""
-"HuSkinDB || DOI:10.1191/096032700678815684","HuSkinDB","Griffin, 2000","10.1191/096032700678815684","DOI:10.1191/096032700678815684","DOI:10.1191/096032700678815684","keep",,""
-"HuSkinDB || DOI:10.1016/j.fct.2004.05.007","HuSkinDB","Kenyon, 2004","10.1016/j.fct.2004.05.007","DOI:10.1016/j.fct.2004.05.007","DOI:10.1016/j.fct.2004.05.007","keep",,""
-"HuSkinDB || DOI:10.1016/0378-5173(91)90387-4","HuSkinDB","Kushla, 1991","10.1016/0378-5173(91)90387-4","DOI:10.1016/0378-5173(91)90387-4","DOI:10.1016/0378-5173(91)90387-4","keep",,""
-"HuSkinDB || DOI:10.1006/taap.2002.9373","HuSkinDB","Lockley, 2002","10.1006/taap.2002.9373","DOI:10.1006/taap.2002.9373","DOI:10.1006/taap.2002.9373","keep",,""
-"HuSkinDB || DOI:10.1111/1523-1747.ep12874561","HuSkinDB","Rigg, 1990","10.1111/1523-1747.ep12874561","DOI:10.1111/1523-1747.ep12874561","DOI:10.1111/1523-1747.ep12874561","keep",,""
-"HuSkinDB || DOI:10.1016/s0278-6915(97)00109-9","HuSkinDB","Roper, 1997","10.1016/s0278-6915(97)00109-9","DOI:10.1016/s0278-6915(97)00109-9","DOI:10.1016/s0278-6915(97)00109-9","keep",,""
-"HuSkinDB || DOI:10.1016/s0168-3659(01)00443-6","HuSkinDB","Sznitowska, 2001","10.1016/s0168-3659(01)00443-6","DOI:10.1016/s0168-3659(01)00443-6","DOI:10.1016/s0168-3659(01)00443-6","keep",,""
-"HuSkinDB || DOI:10.1006/toxs.1998.2490","HuSkinDB","Wester, 1998","10.1006/toxs.1998.2490","DOI:10.1006/toxs.1998.2490","DOI:10.1006/toxs.1998.2490","keep",,""
-"HuSkinDB || DOI:10.1016/0278-6915(96)00030-0","HuSkinDB","Wester, 1996","10.1016/0278-6915(96)00030-0","DOI:10.1016/0278-6915(96)00030-0","DOI:10.1016/0278-6915(96)00030-0","keep",,""
-"HuSkinDB || DOI:10.1006/taap.2000.9028","HuSkinDB","Wester, 2000","10.1006/taap.2000.9028","DOI:10.1006/taap.2000.9028","DOI:10.1006/taap.2000.9028","keep",,""
-"HuSkinDB || DOI:10.1016/s0378-5173(99)00067-8","HuSkinDB","Dias, 1999","10.1016/s0378-5173(99)00067-8","DOI:10.1016/s0378-5173(99)00067-8","DOI:10.1016/s0378-5173(99)00067-8","keep",,""
-"HuSkinDB || DOI:10.1016/s0378-5173(00)00665-7","HuSkinDB","Schmook, 2001","10.1016/s0378-5173(00)00665-7","DOI:10.1016/s0378-5173(00)00665-7","DOI:10.1016/s0378-5173(00)00665-7","keep",,""
-"HuSkinDB || DOI:10.1016/s0278-6915(99)00164-7","HuSkinDB","Moss, 2000","10.1016/s0278-6915(99)00164-7","DOI:10.1016/s0278-6915(99)00164-7","DOI:10.1016/s0278-6915(99)00164-7","keep",,""
-"HuSkinDB || DOI:10.1023/a:1018974131236","HuSkinDB","Pershing, 1993","10.1023/a:1018974131236","DOI:10.1023/a:1018974131236","DOI:10.1023/a:1018974131236","keep",,""
-"HuSkinDB || DOI:10.1177/096032719701601104","HuSkinDB","Dick, 1997","10.1177/096032719701601104","DOI:10.1177/096032719701601104","DOI:10.1177/096032719701601104","keep",,""
-"HuSkinDB || DOI:10.1289/ehp.8457193","HuSkinDB","Dugard, 1984","10.1289/ehp.8457193","DOI:10.1289/ehp.8457193","DOI:10.1289/ehp.8457193","keep",,""
-"HuSkinDB || DOI:10.1111/1523-1747.ep12475447","HuSkinDB","Scott, 1990","10.1111/1523-1747.ep12475447","DOI:10.1111/1523-1747.ep12475447","DOI:10.1111/1523-1747.ep12475447","keep",,""
-"HuSkinDB || DOI:10.1016/0378-4274(95)03393-y","HuSkinDB","Barber, 1995","10.1016/0378-4274(95)03393-y","DOI:10.1016/0378-4274(95)03393-y","DOI:10.1016/0378-4274(95)03393-y","keep",,""
-"HuSkinDB || DOI:10.1016/0278-6915(94)00146-f","HuSkinDB","Brain, 1995","10.1016/0278-6915(94)00146-f","DOI:10.1016/0278-6915(94)00146-f","DOI:10.1016/0278-6915(94)00146-f","keep",,""
-"HuSkinDB || DOI:10.1002/jps.2600800203","HuSkinDB","Sato, 1991","10.1002/jps.2600800203","DOI:10.1002/jps.2600800203","DOI:10.1002/jps.2600800203","keep",,""
-"HuSkinDB || DOI:10.1016/0378-5173(84)90145-5","HuSkinDB","Southwell, 1984","10.1016/0378-5173(84)90145-5","DOI:10.1016/0378-5173(84)90145-5","DOI:10.1016/0378-5173(84)90145-5","keep",,""
-"HuSkinDB || DOI:10.1016/0378-5173(85)90106-1","HuSkinDB","Vaidyanathan, 1985","10.1016/0378-5173(85)90106-1","DOI:10.1016/0378-5173(85)90106-1","DOI:10.1016/0378-5173(85)90106-1","keep",,""
-"HuSkinDB || DOI:10.1006/rtph.2001.1530","HuSkinDB","Cnubben, 2002","10.1006/rtph.2001.1530","DOI:10.1006/rtph.2001.1530","DOI:10.1006/rtph.2001.1530","keep",,""
-"HuSkinDB || DOI:10.1289/ehp.8774223","HuSkinDB","Scott, 1987","10.1289/ehp.8774223","DOI:10.1289/ehp.8774223","DOI:10.1289/ehp.8774223","keep",,""
-"HuSkinDB || DOI:10.1023/a:1015877621976","HuSkinDB","Jolicoeur, 1992","10.1023/a:1015877621976","DOI:10.1023/a:1015877621976","DOI:10.1023/a:1015877621976","keep",,""
-"HuSkinDB || DOI:10.1016/s0168-3659(00)00210-8","HuSkinDB","Ross, 2000","10.1016/s0168-3659(00)00210-8","DOI:10.1016/s0168-3659(00)00210-8","DOI:10.1016/s0168-3659(00)00210-8","keep",,""
-"HuSkinDB || DOI:10.1080/00984109708984056","HuSkinDB","Stinecipher, 1997","10.1080/00984109708984056","DOI:10.1080/00984109708984056","DOI:10.1080/00984109708984056","keep",,""
-"HuSkinDB || DOI:10.1007/s00420-005-0056-5","HuSkinDB","Wilkinson, 2006","10.1007/s00420-005-0056-5","DOI:10.1007/s00420-005-0056-5","DOI:10.1007/s00420-005-0056-5","keep",,""
-"HuSkinDB || DOI:10.1016/j.tox.2003.11.004","HuSkinDB","Kenyon, 2004","10.1016/j.tox.2003.11.004","DOI:10.1016/j.tox.2003.11.004","DOI:10.1016/j.tox.2003.11.004","keep",,""
-"SkinPiX || DOI:10.1016/j.tiv.2020.104990","SkinPiX","Ellison,CA 2020; publication ID=80","10.1016/j.tiv.2020.104990","DOI:10.1016/j.tiv.2020.104990","DOI:10.1016/j.tiv.2020.104990","keep",,""
-"SkinPiX || DOI:10.1007/s11095-014-1420-5","SkinPiX","Namjoshi,S 2014; publication ID=502","10.1007/s11095-014-1420-5","DOI:10.1007/s11095-014-1420-5","DOI:10.1007/s11095-014-1420-5","keep",,""
-"SkinPiX || DOI:10.1016/j.tox.2012.06.012","SkinPiX","Boonen,J 2012; publication ID=280","10.1016/j.tox.2012.06.012","DOI:10.1016/j.tox.2012.06.012","DOI:10.1016/j.tox.2012.06.012","keep",,""
-"SkinPiX || DOI:10.1016/j.jep.2013.03.076","SkinPiX","De,Spiegeleer,B 2013; publication ID=560","10.1016/j.jep.2013.03.076","DOI:10.1016/j.jep.2013.03.076","DOI:10.1016/j.jep.2013.03.076","keep",,""
-"SkinPiX || DOI:10.1016/j.ejps.2014.11.002","SkinPiX","Uchida,T 2015; publication ID=233","10.1016/j.ejps.2014.11.002","DOI:10.1016/j.ejps.2014.11.002","DOI:10.1016/j.ejps.2014.11.002","keep",,""
-"SkinPiX || DOI:10.1038/jes.2017.10","SkinPiX","Frasch,HF 2017; publication ID=41","10.1038/jes.2017.10","DOI:10.1038/jes.2017.10","DOI:10.1038/jes.2017.10","keep",,""
-"SkinPiX || DOI:10.1016/j.scitotenv.2011.12.037","SkinPiX","Nielsen,JB 2012; publication ID=340","10.1016/j.scitotenv.2011.12.037","DOI:10.1016/j.scitotenv.2011.12.037","DOI:10.1016/j.scitotenv.2011.12.037","keep",,""
-"SkinPiX || DOI:10.1016/j.chemosphere.2020.126525","SkinPiX","Champmartin,C 2020; publication ID=5","10.1016/j.chemosphere.2020.126525","DOI:10.1016/j.chemosphere.2020.126525","DOI:10.1016/j.chemosphere.2020.126525","keep",,""
-"SkinPiX || DOI:10.1159/000365730","SkinPiX","Veryser,L 2014; publication ID=460","10.1159/000365730","DOI:10.1159/000365730","DOI:10.1159/000365730","keep",,""
-"SkinPiX || DOI:10.1159/000441038","SkinPiX","Barbero,AM 2015; publication ID=297","10.1159/000441038","DOI:10.1159/000441038","DOI:10.1159/000441038","keep",,""
-"SkinPiX || DOI:10.1002/bdd.2194","SkinPiX","Haltner-Ukomadu,E 2019; publication ID=2","10.1002/bdd.2194","DOI:10.1002/bdd.2194","DOI:10.1002/bdd.2194","keep",,""
-"SkinPiX || DOI:10.1166/jbn.2012.1426","SkinPiX","Ntimenou,V 2012; publication ID=447","10.1166/jbn.2012.1426","DOI:10.1166/jbn.2012.1426","DOI:10.1166/jbn.2012.1426","keep",,""
-"SkinPiX || DOI:10.1016/j.ejps.2019.104976","SkinPiX","Xenikakis,I 2019; publication ID=26","10.1016/j.ejps.2019.104976","DOI:10.1016/j.ejps.2019.104976","DOI:10.1016/j.ejps.2019.104976","keep",,""
-"SkinPiX || DOI:10.1016/j.ejps.2016.10.003","SkinPiX","Ternullo S 2017; publication ID=179","10.1016/j.ejps.2016.10.003","DOI:10.1016/j.ejps.2016.10.003","DOI:10.1016/j.ejps.2016.10.003","keep",,""
-"SkinPiX || DOI:10.1016/j.chemosphere.2015.11.018","SkinPiX","Bányiová,K 2016; publication ID=514","10.1016/j.chemosphere.2015.11.018","DOI:10.1016/j.chemosphere.2015.11.018","DOI:10.1016/j.chemosphere.2015.11.018","keep",,""
-"SkinPiX || DOI:10.3109/03639045.2015.1122610","SkinPiX","Alsaab,H 2015; publication ID=88","10.3109/03639045.2015.1122610","DOI:10.3109/03639045.2015.1122610","DOI:10.3109/03639045.2015.1122610","keep",,""
-"SkinPiX || DOI:10.1111/j.1600-0846.2011.00541.x","SkinPiX","Hui,X 2011; publication ID=378","10.1111/j.1600-0846.2011.00541.x","DOI:10.1111/j.1600-0846.2011.00541.x","DOI:10.1111/j.1600-0846.2011.00541.x","keep",,""
-"SkinPiX || DOI:10.1016/j.ijpharm.2015.04.071","SkinPiX","Musazzi,UM 2015; publication ID=290","10.1016/j.ijpharm.2015.04.071","DOI:10.1016/j.ijpharm.2015.04.071","DOI:10.1016/j.ijpharm.2015.04.071","keep",,""
-"SkinPiX || DOI:10.1016/j.toxlet.2014.06.008","SkinPiX","Moore,CA 2014; publication ID=66","10.1016/j.toxlet.2014.06.008","DOI:10.1016/j.toxlet.2014.06.008","DOI:10.1016/j.toxlet.2014.06.008","keep",,""
-"SkinPiX || DOI:10.1007/s00204-019-02542-2","SkinPiX","Hopf,NB 2019; publication ID=82","10.1007/s00204-019-02542-2","DOI:10.1007/s00204-019-02542-2","DOI:10.1007/s00204-019-02542-2","keep",,""
-"SkinPiX || DOI:10.1016/j.ijpharm.2012.09.031","SkinPiX","Santos,P 2012; publication ID=405","10.1016/j.ijpharm.2012.09.031","DOI:10.1016/j.ijpharm.2012.09.031","DOI:10.1016/j.ijpharm.2012.09.031","keep",,""
-"SkinPiX || DOI:10.1021/acs.molpharmaceut.8b01196","SkinPiX","Kopečná,M 2019; publication ID=144","10.1021/acs.molpharmaceut.8b01196","DOI:10.1021/acs.molpharmaceut.8b01196","DOI:10.1021/acs.molpharmaceut.8b01196","keep",,""
-"SkinPiX || DOI:10.1111/jphp.12311","SkinPiX","Fox,LT 2014; publication ID=305","10.1111/jphp.12311","DOI:10.1111/jphp.12311","DOI:10.1111/jphp.12311","keep",,""
-"SkinPiX || DOI:10.1208/s12249-012-9783-6","SkinPiX","Elmoslemany,RM 2012; publication ID=424","10.1208/s12249-012-9783-6","DOI:10.1208/s12249-012-9783-6","DOI:10.1208/s12249-012-9783-6","keep",,""
-"SkinPiX || DOI:10.1007/s11095-013-1169-2","SkinPiX","Mohammed,D 2013; publication ID=241","10.1007/s11095-013-1169-2","DOI:10.1007/s11095-013-1169-2","DOI:10.1007/s11095-013-1169-2","keep",,""
-"SkinPiX || DOI:10.1038/jes.2016.68","SkinPiX","Frasch,HF 2016; publication ID=223","10.1038/jes.2016.68","DOI:10.1038/jes.2016.68","DOI:10.1038/jes.2016.68","keep",,""
-"SkinPiX || DOI:10.3109/03639045.2011.633262","SkinPiX","Wen,MM 2011; publication ID=321","10.3109/03639045.2011.633262","DOI:10.3109/03639045.2011.633262","DOI:10.3109/03639045.2011.633262","keep",,""
-"SkinPiX || DOI:10.1016/j.phymed.2014.08.015","SkinPiX","Veryser,L 2014; publication ID=407","10.1016/j.phymed.2014.08.015","DOI:10.1016/j.phymed.2014.08.015","DOI:10.1016/j.phymed.2014.08.015","keep",,""
-"SkinPiX || DOI:10.1080/15287394.2011.615108","SkinPiX","Franko,J 2012; publication ID=301","10.1080/15287394.2011.615108","DOI:10.1080/15287394.2011.615108","DOI:10.1080/15287394.2011.615108","keep",,""
-"SkinPiX || DOI:10.1016/j.ijpharm.2016.01.071","SkinPiX","Abrego,G 2016; publication ID=614","10.1016/j.ijpharm.2016.01.071","DOI:10.1016/j.ijpharm.2016.01.071","DOI:10.1016/j.ijpharm.2016.01.071","keep",,""
-"SkinPiX || DOI:10.1080/17425247.2016.1182490","SkinPiX","Mohyeldin,SM 2016; publication ID=434","10.1080/17425247.2016.1182490","DOI:10.1080/17425247.2016.1182490","DOI:10.1080/17425247.2016.1182490","keep",,""
-"SkinPiX || DOI:10.1016/j.toxlet.2020.09.017","SkinPiX","Berthet,A 2020; publication ID=105","10.1016/j.toxlet.2020.09.017","DOI:10.1016/j.toxlet.2020.09.017","DOI:10.1016/j.toxlet.2020.09.017","keep",,""
-"SkinPiX || DOI:10.1016/j.envint.2015.07.015","SkinPiX","Abdallah,MA 2015; publication ID=102","10.1016/j.envint.2015.07.015","DOI:10.1016/j.envint.2015.07.015","DOI:10.1016/j.envint.2015.07.015","keep",,""
-"SkinPiX || DOI:10.1007/s11095-017-2214-3","SkinPiX","Kopečná,M 2017; publication ID=577","10.1007/s11095-017-2214-3","DOI:10.1007/s11095-017-2214-3","DOI:10.1007/s11095-017-2214-3","keep",,""
-"SkinPiX || DOI:10.1080/10717544.2018.1523256","SkinPiX","Haq,A 2018; publication ID=154","10.1080/10717544.2018.1523256","DOI:10.1080/10717544.2018.1523256","DOI:10.1080/10717544.2018.1523256","keep",,""
-"SkinPiX || DOI:10.1016/j.xphs.2019.06.030","SkinPiX","Morris,SAV 2019; publication ID=63","10.1016/j.xphs.2019.06.030","DOI:10.1016/j.xphs.2019.06.030","DOI:10.1016/j.xphs.2019.06.030","keep",,""
+source_key,dataset_origin,original_reference,doi,candidate_publication_id,publication_id,decision,notes,author_year_candidates
+Cheruvu || REF:(Blank and McAuliffe 1985),Cheruvu,(Blank and McAuliffe 1985),,DOI:10.1111/1523-1747.ep12277325,DOI:10.1111/1523-1747.ep12277325,keep,,DOI:10.1111/1523-1747.ep12277325
+Cheruvu || REF:(Parry et al. 1990),Cheruvu,(Parry et al. 1990),,CHREF:(Parry et al. 1990),DOI:10.1023/a:1015861709758,keep,,
+Cheruvu || REF:(Roberts 1976),Cheruvu,(Roberts 1976),,CHREF:(Roberts 1976),DOI:10.1111/j.2042-7158.1977.tb11434.x,keep,,
+Cheruvu || REF:(Siddiqui et al. 1989),Cheruvu,(Siddiqui et al. 1989),,DOI:10.1007/bf01061455,DOI:10.1007/bf01061455,keep,,DOI:10.1007/bf01061455
+Cheruvu || REF:(Roberts et al. 1977),Cheruvu,(Roberts et al. 1977),,DOI:10.1111/j.2042-7158.1977.tb11434.x,DOI:10.1111/j.2042-7158.1977.tb11434.x,keep,,DOI:10.1111/j.2042-7158.1977.tb11434.x
+Cheruvu || REF:(Blank et al. 1967),Cheruvu,(Blank et al. 1967),,DOI:10.1038/jid.1967.184,DOI:10.1038/jid.1967.184,keep,,DOI:10.1038/jid.1967.184
+Cheruvu || REF:(Scheuplein and Blank 1973),Cheruvu,(Scheuplein and Blank 1973),,DOI:10.1111/1523-1747.ep12723090,DOI:10.1111/1523-1747.ep12723090,keep,,DOI:10.1111/1523-1747.ep12723090
+Cheruvu || REF:(Scheuplein et al. 1969),Cheruvu,(Scheuplein et al. 1969),,DOI:10.1038/jid.1969.9,DOI:10.1038/jid.1969.9,keep,,DOI:10.1038/jid.1969.9
+Cheruvu || REF:(Peck et al. 1995),Cheruvu,(Peck et al. 1995),,CHREF:(Peck et al. 1995),DOI:10.1002/jps.2600840813,keep,,
+Cheruvu || REF:(Anderson and Raykar 1989),Cheruvu,(Anderson and Raykar 1989),,DOI:10.1111/1523-1747.ep12277592,DOI:10.1111/1523-1747.ep12277592,keep,,DOI:10.1111/1523-1747.ep12277592
+Cheruvu || REF:(Liu et al. 1994),Cheruvu,(Liu et al. 1994),,CHREF:(Liu et al. 1994),DOI:10.1023/a:1018975602818,keep,"Cheruvu_27 matches the mean β-estradiol stratum corneum permeability reported in Table 4, p. 1782. The reported value of 2.7 × 10⁻⁶ cm/s converts to log10 Kp = −2.01233 with Kp in cm/h.",
+Cheruvu || REF:(Williams et al. 1992),Cheruvu,(Williams et al. 1992),,DOI:10.1016/0378-5173(92)90032-w,DOI:10.1016/0378-5173(92)90032-w,keep,"Verified against Table I, p. 74. Cheruvu_29 and Cheruvu_99 are the all-data geometric means. HuSkinDB_344 and HuSkinDB_345 report the arithmetic means from the same experiments.",DOI:10.1016/0378-5173(92)90032-w
+Cheruvu || REF:(Williams and Barry 1991a),Cheruvu,(Williams and Barry 1991a),,CHREF:(Williams and Barry 1991a),DOI:10.1023/a:1015813803205,keep,Seventeen initial controls match Table I. Cheruvu_36 matches the separate reversibility control in Table IV.,
+Cheruvu || REF:(Dick and Scott 1992),Cheruvu,(Dick and Scott 1992),,CHREF:(Dick and Scott 1992),DOI:10.1111/j.2042-7158.1992.tb05485.x,keep,,
+Cheruvu || REF:(Southwell et al. 1984),Cheruvu,(Southwell et al. 1984),,DOI:10.1016/0378-5173(84)90145-5,DOI:10.1016/0378-5173(84)90145-5,keep,,DOI:10.1016/0378-5173(84)90145-5
+Cheruvu || REF:(DalPozzo et al. 1991),Cheruvu,(DalPozzo et al. 1991),,DOI:10.1002/jps.2600800114,DOI:10.1002/jps.2600800114,keep,,DOI:10.1002/jps.2600800114
+Cheruvu || REF:(Singh and Roberts 1994a),Cheruvu,(Singh and Roberts 1994a),,CHREF:(Singh and Roberts 1994a),PMID:8301551,keep,,
+Cheruvu || REF:(Bronaugh and Congdon 1984),Cheruvu,(Bronaugh and Congdon 1984),,DOI:10.1111/1523-1747.ep12263302,DOI:10.1111/1523-1747.ep12263302,keep,,DOI:10.1111/1523-1747.ep12263302
+Cheruvu || REF:(Anderson et al. 1988),Cheruvu,(Anderson et al. 1988),,DOI:10.1023/a:1015989929342,DOI:10.1023/a:1015989929342,keep,,DOI:10.1023/a:1015989929342
+Cheruvu || REF:(Barber et al. 1992),Cheruvu,(Barber et al. 1992),,DOI:10.1016/0272-0590(92)90086-w,DOI:10.1016/0272-0590(92)90086-w,keep,,DOI:10.1016/0272-0590(92)90086-w
+Cheruvu || REF:(Bronaugh et al. 1986),Cheruvu,(Bronaugh et al. 1986),,DOI:10.1111/j.1365-2133.1986.tb06214.x,DOI:10.1111/j.1365-2133.1986.tb06214.x,keep,,DOI:10.1111/j.1365-2133.1986.tb06214.x
+"Cheruvu || REF:(Anderson et al. 1988), (Raykar 1988)",Cheruvu,"(Anderson et al. 1988), (Raykar 1988)",,"CHREF:(Anderson et al. 1988), (Raykar 1988)",DOI:10.1023/a:1015989929342,keep,"Verified against Anderson et al. 1988, Scheme I p. 567 and Table II p. 570. Cheruvu_90 and Cheruvu_91 match compounds 1d and 1h measured through isolated human stratum corneum at 37 C. Corresponding HuSkinDB records are HuSkinDB_6 and HuSkinDB_16.",DOI:10.1023/a:1015989929342
+Cheruvu || REF:(Roy et al. 1990),Cheruvu,(Roy et al. 1990),,DOI:10.1023/a:1015912932416,DOI:10.1023/a:1015912932416,keep,,DOI:10.1023/a:1015912932416
+Cheruvu || REF:(Williams and Barry 1989) (Williams and Barry 1991a),Cheruvu,(Williams and Barry 1989) (Williams and Barry 1991a),,CHREF:(Williams and Barry 1989) (Williams and Barry 1991a),DOI:10.1016/0378-5173(89)90310-4,keep,Four pretreatment controls match Table 1 of the 1989 paper. The same values are reproduced in the 1991a paper.,
+Cheruvu || REF:(Williams and Barry 1991b),Cheruvu,(Williams and Barry 1991b),,CHREF:(Williams and Barry 1991b),DOI:10.1016/0378-5173(91)90232-d,keep,Sixteen initial controls match Table 2. Cheruvu_138 matches the isolated stratum corneum result in Table 1. Exclude Cheruvu_137 separately because the overall epidermal mean may overlap the Table 2 controls.,
+Cheruvu || REF:(Smith and Irwin 2000),Cheruvu,(Smith and Irwin 2000),,CHREF:(Smith and Irwin 2000),DOI:10.1016/s0378-5173(00)00561-5,keep,,
+Cheruvu || REF:(Siddiqui et al. 1985),Cheruvu,(Siddiqui et al. 1985),,CHREF:(Siddiqui et al. 1985),DOI:10.1111/j.2042-7158.1985.tb04954.x,keep,,
+Cheruvu || REF:(Buist et al. 2010),Cheruvu,(Buist et al. 2010),,DOI:10.1016/j.yrtph.2010.02.008,DOI:10.1016/j.yrtph.2010.02.008,keep,,DOI:10.1016/j.yrtph.2010.02.008
+Cheruvu || REF:(Johnson et al.1995),Cheruvu,(Johnson et al.1995),,DOI:10.1002/jps.2600840922,DOI:10.1002/jps.2600840922,keep,,DOI:10.1002/jps.2600840922
+Cheruvu || REF:(Clowes et al. 1994),Cheruvu,(Clowes et al. 1994),,DOI:10.1016/0887-2333(94)90078-7,DOI:10.1016/0887-2333(94)90078-7,keep,,DOI:10.1016/0887-2333(94)90078-7
+Cheruvu || REF:(Barber et al. 1995),Cheruvu,(Barber et al. 1995),,DOI:10.1016/0378-4274(95)03393-y,DOI:10.1016/0378-4274(95)03393-y,keep,,DOI:10.1016/0378-4274(95)03393-y
+Cheruvu || REF:(Howes et al. 1975),Cheruvu,(Howes et al. 1975),,CHREF:(Howes et al. 1975),DOI:10.3109/109158183091420,keep,,
+Cheruvu || REF:(Dias et al. 1999),Cheruvu,(Dias et al. 1999),,DOI:10.1016/s0378-5173(99)00067-8,DOI:10.1016/s0378-5173(99)00067-8,keep,,DOI:10.1016/s0378-5173(99)00067-8
+Cheruvu || REF:(Mitragotri et al. 1996),Cheruvu,(Mitragotri et al. 1996),,DOI:10.1023/a:1016096626810,DOI:10.1023/a:1016096626810,keep,,DOI:10.1023/a:1016096626810
+Cheruvu || REF:(Mitragotri et al. 1995),Cheruvu,(Mitragotri et al. 1995),,DOI:10.1002/jps.2600840607,DOI:10.1002/jps.2600840607,keep,,DOI:10.1002/jps.2600840607
+Cheruvu || REF:(Zhang et al. 2009),Cheruvu,(Zhang et al. 2009),,DOI:10.1007/s11095-009-9912-4,DOI:10.1007/s11095-009-9912-4,keep,,DOI:10.1007/s11095-009-9912-4
+Cheruvu || REF:(Chantasart et al. 2007),Cheruvu,(Chantasart et al. 2007),,CHREF:(Chantasart et al. 2007),DOI:10.1002/jps.20865,keep,,
+Cheruvu || REF:(Krishnan et al. 2010),Cheruvu,(Krishnan et al. 2010),,CHREF:(Krishnan et al. 2010),DOI:10.1002/jps.22024,keep,,
+Cheruvu || REF:(Lawrence et al. 1997),Cheruvu,(Lawrence et al. 1997),,CHREF:(Lawrence et al. 1997),DOI:10.1016/s0887-2333(97)00044-1,keep,,
+Cheruvu || REF:(Copovi et al. 2006),Cheruvu,(Copovi et al. 2006),,CHREF:(Copovi et al. 2006),DOI:10.1016/j.ijpharm.2006.01.033,keep,,
+Cheruvu || REF:(Akomeah et al. 2007),Cheruvu,(Akomeah et al. 2007),,DOI:10.1002/jps.20773,DOI:10.1002/jps.20773,keep,,DOI:10.1002/jps.20773
+Cheruvu || REF:(Barbero et al. 2016),Cheruvu,(Barbero et al. 2016),,CHREF:(Barbero et al. 2016),DOI:10.1159/000441038,keep,,
+Cheruvu || REF:(Intarakumhaeng et al. 2017),Cheruvu,(Intarakumhaeng et al. 2017),,CHREF:(Intarakumhaeng et al. 2017),DOI:10.1016/j.ijpharm.2017.11.042,keep,,
+Cheruvu || REF:(Eman et al. 2019),Cheruvu,(Eman et al. 2019),,CHREF:(Eman et al. 2019),DOI:10.1159/000497225,keep,,
+Cheruvu || REF:(Chantasart et al. 2009),Cheruvu,(Chantasart et al. 2009),,CHREF:(Chantasart et al. 2009),DOI:10.1002/jps.21666,keep,,
+Cheruvu || REF:(Mitragotri et al. 2000),Cheruvu,(Mitragotri et al. 2000),,DOI:10.1023/a:1007547809430,DOI:10.1023/a:1007547809430,keep,,DOI:10.1023/a:1007547809430
+Cheruvu || REF:(Mitragotri et al. 2001),Cheruvu,(Mitragotri et al. 2001),,CHREF:(Mitragotri et al. 2001),CHREF:(Mitragotri et al. 2001),exclude,"Table 1 attributes all five passive values to Mitragotri 2000, DOI 10.1023/a:1007547809430. Excluded as re-reported measurements.",
+Cheruvu || REF:(Durrheim et al. 1980) (Scheuplein 1965),Cheruvu,(Durrheim et al. 1980) (Scheuplein 1965),,CHREF:(Durrheim et al. 1980) (Scheuplein 1965),CHREF:(Durrheim et al. 1980) (Scheuplein 1965),exclude,All ten values match the published 25 °C human comparison series in Durrheim Table III and have matching entries in HuSkinDB under Scheuplein and Blank 1973. Excluded to avoid double counting.,
+Cheruvu || REF:(Suhonen et al. 2003),Cheruvu,(Suhonen et al. 2003),,CHREF:(Suhonen et al. 2003),DOI:10.1016/s0928-0987(03)00176-3,keep,,
+Cheruvu || REF:(Essa et al. 2002),Cheruvu,(Essa et al. 2002),,CHREF:(Essa et al. 2002),DOI:10.1016/s0378-5173(02)00107-2,keep,,
+Cheruvu || REF:(Monene et al. 2005),Cheruvu,(Monene et al. 2005),,CHREF:(Monene et al. 2005),DOI:10.1016/j.ejps.2004.11.001,keep,,
+Cheruvu || REF:(Plessis et al. 2002),Cheruvu,(Plessis et al. 2002),,CHREF:(Plessis et al. 2002),DOI:10.1016/s0928-0987(02)00085-4,keep,,
+Cheruvu || REF:(Cettina et al. 1995),Cheruvu,(Cettina et al. 1995),,CHREF:(Cettina et al. 1995),DOI:10.1016/0378-5173(94)00253-2,keep,,
+Cheruvu || REF:(Knutson et al. 1993),Cheruvu,(Knutson et al. 1993),,DOI:10.1016/0168-3659(93)90170-a,DOI:10.1016/0168-3659(93)90170-a,keep,,DOI:10.1016/0168-3659(93)90170-a
+Cheruvu || REF:(Johnson et al. 1996),Cheruvu,(Johnson et al. 1996),,DOI:10.1021/js960079z,DOI:10.1021/js960079z,keep,,DOI:10.1021/js960079z
+Cheruvu || REF:(Hirvonen et al. 1998),Cheruvu,(Hirvonen et al. 1998),,CHREF:(Hirvonen et al. 1998),DOI:10.1016/s0168-3659(98)00063-7,keep,Drug values match Table 1 and water values agree with Figure 2. Script 80 retains the four records from control protocols III and VII.,
+Cheruvu || REF:(Hirvonen et al. 1993),Cheruvu,(Hirvonen et al. 1993),,CHREF:(Hirvonen et al. 1993),DOI:10.1016/0378-5173(93)90368-p,keep,,
+Cheruvu || REF:(Hirvonen et al. 1998b),Cheruvu,(Hirvonen et al. 1998b),,CHREF:(Hirvonen et al. 1998b),DOI:10.1016/s0168-3659(98)00088-1,keep,"Cheruvu_380 to Cheruvu_384 match the 0 V passive controls in Figures 1 and 2, pp. 171 and 173, to plotting precision. Human epidermis at 32 C. Water measurements are tritiated-water tracer controls.",
+Cheruvu || REF:(Peck et al. 1994),Cheruvu,(Peck et al. 1994),,DOI:10.1023/a:1018998529283,DOI:10.1023/a:1018998529283,keep,,DOI:10.1023/a:1018998529283
+Cheruvu || REF:(Peck et al. 1998),Cheruvu,(Peck et al. 1998),,CHREF:(Peck et al. 1998),DOI:10.1021/js970012r,keep,,
+Cheruvu || REF:(Peck et al. 1996),Cheruvu,(Peck et al. 1996),,CHREF:(Peck et al. 1996),DOI:10.1021/js950044j,keep,,
+Cheruvu || REF:(Peck et al. 1993),Cheruvu,(Peck et al. 1993),,CHREF:(Peck et al. 1993),DOI:10.1016/0378-5173(93)90050-p,keep,,
+Cheruvu || REF:(Sims et al. 1992),Cheruvu,(Sims et al. 1992),,CHREF:(Sims et al. 1992),DOI:10.1023/a:1015898510531,keep,,
+Cheruvu || REF:(Sims et al. 1991),Cheruvu,(Sims et al. 1991),,CHREF:(Sims et al. 1991),DOI:10.1016/0378-5173(91)90216-b,keep,,
+Cheruvu || REF:(Ellison et al. 2020),Cheruvu,(Ellison et al. 2020),,DOI:10.1016/j.tiv.2020.104990,DOI:10.1016/j.tiv.2020.104990,keep,,DOI:10.1016/j.tiv.2020.104990
+Cheruvu || REF:(Bonina et al. 1993),Cheruvu,(Bonina et al. 1993),,CHREF:(Bonina et al. 1993),DOI:10.1016/0378-5173(93)90073-o,keep,,
+Cheruvu || REF:(Najib et al.2020),Cheruvu,(Najib et al.2020),,CHREF:(Najib et al.2020),DOI:10.3390/pharmaceutics12100958,keep,,
+Cheruvu || REF:(Magnusson et al. 2006),Cheruvu,(Magnusson et al. 2006),,CHREF:(Magnusson et al. 2006),DOI:10.1159/000095254,keep,,
+Cheruvu || REF:(Cross et al. 2003),Cheruvu,(Cross et al. 2003),,DOI:10.1046/j.1523-1747.2003.12131.x,DOI:10.1046/j.1523-1747.2003.12131.x,keep,,DOI:10.1046/j.1523-1747.2003.12131.x
+HuSkinDB || DOI:10.1002/jps.20773,HuSkinDB,"Akomeah, 2007",10.1002/jps.20773,DOI:10.1002/jps.20773,DOI:10.1002/jps.20773,keep,,
+HuSkinDB || DOI:10.1023/a:1015989929342,HuSkinDB,"Anderson, 1988",10.1023/a:1015989929342,DOI:10.1023/a:1015989929342,DOI:10.1023/a:1015989929342,keep,,
+HuSkinDB || DOI:10.1111/1523-1747.ep12277592,HuSkinDB,"Anderson, 1989",10.1111/1523-1747.ep12277592,DOI:10.1111/1523-1747.ep12277592,DOI:10.1111/1523-1747.ep12277592,keep,,
+HuSkinDB || DOI:10.1002/jps.2600650210,HuSkinDB,"Astley, 1976",10.1002/jps.2600650210,DOI:10.1002/jps.2600650210,DOI:10.1002/jps.2600650210,keep,,
+HuSkinDB || DOI:10.1016/0272-0590(92)90086-w,HuSkinDB,"Barber, 1992",10.1016/0272-0590(92)90086-w,DOI:10.1016/0272-0590(92)90086-w,DOI:10.1016/0272-0590(92)90086-w,keep,,
+HuSkinDB || DOI:10.1038/jid.1964.174,HuSkinDB,"Blank, 1964",10.1038/jid.1964.174,DOI:10.1038/jid.1964.174,DOI:10.1038/jid.1964.174,keep,,
+HuSkinDB || DOI:10.1038/jid.1967.184,HuSkinDB,"Blank, 1967",10.1038/jid.1967.184,DOI:10.1038/jid.1967.184,DOI:10.1038/jid.1967.184,keep,,
+HuSkinDB || DOI:10.1111/1523-1747.ep12277325,HuSkinDB,"Blank, 1985",10.1111/1523-1747.ep12277325,DOI:10.1111/1523-1747.ep12277325,DOI:10.1111/1523-1747.ep12277325,keep,,
+HuSkinDB || DOI:10.1111/1523-1747.ep12263302,HuSkinDB,"Bronaugh, 1984",10.1111/1523-1747.ep12263302,DOI:10.1111/1523-1747.ep12263302,DOI:10.1111/1523-1747.ep12263302,keep,,
+HuSkinDB || DOI:10.1016/j.yrtph.2010.02.008,HuSkinDB,"Buist, 2010",10.1016/j.yrtph.2010.02.008,DOI:10.1016/j.yrtph.2010.02.008,DOI:10.1016/j.yrtph.2010.02.008,keep,,
+HuSkinDB || DOI:10.1007/s11095-010-0181-z,HuSkinDB,"Chantasart, 2010",10.1007/s11095-010-0181-z,DOI:10.1007/s11095-010-0181-z,DOI:10.1007/s11095-010-0181-z,keep,,
+HuSkinDB || DOI:10.1046/j.1523-1747.2003.12131.x,HuSkinDB,"Cross, 2003",10.1046/j.1523-1747.2003.12131.x,DOI:10.1046/j.1523-1747.2003.12131.x,DOI:10.1046/j.1523-1747.2003.12131.x,keep,,
+HuSkinDB || DOI:10.1002/jps.2600800114,HuSkinDB,"Dalpozzo, 1991",10.1002/jps.2600800114,DOI:10.1002/jps.2600800114,DOI:10.1002/jps.2600800114,keep,,
+HuSkinDB || DOI:10.1016/s0378-5173(98)00113-6,HuSkinDB,"Degim, 1998",10.1016/s0378-5173(98)00113-6,DOI:10.1016/s0378-5173(98)00113-6,DOI:10.1016/s0378-5173(98)00113-6,keep,,
+HuSkinDB || DOI:10.1002/jps.10312,HuSkinDB,"Degim, 2003",10.1002/jps.10312,DOI:10.1002/jps.10312,DOI:10.1002/jps.10312,keep,,
+HuSkinDB || DOI:10.1023/a:1018914806761,HuSkinDB,"Dolezal, 1993",10.1023/a:1018914806761,DOI:10.1023/a:1018914806761,DOI:10.1023/a:1018914806761,keep,,
+HuSkinDB || DOI:10.1016/s0928-0987(02)00085-4,HuSkinDB,"du Plessis, 2002",10.1016/s0928-0987(02)00085-4,DOI:10.1016/s0928-0987(02)00085-4,DOI:10.1016/s0928-0987(02)00085-4,keep,,
+HuSkinDB || DOI:10.1111/1523-1747.ep12598596,HuSkinDB,"Galey, 1976",10.1111/1523-1747.ep12598596,DOI:10.1111/1523-1747.ep12598596,DOI:10.1111/1523-1747.ep12598596,keep,,
+HuSkinDB || DOI:10.1111/1523-1747.ep12475655,HuSkinDB,"Goodman, 1988",10.1111/1523-1747.ep12475655,DOI:10.1111/1523-1747.ep12475655,DOI:10.1111/1523-1747.ep12475655,keep,,
+HuSkinDB || DOI:10.1016/0378-5173(87)90210-9,HuSkinDB,"Hadgraft, 1987",10.1016/0378-5173(87)90210-9,DOI:10.1016/0378-5173(87)90210-9,DOI:10.1016/0378-5173(87)90210-9,keep,,
+HuSkinDB || DOI:10.1159/000112958,HuSkinDB,"Henning, 2008",10.1159/000112958,DOI:10.1159/000112958,DOI:10.1159/000112958,keep,,
+HuSkinDB || DOI:10.1023/a:1015824100788,HuSkinDB,"Hirvonen, 1991",10.1023/a:1015824100788,DOI:10.1023/a:1015824100788,DOI:10.1023/a:1015824100788,keep,,
+HuSkinDB || DOI:10.1002/jps.2600840922,HuSkinDB,"Johnson, 1995",10.1002/jps.2600840922,DOI:10.1002/jps.2600840922,DOI:10.1002/jps.2600840922,keep,,
+HuSkinDB || DOI:10.1021/js960079z,HuSkinDB,"Johnson, 1996",10.1021/js960079z,DOI:10.1021/js960079z,DOI:10.1021/js960079z,keep,,
+HuSkinDB || DOI:10.1016/0168-3659(93)90170-a,HuSkinDB,"Knutson, 1993",10.1016/0168-3659(93)90170-a,DOI:10.1016/0168-3659(93)90170-a,DOI:10.1016/0168-3659(93)90170-a,keep,,
+HuSkinDB || DOI:10.1002/bip.21520,HuSkinDB,"Krishnan, 2011",10.1002/bip.21520,DOI:10.1002/bip.21520,DOI:10.1002/bip.21520,keep,,
+HuSkinDB || DOI:10.1002/jps.2600821017,HuSkinDB,"Kubota, 1993",10.1002/jps.2600821017,DOI:10.1002/jps.2600821017,DOI:10.1002/jps.2600821017,keep,,
+HuSkinDB || DOI:10.1211/jpp.62.06.0012,HuSkinDB,"Legoabe, 2010",10.1211/jpp.62.06.0012,DOI:10.1211/jpp.62.06.0012,DOI:10.1211/jpp.62.06.0012,keep,,
+HuSkinDB || DOI:10.1007/s004200050223,HuSkinDB,"Lundh, 1997",10.1007/s004200050223,DOI:10.1007/s004200050223,DOI:10.1007/s004200050223,keep,,
+HuSkinDB || DOI:10.1016/j.ejpb.2007.11.012,HuSkinDB,"Melero, 2008",10.1016/j.ejpb.2007.11.012,DOI:10.1016/j.ejpb.2007.11.012,DOI:10.1016/j.ejpb.2007.11.012,keep,,
+HuSkinDB || DOI:10.1002/aic.690210522,HuSkinDB,"Michaels A. S., 1975",10.1002/aic.690210522,DOI:10.1002/aic.690210522,DOI:10.1002/aic.690210522,keep,,
+HuSkinDB || DOI:10.1002/jps.2600840607,HuSkinDB,"Mitragotri, 1995",10.1002/jps.2600840607,DOI:10.1002/jps.2600840607,DOI:10.1002/jps.2600840607,keep,,
+HuSkinDB || DOI:10.1023/a:1016096626810,HuSkinDB,"Mitragotri, 1996",10.1023/a:1016096626810,DOI:10.1023/a:1016096626810,DOI:10.1023/a:1016096626810,keep,,
+HuSkinDB || DOI:10.1023/a:1007547809430,HuSkinDB,"Mitragotri, 2000",10.1023/a:1007547809430,DOI:10.1023/a:1007547809430,DOI:10.1023/a:1007547809430,keep,,
+HuSkinDB || DOI:10.1016/s0378-5173(98)00214-2,HuSkinDB,"Modamio, 1998",10.1016/s0378-5173(98)00214-2,DOI:10.1016/s0378-5173(98)00214-2,DOI:10.1016/s0378-5173(98)00214-2,keep,,
+HuSkinDB || DOI:10.1016/s0378-5173(99)00380-4,HuSkinDB,"Modamio, 2000",10.1016/s0378-5173(99)00380-4,DOI:10.1016/s0378-5173(99)00380-4,DOI:10.1016/s0378-5173(99)00380-4,keep,,
+HuSkinDB || DOI:10.1023/a:1018998529283,HuSkinDB,"Peck, 1994",10.1023/a:1018998529283,DOI:10.1023/a:1018998529283,DOI:10.1023/a:1018998529283,keep,,
+HuSkinDB || DOI:10.1016/s0928-0987(00)00091-9,HuSkinDB,"Qvist, 2000",10.1016/s0928-0987(00)00091-9,DOI:10.1016/s0928-0987(00)00091-9,DOI:10.1016/s0928-0987(00)00091-9,keep,,
+HuSkinDB || DOI:10.1111/j.2042-7158.1977.tb11434.x,HuSkinDB,"Roberts, 1977",10.1111/j.2042-7158.1977.tb11434.x,DOI:10.1111/j.2042-7158.1977.tb11434.x,DOI:10.1111/j.2042-7158.1977.tb11434.x,keep,,
+HuSkinDB || DOI:10.1159/000272121,HuSkinDB,"Romonchuk, 2010",10.1159/000272121,DOI:10.1159/000272121,DOI:10.1159/000272121,keep,,
+HuSkinDB || DOI:10.1023/a:1015944018555,HuSkinDB,"Roy, 1989",10.1023/a:1015944018555,DOI:10.1023/a:1015944018555,DOI:10.1023/a:1015944018555,keep,,
+HuSkinDB || DOI:10.1023/a:1015912932416,HuSkinDB,"Roy, 1990",10.1023/a:1015912932416,DOI:10.1023/a:1015912932416,DOI:10.1023/a:1015912932416,keep,,
+HuSkinDB || DOI:10.1002/jps.2600821217,HuSkinDB,"Roy, 1993",10.1002/jps.2600821217,DOI:10.1002/jps.2600821217,DOI:10.1002/jps.2600821217,keep,,
+HuSkinDB || DOI:10.1002/jps.2600831215,HuSkinDB,"Roy, 1994",10.1002/jps.2600831215,DOI:10.1002/jps.2600831215,DOI:10.1002/jps.2600831215,keep,,
+HuSkinDB || DOI:10.1002/jps.2600841010,HuSkinDB,"Roy, 1995",10.1002/jps.2600841010,DOI:10.1002/jps.2600841010,DOI:10.1002/jps.2600841010,keep,,
+HuSkinDB || DOI:10.1038/jid.1965.140,HuSkinDB,"Scheuplein, 1965",10.1038/jid.1965.140,DOI:10.1038/jid.1965.140,DOI:10.1038/jid.1965.140,keep,,
+HuSkinDB || DOI:10.1038/jid.1967.11,HuSkinDB,"Scheuplein, 1967",10.1038/jid.1967.11,DOI:10.1038/jid.1967.11,DOI:10.1038/jid.1967.11,keep,,
+HuSkinDB || DOI:10.1038/jid.1969.9,HuSkinDB,"Scheuplein, 1969",10.1038/jid.1969.9,DOI:10.1038/jid.1969.9,DOI:10.1038/jid.1969.9,keep,,
+HuSkinDB || DOI:10.1152/physrev.1971.51.4.702,HuSkinDB,"Scheuplein, 1971",10.1152/physrev.1971.51.4.702,DOI:10.1152/physrev.1971.51.4.702,DOI:10.1152/physrev.1971.51.4.702,keep,,
+HuSkinDB || DOI:10.1111/1523-1747.ep12723090,HuSkinDB,"Scheuplein, 1973",10.1111/1523-1747.ep12723090,DOI:10.1111/1523-1747.ep12723090,DOI:10.1111/1523-1747.ep12723090,keep,,
+HuSkinDB || DOI:10.1007/bf01061455,HuSkinDB,"Siddiqui, 1989",10.1007/bf01061455,DOI:10.1007/bf01061455,DOI:10.1007/bf01061455,keep,,
+HuSkinDB || DOI:10.1016/j.ijpharm.2005.05.030,HuSkinDB,"Swart, 2005",10.1016/j.ijpharm.2005.05.030,DOI:10.1016/j.ijpharm.2005.05.030,DOI:10.1016/j.ijpharm.2005.05.030,keep,,
+HuSkinDB || DOI:10.1016/0378-5173(93)90321-6,HuSkinDB,"Sznitowska, 1993",10.1016/0378-5173(93)90321-6,DOI:10.1016/0378-5173(93)90321-6,DOI:10.1016/0378-5173(93)90321-6,keep,,
+HuSkinDB || DOI:10.1002/jat.1657,HuSkinDB,"Trabaris, 2012",10.1002/jat.1657,DOI:10.1002/jat.1657,DOI:10.1002/jat.1657,keep,,
+HuSkinDB || DOI:10.1248/cpb.49.1395,HuSkinDB,"Vaddi, 2001",10.1248/cpb.49.1395,DOI:10.1248/cpb.49.1395,DOI:10.1248/cpb.49.1395,keep,,
+HuSkinDB || DOI:10.1016/s0928-0987(00)00120-2,HuSkinDB,"Valjakka-Koskela, 2000",10.1016/s0928-0987(00)00120-2,DOI:10.1016/s0928-0987(00)00120-2,DOI:10.1016/s0928-0987(00)00120-2,keep,,
+HuSkinDB || DOI:10.1016/j.tiv.2004.03.004,HuSkinDB,"Venier, 2004",10.1016/j.tiv.2004.03.004,DOI:10.1016/j.tiv.2004.03.004,DOI:10.1016/j.tiv.2004.03.004,keep,,
+HuSkinDB || DOI:10.1016/s0168-3659(97)00152-1,HuSkinDB,"Volpato, 1998",10.1016/s0168-3659(97)00152-1,DOI:10.1016/s0168-3659(97)00152-1,DOI:10.1016/s0168-3659(97)00152-1,keep,,
+HuSkinDB || DOI:10.1007/s00420-002-0367-8,HuSkinDB,"Wilkinson, 2002",10.1007/s00420-002-0367-8,DOI:10.1007/s00420-002-0367-8,DOI:10.1007/s00420-002-0367-8,keep,,
+HuSkinDB || DOI:10.1016/0378-5173(92)90032-w,HuSkinDB,"Williams, 1992",10.1016/0378-5173(92)90032-w,DOI:10.1016/0378-5173(92)90032-w,DOI:10.1016/0378-5173(92)90032-w,keep,,
+HuSkinDB || DOI:10.1006/taap.2002.9494,HuSkinDB,"Xu, 2002",10.1006/taap.2002.9494,DOI:10.1006/taap.2002.9494,DOI:10.1006/taap.2002.9494,keep,,
+HuSkinDB || DOI:10.1007/s11095-009-9912-4,HuSkinDB,"Zhang, 2009",10.1007/s11095-009-9912-4,DOI:10.1007/s11095-009-9912-4,DOI:10.1007/s11095-009-9912-4,keep,,
+HuSkinDB || DOI:10.1111/1523-1747.ep12460958,HuSkinDB,"Bond, 1988",10.1111/1523-1747.ep12460958,DOI:10.1111/1523-1747.ep12460958,DOI:10.1111/1523-1747.ep12460958,keep,,
+HuSkinDB || DOI:10.1080/004982500237488,HuSkinDB,"Boogaard, 2000",10.1080/004982500237488,DOI:10.1080/004982500237488,DOI:10.1080/004982500237488,keep,,
+HuSkinDB || DOI:10.1111/j.1365-2133.1986.tb06214.x,HuSkinDB,"Bronaugh, 1986",10.1111/j.1365-2133.1986.tb06214.x,DOI:10.1111/j.1365-2133.1986.tb06214.x,DOI:10.1111/j.1365-2133.1986.tb06214.x,keep,,
+HuSkinDB || DOI:10.1016/0887-2333(94)90078-7,HuSkinDB,"Clowes, 1994",10.1016/0887-2333(94)90078-7,DOI:10.1016/0887-2333(94)90078-7,DOI:10.1016/0887-2333(94)90078-7,keep,,
+HuSkinDB || DOI:10.1191/096032700678815684,HuSkinDB,"Griffin, 2000",10.1191/096032700678815684,DOI:10.1191/096032700678815684,DOI:10.1191/096032700678815684,keep,,
+HuSkinDB || DOI:10.1016/j.fct.2004.05.007,HuSkinDB,"Kenyon, 2004",10.1016/j.fct.2004.05.007,DOI:10.1016/j.fct.2004.05.007,DOI:10.1016/j.fct.2004.05.007,keep,,
+HuSkinDB || DOI:10.1016/0378-5173(91)90387-4,HuSkinDB,"Kushla, 1991",10.1016/0378-5173(91)90387-4,DOI:10.1016/0378-5173(91)90387-4,DOI:10.1016/0378-5173(91)90387-4,keep,,
+HuSkinDB || DOI:10.1006/taap.2002.9373,HuSkinDB,"Lockley, 2002",10.1006/taap.2002.9373,DOI:10.1006/taap.2002.9373,DOI:10.1006/taap.2002.9373,keep,,
+HuSkinDB || DOI:10.1111/1523-1747.ep12874561,HuSkinDB,"Rigg, 1990",10.1111/1523-1747.ep12874561,DOI:10.1111/1523-1747.ep12874561,DOI:10.1111/1523-1747.ep12874561,keep,,
+HuSkinDB || DOI:10.1016/s0278-6915(97)00109-9,HuSkinDB,"Roper, 1997",10.1016/s0278-6915(97)00109-9,DOI:10.1016/s0278-6915(97)00109-9,DOI:10.1016/s0278-6915(97)00109-9,keep,,
+HuSkinDB || DOI:10.1016/s0168-3659(01)00443-6,HuSkinDB,"Sznitowska, 2001",10.1016/s0168-3659(01)00443-6,DOI:10.1016/s0168-3659(01)00443-6,DOI:10.1016/s0168-3659(01)00443-6,keep,,
+HuSkinDB || DOI:10.1006/toxs.1998.2490,HuSkinDB,"Wester, 1998",10.1006/toxs.1998.2490,DOI:10.1006/toxs.1998.2490,DOI:10.1006/toxs.1998.2490,keep,,
+HuSkinDB || DOI:10.1016/0278-6915(96)00030-0,HuSkinDB,"Wester, 1996",10.1016/0278-6915(96)00030-0,DOI:10.1016/0278-6915(96)00030-0,DOI:10.1016/0278-6915(96)00030-0,keep,,
+HuSkinDB || DOI:10.1006/taap.2000.9028,HuSkinDB,"Wester, 2000",10.1006/taap.2000.9028,DOI:10.1006/taap.2000.9028,DOI:10.1006/taap.2000.9028,keep,,
+HuSkinDB || DOI:10.1016/s0378-5173(99)00067-8,HuSkinDB,"Dias, 1999",10.1016/s0378-5173(99)00067-8,DOI:10.1016/s0378-5173(99)00067-8,DOI:10.1016/s0378-5173(99)00067-8,keep,,
+HuSkinDB || DOI:10.1016/s0378-5173(00)00665-7,HuSkinDB,"Schmook, 2001",10.1016/s0378-5173(00)00665-7,DOI:10.1016/s0378-5173(00)00665-7,DOI:10.1016/s0378-5173(00)00665-7,keep,,
+HuSkinDB || DOI:10.1016/s0278-6915(99)00164-7,HuSkinDB,"Moss, 2000",10.1016/s0278-6915(99)00164-7,DOI:10.1016/s0278-6915(99)00164-7,DOI:10.1016/s0278-6915(99)00164-7,keep,,
+HuSkinDB || DOI:10.1023/a:1018974131236,HuSkinDB,"Pershing, 1993",10.1023/a:1018974131236,DOI:10.1023/a:1018974131236,DOI:10.1023/a:1018974131236,keep,,
+HuSkinDB || DOI:10.1177/096032719701601104,HuSkinDB,"Dick, 1997",10.1177/096032719701601104,DOI:10.1177/096032719701601104,DOI:10.1177/096032719701601104,keep,,
+HuSkinDB || DOI:10.1289/ehp.8457193,HuSkinDB,"Dugard, 1984",10.1289/ehp.8457193,DOI:10.1289/ehp.8457193,DOI:10.1289/ehp.8457193,keep,,
+HuSkinDB || DOI:10.1111/1523-1747.ep12475447,HuSkinDB,"Scott, 1990",10.1111/1523-1747.ep12475447,DOI:10.1111/1523-1747.ep12475447,DOI:10.1111/1523-1747.ep12475447,keep,,
+HuSkinDB || DOI:10.1016/0378-4274(95)03393-y,HuSkinDB,"Barber, 1995",10.1016/0378-4274(95)03393-y,DOI:10.1016/0378-4274(95)03393-y,DOI:10.1016/0378-4274(95)03393-y,keep,,
+HuSkinDB || DOI:10.1016/0278-6915(94)00146-f,HuSkinDB,"Brain, 1995",10.1016/0278-6915(94)00146-f,DOI:10.1016/0278-6915(94)00146-f,DOI:10.1016/0278-6915(94)00146-f,keep,,
+HuSkinDB || DOI:10.1002/jps.2600800203,HuSkinDB,"Sato, 1991",10.1002/jps.2600800203,DOI:10.1002/jps.2600800203,DOI:10.1002/jps.2600800203,keep,,
+HuSkinDB || DOI:10.1016/0378-5173(84)90145-5,HuSkinDB,"Southwell, 1984",10.1016/0378-5173(84)90145-5,DOI:10.1016/0378-5173(84)90145-5,DOI:10.1016/0378-5173(84)90145-5,keep,,
+HuSkinDB || DOI:10.1016/0378-5173(85)90106-1,HuSkinDB,"Vaidyanathan, 1985",10.1016/0378-5173(85)90106-1,DOI:10.1016/0378-5173(85)90106-1,DOI:10.1016/0378-5173(85)90106-1,keep,,
+HuSkinDB || DOI:10.1006/rtph.2001.1530,HuSkinDB,"Cnubben, 2002",10.1006/rtph.2001.1530,DOI:10.1006/rtph.2001.1530,DOI:10.1006/rtph.2001.1530,keep,,
+HuSkinDB || DOI:10.1289/ehp.8774223,HuSkinDB,"Scott, 1987",10.1289/ehp.8774223,DOI:10.1289/ehp.8774223,DOI:10.1289/ehp.8774223,keep,,
+HuSkinDB || DOI:10.1023/a:1015877621976,HuSkinDB,"Jolicoeur, 1992",10.1023/a:1015877621976,DOI:10.1023/a:1015877621976,DOI:10.1023/a:1015877621976,keep,,
+HuSkinDB || DOI:10.1016/s0168-3659(00)00210-8,HuSkinDB,"Ross, 2000",10.1016/s0168-3659(00)00210-8,DOI:10.1016/s0168-3659(00)00210-8,DOI:10.1016/s0168-3659(00)00210-8,keep,,
+HuSkinDB || DOI:10.1080/00984109708984056,HuSkinDB,"Stinecipher, 1997",10.1080/00984109708984056,DOI:10.1080/00984109708984056,DOI:10.1080/00984109708984056,keep,,
+HuSkinDB || DOI:10.1007/s00420-005-0056-5,HuSkinDB,"Wilkinson, 2006",10.1007/s00420-005-0056-5,DOI:10.1007/s00420-005-0056-5,DOI:10.1007/s00420-005-0056-5,keep,,
+HuSkinDB || DOI:10.1016/j.tox.2003.11.004,HuSkinDB,"Kenyon, 2004",10.1016/j.tox.2003.11.004,DOI:10.1016/j.tox.2003.11.004,DOI:10.1016/j.tox.2003.11.004,keep,,
+SkinPiX || DOI:10.1016/j.tiv.2020.104990,SkinPiX,"Ellison,CA 2020; publication ID=80",10.1016/j.tiv.2020.104990,DOI:10.1016/j.tiv.2020.104990,DOI:10.1016/j.tiv.2020.104990,keep,,
+SkinPiX || DOI:10.1007/s11095-014-1420-5,SkinPiX,"Namjoshi,S 2014; publication ID=502",10.1007/s11095-014-1420-5,DOI:10.1007/s11095-014-1420-5,DOI:10.1007/s11095-014-1420-5,keep,,
+SkinPiX || DOI:10.1016/j.tox.2012.06.012,SkinPiX,"Boonen,J 2012; publication ID=280",10.1016/j.tox.2012.06.012,DOI:10.1016/j.tox.2012.06.012,DOI:10.1016/j.tox.2012.06.012,keep,,
+SkinPiX || DOI:10.1016/j.jep.2013.03.076,SkinPiX,"De,Spiegeleer,B 2013; publication ID=560",10.1016/j.jep.2013.03.076,DOI:10.1016/j.jep.2013.03.076,DOI:10.1016/j.jep.2013.03.076,keep,,
+SkinPiX || DOI:10.1016/j.ejps.2014.11.002,SkinPiX,"Uchida,T 2015; publication ID=233",10.1016/j.ejps.2014.11.002,DOI:10.1016/j.ejps.2014.11.002,DOI:10.1016/j.ejps.2014.11.002,keep,,
+SkinPiX || DOI:10.1038/jes.2017.10,SkinPiX,"Frasch,HF 2017; publication ID=41",10.1038/jes.2017.10,DOI:10.1038/jes.2017.10,DOI:10.1038/jes.2017.10,keep,,
+SkinPiX || DOI:10.1016/j.scitotenv.2011.12.037,SkinPiX,"Nielsen,JB 2012; publication ID=340",10.1016/j.scitotenv.2011.12.037,DOI:10.1016/j.scitotenv.2011.12.037,DOI:10.1016/j.scitotenv.2011.12.037,keep,,
+SkinPiX || DOI:10.1016/j.chemosphere.2020.126525,SkinPiX,"Champmartin,C 2020; publication ID=5",10.1016/j.chemosphere.2020.126525,DOI:10.1016/j.chemosphere.2020.126525,DOI:10.1016/j.chemosphere.2020.126525,keep,,
+SkinPiX || DOI:10.1159/000365730,SkinPiX,"Veryser,L 2014; publication ID=460",10.1159/000365730,DOI:10.1159/000365730,DOI:10.1159/000365730,keep,,
+SkinPiX || DOI:10.1159/000441038,SkinPiX,"Barbero,AM 2015; publication ID=297",10.1159/000441038,DOI:10.1159/000441038,DOI:10.1159/000441038,keep,,
+SkinPiX || DOI:10.1002/bdd.2194,SkinPiX,"Haltner-Ukomadu,E 2019; publication ID=2",10.1002/bdd.2194,DOI:10.1002/bdd.2194,DOI:10.1002/bdd.2194,keep,,
+SkinPiX || DOI:10.1166/jbn.2012.1426,SkinPiX,"Ntimenou,V 2012; publication ID=447",10.1166/jbn.2012.1426,DOI:10.1166/jbn.2012.1426,DOI:10.1166/jbn.2012.1426,keep,,
+SkinPiX || DOI:10.1016/j.ejps.2019.104976,SkinPiX,"Xenikakis,I 2019; publication ID=26",10.1016/j.ejps.2019.104976,DOI:10.1016/j.ejps.2019.104976,DOI:10.1016/j.ejps.2019.104976,keep,,
+SkinPiX || DOI:10.1016/j.ejps.2016.10.003,SkinPiX,Ternullo S 2017; publication ID=179,10.1016/j.ejps.2016.10.003,DOI:10.1016/j.ejps.2016.10.003,DOI:10.1016/j.ejps.2016.10.003,keep,,
+SkinPiX || DOI:10.1016/j.chemosphere.2015.11.018,SkinPiX,"Bányiová,K 2016; publication ID=514",10.1016/j.chemosphere.2015.11.018,DOI:10.1016/j.chemosphere.2015.11.018,DOI:10.1016/j.chemosphere.2015.11.018,keep,,
+SkinPiX || DOI:10.3109/03639045.2015.1122610,SkinPiX,"Alsaab,H 2015; publication ID=88",10.3109/03639045.2015.1122610,DOI:10.3109/03639045.2015.1122610,DOI:10.3109/03639045.2015.1122610,keep,,
+SkinPiX || DOI:10.1111/j.1600-0846.2011.00541.x,SkinPiX,"Hui,X 2011; publication ID=378",10.1111/j.1600-0846.2011.00541.x,DOI:10.1111/j.1600-0846.2011.00541.x,DOI:10.1111/j.1600-0846.2011.00541.x,keep,,
+SkinPiX || DOI:10.1016/j.ijpharm.2015.04.071,SkinPiX,"Musazzi,UM 2015; publication ID=290",10.1016/j.ijpharm.2015.04.071,DOI:10.1016/j.ijpharm.2015.04.071,DOI:10.1016/j.ijpharm.2015.04.071,keep,,
+SkinPiX || DOI:10.1016/j.toxlet.2014.06.008,SkinPiX,"Moore,CA 2014; publication ID=66",10.1016/j.toxlet.2014.06.008,DOI:10.1016/j.toxlet.2014.06.008,DOI:10.1016/j.toxlet.2014.06.008,keep,,
+SkinPiX || DOI:10.1007/s00204-019-02542-2,SkinPiX,"Hopf,NB 2019; publication ID=82",10.1007/s00204-019-02542-2,DOI:10.1007/s00204-019-02542-2,DOI:10.1007/s00204-019-02542-2,keep,,
+SkinPiX || DOI:10.1016/j.ijpharm.2012.09.031,SkinPiX,"Santos,P 2012; publication ID=405",10.1016/j.ijpharm.2012.09.031,DOI:10.1016/j.ijpharm.2012.09.031,DOI:10.1016/j.ijpharm.2012.09.031,keep,,
+SkinPiX || DOI:10.1021/acs.molpharmaceut.8b01196,SkinPiX,"Kopečná,M 2019; publication ID=144",10.1021/acs.molpharmaceut.8b01196,DOI:10.1021/acs.molpharmaceut.8b01196,DOI:10.1021/acs.molpharmaceut.8b01196,keep,,
+SkinPiX || DOI:10.1111/jphp.12311,SkinPiX,"Fox,LT 2014; publication ID=305",10.1111/jphp.12311,DOI:10.1111/jphp.12311,DOI:10.1111/jphp.12311,keep,,
+SkinPiX || DOI:10.1208/s12249-012-9783-6,SkinPiX,"Elmoslemany,RM 2012; publication ID=424",10.1208/s12249-012-9783-6,DOI:10.1208/s12249-012-9783-6,DOI:10.1208/s12249-012-9783-6,keep,,
+SkinPiX || DOI:10.1007/s11095-013-1169-2,SkinPiX,"Mohammed,D 2013; publication ID=241",10.1007/s11095-013-1169-2,DOI:10.1007/s11095-013-1169-2,DOI:10.1007/s11095-013-1169-2,keep,,
+SkinPiX || DOI:10.1038/jes.2016.68,SkinPiX,"Frasch,HF 2016; publication ID=223",10.1038/jes.2016.68,DOI:10.1038/jes.2016.68,DOI:10.1038/jes.2016.68,keep,,
+SkinPiX || DOI:10.3109/03639045.2011.633262,SkinPiX,"Wen,MM 2011; publication ID=321",10.3109/03639045.2011.633262,DOI:10.3109/03639045.2011.633262,DOI:10.3109/03639045.2011.633262,keep,,
+SkinPiX || DOI:10.1016/j.phymed.2014.08.015,SkinPiX,"Veryser,L 2014; publication ID=407",10.1016/j.phymed.2014.08.015,DOI:10.1016/j.phymed.2014.08.015,DOI:10.1016/j.phymed.2014.08.015,keep,,
+SkinPiX || DOI:10.1080/15287394.2011.615108,SkinPiX,"Franko,J 2012; publication ID=301",10.1080/15287394.2011.615108,DOI:10.1080/15287394.2011.615108,DOI:10.1080/15287394.2011.615108,keep,,
+SkinPiX || DOI:10.1016/j.ijpharm.2016.01.071,SkinPiX,"Abrego,G 2016; publication ID=614",10.1016/j.ijpharm.2016.01.071,DOI:10.1016/j.ijpharm.2016.01.071,DOI:10.1016/j.ijpharm.2016.01.071,keep,,
+SkinPiX || DOI:10.1080/17425247.2016.1182490,SkinPiX,"Mohyeldin,SM 2016; publication ID=434",10.1080/17425247.2016.1182490,DOI:10.1080/17425247.2016.1182490,DOI:10.1080/17425247.2016.1182490,keep,,
+SkinPiX || DOI:10.1016/j.toxlet.2020.09.017,SkinPiX,"Berthet,A 2020; publication ID=105",10.1016/j.toxlet.2020.09.017,DOI:10.1016/j.toxlet.2020.09.017,DOI:10.1016/j.toxlet.2020.09.017,keep,,
+SkinPiX || DOI:10.1016/j.envint.2015.07.015,SkinPiX,"Abdallah,MA 2015; publication ID=102",10.1016/j.envint.2015.07.015,DOI:10.1016/j.envint.2015.07.015,DOI:10.1016/j.envint.2015.07.015,keep,,
+SkinPiX || DOI:10.1007/s11095-017-2214-3,SkinPiX,"Kopečná,M 2017; publication ID=577",10.1007/s11095-017-2214-3,DOI:10.1007/s11095-017-2214-3,DOI:10.1007/s11095-017-2214-3,keep,,
+SkinPiX || DOI:10.1080/10717544.2018.1523256,SkinPiX,"Haq,A 2018; publication ID=154",10.1080/10717544.2018.1523256,DOI:10.1080/10717544.2018.1523256,DOI:10.1080/10717544.2018.1523256,keep,,
+SkinPiX || DOI:10.1016/j.xphs.2019.06.030,SkinPiX,"Morris,SAV 2019; publication ID=63",10.1016/j.xphs.2019.06.030,DOI:10.1016/j.xphs.2019.06.030,DOI:10.1016/j.xphs.2019.06.030,keep,,

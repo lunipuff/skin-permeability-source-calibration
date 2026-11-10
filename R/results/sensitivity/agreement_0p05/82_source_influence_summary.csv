@@ -1,3 +1,3 @@
 "analysis","full_effect","minimum_omission_effect","maximum_omission_effect","largest_absolute_change","most_influential_source","n_direction_reversals","n_intervals_including_zero","n_omissions"
-"One-anchor RMSE reduction (%)",8.4716686199457,6.6586038086031,9.9602797368785,1.8130648113426,"DOI:10.1016/j.ijpharm.2006.01.033",0,35,38
-"RMSE decrease from one to five anchors (log units)",0.127447482709566,0.111154904443483,0.153635005817035,0.0261875231074686,"DOI:10.1038/jid.1969.9",0,0,13
+"One-anchor RMSE reduction (%)",8.47166878083238,6.65860400182147,9.96027988351876,1.81306477901091,"DOI:10.1016/j.ijpharm.2006.01.033",0,35,38
+"RMSE decrease from one to five anchors (log units)",0.127447479993339,0.11115490109153,0.153635001990082,0.026187521996743,"DOI:10.1038/jid.1969.9",0,0,13

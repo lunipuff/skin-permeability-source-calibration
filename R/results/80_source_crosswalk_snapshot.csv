@@ -9,7 +9,7 @@
 "Cheruvu || REF:(Scheuplein et al. 1969)","Cheruvu","(Scheuplein et al. 1969)",,"DOI:10.1038/jid.1969.9","DOI:10.1038/jid.1969.9","keep",,"DOI:10.1038/jid.1969.9"
 "Cheruvu || REF:(Peck et al. 1995)","Cheruvu","(Peck et al. 1995)",,"CHREF:(Peck et al. 1995)","DOI:10.1002/jps.2600840813","keep",,""
 "Cheruvu || REF:(Anderson and Raykar 1989)","Cheruvu","(Anderson and Raykar 1989)",,"DOI:10.1111/1523-1747.ep12277592","DOI:10.1111/1523-1747.ep12277592","keep",,"DOI:10.1111/1523-1747.ep12277592"
-"Cheruvu || REF:(Liu et al. 1994)","Cheruvu","(Liu et al. 1994)",,"CHREF:(Liu et al. 1994)","CHREF:(DOI:10.1002/jps.21459)","keep",,""
+"Cheruvu || REF:(Liu et al. 1994)","Cheruvu","(Liu et al. 1994)",,"CHREF:(Liu et al. 1994)","DOI:10.1023/a:1018975602818","keep","Cheruvu_27 matches the mean β-estradiol stratum corneum permeability reported in Table 4, p. 1782. The reported value of 2.7 × 10⁻⁶ cm/s converts to log10 Kp = −2.01233 with Kp in cm/h.",""
 "Cheruvu || REF:(Williams et al. 1992)","Cheruvu","(Williams et al. 1992)",,"DOI:10.1016/0378-5173(92)90032-w","DOI:10.1016/0378-5173(92)90032-w","keep","Verified against Table I, p. 74. Cheruvu_29 and Cheruvu_99 are the all-data geometric means. HuSkinDB_344 and HuSkinDB_345 report the arithmetic means from the same experiments.","DOI:10.1016/0378-5173(92)90032-w"
 "Cheruvu || REF:(Williams and Barry 1991a)","Cheruvu","(Williams and Barry 1991a)",,"CHREF:(Williams and Barry 1991a)","DOI:10.1023/a:1015813803205","keep","Seventeen initial controls match Table I. Cheruvu_36 matches the separate reversibility control in Table IV.",""
 "Cheruvu || REF:(Dick and Scott 1992)","Cheruvu","(Dick and Scott 1992)",,"CHREF:(Dick and Scott 1992)","DOI:10.1111/j.2042-7158.1992.tb05485.x","keep",,""

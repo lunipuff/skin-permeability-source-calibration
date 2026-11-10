@@ -93,6 +93,24 @@ for (path in output_dirs) {
   }
 }
 
+scenario_dirs <- c(
+	file.path("R/results/sensitivity", c("agreement_0p01", "agreement_0p02", "agreement_0p05")),
+	file.path("R/results/priority_sensitivity", c(
+		"priority_skinpix_huskindb_cheruvu",
+		"priority_skinpix_cheruvu_huskindb",
+		"priority_huskindb_skinpix_cheruvu",
+		"priority_huskindb_cheruvu_skinpix",
+		"priority_cheruvu_skinpix_huskindb",
+		"priority_cheruvu_huskindb_skinpix"
+	))
+)
+
+for (path in scenario_dirs) {
+	if (!dir.exists(path) && !dir.create(path, recursive = TRUE)) {
+		stop("Cannot create sensitivity directory: ", path)
+	}
+}
+
 log_dir <- "R/results/logs"
 if (!dir.create(log_dir)) stop("Cannot create: ", log_dir)
 status_log <- file.path(log_dir, "run_all.log")

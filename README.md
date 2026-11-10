@@ -1,6 +1,6 @@
 # Human skin permeability calibration using shared compounds
 
-Analysis code and outputs for **From study variation to calibration: human skin permeability QSPR using shared compounds**.
+Analysis code and outputs for **From study variation to calibration: how shared compounds help adjust human skin permeability predictions**.
 
 The primary analysis pools 921 measurements of 349 compounds from 164 publications in the Cheruvu, HuSkinDB, and SkinPiX datasets. We hold out one publication at a time and fit a molecular quantitative structure–property relationship (QSPR) model to the remaining publications. Compounds measured in both the training data and the held-out publication serve as calibration anchors. We estimate a publication-specific offset from those anchors and evaluate it on compounds absent from training. We enumerate every possible panel of one to five anchors, where available, and compare one and five anchors on a fixed subset of publications.
 

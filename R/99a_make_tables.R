@@ -300,6 +300,58 @@ write_table(
 	"S12_verified_unit_corrections.csv"
 )
 
+# Describe the molecular QSPR model fitted to the full pooled dataset.
+model_data <- pooled[, c("log_kp", "mw", "logp", "compound_id", "publication_id")]
+compound_profile <- model_data[!duplicated(model_data$compound_id), c("mw", "logp")]
+
+for (field in c("mw", "logp")) {
+	model_data[[paste0(field, "_z")]] <-
+		(model_data[[field]] - mean(compound_profile[[field]])) / sd(compound_profile[[field]])
+}
+
+pooled_qspr <- lme4::lmer(
+	log_kp ~ mw_z + logp_z + (1 | compound_id) + (1 | publication_id),
+	data = model_data, REML = TRUE, na.action = stats::na.fail,
+	control = lme4::lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 100000))
+)
+
+if (length(pooled_qspr@optinfo$conv$lme4$messages) ||
+	any(pooled_qspr@optinfo$conv$opt != 0)) {
+	stop("The pooled QSPR model did not converge. Inspect pooled_qspr before reporting.")
+}
+
+coefficient_terms <- c("(Intercept)", "mw_z", "logp_z")
+coefficients_qspr <- summary(pooled_qspr)$coefficients[coefficient_terms, , drop = FALSE]
+
+variance_qspr <- as.data.frame(lme4::VarCorr(pooled_qspr))
+variance_qspr <- variance_qspr$vcov[
+	match(c("compound_id", "publication_id", "Residual"), variance_qspr$grp)
+]
+
+# Nakagawa R2 for this Gaussian model with two random intercepts.
+fixed_variance <- stats::var(stats::predict(pooled_qspr, re.form = NA))
+random_variance <- sum(variance_qspr[1:2])
+total_variance <- fixed_variance + sum(variance_qspr)
+marginal_r2 <- fixed_variance / total_variance
+conditional_r2 <- (fixed_variance + random_variance) / total_variance
+
+write_table(data.frame(
+	Measure = c(
+		"Measurements", "Compounds", "Publications",
+		"Intercept", "Molecular weight (standardized)", "Crippen logP (standardized)",
+		"Compound variance", "Publication variance", "Residual variance",
+		"Marginal R2", "Conditional R2"
+	),
+	Estimate = c(
+		as.character(c(nrow(model_data), length(unique(model_data$compound_id)),
+			length(unique(model_data$publication_id)))),
+		fmt(coefficients_qspr[, "Estimate"]), fmt(variance_qspr),
+		fmt(c(marginal_r2, conditional_r2))
+	),
+	SE = c(rep("", 3), fmt(coefficients_qspr[, "Std. Error"]), rep("", 5)),
+	check.names = FALSE
+), "S13_pooled_qspr_model_fit.csv")
+
 # Export the submission files with names that match the manuscript.
 additional_dir <- "R/additional_files"
 if (!dir.exists(additional_dir) && !dir.create(additional_dir)) {

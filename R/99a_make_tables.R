@@ -4,6 +4,7 @@
 result_dir <- "R/results"
 table_dir <- "R/tables"
 sensitivity_dir <- file.path(result_dir, "sensitivity")
+additional_dir <- "R/additional_files"
 
 read_checked <- function(path, required = character()) {
 	x <- read.csv(path, stringsAsFactors = FALSE, check.names = FALSE)
@@ -36,6 +37,9 @@ close_enough <- function(x, y) {
 }
 write_table <- function(x, filename) {
 	write.csv(x, file.path(table_dir, filename), row.names = FALSE, na = "")
+}
+write_additional <- function(x, filename) {
+	write.csv(x, file.path(additional_dir, filename), row.names = FALSE, na = "")
 }
 
 # Require exhaustive calibration for the primary and agreement analyses.
@@ -105,6 +109,15 @@ corrections <- read_result("80_verified_unit_corrections.csv", c(
 	"record_id", "previous_log_kp", "corrected_log_kp", "original_kp_cm_h", "evidence"
 ))
 
+settings81 <- read_result("81_analysis_settings.csv", c("n_boot", "seed"))
+priority <- read_result("priority_sensitivity/87_priority_comparison.csv")
+test_sensitivity <- read_result("86_test_set_sensitivity.csv")
+sensitivity_influence <- read_result("sensitivity/83_sensitivity_influence.csv")
+influence <- read_result("82_source_influence_summary.csv")
+influence_gain <- influence[influence$analysis == "RMSE decrease from one to five anchors (log units)", ]
+test_one <- test_sensitivity[test_sensitivity$endpoint == "one_anchor" & test_sensitivity$minimum_test_compounds == 2L, ]
+test_gain <- test_sensitivity[test_sensitivity$endpoint == "one_to_five" & test_sensitivity$minimum_test_compounds == 2L, ]
+
 # Check that upstream results describe the same analysis.
 one <- all_cal[all_cal$anchors == 1, , drop = FALSE]
 primary_sensitivity <- sensitivity[sensitivity$scenario == "primary", , drop = FALSE]
@@ -168,44 +181,95 @@ label <- function(x) {
 	if (anyNA(j)) stop("Publication missing from primary index: ", paste(x[is.na(j)], collapse = ", "))
 	publication_key$publication_label[j]
 }
-
-# Dataset structure and agreement-threshold sensitivity.
-t1 <- structure
-names(t1) <- c("Dataset", "Raw records", "Retained measurements", "Compounds", "Publications")
-write_table(t1, "01_dataset_structure.csv")
-
-policy_labels <- ifelse(sensitivity$curation_policy == "priority", "Database priority (primary)",
-	paste0("Agreement threshold ", sensitivity$log_tolerance))
-t3 <- data.frame(
-	Policy = policy_labels, Measurements = sensitivity$n_measurements,
-	`Publications: one / five anchors` = paste0(sensitivity$one_anchor_publications, " / ", sensitivity$matched_publications),
-	`One-anchor reduction (%) [95% CI]` = fmt_est_ci(sensitivity$one_anchor_reduction_percent, sensitivity$one_anchor_ci_low, sensitivity$one_anchor_ci_high, 1),
-	`One-to-five RMSE decrease [95% CI]` = fmt_est_ci(sensitivity$one_to_five_RMSE_decrease, sensitivity$one_to_five_ci_low, sensitivity$one_to_five_ci_high),
-	check.names = FALSE
-)
-write_table(t3, "03a_curation_sensitivity.csv")
-
-# Publication index and descriptive tables.
 pub <- merge(publication_key, eligibility, by = "source_id", all.x = TRUE, sort = FALSE)
 if (anyNA(pub$n_measurements)) stop("Incomplete publication eligibility index.")
 pub$dataset_origins <- vapply(pub$source_id, function(id) {
 	paste(sort(unique(pooled$dataset_origin[pooled$publication_id == id])), collapse = "; ")
 }, character(1))
 pub <- pub[order(pub$publication_label), ]
-write_table(pub, "S1_publication_index.csv")
 
-meta_table <- data.frame(Metadata = unique(metadata$metadata), check.names = FALSE)
-for (origin in c("Cheruvu", "HuSkinDB", "SkinPiX", "Pooled")) {
-	x <- metadata[metadata$dataset == origin, ]
-	j <- match(meta_table$Metadata, x$metadata)
-	if (anyNA(j) || anyDuplicated(x$metadata)) stop("Incomplete metadata audit: ", origin)
-	x <- x[j, ]
-	meta_table[[origin]] <- ifelse(x$n_records == 0, "No retained records",
-		ifelse(!x$field_provided, "Field not provided",
-			paste0(x$n_reported, "/", x$n_records, " (", fmt(x$percent_reported, 1), "%)")))
+# Table 1. Dataset provenance.
+t1 <- structure
+names(t1) <- c("Dataset", "Raw records", "Retained measurements", "Compounds", "Publications")
+write_table(t1, "01_dataset_structure.csv")
+
+# Table 2. Sensitivity overview in absolute RMSE units.
+# Absolute one-anchor decreases and their source-level bootstrap interval.
+t2_one <- by_source[by_source$anchors == 1L, , drop = FALSE]
+t2_one <- t2_one[order(t2_one$source_id), ]
+t2_one_gain <- t2_one$RMSE_uncalibrated - t2_one$RMSE_calibrated
+
+set.seed(settings81$seed[[1]] + 1L)
+t2_boot <- replicate(settings81$n_boot[[1]], {
+	i <- sample.int(length(t2_one_gain), replace = TRUE)
+	mean(t2_one_gain[i])
+})
+t2_one_ci <- quantile(t2_boot, c(0.025, 0.975), names = FALSE)
+
+# Each pooling analysis uses its own uncalibrated baseline.
+t2_agreement <- sensitivity[
+	sensitivity$curation_policy == "agreement",
+	, drop = FALSE
+]
+t2_agreement_one <- with(
+	t2_agreement,
+	one_anchor_RMSE_before - one_anchor_RMSE_after
+)
+t2_priority_one <- with(
+	priority,
+	one_anchor_RMSE_before - one_anchor_RMSE_after
+)
+t2_restricted_one <- with(
+	test_one,
+	mean_RMSE_before - mean_RMSE_after
+)
+
+# Omit each source from the primary one-anchor evaluation summary.
+t2_omission_one <- (
+	sum(t2_one_gain) - t2_one_gain
+) / (length(t2_one_gain) - 1L)
+
+t2_range <- function(x) {
+	paste0(fmt(min(x), 3), " to ", fmt(max(x), 3))
 }
-write_table(meta_table, "S2_metadata_availability.csv")
 
+sensitivity_overview <- data.frame(
+	Analysis = c(
+		"Primary analysis",
+		"Applied different agreement thresholds to overlapping records (Table~\\ref{tab:table-s5})",
+		"Changed which database took priority (Table~\\ref{tab:table-s6})",
+		"Kept studies with at least two test compounds (Table~\\ref{tab:table-s7})",
+		"Left one study at a time out of the primary evaluation summary (Table~\\ref{tab:table-s8})"
+	),
+	`One anchor vs none` = c(
+		paste0(
+			fmt(mean(t2_one_gain), 3), " ",
+			fmt_ci(t2_one_ci[1], t2_one_ci[2], 3)
+		),
+		t2_range(t2_agreement_one),
+		t2_range(t2_priority_one),
+		fmt(t2_restricted_one, 3),
+		t2_range(t2_omission_one)
+	),
+	`Five anchors vs one` = c(
+		paste0(
+			fmt(paired$mean_RMSE_decrease, 3), " ",
+			fmt_ci(paired$decrease_ci_low, paired$decrease_ci_high, 3)
+		),
+		t2_range(t2_agreement$one_to_five_RMSE_decrease),
+		t2_range(priority$one_to_five_RMSE_decrease),
+		fmt(test_gain$effect, 3),
+		t2_range(c(
+			influence_gain$minimum_omission_effect,
+			influence_gain$maximum_omission_effect
+		))
+	),
+	check.names = FALSE
+)
+
+write_table(sensitivity_overview, "02_sensitivity_overview.csv")
+
+# Table S1. Variance components.
 write_table(
 	data.frame(
 		Component = variance$component,
@@ -215,92 +279,10 @@ write_table(
 		),
 		check.names = FALSE
 	),
-	"S3_variance_components.csv"
+	"S1_variance_components.csv"
 )
 
-# Calibration and failure diagnostics.
-write_table(data.frame(
-	Cohort = rep("Fixed five-anchor-eligible subset", nrow(matched_cal)),
-	Anchors = matched_cal$anchors,
-	`Publications improved` = paste0(matched_cal$n_sources_improved, "/", matched_cal$n_sources),
-	`RMSE before` = fmt(matched_cal$mean_source_RMSE_uncalibrated),
-	`RMSE after` = fmt(matched_cal$mean_source_RMSE_calibrated),
-	`RMSE reduction (%) [95% CI]` = fmt_est_ci(
-		matched_cal$RMSE_reduction_percent, matched_cal$reduction_ci_low, matched_cal$reduction_ci_high, 1
-	),
-	check.names = FALSE
-), "S6_calibration_matched.csv")
-
-write_table(
-	data.frame(
-		Publication = label(by_source$source_id),
-		Anchors = by_source$anchors,
-		`Available anchors` = by_source$n_available_anchors,
-		`Test compounds` = by_source$n_test_compounds,
-		`Test measurements` = by_source$n_test_measurements,
-		`Panels evaluated` = by_source$n_panels,
-		`RMSE before` = by_source$RMSE_uncalibrated,
-		`RMSE after` = by_source$RMSE_calibrated,
-		`RMSE reduction (%)` = by_source$RMSE_reduction_percent,
-		`Panels improved (%)` = failure$draws_improved_percent[diagnostic_index],
-		check.names = FALSE
-	),
-	"S7_calibration_by_publication.csv"
-)
-
-write_table(data.frame(
-	Publication = label(failure$source_id), Anchors = failure$anchors,
-	`Offset variance` = fmt(failure$offset_variance),
-	`Squared mean-offset mismatch` = fmt(failure$offset_mismatch_squared),
-	`Squared mean test bias` = fmt(failure$correctable_test_bias_squared),
-	`Mean MSE change` = fmt(failure$mean_MSE_change),
-	`Larger penalty term` = failure$dominant_penalty, check.names = FALSE
-), "S10_failure_decomposition.csv")
-
-write_table(data.frame(
-	Publication = label(failure_paired$source_id),
-	`One-anchor RMSE` = fmt(failure_paired$RMSE_calibrated_one),
-	`Five-anchor RMSE` = fmt(failure_paired$RMSE_calibrated_five),
-	`RMSE decrease` = fmt(failure_paired$RMSE_decrease),
-	`Offset variance: one` = fmt(failure_paired$offset_variance_one),
-	`Offset variance: five` = fmt(failure_paired$offset_variance_five),
-	`Squared mismatch: one` = fmt(failure_paired$offset_mismatch_squared_one),
-	`Squared mismatch: five` = fmt(failure_paired$offset_mismatch_squared_five), check.names = FALSE
-), "S11_one_vs_five_diagnostics.csv")
-
-# Verified unit corrections.
-correction_index <- match(corrections$record_id, pooled$record_id)
-if (anyNA(correction_index)) {
-	stop("Correction records are missing from the pooled dataset.")
-}
-
-correction_study <- ifelse(
-	grepl("Barber 1992", corrections$evidence, fixed = TRUE),
-	"Barber et al. (1992)",
-	ifelse(
-		grepl("Barber 1995", corrections$evidence, fixed = TRUE),
-		"Barber et al. (1995)",
-		NA_character_
-	)
-)
-if (anyNA(correction_study)) {
-	stop("Missing study citation for a correction record.")
-}
-
-write_table(
-	data.frame(
-		Record = corrections$record_id,
-		Compound = pooled$compound_name[correction_index],
-		`Previously processed log10 Kp` = fmt(corrections$previous_log_kp, 3),
-		`Corrected log10 Kp` = fmt(corrections$corrected_log_kp, 3),
-		`Original Kp (cm/h)` = formatC(corrections$original_kp_cm_h, format = "e", digits = 3),
-		Study = correction_study,
-		check.names = FALSE
-	),
-	"S12_verified_unit_corrections.csv"
-)
-
-# Describe the molecular QSPR model fitted to the full pooled dataset.
+# Table S2. Descriptive molecular QSPR fit.
 model_data <- pooled[, c("log_kp", "mw", "logp", "compound_id", "publication_id")]
 compound_profile <- model_data[!duplicated(model_data$compound_id), c("mw", "logp")]
 
@@ -350,27 +332,242 @@ write_table(data.frame(
 	),
 	SE = c(rep("", 3), fmt(coefficients_qspr[, "Std. Error"]), rep("", 5)),
 	check.names = FALSE
-), "S13_pooled_qspr_model_fit.csv")
+), "S2_pooled_qspr_model_fit.csv")
 
-# Export the submission files with names that match the manuscript.
-additional_dir <- "R/additional_files"
-if (!dir.exists(additional_dir) && !dir.create(additional_dir)) {
-	stop("Cannot create: ", additional_dir, call. = FALSE)
+# Table S3. Experimental metadata availability.
+meta_table <- data.frame(Metadata = unique(metadata$metadata), check.names = FALSE)
+for (origin in c("Cheruvu", "HuSkinDB", "SkinPiX", "Pooled")) {
+	x <- metadata[metadata$dataset == origin, ]
+	j <- match(meta_table$Metadata, x$metadata)
+	if (anyNA(j) || anyDuplicated(x$metadata)) stop("Incomplete metadata audit: ", origin)
+	x <- x[j, ]
+	meta_table[[origin]] <- ifelse(x$n_records == 0, "No retained records",
+		ifelse(!x$field_provided, "Field not provided",
+			paste0(x$n_reported, "/", x$n_records, " (", fmt(x$percent_reported, 1), "%)")))
 }
-additional_files <- c(
-	"Additional_file_1_publication_index.csv" = file.path(table_dir, "S1_publication_index.csv"),
-	"Additional_file_2_calibration_by_publication.csv" = file.path(table_dir, "S7_calibration_by_publication.csv"),
-	"Additional_file_3_failure_decomposition.csv" = file.path(table_dir, "S10_failure_decomposition.csv"),
-	"Additional_file_4_pooled_dataset.csv" = pooled_path
+write_table(meta_table, "S3_metadata_availability.csv")
+
+# Table S4. Anchor-number comparison.
+write_table(data.frame(
+	Anchors = matched_cal$anchors,
+	`Publications improved` = paste0(matched_cal$n_sources_improved, "/", matched_cal$n_sources),
+	`RMSE before` = fmt(matched_cal$mean_source_RMSE_uncalibrated),
+	`RMSE after` = fmt(matched_cal$mean_source_RMSE_calibrated),
+	`RMSE reduction (%) [95% CI]` = fmt_est_ci(
+		matched_cal$RMSE_reduction_percent, matched_cal$reduction_ci_low, matched_cal$reduction_ci_high, 1
+	),
+	check.names = FALSE
+), "S4_calibration_matched.csv")
+
+# Table S5. Agreement-threshold sensitivity.
+policy_labels <- ifelse(sensitivity$curation_policy == "priority", "Database priority (primary)",
+	paste0("Agreement threshold ", sensitivity$log_tolerance))
+t3 <- data.frame(
+	Policy = policy_labels, Measurements = sensitivity$n_measurements,
+	`Publications: one / five anchors` = paste0(sensitivity$one_anchor_publications, " / ", sensitivity$matched_publications),
+	`One-anchor reduction (%) [95% CI]` = fmt_est_ci(sensitivity$one_anchor_reduction_percent, sensitivity$one_anchor_ci_low, sensitivity$one_anchor_ci_high, 1),
+	`One-to-five RMSE decrease [95% CI]` = fmt_est_ci(sensitivity$one_to_five_RMSE_decrease, sensitivity$one_to_five_ci_low, sensitivity$one_to_five_ci_high),
+	check.names = FALSE
 )
-copied <- file.copy(
-	unname(additional_files),
-	file.path(additional_dir, names(additional_files)),
-	overwrite = TRUE
+write_table(t3, "S5_curation_sensitivity.csv")
+
+# Table S6. Database-priority sensitivity.
+write_table(data.frame(
+	`Database priority` = priority$database_priority,
+	Measurements = priority$n_measurements,
+	`Sources with one / five anchors` = paste(priority$one_anchor_publications, priority$matched_publications, sep = " / "),
+	`One-anchor reduction (%) [95% CI]` = with(priority,
+		fmt_est_ci(one_anchor_reduction_percent, one_anchor_ci_low, one_anchor_ci_high, 1)),
+	`One-to-five decrease [95% CI]` = with(priority,
+		fmt_est_ci(one_to_five_RMSE_decrease, one_to_five_ci_low, one_to_five_ci_high)),
+	check.names = FALSE
+), "S6_database_priority_sensitivity.csv")
+
+# Table S7. Test-set sensitivity.
+s_test <- test_sensitivity
+
+effect_ci <- vapply(seq_len(nrow(s_test)), function(i) {
+	digits <- if (s_test$endpoint[i] == "one_anchor") 1L else 3L
+
+	paste(
+		fmt(s_test$effect[i], digits),
+		fmt_ci(s_test$ci_low[i], s_test$ci_high[i], digits)
+	)
+}, character(1))
+
+s_test_print <- data.frame(
+	Comparison = ifelse(
+		s_test$endpoint == "one_anchor",
+		"One-anchor reduction (%)",
+		"One-to-five decrease (log units)"
+	),
+	"Minimum test compounds" = s_test$minimum_test_compounds,
+	Sources = s_test$n_sources,
+	"Test compounds" = s_test$n_test_compounds,
+	"Test measurements" = s_test$n_test_measurements,
+	"Effect [95% CI]" = effect_ci,
+	check.names = FALSE
 )
-if (!all(copied)) {
-	stop("Could not export: ", paste(names(additional_files)[!copied], collapse = ", "), call. = FALSE)
+
+write_table(s_test_print, "S7_test_set_sensitivity.csv")
+
+# Table S8. Evaluation-publication omissions.
+# Script 87 records which orders share the same analysis dataset.
+primary_group <- unique(priority$analysis_scenario[priority$is_primary_order])
+alternative_groups <- setdiff(unique(priority$analysis_scenario), primary_group)
+priority_orders <- setNames(
+	gsub(" > ", " then ", priority$database_priority, fixed = TRUE),
+	priority$scenario
+)
+
+priority_omissions <- read_result("priority_sensitivity/87_priority_influence.csv")
+
+# The primary analysis is already included in the script 83 output.
+priority_omissions <- priority_omissions[
+	priority_omissions$scenario %in% alternative_groups,
+	names(sensitivity_influence),
+	drop = FALSE
+]
+
+endpoint_labels <- c(
+	"One-anchor RMSE reduction (%)" = "One anchor (%)",
+	"RMSE decrease from one to five anchors (log units)" = "One to five (log units)"
+)
+
+stopifnot(
+	length(primary_group) == 1L,
+	all(table(
+		factor(priority_omissions$scenario, levels = alternative_groups),
+		factor(priority_omissions$analysis, levels = names(endpoint_labels))
+	) == 1L),
+	all(priority_omissions$analysis %in% names(endpoint_labels))
+)
+
+omissions <- rbind(sensitivity_influence, priority_omissions)
+scenario_labels <- c(
+	primary = "Primary priority",
+	agreement_0p01 = "Agreement 0.01",
+	agreement_0p02 = "Agreement 0.02",
+	agreement_0p05 = "Agreement 0.05",
+	priority_orders[alternative_groups]
+)
+
+source_labels <- pub$publication_label[
+	match(omissions$most_influential_source, pub$source_id)
+]
+
+one_anchor <- omissions$analysis == "One-anchor RMSE reduction (%)"
+format_effect <- function(x) ifelse(one_anchor, fmt(x, 1), fmt(x, 3))
+
+s8 <- data.frame(
+	`Curation policy` = unname(scenario_labels[omissions$scenario]),
+	Comparison = unname(endpoint_labels[omissions$analysis]),
+	`Full effect` = format_effect(omissions$full_effect),
+	`Omission range` = paste(
+		format_effect(omissions$minimum_omission_effect), "to",
+		format_effect(omissions$maximum_omission_effect)
+	),
+	`CIs including zero` = paste0(
+		omissions$n_intervals_including_zero, "/", omissions$n_omissions
+	),
+	`Largest change source` = source_labels,
+	check.names = FALSE
+)
+
+if (anyNA(s8)) stop("Incomplete labels or results in the omission table.")
+
+shared_orders <- priority$scenario != priority$analysis_scenario
+same_dataset_note <- paste0(
+	priority_orders[priority$scenario[shared_orders]],
+	" used the same dataset as ",
+	priority_orders[priority$analysis_scenario[shared_orders]],
+	"."
+)
+
+write_table(s8, "S8_evaluation_publication_omissions.csv")
+
+# Table S9. One-versus-five diagnostics.
+write_table(data.frame(
+	Publication = label(failure_paired$source_id),
+	`One-anchor RMSE` = fmt(failure_paired$RMSE_calibrated_one),
+	`Five-anchor RMSE` = fmt(failure_paired$RMSE_calibrated_five),
+	`RMSE decrease` = fmt(failure_paired$RMSE_decrease),
+	`Offset variance: one` = fmt(failure_paired$offset_variance_one),
+	`Offset variance: five` = fmt(failure_paired$offset_variance_five),
+	`Squared mismatch: one` = fmt(failure_paired$offset_mismatch_squared_one),
+	`Squared mismatch: five` = fmt(failure_paired$offset_mismatch_squared_five), check.names = FALSE
+), "S9_one_vs_five_diagnostics.csv")
+
+# Table S10. Verified permeability corrections.
+correction_index <- match(corrections$record_id, pooled$record_id)
+if (anyNA(correction_index)) {
+	stop("Correction records are missing from the pooled dataset.")
 }
 
-message("Manuscript tables written to ", table_dir, ".")
-message("Additional files written to ", additional_dir, ".")
+correction_study <- ifelse(
+	grepl("Barber 1992", corrections$evidence, fixed = TRUE),
+	"Barber et al. (1992)",
+	ifelse(
+		grepl("Barber 1995", corrections$evidence, fixed = TRUE),
+		"Barber et al. (1995)",
+		NA_character_
+	)
+)
+if (anyNA(correction_study)) {
+	stop("Missing study citation for a correction record.")
+}
+
+write_table(
+	data.frame(
+		Record = corrections$record_id,
+		Compound = pooled$compound_name[correction_index],
+		`Previously processed log10 Kp` = fmt(corrections$previous_log_kp, 3),
+		`Corrected log10 Kp` = fmt(corrections$corrected_log_kp, 3),
+		`Original Kp (cm/h)` = formatC(corrections$original_kp_cm_h, format = "e", digits = 3),
+		Study = correction_study,
+		check.names = FALSE
+	),
+	"S10_verified_unit_corrections.csv"
+)
+
+# Additional files. Export directly without duplicate supplementary-table copies.
+write_additional(pub, "Additional_file_1_publication_index.csv")
+write_additional(
+	data.frame(
+		Publication = label(by_source$source_id),
+		Anchors = by_source$anchors,
+		`Available anchors` = by_source$n_available_anchors,
+		`Test compounds` = by_source$n_test_compounds,
+		`Test measurements` = by_source$n_test_measurements,
+		`Panels evaluated` = by_source$n_panels,
+		`RMSE before` = by_source$RMSE_uncalibrated,
+		`RMSE after` = by_source$RMSE_calibrated,
+		`RMSE reduction (%)` = by_source$RMSE_reduction_percent,
+		`Panels improved (%)` = failure$draws_improved_percent[diagnostic_index],
+		check.names = FALSE
+	),
+	"Additional_file_2_calibration_by_publication.csv"
+)
+
+write_additional(data.frame(
+	Publication = label(failure$source_id), Anchors = failure$anchors,
+	`Offset variance` = fmt(failure$offset_variance),
+	`Squared mean-offset mismatch` = fmt(failure$offset_mismatch_squared),
+	`Squared mean test bias` = fmt(failure$correctable_test_bias_squared),
+	`Mean MSE change` = fmt(failure$mean_MSE_change),
+	`Larger penalty term` = failure$dominant_penalty, check.names = FALSE
+), "Additional_file_3_failure_decomposition.csv")
+
+if (!file.copy(pooled_path, file.path(additional_dir, "Additional_file_4_pooled_dataset.csv"), overwrite = TRUE)) {
+	stop("Could not export the pooled dataset.")
+}
+
+# Remove superseded reporting files after the replacement outputs are complete.
+obsolete_tables <- c(
+	"03a_curation_sensitivity.csv", "87_database_priority_sensitivity.csv",
+	"S1_publication_index.csv", "S2_metadata_availability.csv", "S3_variance_components.csv",
+	"S6_calibration_matched.csv", "S7_calibration_by_publication.csv", "S10_failure_decomposition.csv",
+	"S11_one_vs_five_diagnostics.csv", "S12_verified_unit_corrections.csv", "S13_pooled_qspr_model_fit.csv"
+)
+unlink(file.path(table_dir, obsolete_tables))
+message("Tables 1–2, Supplementary Tables S1–S10 and Additional files 1–4 written.")

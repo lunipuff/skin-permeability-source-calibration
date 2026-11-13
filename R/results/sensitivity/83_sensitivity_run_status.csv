@@ -1,4 +1,4 @@
 "scenario","curation_policy","log_tolerance","temperature_tolerance","output_directory","status","started","finished"
-"agreement_0p01","agreement",0.01,0.2,"R/results/sensitivity/agreement_0p01","SUCCESS","2026-11-10 22:31:42.45364","2026-11-10 22:31:48.344388"
-"agreement_0p02","agreement",0.02,0.2,"R/results/sensitivity/agreement_0p02","SUCCESS","2026-11-10 22:31:48.345088","2026-11-10 22:31:54.055456"
-"agreement_0p05","agreement",0.05,0.2,"R/results/sensitivity/agreement_0p05","SUCCESS","2026-11-10 22:31:54.055872","2026-11-10 22:32:00.015134"
+"agreement_0p01","agreement",0.01,0.2,"R/results/sensitivity/agreement_0p01","SUCCESS","2026-11-13 11:58:44.80545","2026-11-13 11:58:50.498913"
+"agreement_0p02","agreement",0.02,0.2,"R/results/sensitivity/agreement_0p02","SUCCESS","2026-11-13 11:58:50.499367","2026-11-13 11:58:56.12943"
+"agreement_0p05","agreement",0.05,0.2,"R/results/sensitivity/agreement_0p05","SUCCESS","2026-11-13 11:58:56.129807","2026-11-13 11:59:01.963155"

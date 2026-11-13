@@ -1,6 +1,0 @@
-"Cohort","Anchors","Publications improved","RMSE before","RMSE after","RMSE reduction (%) [95% CI]"
-"Fixed five-anchor-eligible subset",1,"11/13","1.034","0.821","20.6 [9.3, 29.0]"
-"Fixed five-anchor-eligible subset",2,"11/13","1.034","0.755","27.0 [12.9, 37.5]"
-"Fixed five-anchor-eligible subset",3,"11/13","1.034","0.721","30.3 [14.8, 41.8]"
-"Fixed five-anchor-eligible subset",4,"11/13","1.034","0.701","32.3 [16.1, 43.9]"
-"Fixed five-anchor-eligible subset",5,"11/13","1.034","0.687","33.6 [16.8, 45.5]"

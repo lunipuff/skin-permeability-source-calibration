@@ -1,0 +1,5 @@
+"Comparison","Minimum test compounds","Sources","Test compounds","Test measurements","Effect [95% CI]"
+"One-anchor reduction (%)",1,38,171,227,"9.8 [1.5, 17.9]"
+"One-anchor reduction (%)",2,28,161,213,"8.4 [-0.5, 17.1]"
+"One-to-five decrease (log units)",1,13,84,121,"0.134 [0.053, 0.204]"
+"One-to-five decrease (log units)",2,12,83,120,"0.136 [0.051, 0.218]"

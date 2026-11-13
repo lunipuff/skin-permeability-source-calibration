@@ -1,0 +1,6 @@
+"Analysis","One anchor vs none","Five anchors vs one"
+"Primary analysis","0.115 [0.017, 0.223]","0.134 [0.053, 0.204]"
+"Applied different agreement thresholds to overlapping records (Table~\ref{tab:table-s5})","0.081 to 0.105","0.107 to 0.129"
+"Changed which database took priority (Table~\ref{tab:table-s6})","0.100 to 0.125","0.073 to 0.139"
+"Kept studies with at least two test compounds (Table~\ref{tab:table-s7})","0.097","0.136"
+"Left one study at a time out of the primary evaluation summary (Table~\ref{tab:table-s8})","0.093 to 0.134","0.118 to 0.161"

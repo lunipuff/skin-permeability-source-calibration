@@ -6,7 +6,6 @@ library(patchwork)
 
 result_dir <- "R/results"
 figure_dir <- "R/figures"
-save_png <- FALSE
 example_sources <- c("DOI:10.1016/s0928-0987(03)00176-3", "DOI:10.1038/jid.1969.9")
 
 read_checked <- function(path, required) {
@@ -42,10 +41,6 @@ theme_manuscript <- function(base_size = 11) {
 save_fig <- function(p, filename, width, height) {
 	ggsave(file.path(figure_dir, paste0(filename, ".pdf")), plot = p,
 		width = width, height = height, units = "in", device = grDevices::cairo_pdf)
-	if (save_png) {
-		ggsave(file.path(figure_dir, paste0(filename, ".png")), plot = p,
-			width = width, height = height, units = "in", dpi = 300, bg = "white")
-	}
 }
 
 # Load the primary analysis and the shared publication labels.
@@ -59,7 +54,7 @@ if (!identical(settings81$input_md5, pooled_md5) || !identical(settings85$md5, p
 	stop("Pooled input changed. Rerun 81, 85 and subsequent reporting scripts.")
 }
 
-key <- read_checked("R/tables/S1_publication_index.csv", c("publication_label", "source_id"))
+key <- read_checked("R/additional_files/Additional_file_1_publication_index.csv", c("publication_label", "source_id"))
 if (anyDuplicated(key$source_id) || anyDuplicated(key$publication_label)) stop("Duplicate publication labels.")
 label <- function(ids) {
 	j <- match(ids, key$source_id)
@@ -158,7 +153,7 @@ p1a <- ggplot() +
 	facet_grid(
 		cols = vars(source_group),
 		scales = "free_x",
-	space = "free_x",
+		space = "free_x",
 		labeller = labeller(source_group = facet_labels)
 	) +
 	scale_x_continuous(breaks = c(1, 20, 40, 60, 80), expand = expansion(mult = c(0.025, 0.025))) +
@@ -270,67 +265,11 @@ p1b <- ggplot(variance_bar) +
 p1 <- p1a / p1b + plot_layout(heights = c(2, 1)) + plot_annotation(tag_levels = "A")
 save_fig(p1, "01_variance_decomposition", 7, 5.5)
 
-# Figure 2. Source-level RMSE changes with one anchor.
-fig2_sources <- one
-fig2_sources$RMSE_decrease <- with(fig2_sources, RMSE_uncalibrated - RMSE_calibrated)
-
-fig2_mean_decrease <- mean(fig2_sources$RMSE_decrease)
-
-fig2_mean_label <- paste0("Mean RMSE decrease = ", fmt(fig2_mean_decrease, 3))
-fig2_sources$Outcome <- ifelse(
-	fig2_sources$RMSE_decrease > 1e-10,
-	"Improved",
-	ifelse(fig2_sources$RMSE_decrease < -1e-10, "Worsened", "Unchanged")
-)
-
-source_order <- order(fig2_sources$RMSE_decrease, fig2_sources$source_id)
-fig2_sources$Publication <- factor(fig2_sources$Publication, levels = rev(fig2_sources$Publication[source_order]))
-
-p2 <- ggplot(
-	fig2_sources, aes(y = Publication, colour = Outcome)
-) +
-	geom_vline(xintercept = 0, colour = "grey60", linewidth = 0.4) +
-	geom_vline(
-		xintercept = fig2_mean_decrease,
-		colour = cols[["teal"]],
-		linetype = "dashed",
-		linewidth = 0.8
-	) +
-	geom_segment(aes(x = 0, xend = RMSE_decrease, yend = Publication), linewidth = 0.6) +
-	geom_point(aes(x = RMSE_decrease), size = 2.2) +
-	annotate(
-		"text",
-		x = fig2_mean_decrease + 0.02,
-		y = Inf,
-		label = fig2_mean_label,
-		hjust = 0,
-		vjust = 1.2,
-		size = 3.5,
-		colour = cols[["teal"]]
-	) +
-	scale_colour_manual(
-		values = c(Improved = cols[["blue"]], Worsened = cols[["red"]], Unchanged = cols[["grey"]])
-	) +
-	scale_x_continuous(
-		breaks = function(limits) pretty(limits, n = 5),
-		expand = expansion(mult = c(0.08, 0.08))
-	) +
-	scale_y_discrete(expand = expansion(add = 0.7)) +
-	labs(
-		title = "One-anchor calibration",
-		y = "Source",
-		x = expression("RMSE decrease (" * log[10] * K[p] ~ "units)")
-	) +
-	theme_manuscript() +
-	theme(legend.position = "none", axis.text.y = element_text(size = 8))
-
-save_fig(p2, "02_one_anchor_calibration", 6, max(5, 0.07 * nrow(fig2_sources) + 2))
-
-# Figure 3. Calibration benefit from zero to five anchors.
+# Figure 2. Calibration benefit from zero to five anchors.
 matched_ids <- unique(source_cal$source_id[source_cal$anchors == 5L])
-fig3_n_sources <- length(matched_ids)
+fig2_n_sources <- length(matched_ids)
 matched <- source_cal[source_cal$source_id %in% matched_ids, , drop = FALSE]
-if (fig3_n_sources != paired$n_sources || any(matched_cal$n_sources != fig3_n_sources)) {
+if (fig2_n_sources != paired$n_sources || any(matched_cal$n_sources != fig2_n_sources)) {
 	stop("Fixed subset does not agree with the saved summaries.")
 }
 
@@ -350,11 +289,11 @@ if (!close_enough(matched$RMSE_uncalibrated, baseline$RMSE_uncalibrated[baseline
 # Rows are sources and columns are anchor counts. The zero-anchor gain is zero.
 anchor_counts <- 0:5
 gain_matrix <- vapply(anchor_counts, function(k) {
-	if (k == 0L) return(rep(0, fig3_n_sources))
+	if (k == 0L) return(rep(0, fig2_n_sources))
 	x <- matched[matched$anchors == k, , drop = FALSE]
 	j <- match(matched_ids, x$source_id)
 	baseline$RMSE_uncalibrated - x$RMSE_calibrated[j]
-}, numeric(fig3_n_sources))
+}, numeric(fig2_n_sources))
 colnames(gain_matrix) <- as.character(anchor_counts)
 additional_gain <- gain_matrix[, "5"] - gain_matrix[, "1"]
 if (!close_enough(mean(additional_gain), paired$mean_RMSE_decrease)) {
@@ -364,7 +303,7 @@ if (!close_enough(mean(additional_gain), paired$mean_RMSE_decrease)) {
 # Resample sources with their complete trajectories.
 set.seed(as.integer(settings81$seed) + 300L)
 bootstrap_gain <- replicate(as.integer(settings81$n_boot), {
-	sampled_sources <- sample.int(fig3_n_sources, size = fig3_n_sources, replace = TRUE)
+	sampled_sources <- sample.int(fig2_n_sources, size = fig2_n_sources, replace = TRUE)
 	colMeans(gain_matrix[sampled_sources, , drop = FALSE])
 })
 mean_gain <- data.frame(
@@ -375,18 +314,18 @@ mean_gain <- data.frame(
 )
 
 # Individual source trajectories, including zero anchors.
-fig3_trajectories <- data.frame(
+fig2_trajectories <- data.frame(
 	source_id = rep(matched_ids, times = length(anchor_counts)),
-	anchors = rep(anchor_counts, each = fig3_n_sources),
+	anchors = rep(anchor_counts, each = fig2_n_sources),
 	RMSE_decrease = as.vector(gain_matrix),
 	stringsAsFactors = FALSE
 )
 
 # Red identifies worsening from one to five anchors.
 worsened_ids <- matched_ids[additional_gain < -1e-10]
-fig3_trajectories$worsened_with_five <- fig3_trajectories$source_id %in% worsened_ids
+fig2_trajectories$worsened_with_five <- fig2_trajectories$source_id %in% worsened_ids
 
-p3 <- ggplot() +
+p2 <- ggplot() +
 	geom_hline(yintercept = 0, linetype = "dashed", colour = "grey60", linewidth = 0.4) +
 	geom_ribbon(
 		data = mean_gain,
@@ -395,14 +334,14 @@ p3 <- ggplot() +
 		alpha = 0.7
 	) +
 	geom_line(
-		data = fig3_trajectories[!fig3_trajectories$worsened_with_five, ],
+		data = fig2_trajectories[!fig2_trajectories$worsened_with_five, ],
 		aes(x = anchors, y = RMSE_decrease, group = source_id),
 		colour = cols[["blue"]],
 		linewidth = 0.55,
 		alpha = 0.75
 	) +
 	geom_line(
-		data = fig3_trajectories[fig3_trajectories$worsened_with_five, ],
+		data = fig2_trajectories[fig2_trajectories$worsened_with_five, ],
 		aes(x = anchors, y = RMSE_decrease, group = source_id),
 		colour = cols[["red"]],
 		linewidth = 0.75
@@ -439,7 +378,63 @@ p3 <- ggplot() +
 	theme_manuscript() +
 	theme(legend.position = "none", plot.margin = margin(12, 48, 12, 12))
 
-save_fig(p3, "03_anchor_number", 7, 4)
+save_fig(p2, "02_anchor_number", 7, 4)
+
+# Figure 3. Source-level RMSE changes with one anchor.
+fig3_sources <- one
+fig3_sources$RMSE_decrease <- with(fig3_sources, RMSE_uncalibrated - RMSE_calibrated)
+
+fig3_mean_decrease <- mean(fig3_sources$RMSE_decrease)
+
+fig3_mean_label <- paste0("Mean RMSE decrease = ", fmt(fig3_mean_decrease, 3))
+fig3_sources$Outcome <- ifelse(
+	fig3_sources$RMSE_decrease > 1e-10,
+	"Improved",
+	ifelse(fig3_sources$RMSE_decrease < -1e-10, "Worsened", "Unchanged")
+)
+
+source_order <- order(fig3_sources$RMSE_decrease, fig3_sources$source_id)
+fig3_sources$Publication <- factor(fig3_sources$Publication, levels = rev(fig3_sources$Publication[source_order]))
+
+p3 <- ggplot(
+	fig3_sources, aes(y = Publication, colour = Outcome)
+) +
+	geom_vline(xintercept = 0, colour = "grey60", linewidth = 0.4) +
+	geom_vline(
+		xintercept = fig3_mean_decrease,
+		colour = cols[["teal"]],
+		linetype = "dashed",
+		linewidth = 0.8
+	) +
+	geom_segment(aes(x = 0, xend = RMSE_decrease, yend = Publication), linewidth = 0.6) +
+	geom_point(aes(x = RMSE_decrease), size = 2.2) +
+	annotate(
+		"text",
+		x = fig3_mean_decrease + 0.02,
+		y = Inf,
+		label = fig3_mean_label,
+		hjust = 0,
+		vjust = 1.2,
+		size = 3.5,
+		colour = cols[["teal"]]
+	) +
+	scale_colour_manual(
+		values = c(Improved = cols[["blue"]], Worsened = cols[["red"]], Unchanged = cols[["grey"]])
+	) +
+	scale_x_continuous(
+		breaks = function(limits) pretty(limits, n = 5),
+		expand = expansion(mult = c(0.08, 0.08))
+	) +
+	scale_y_discrete(expand = expansion(add = 0.7)) +
+	labs(
+		title = "One-anchor calibration",
+		y = "Source",
+		x = expression("RMSE decrease (" * log[10] * K[p] ~ "units)")
+	) +
+	theme_manuscript() +
+	theme(legend.position = "none", axis.text.y = element_text(size = 8))
+
+save_fig(p3, "03_one_anchor_calibration", 6, max(5, 0.07 * nrow(fig3_sources) + 2))
 
 # Figure 4. Two contrasting calibration failures.
 f <- failure[failure$anchors == 1L, , drop = FALSE]
@@ -548,3 +543,11 @@ p4 <- (fig4_top / fig4_bottom) +
 save_fig(p4, "04_calibration_failures", 8, 4.9)
 
 message("Manuscript figures written to ", figure_dir, ".")
+
+# Remove the old figure names and unused raster exports.
+obsolete_figures <- c(
+	"02_one_anchor_calibration.pdf", "03_anchor_number.pdf",
+	"01_variance_decomposition.png", "02_one_anchor_calibration.png", "03_anchor_number.png",
+	"02_anchor_number.png", "03_one_anchor_calibration.png", "04_calibration_failures.png"
+)
+unlink(file.path(figure_dir, obsolete_figures))

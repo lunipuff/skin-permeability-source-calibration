@@ -65,7 +65,7 @@ Bootstrap settings and seeds are recorded with the analysis outputs. The workflo
 | --- | --- |
 | [`data/processed/80_pooled.csv`](data/processed/80_pooled.csv) | Primary analysis dataset with record, compound, and publication identifiers. |
 | [`R/results/`](R/results/) | Uncalibrated test predictions, anchor-panel results, fit diagnostics, bootstrap summaries, and sensitivity analyses. Start with the [one-anchor summary](R/results/81_pooled_calibration_summary_all.csv) or the [paired one-versus-five comparison](R/results/81_pooled_one_vs_five_anchors.csv). |
-| [`R/tables/`](R/tables/) | CSV inputs for the manuscript tables and figures. |
+| [`R/tables/`](R/tables/) | CSV inputs for Tables 1–2 and Supplementary Tables S1–S10, in manuscript order. |
 | [`R/additional_files/`](R/additional_files/) | Numbered CSV files for manuscript submission. |
 | [`R/figures/`](R/figures/) | The graphical abstract and four analysis figures. |
 
@@ -78,7 +78,7 @@ Bootstrap settings and seeds are recorded with the analysis outputs. The workflo
 | Additional file 3 | [Decomposition of calibration error](R/additional_files/Additional_file_3_failure_decomposition.csv) |
 | Additional file 4 | [Curated pooled dataset used in the primary analysis](R/additional_files/Additional_file_4_pooled_dataset.csv) |
 
-Stage 99a exports Additional files 1–3 from `R/tables/` and copies Additional file 4 from `data/processed/80_pooled.csv`. To refresh the tables and additional files from existing analysis results, run this command from the repository root.
+Stage 99a creates Additional files 1–3 directly in `R/additional_files/` and copies Additional file 4 from `data/processed/80_pooled.csv`. Figure filenames follow manuscript order. Stage 99b reads publication labels from Additional file 1. To refresh the tables and additional files from existing analysis results, run this command from the repository root.
 
 ```bash
 Rscript R/99a_make_tables.R
